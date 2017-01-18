@@ -17,12 +17,12 @@
 
 <p>
   <strong>Start time:</strong>
-  <%= @event.start_time %>
+  <%= @event.start_time.strftime("%b %e, %Y %l:%M %p") %>
 </p>
 
 <p>
   <strong>End time:</strong>
-  <%= @event.end_time %>
+  <%= @event.end_time.strftime("%b %e, %Y %l:%M %p") %>
 </p>
 
 <p>
@@ -46,8 +46,8 @@
 </p>
 
 <p>
-  <strong>Conutry:</strong>
-  <%= @event.conutry %>
+  <strong>Country:</strong>
+  <%= @event.country %>
 </p>
 
 <p>
