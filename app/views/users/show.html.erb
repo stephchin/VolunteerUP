@@ -1,0 +1,12 @@
+<h1>Hi <%= @user.name %>!</h1>
+<br>
+<div class="user-info">
+  <ul>
+    <li>Email: <%= @user.email %></li>
+    <li>Location: <%= @user.city + ' ' + @user.state %></li>
+  </ul>
+</div>
+<br>
+<p>
+<%= link_to 'Home', root_path %>
+</p>
