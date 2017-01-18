@@ -16,7 +16,7 @@ RSpec.feature "LandingPages", type: :feature do
         click_link('Log in')
       end
       And 'I can click link and go to log in page' do
-        visit '/users/sign_in'
+        expect(page).to have_content('Log in')
       end
     end
   end
