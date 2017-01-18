@@ -3,19 +3,31 @@ require 'rails_helper'
 RSpec.feature "LandingPages", type: :feature do
   context 'Going to the landing page' do
     Steps 'Go to landing page' do
-      Given 'We are on the landing page' do
+      Given 'I am on the landing page' do
         visit '/'
       end
       Then 'I can see a description of the service' do
-        expect(page).to have_content("VolunteerUP is")
+        expect(page).to have_content('VolunteerUP is')
       end
       And 'I can see the navigation bar' do
-        expect(page).to have_content("About")
+        expect(page).to have_content('About')
       end
-      And 'I can click the login link' do
+      Then 'I can click the sign up link to take me to a sign up page' do
+        click_button('Sign up')
+      end
+      And 'I will see the registration fields' do
+        expect(page).to have_content('Sign up')
+      end
+      Then 'I can click on the logo to go back to the landing page' do
+        click_link('VolunteerUP')
+      end
+      And 'I will be on the home page again' do
+        expect(page).to have_content('VolunteerUP!')
+      end
+      Then 'I can click the log in link' do
         click_link('Log in')
       end
-      And 'I can click link and go to log in page' do
+      And 'I am taken to the log in page' do
         expect(page).to have_content('Log in')
       end
     end
