@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :organizations
   root 'landing_page#index'
 
 
