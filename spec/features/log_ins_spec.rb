@@ -6,7 +6,7 @@ RSpec.feature "LogIns", type: :feature do
       Given "I am on the landing page" do
         visit '/'
       end
-      Then "I can press the 'Log in' button" do
+      skip Then "I can press the 'Log in' button" do
         click_link('Log in')
         expect(page).to have_content "Log in"
       end
