@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   resources :users
   resources :events
   resources :organizations
-  devise_for :users
   root 'landing_page#index'
 
 
