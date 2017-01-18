@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :users
   resources :events
   resources :organizations
->>>>>>> master
+
   devise_for :users
   root 'landing_page#index'
 
