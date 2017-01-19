@@ -17,8 +17,12 @@ RSpec.feature "EventPages", type: :feature do
       Then 'I am taken to the event page' do
         visit event_path(@event)
       end
-      Then 'I can view the event information' do
-        expect(page).to have_content
+      Then 'I can view the event details' do
+        expect(page).to have_content("Description:")
+        expect(page).to have_content("Cause:")
+        expect(page).to have_content("Date and Time:")
+        expect(page).to have_content("Address:")
+        expect(page).to have_content("Volunteers needed:")
       end
       And 'I can click the volunteer button' do
         click_button('Volunteer!')
