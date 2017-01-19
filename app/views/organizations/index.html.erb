@@ -2,7 +2,7 @@
 
 <h1>Organizations</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
@@ -17,12 +17,11 @@
   <tbody>
     <% @organizations.each do |organization| %>
       <tr>
-        <td><%= organization.name %></td>
+        <td><%= link_to organization.name, organization %></td>
         <td><%= organization.description %></td>
         <td><%= organization.phone %></td>
         <td><%= organization.email %></td>
         <td><%= organization.website %></td>
-        <td><%= link_to 'Show', organization %></td>
         <td><%= link_to 'Edit', edit_organization_path(organization) %></td>
         <td><%= link_to 'Destroy', organization, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
