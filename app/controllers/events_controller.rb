@@ -18,16 +18,28 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
+
+    @organizations_for_select = Organization.all.map do |org|
+      [org.name, org.id]
+    end
+
   end
 
   # GET /events/1/edit
   def edit
+    @organizations_for_select = Organization.all.map do |org|
+      [org.name, org.id]
+    end
   end
 
   # POST /events
   # POST /events.json
   def create
     @event = Event.new(event_params)
+
+    @organizations_for_select = Organization.all.map do |org|
+      [org.name, org.id]
+    end
 
     respond_to do |format|
       if @event.save
@@ -72,6 +84,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :description, :cause, :start_time, :end_time, :street, :city, :state, :postal_code, :country, :volunteers_needed)
+      params.require(:event).permit(:name, :description, :cause, :start_time, :end_time, :street, :city, :state, :postal_code, :country, :volunteers_needed, :organization_id)
     end
 end

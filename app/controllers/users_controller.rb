@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
 
   def show
+    @user_events = @user.user_events.all
   end
 
 
