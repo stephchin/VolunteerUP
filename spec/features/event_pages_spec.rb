@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.feature "EventPages", type: :feature do
 
   before(:each) do
+    
     @event = Event.create(name: "ABC", start_time:"2017-02-02 01:01:01", end_time:"2017-02-02 02:01:01", volunteers_needed: 100 )
   end
   context 'I can go to the event page' do

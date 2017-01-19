@@ -66,6 +66,11 @@
     <%= f.number_field :volunteers_needed %>
   </div>
 
+  <div class="field">
+    <%= f.label :organization %>
+    <%= select(:event, :organization_id, @organizations_for_select, {prompt: '- Select One -'}) %>
+  </div>
+
   <div class="actions">
     <%= f.submit class: "btn btn-sm btn-primary" %>
   </div>
