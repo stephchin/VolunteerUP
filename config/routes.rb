@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :users
   resources :events
   resources :organizations
+
   root 'landing_page#index'
 
 
