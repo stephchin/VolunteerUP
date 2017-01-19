@@ -4,8 +4,11 @@ RSpec.feature "UserProfilePages", type: :feature do
   before(:each) do
     @user = User.create(name: "YungTony", email:"t_eazy@bigmoney.com", password:"password", password_confirmation: "password", city: "Cincinnasty", state: "OH" )
     @event = Event.create(name: "ABC", start_time:"2017-02-02 01:01:01", end_time:"2017-02-02 02:01:01", volunteers_needed: 100 )
+    @organization = Organization.new(name: "ABC", description: "ABC is a helpful org")
+    @organization.save
+    @event.organization = @organization
+    @event.save
     UserEvent.create(user_id: @user.id, event_id: @event.id)
-
   end
 
   context 'I can go to the user profile page' do
