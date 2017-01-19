@@ -1,29 +1,28 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @organization.name %>
-</p>
+<h3>
+  <strong><%= @organization.name %></strong>
+</h3><hr>
 
 <p>
-  <strong>Description:</strong>
+  <strong>Description:</strong><br>
   <%= @organization.description %>
 </p>
 
 <p>
-  <strong>Phone:</strong>
+  <strong>Phone:</strong><br>
   <%= @organization.phone %>
 </p>
 
 <p>
-  <strong>Email:</strong>
+  <strong>Email:</strong><br>
   <%= @organization.email %>
 </p>
 
 <p>
-  <strong>Website:</strong>
+  <strong>Website:</strong><br>
   <%= @organization.website %>
 </p>
 
-<%= link_to 'Edit', edit_organization_path(@organization) %> |
+<%= link_to 'Edit', edit_organization_path(@organization), class: "btn btn-xs btn-info" %> |
 <%= link_to 'Back', organizations_path %>

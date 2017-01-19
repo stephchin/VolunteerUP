@@ -1,59 +1,39 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @event.name %>
-</p>
+<h3>
+  <strong><%= @event.name %></strong>
+</h3><hr>
 
 <p>
-  <strong>Description:</strong>
+  <strong>Description:</strong><br>
   <%= @event.description %>
 </p>
 
 <p>
-  <strong>Cause:</strong>
+  <strong>Cause:</strong><br>
   <%= @event.cause %>
 </p>
 
 <p>
-  <strong>Start time:</strong>
-  <%= @event.start_time.strftime("%b %e, %Y %l:%M %p") %>
+  <strong>Date and Time:</strong><br>
+  <%= @event.start_time.strftime("%b %e, %Y ") %><br>
+  <%= @event.start_time.strftime("%l:%M %p") %> -
+  <%= @event.end_time.strftime("%l:%M %p") %>
 </p>
 
 <p>
-  <strong>End time:</strong>
-  <%= @event.end_time.strftime("%b %e, %Y %l:%M %p") %>
-</p>
-
-<p>
-  <strong>Street:</strong>
-  <%= @event.street %>
-</p>
-
-<p>
-  <strong>City:</strong>
-  <%= @event.city %>
-</p>
-
-<p>
-  <strong>State:</strong>
+  <strong>Address:</strong><br>
+  <%= @event.street %><br>
+  <%= @event.city %>,
   <%= @event.state %>
-</p>
-
-<p>
-  <strong>Postal code:</strong>
   <%= @event.postal_code %>
-</p>
-
-<p>
-  <strong>Country:</strong>
   <%= @event.country %>
 </p>
 
 <p>
-  <strong>Volunteers needed:</strong>
+  <strong>Volunteers needed:</strong><br>
   <%= @event.volunteers_needed %>
 </p>
 
-<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Edit', edit_event_path(@event), class: "btn btn-xs btn-info" %> |
 <%= link_to 'Back', events_path %>
