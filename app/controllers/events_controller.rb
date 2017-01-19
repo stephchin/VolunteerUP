@@ -5,6 +5,9 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = Event.all
+    if params[:search]
+      @events = Event.fuzzy_search(params[:search])
+    end
   end
 
   # GET /events/1

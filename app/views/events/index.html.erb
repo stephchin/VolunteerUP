@@ -1,47 +1,63 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Events</h1>
+<div class="row">
+  <div class="col-md-8">
+    <h1 class= "vertical-align">Events</h1>
+  </div>
 
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>Event Info</th>
-      <th>Cause</th>
-      <th>Date and Time</th>
-      <th>Event Location</th>
-      <th>Volunteers Needed</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @events.each do |event| %>
-      <tr>
-        <td>
-          <strong><%= link_to event.name, event %></strong><br><br>
-          <%= event.description %><br><br>
-          <%= link_to 'Edit', edit_event_path(event), class: "btn btn-xs btn-info" %>
-          <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger"%>
-        </td>
-        <td><%= event.cause %></td>
-        <td>
-          <%= event.start_time.strftime("%b %e, %Y")%><br>
-          <%= event.start_time.strftime("%l:%M %p") %> -
-          <%= event.end_time.strftime("%l:%M %p") %><br>
-          (<%= ((event.end_time-event.start_time)/3600).round(1)  %> hours)
-        </td>
-        <td>
-          <%= event.street %><br>
-          <%= event.city %>,
-          <%= event.state %>
-          <%= event.postal_code %>
-          <%= event.country %>
-        </td>
-        <td><%= event.volunteers_needed %></td>
-      </tr>
+  <div class="col-md-4 text-right" id="search-bar">
+    <%= form_tag(events_path, method: 'get', id: 'search-form') do %>
+    <span class="vertical-align" id = "search_box"> <%= text_field_tag :search, params[:search], placeholder: "Search" %> </span>
+    <span id = "search_button"><%= submit_tag "Search All", name: nil %></span>
     <% end %>
-  </tbody>
-</table>
+  </div>
+</div>
+
+<div class="row">
+  <p id="notice"><%= notice %></p>
+</div>
+
+<div class="row">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Event Info</th>
+        <th>Cause</th>
+        <th>Date and Time</th>
+        <th>Event Location</th>
+        <th>Volunteers Needed</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @events.each do |event| %>
+        <tr>
+          <td>
+            <strong><%= link_to event.name, event %></strong><br><br>
+            <%= event.description %><br><br>
+            <%= link_to 'Edit', edit_event_path(event), class: "btn btn-xs btn-info" %>
+            <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger"%>
+          </td>
+          <td><%= event.cause %></td>
+          <td>
+            <%= event.start_time.strftime("%b %e, %Y")%><br>
+            <%= event.start_time.strftime("%l:%M %p") %> -
+            <%= event.end_time.strftime("%l:%M %p") %><br>
+            (<%= ((event.end_time-event.start_time)/3600).round(1)  %> hours)
+          </td>
+          <td>
+            <%= event.street %><br>
+            <%= event.city %>,
+            <%= event.state %>
+            <%= event.postal_code %>
+            <%= event.country %>
+          </td>
+          <td><%= event.volunteers_needed %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <br>
 
