@@ -1,6 +1,14 @@
 require 'rails_helper'
 
 RSpec.feature "EventSearches", type: :feature do
+
+  before(:each) do
+    @org = Organization.new(name: "The Red Cross", description: "A non-profit organization")
+    @org.save
+    @org2 = Organization.new(name: "The Puppy Shelter", description: "A non-profit organization")
+    @org2.save
+  end
+
   context 'Creating multiple events' do
     Steps 'To create events' do
       Given 'I am on the events page' do
@@ -8,9 +16,6 @@ RSpec.feature "EventSearches", type: :feature do
       end
       Then 'I can click the new event button' do
         click_link 'New Event'
-      end
-      And 'I am taken to a new event page' do
-        expect(page).to have_content('Volunteers needed Back')
       end
       Then 'I can fill in the info' do
         fill_in 'Name', with: 'test'
@@ -25,6 +30,7 @@ RSpec.feature "EventSearches", type: :feature do
         select '26', :from => 'event[end_time(3i)]'
         select '02', :from => 'event[end_time(4i)]'
         select '30', :from => 'event[end_time(5i)]'
+        select @org.name, from: "event_organization_id"
         fill_in 'Volunteers needed', with: '100'
       end
       And 'I can submit the info' do
@@ -42,9 +48,6 @@ RSpec.feature "EventSearches", type: :feature do
       Then 'I can click the new event button' do
         click_link 'New Event'
       end
-      And 'I am taken to a new event page' do
-        expect(page).to have_content('Volunteers needed Back')
-      end
       Then 'I can fill in the info for event 2' do
         fill_in 'Name', with: 'test2'
         fill_in 'Cause', with: 'just cause'
@@ -58,6 +61,7 @@ RSpec.feature "EventSearches", type: :feature do
         select '26', :from => 'event[end_time(3i)]'
         select '02', :from => 'event[end_time(4i)]'
         select '30', :from => 'event[end_time(5i)]'
+        select @org2.name, from: "event_organization_id"
         fill_in 'Volunteers needed', with: '100'
       end
       And 'I can submit event 2 info' do
@@ -75,9 +79,6 @@ RSpec.feature "EventSearches", type: :feature do
       Then 'I can click the new event button' do
         click_link 'New Event'
       end
-      And 'I am taken to a new event page' do
-        expect(page).to have_content('Volunteers needed Back')
-      end
       Then 'I can fill in the info' do
         fill_in 'Name', with: 'example'
         select '2019', :from => 'event[start_time(1i)]'
@@ -90,6 +91,7 @@ RSpec.feature "EventSearches", type: :feature do
         select '26', :from => 'event[end_time(3i)]'
         select '02', :from => 'event[end_time(4i)]'
         select '30', :from => 'event[end_time(5i)]'
+        select @org.name, from: "event_organization_id"
         fill_in 'City', with: 'San Diego'
         fill_in 'Volunteers needed', with: '100'
       end
