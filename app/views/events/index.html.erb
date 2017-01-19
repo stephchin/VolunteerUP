@@ -28,10 +28,8 @@
       <th colspan="3"></th>
     </tr>
   </thead>
-
-<div class="row">
-  <table class="table table-hover">
-    <thead>
+  <tbody>
+    <% @events.each do |event| %>
       <tr>
         <td>
           <strong><%= link_to event.name, event %></strong><br><br>
@@ -40,7 +38,6 @@
           <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger"%>
         </td>
         <td><%= event.cause %></td>
-        <td><%= event.organization.name %></td>
         <td>
           <%= event.start_time.strftime("%b %e, %Y")%><br>
           <%= event.start_time.strftime("%l:%M %p") %> -
@@ -56,37 +53,9 @@
         </td>
         <td><%= event.volunteers_needed %></td>
       </tr>
-    </thead>
-
-    <tbody>
-      <% @events.each do |event| %>
-        <tr>
-          <td>
-            <strong><%= link_to event.name, event %></strong><br><br>
-            <%= event.description %><br><br>
-            <%= link_to 'Edit', edit_event_path(event), class: "btn btn-xs btn-info" %>
-            <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger"%>
-          </td>
-          <td><%= event.cause %></td>
-          <td>
-            <%= event.start_time.strftime("%b %e, %Y")%><br>
-            <%= event.start_time.strftime("%l:%M %p") %> -
-            <%= event.end_time.strftime("%l:%M %p") %><br>
-            (<%= ((event.end_time-event.start_time)/3600).round(1)  %> hours)
-          </td>
-          <td>
-            <%= event.street %><br>
-            <%= event.city %>,
-            <%= event.state %>
-            <%= event.postal_code %>
-            <%= event.country %>
-          </td>
-          <td><%= event.volunteers_needed %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+    <% end %>
+  </tbody>
+</table>
 
 <br>
 
