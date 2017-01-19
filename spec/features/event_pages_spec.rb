@@ -17,9 +17,9 @@ RSpec.feature "EventPages", type: :feature do
         visit event_path(@event)
       end
       Then 'I can view the event details' do
-        expect(page).to have_content("ABC")
         expect(page).to have_content("Description:")
         expect(page).to have_content("Cause:")
+        expect(page).to have_content("Date and Time:")
         expect(page).to have_content("Address:")
         expect(page).to have_content("Volunteers needed:")
       end
