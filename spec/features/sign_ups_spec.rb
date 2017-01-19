@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 RSpec.feature "SignUps", type: :feature do
+
+  before(:each) do
+    @organization = Organization.new(name: "ABC", description: "ABC is a helpful org")
+  end
+
   context "I can go to sign up page" do
     Steps "I can go to the landing page and press the 'Sign-up' button" do
       Given "I am on the landing page" do
@@ -18,6 +23,7 @@ RSpec.feature "SignUps", type: :feature do
         fill_in "user[password]", with: "123456"
         fill_in "user[password_confirmation]", with: "123456"
         select "Organizer", from: "role"
+        select @organization.id, from: "organization"
         click_button "Sign up"
         expect(page).to have_content("Welcome! You have signed up successfully.")
       end
