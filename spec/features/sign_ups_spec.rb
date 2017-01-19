@@ -18,7 +18,17 @@ RSpec.feature "SignUps", type: :feature do
         click_link('Sign up')
         expect(page).to have_content "Sign up"
       end
+      Then "I can see that a name field is required" do
+        fill_in "user[email]", with: "hello@me.com"
+        fill_in "user[password]", with: "1234567"
+        fill_in "user[password]", with: '1234567'
+        click_button "Sign up"
+        expect(page).to have_content("Name can't be blank")
+      end
       Then "I can fill out the sign-up form" do
+        fill_in "user[name]", with: "Suzan"
+        fill_in "user[city]", with: "Cincinnati"
+        fill_in "user[state]", with: "OH"
         fill_in "user[email]", with: "123@yahoo.com"
         fill_in "user[password]", with: "123456"
         fill_in "user[password_confirmation]", with: "123456"
@@ -26,6 +36,20 @@ RSpec.feature "SignUps", type: :feature do
         select @organization.id, from: "organization"
         click_button "Sign up"
         expect(page).to have_content("Welcome! You have signed up successfully.")
+      end
+      Then "I can see that I am logged in" do
+        expect(page).to have_content("Logged in as: Suzan")
+        expect(page).to have_content("Profile")
+        expect(page).to have_content("Log out")
+        expect(page).to_not have_content("Log in")
+        expect(page).to_not have_content("Sign up")
+
+      end
+      Then "I can click a button to go to user profile page" do
+        click_link "Profile"
+        expect(page).to have_content "Hi Suzan!"
+        expect(page).to have_content "Email: 123@yahoo.com"
+        expect(page).to have_content "Location: Cincinnati OH"
       end
     end
   end
