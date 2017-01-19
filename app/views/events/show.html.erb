@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<h3>
+<h1>
   <strong><%= @event.name %></strong>
-</h3><hr>
+</h1><hr>
 
 <p>
   <strong>Description:</strong><br>
@@ -35,7 +35,8 @@
   <%= @event.volunteers_needed %>
 </p>
 
-<button type="button">Volunteer!</button>
+<button type="button" class="btn btn-warning">Volunteer!</button><br><br>
+
 
 <%= link_to 'Edit', edit_event_path(@event), class: "btn btn-xs btn-info" %> |
 <%= link_to 'Back', events_path %>
