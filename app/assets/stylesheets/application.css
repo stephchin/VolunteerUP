@@ -13,3 +13,40 @@
  *= require_tree .
  *= require_self
  */
+
+ a:hover {
+   background-color: inherit;
+ }
+
+ a.btn {
+   color: white;
+ }
+
+  a:hover {
+    color: #005eb4;
+    text-decoration: none;
+  }
+
+ .btn {
+  border-radius: 2px;
+ }
+ .navbar {
+   margin-bottom: 0px;
+   border-radius: 0px;
+ }
+
+ .devise-box {
+   border: 1px solid #e7e7e7;
+   border-radius: 2px;
+   background-color: #f8f8f8;
+   padding: 15px;
+   margin: 10px 0px 10px 0px;
+   max-width: 337px;
+ }
+   .devise-box input {
+     width: 300px;
+     margin-bottom: 2px
+   }
+     .devise-box label {
+       margin-top: 2px;
+     }
