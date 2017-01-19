@@ -14,6 +14,10 @@ RSpec.describe UserEvent, type: :model do
         volunteers_needed: 10)
       e2 = Event.new(name: "Pestilence", start_time: @start, end_time: @end,
         volunteers_needed: 100)
+      org = Organization.new(name: "The Red Cross", description: "A non-profit organization")
+      expect(org.save).to eq true
+      e1.organization = org
+      e2.organization = org
       expect(u1.save).to eq true
       expect(e1.save).to eq true
       expect(e2.save).to eq true

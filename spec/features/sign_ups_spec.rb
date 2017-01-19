@@ -4,6 +4,7 @@ RSpec.feature "SignUps", type: :feature do
 
   before(:each) do
     @organization = Organization.new(name: "ABC", description: "ABC is a helpful org")
+    @organization.save
   end
 
   context "I can go to sign up page" do
@@ -33,7 +34,7 @@ RSpec.feature "SignUps", type: :feature do
         fill_in "user[password]", with: "123456"
         fill_in "user[password_confirmation]", with: "123456"
         select "Organizer", from: "role"
-        select @organization.id, from: "organization"
+        select @organization.name, from: "organization"
         click_button "Sign up"
         expect(page).to have_content("Welcome! You have signed up successfully.")
       end
