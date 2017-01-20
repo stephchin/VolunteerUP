@@ -83,13 +83,16 @@ class EventsController < ApplicationController
 
   def add_user
     event = Event.find(params[:event_id])
-    if !event.users.all.include?(current_user)
+    if !user_signed_in?
+      flash[:notice] = "Please log in to volunteer."
+      redirect_to new_user_session_path
+    elsif !event.users.all.include?(current_user)
       event.user_events.new(user: current_user)
       event.save
       redirect_to user_path(current_user.id)
     else
-      redirect_to event_path(event.id)
       flash[:notice] = "You already signed up!"
+      redirect_to event_path(event.id)
     end
   end
 
