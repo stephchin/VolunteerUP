@@ -6,6 +6,9 @@
   <p>
   <span class="glyphicon glyphicon-map-marker"></span> <%= @user.city + ' ' + @user.state %>
   </p>
+  <p> <%=link_to "My Organizations:", organizations_path %>
+  <%= @user.organizations.all.pluck(:name).join(", ") %>
+  </p>
 </div>
 <p>
 <%= link_to 'Account Settings', edit_user_registration_path, class: "btn btn-xs btn-info" %>
