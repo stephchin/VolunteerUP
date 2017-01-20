@@ -13,4 +13,8 @@ class Event < ApplicationRecord
   def address
     "#{street}, #{city} #{state} #{postal_code}"
   end
+
+  def remaining_vol
+    volunteers_needed - self.users.count
+  end
 end
