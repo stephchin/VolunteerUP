@@ -38,6 +38,7 @@
           <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger"%>
         </td>
         <td><%= event.cause %></td>
+        <td><%= event.organization.name %></td>
         <td>
           <%= event.start_time.strftime("%b %e, %Y")%><br>
           <%= event.start_time.strftime("%l:%M %p") %> -
