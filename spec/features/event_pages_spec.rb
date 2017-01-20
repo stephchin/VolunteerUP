@@ -12,7 +12,7 @@ RSpec.feature "EventPages", type: :feature do
   end
 
   context 'I can go to the event page' do
-    Steps 'I can go to the events page and click on a speciifc event for further details' do
+    Steps 'I can go to the events page and click on a specific event for further details' do
       Given 'I am on the events page and logged in' do
         visit '/'
         click_link "Log in"
@@ -24,14 +24,34 @@ RSpec.feature "EventPages", type: :feature do
       Then 'I can click the event name' do
         click_link (@event.name)
       end
-      Then 'I am taken to the event page' do
-        visit event_path(@event)
+      Then 'I can see that event\'s page with event info' do
+        expect(page).to have_content "#{@event.name}"
+        expect(page).to have_content "#{@event.description}"
+        expect(page).to have_content "#{@event.organization.name}"
+        expect(page).to have_content "#{@event.volunteers_needed}"
       end
-      Then 'I can view the event information' do
-        expect(page).to have_content
+      Then 'I have the option to go back to events page' do
+        expect(page).to have_link("Back", href: "/events")
       end
       And 'I can click the volunteer button' do
         click_button('Volunteer!')
+      end
+      And 'I am taken to the user profile page with my upcoming event' do
+        expect(page).to have_content "Your Upcoming Events"
+        expect(page).to have_content "#{@event.name}"
+      end
+      Then 'I can click on a link to go back to the events page' do
+        click_link "Events"
+      end
+      And 'The event\'s volunteers needed count goes down' do
+        expect(page).to have_content "#{@event.name}"
+        expect(page).to have_content "#{@event.volunteers_needed - 1}"
+      end
+      Then 'I can go back to the event\'s page' do
+        click_link (@event.name)
+      end
+      And 'The event\'s volunteers needed count is updated' do
+        expect(page).to have_content "#{@event.volunteers_needed - 1}"
       end
     end
   end
