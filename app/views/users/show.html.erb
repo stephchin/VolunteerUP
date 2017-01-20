@@ -1,14 +1,17 @@
 <h1>Hi <%= @user.name %>!</h1>
 <br>
 <div class="user-info">
-  <ul>
-    <li>Email: <%= @user.email %></li>
-    <li>Location: <%= @user.city + ' ' + @user.state %></li>
-  </ul>
+  <p>
+  <span class="glyphicon glyphicon-envelope"></span> <%= @user.email %>
+  </p>
+  <p>
+  <span class="glyphicon glyphicon-map-marker"></span> <%= @user.city + ' ' + @user.state %>
+  </p>
 </div>
-<br>
 <p>
-<%= link_to 'Account Settings', edit_user_registration_path, class: "btn btn-xs btn-info" %> |
+<%= link_to 'Account Settings', edit_user_registration_path, class: "btn btn-xs btn-info" %>
+</p>
+<p>
 <%= link_to 'Home', root_path, class: "btn btn-xs btn-info" %>
 </p>
 <br>
@@ -26,6 +29,14 @@
       <th colspan="3"></th>
     </tr>
   </thead>
+
+
+<p>
+  <% @events.each do |event| %>
+  <%= link_to event.name, event %>
+
+  <% end %>
+</p>
 
   <tbody>
     <% @events.each do |event| %>
