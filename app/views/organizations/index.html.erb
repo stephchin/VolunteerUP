@@ -17,8 +17,10 @@
         <td>
           <strong><%= link_to organization.name, organization%></strong><br><br>
           <%= organization.description %><br><br>
-          <%= link_to 'Edit', edit_organization_path(organization), class: "btn btn-xs btn-info"%>
-          <%= link_to 'Destroy', organization, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %>
+          <% if user_signed_in? %>
+            <%= link_to 'Edit', edit_organization_path(organization), class: "btn btn-xs btn-info"%>
+            <%= link_to 'Destroy', organization, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %>
+          <% end %>
         </td>
         <td>
           Phone: <%= organization.phone %><br>
@@ -32,4 +34,6 @@
 
 <br>
 
-<%= link_to 'New Organization', new_organization_path, class: "btn btn-sm btn-primary" %>
+<% if user_signed_in? %>
+  <%= link_to 'New Organization', new_organization_path, class: "btn btn-sm btn-primary" %>
+<% end %>

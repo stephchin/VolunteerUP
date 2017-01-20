@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.feature "EventSearches", type: :feature do
 
   before(:each) do
+    @user = User.create(name: "Donnie", email: "1@yahoo.com", password: "123456",
+      city: "San Diego", state: "CA")
     @org = Organization.new(name: "The Red Cross", description: "A non-profit organization")
     @org.save
     @org2 = Organization.new(name: "The Puppy Shelter", description: "A non-profit organization")
@@ -11,7 +13,11 @@ RSpec.feature "EventSearches", type: :feature do
 
   context 'Searching for events' do
     Steps 'To search for events' do
-      Given 'I am on the events page' do
+      Given 'I am on the events page and I am logged in' do
+        visit '/users/sign_in'
+        fill_in "user[email]", with: @user.email
+        fill_in "user[password]", with: @user.password
+        click_button "Log in"
         visit '/events'
       end
       Then 'I can create a new event' do
