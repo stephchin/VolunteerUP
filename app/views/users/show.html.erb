@@ -4,6 +4,9 @@
   <ul>
     <li>Email: <%= @user.email %></li>
     <li>Location: <%= @user.city + ' ' + @user.state %></li>
+    <li>My Organizations:
+    <%= @user.organizations.all.pluck(:name).join(", ") %>
+    </li>
   </ul>
 </div>
 <br>
