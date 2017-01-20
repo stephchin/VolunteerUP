@@ -41,15 +41,14 @@
       <%= select_tag(:role, options_for_select([['Volunteer', 1], ['Organizer', 2]], 1)) %>
     </div>
 
-
-    <div class="field">
+    <div class="field", id="org_selector">
       <%= f.label :organization %>
       <%= select_tag(:organization, options_for_select( Organization.all.map do |org|
         [org.name, org.id]
-      end), {prompt: '- Select One -'}) %>
-    </div>
+      end), {prompt: '- Select One -'}) %><br>
 
-    <%= link_to 'Or create a new organization', new_organization_path %><br><br>
+    <%= link_to 'Or create a new organization', new_organization_path %>
+    </div><br>
 
 
     <div class="actions">

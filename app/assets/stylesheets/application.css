@@ -44,7 +44,7 @@ a:hover {
   max-width: 337px;
 }
 
-.devise-box input {
+.devise-box input, .devise-box a {
   width: 300px;
   margin-bottom: 2px
 }
