@@ -33,6 +33,14 @@ RSpec.describe Event, type: :model do
       expect(new_event.end_time.hour).to eq 5
       expect(new_event.end_time.min).to eq 30
     end
+    it "has an organization" do
+      new_event = Event.new(name: "ABC", start_time: DateTime.new(2017,1,18,1,30), end_time: DateTime.new(2017,1,18,5,30), volunteers_needed: 100)
+      new_org = Organization.new(name: "The Red Cross", description: "A non-profit organization")
+      new_org.save
+      new_event.organization = new_org
+      expect(new_event.organization.name).to eq "The Red Cross"
+      expect(new_event.organization.description).to eq "A non-profit organization"
+    end
     it "has a number of volunteers needed" do
       new_event = Event.new
       new_event.volunteers_needed = 100
@@ -40,6 +48,9 @@ RSpec.describe Event, type: :model do
     end
     it "should save" do
       new_event = Event.new(name: "ABC", start_time: DateTime.new(2017,1,18,1,30), end_time: DateTime.new(2017,1,18,5,30), volunteers_needed: 100)
+      new_org = Organization.new(name: "The Red Cross", description: "A non-profit organization")
+      new_org.save
+      new_event.organization = new_org
       expect{new_event.save}.to_not raise_error
     end
   end

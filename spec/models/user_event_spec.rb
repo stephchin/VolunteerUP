@@ -9,11 +9,15 @@ RSpec.describe UserEvent, type: :model do
 
   describe "User" do
     it "can be created and saved" do
-      u1 = User.new(email: "a@yahoo.com", password: @pw, name: "Stephen")
-      e1 = Event.new(name: "Blood", start_time: @start, end_time: @end,
+      u1 = User.create(email: "a@yahoo.com", password: @pw, name: "Stephen")
+      e1 = Event.create(name: "Blood", start_time: @start, end_time: @end,
         volunteers_needed: 10)
       e2 = Event.new(name: "Pestilence", start_time: @start, end_time: @end,
         volunteers_needed: 100)
+      org = Organization.new(name: "The Red Cross", description: "A non-profit organization")
+      expect(org.save).to eq true
+      e1.organization = org
+      e2.organization = org
       expect(u1.save).to eq true
       expect(e1.save).to eq true
       expect(e2.save).to eq true
@@ -21,13 +25,19 @@ RSpec.describe UserEvent, type: :model do
 
     it "can have many events" do
       u1 = User.create(email: "a@yahoo.com", password: @pw, name: "Stephen")
+      org = Organization.new(name: "The Red Cross", description: "A non-profit organization")
+      expect(org.save).to eq true
       e1 = Event.create(name: "Blood", start_time: @start, end_time: @end,
         volunteers_needed: 10)
+      e1.organization = org
+      expect(e1.save).to eq true
       e2 = Event.create(name: "Pestilence", start_time: @start, end_time: @end,
         volunteers_needed: 100)
+      e2.organization = org
+      expect(e2.save).to eq true
       expect(u1.user_events.new(event: e1).save).to eq true
       expect(u1.user_events.new(event: e2).save).to eq true
-      expect(u1.user_events.all.length).to eq 2
+      expect(u1.events.length).to eq 2
     end
   end
 
@@ -42,11 +52,15 @@ RSpec.describe UserEvent, type: :model do
     it "can have many users" do
       e1 = Event.create(name: "Frost", start_time: @start, end_time: @end,
         volunteers_needed: 30)
+      org = Organization.new(name: "The Red Cross", description: "A non-profit organization")
+      expect(org.save).to eq true
+      e1.organization = org
+      expect(e1.save).to eq true
       u1 = User.create(email: "b@yahoo.com", password: @pw, name: "Stephen")
-      u2 = User.create(email: "c@yahoo.com", password: @pw, name: "Stephen")
+      u2 = User.create(email: "c@yahoo.com", password: @pw, name: "Steph")
       expect(e1.user_events.new(user: u1).save).to eq true
       expect(e1.user_events.new(user: u2).save).to eq true
-      expect(e1.user_events.all.length).to eq 2
+      expect(e1.users.length).to eq 2
     end
 
   end

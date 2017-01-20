@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     e1 = Event.find(params[:event])
     u1.user_events.delete(event: e1)
     u1.events.delete(e1)
-    redirect_to user_path(params[:user_id])
+    redirect_to user_path(u1)
   end
 
   private
