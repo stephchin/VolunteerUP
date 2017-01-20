@@ -26,17 +26,15 @@
   </thead>
 
   <tbody>
-    <%# @user_events.each do |event| %>
+    <% @events.each do |event| %>
       <tr>
-        <td><%#= event.name %></td>
-        <td><%#= event.description %></td>
-        <td><%#= event.cause %></td>
-        <td><%#= event.address %></td>
-        <td><%#= event.start_time %></td>
-
-        <td class="table-btn"><%#= link_to 'Cancel Your RSVP', REMOVE EVENT FROM USER %></td>
-
+        <td><%= event.name %></td>
+        <td><%= event.description %></td>
+        <td><%= event.cause %></td>
+        <td><%= event.address %></td>
+        <td><%= event.start_time %></td>
+        <td><%= link_to "Cancel Your RSVP", user_remove_event_path(current_user.id) + "?event=" + event.id.to_s, method: :delete %></td>
       </tr>
-    <%# end %>
+    <% end %>
   </tbody>
 </table>
