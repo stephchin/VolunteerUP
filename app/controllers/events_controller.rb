@@ -5,8 +5,13 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = Event.all
-    if params[:search]
-      @events = Event.fuzzy_search(params[:search])
+    if params[:search].present?
+      #uses fuzzy search for all event string fields
+      @search_events = Event.fuzzy_search(params[:search])
+      #joins org table and uses fuzzy search on just the name
+      @search_orgs = Event.joins(:organization).fuzzy_search(organizations: {name: params[:search]})
+      #union of both searches which updates the index
+      @events = @search_events | @search_orgs
     end
   end
 
