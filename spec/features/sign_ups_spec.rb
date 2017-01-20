@@ -19,6 +19,18 @@ RSpec.feature "SignUps", type: :feature do
         click_link('Sign up')
         expect(page).to have_content "Sign up"
       end
+      #FYI: testing cannot be done for jquery hide/show
+      # Then "I can see that I'm given a default role of 'Volunteer'" do
+      #   expect(page).to have_content("Volunteer")
+      #   expect(page).to_not have_content("Organization")
+      # end
+      # And "If I select the Organizer role" do
+      #   select "Organizer", from: "role"
+      # end
+      # Then "I can also see the organizations dropdown" do
+      #   expect(page).to_not have_content("Volunteer")
+      #   select @organization.name, from: "organization"
+      # end
       Then "I can see that a name field is required" do
         fill_in "user[email]", with: "hello@me.com"
         fill_in "user[password]", with: "1234567"
@@ -26,7 +38,7 @@ RSpec.feature "SignUps", type: :feature do
         click_button "Sign up"
         expect(page).to have_content("Name can't be blank")
       end
-      Then "I can fill out the sign-up form" do
+      Then "I can fill out the sign-up form as an organizer" do
         fill_in "user[name]", with: "Suzan"
         fill_in "user[city]", with: "Cincinnati"
         fill_in "user[state]", with: "OH"
@@ -44,7 +56,6 @@ RSpec.feature "SignUps", type: :feature do
         expect(page).to have_content("Log out")
         expect(page).to_not have_content("Log in")
         expect(page).to_not have_content("Sign up")
-
       end
       Then "I can click a button to go to user profile page" do
         click_link "Profile"
