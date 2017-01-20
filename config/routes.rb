@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
 
   devise_for :users
-  resources :users
-  resources :events
+  resources :users do
+    delete :remove_event
+  end
+  resources :events do
+    post :add_user
+  end
   resources :organizations
 
   root 'landing_page#index'
