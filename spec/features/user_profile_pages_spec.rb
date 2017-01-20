@@ -6,6 +6,8 @@ RSpec.feature "UserProfilePages", type: :feature do
     @event = Event.create(name: "ABC", start_time:"2017-02-02 01:01:01", end_time:"2017-02-02 02:01:01", volunteers_needed: 100 )
     @organization = Organization.new(name: "ABC", description: "ABC is a helpful org")
     @organization.save
+    @organization2 = Organization.new(name: "DEF", description: "DEF is a helpful org")
+    @organization2.save
     @event.organization = @organization
     @event.save
     UserEvent.create(user_id: @user.id, event_id: @event.id)
@@ -27,6 +29,10 @@ RSpec.feature "UserProfilePages", type: :feature do
       end
       And "I can see a list of my RSVP'd events" do
         expect(page).to have_content "#{@event.name}"
+      end
+      And "I can see a list of my Organizations" do
+        expect(page).to have_content "#{@organization.name}"
+        expect(page).to have_content "#{@organization2.name}"
       end
       And "I can press a link to go to the splash page" do
         click_link('Home')
