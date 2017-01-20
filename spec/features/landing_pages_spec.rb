@@ -47,4 +47,25 @@ RSpec.feature "LandingPages", type: :feature do
       end
     end
   end
+
+  before(:each) do
+    @user = User.create(name: "Michael", city: "San Diego", state: "CA", email: "1@yahoo.com", password: "123456")
+  end
+  context 'Going to the landing page as a logged in User' do
+    Steps 'Go to landing page' do
+      Given 'I am on the landing page' do
+        visit '/'
+      end
+      Then 'I can login' do
+        click_link('Log in')
+        fill_in "user[email]", with: '1@yahoo.com'
+        fill_in "user[password]", with: '123456'
+        click_button "Log in"
+      end
+      And 'I can see my user dashboard page' do
+        expect(page).to have_content "Hi #{@user.name}!"
+      end
+    end
+  end
+
 end

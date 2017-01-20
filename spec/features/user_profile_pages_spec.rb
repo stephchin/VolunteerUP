@@ -19,7 +19,7 @@ RSpec.feature "UserProfilePages", type: :feature do
         fill_in "user[email]", with: "t_eazy@bigmoney.com"
         fill_in "user[password]", with: "password"
         click_button "Log in"
-        
+
         visit user_path(@user)
       end
       Then 'I can see my profile information' do
@@ -33,10 +33,6 @@ RSpec.feature "UserProfilePages", type: :feature do
       end
       And "I can see a list of my RSVP'd events" do
         expect(page).to have_content "#{@event.name}"
-      end
-      And "I can press a link to go to the splash page" do
-        click_link('Home')
-        expect(page).to have_content "VolunteerUP!"
       end
     end
   end
