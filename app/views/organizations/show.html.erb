@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <h3>
   <strong><%= @organization.name %></strong>
 </h3><hr>
@@ -23,6 +21,8 @@
   <strong>Website:</strong><br>
   <%= @organization.website %>
 </p>
+
+<%= button_to "Join!", organization_add_user_path(@organization.id), class: "btn btn-primary btn-sm"%>
 
 <%= link_to 'Edit', edit_organization_path(@organization), class: "btn btn-xs btn-info" %> |
 <%= link_to 'Back', organizations_path %>
