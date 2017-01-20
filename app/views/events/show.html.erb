@@ -34,11 +34,12 @@
 </p>
 
 <p>
-  <strong>Volunteers needed:</strong><br>
-  <%= @event.volunteers_needed %>
+  <strong>Spots Remaining:</strong><br>
+   <%= "#{@event.remaining_vol} out of #{@event.volunteers_needed}" %>
 </p>
 
 <%= button_to "Volunteer!", event_add_user_path(@event.id), class: "btn btn-primary btn-sm"%>
-
-<%= link_to 'Edit', edit_event_path(@event), class: "btn btn-xs btn-info" %> |
-<%= link_to 'Back', events_path %>
+<% if user_signed_in? %>
+<%= link_to 'Edit', edit_event_path(@event), class: "btn btn-xs btn-info" %>|
+<% end %>
+<%= link_to 'Back', events_path, class: "btn btn-xs btn-info" %>

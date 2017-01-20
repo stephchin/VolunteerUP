@@ -1,44 +1,72 @@
 <h1>Hi <%= @user.name %>!</h1>
 <br>
 <div class="user-info">
-  <ul>
-    <li>Email: <%= @user.email %></li>
-    <li>Location: <%= @user.city + ' ' + @user.state %></li>
-    <li>My Organizations:
-    <%= @user.organizations.all.pluck(:name).join(", ") %>
-    </li>
-  </ul>
+  <p>
+  <span class="glyphicon glyphicon-envelope"></span> <%= @user.email %>
+  </p>
+  <p>
+  <span class="glyphicon glyphicon-map-marker"></span> <%= @user.city + ' ' + @user.state %>
+  </p>
+  <p> <%=link_to "My Organizations:", organizations_path %>
+  <%= @user.organizations.all.pluck(:name).join(", ") %>
+  </p>
 </div>
-<br>
 <p>
-<%= link_to 'Account Settings', edit_user_registration_path, class: "btn btn-xs btn-info" %> |
+<%= link_to 'Account Settings', edit_user_registration_path, class: "btn btn-xs btn-info" %>
+</p>
+<p>
 <%= link_to 'Home', root_path, class: "btn btn-xs btn-info" %>
 </p>
 <br>
 <h2>Your Upcoming Events</h2>
-<table class="table">
+<table class="table" id="user-events-table">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Description</th>
+      <th>Event Info</th>
       <th>Cause</th>
-      <th>Address</th>
-      <th>Start Time</th>
+      <th>Organization</th>
+      <th>Date and Time</th>
+      <th>Event Location</th>
+      <th>Spots Remaining</th>
+      <th>Can't Make It?</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
+
+<p>
+  <% @events.each do |event| %>
+  <%= link_to event.name, event %>
+
+  <% end %>
+</p>
+
   <tbody>
     <% @events.each do |event| %>
       <tr>
-        <td><%= event.name %></td>
-        <td><%= event.description %></td>
+        <td>
+          <strong><%= link_to event.name, event %></strong><br><br>
+          <%= event.description %><br><br>
+        </td>
         <td><%= event.cause %></td>
-        <td><%= event.address %></td>
-        <td><%= event.start_time %></td>
+        <td><%= event.organization.name %></td>
+        <td>
+          <%= event.start_time.strftime("%b %e, %Y")%><br>
+          <%= event.start_time.strftime("%l:%M %p") %> -
+          <%= event.end_time.strftime("%l:%M %p") %><br>
+          (<%= ((event.end_time-event.start_time)/3600).round(1)  %> hours)
+        </td>
+        <td>
+          <%= event.street %><br>
+          <%= event.city %>,
+          <%= event.state %>
+          <%= event.postal_code %>
+          <%= event.country %>
+        </td>
+        <td><%= "#{event.remaining_vol} out of #{event.volunteers_needed}" %></td>
         <td><%= link_to "Cancel Your RSVP",
           user_remove_event_path(current_user.id) + "?event=" +
-          event.id.to_s, method: :delete %></td>
+          event.id.to_s, method: :delete, class: "btn btn-xs btn-info" %></td>
       </tr>
     <% end %>
   </tbody>

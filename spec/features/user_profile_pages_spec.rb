@@ -46,10 +46,6 @@ RSpec.feature "UserProfilePages", type: :feature do
       And "I can see a list of my RSVP'd events" do
         expect(page).to have_content @event.name
       end
-      And "I can press a link to go to the splash page" do
-        click_link('Home')
-        expect(page).to have_content "VolunteerUP!"
-      end
     end
   end
 end
