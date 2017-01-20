@@ -15,7 +15,13 @@ RSpec.feature "UserProfilePages", type: :feature do
 
   context 'I can go to the user profile page' do
     Steps 'I can go to user profile page to see user details' do
-      Given 'I am on my profile page' do
+      Given 'I am on my profile page and logged in' do
+        visit  '/'
+        click_link 'Log in'
+        fill_in "user[email]", with: "t_eazy@bigmoney.com"
+        fill_in "user[password]", with: "password"
+        click_button "Log in"
+        
         visit user_path(@user)
       end
       Then 'I can see my profile information' do

@@ -5,8 +5,13 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = Event.all
-    if params[:search]
-      @events = Event.fuzzy_search(params[:search])
+    if params[:search].present?
+      #uses fuzzy search for all event string fields
+      @search_events = Event.fuzzy_search(params[:search])
+      #joins org table and uses fuzzy search on just the name
+      @search_orgs = Event.joins(:organization).fuzzy_search(organizations: {name: params[:search]})
+      #union of both searches which updates the index
+      @events = @search_events | @search_orgs
     end
   end
 
@@ -73,6 +78,18 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def add_user
+    event = Event.find(params[:event_id])
+    if !event.users.all.include?(current_user)
+      event.user_events.new(user: current_user)
+      event.save
+      redirect_to user_path(current_user.id)
+    else
+      redirect_to event_path(event.id)
+      flash[:notice] = "You already signed up!"
     end
   end
 

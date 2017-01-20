@@ -148,6 +148,16 @@ RSpec.feature "EventSearches", type: :feature do
         expect(page).to have_content('San Diego')
         expect(page).not_to have_content('test')
       end
+      Then 'I can enter any the org name into a search box' do
+        fill_in 'Search', with: 'The Red Cross'
+      end
+      And 'I can click the search button' do
+        click_button 'Search All'
+      end
+      Then 'I can see the thing(s) I searched for by organization, but that\'s all' do
+        expect(page).to have_content('The Red Cross')
+        expect(page).not_to have_content('test2')
+      end
     end
   end
 end
