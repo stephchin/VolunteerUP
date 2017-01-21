@@ -60,8 +60,8 @@ RSpec.feature "SignUps", type: :feature do
       Then "I can click a button to go to user profile page" do
         click_link "Profile"
         expect(page).to have_content "Hi Suzan!"
-        expect(page).to have_content "Email: 123@yahoo.com"
-        expect(page).to have_content "Location: Cincinnati OH"
+        expect(page).to have_content "123@yahoo.com"
+        expect(page).to have_content "Cincinnati OH"
       end
     end
   end

@@ -1,3 +1,25 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.user-info {
+  padding-top: 1em;
+  p {
+    font-size: 1.1em;
+  }
+}
+#user-events-table{
+  margin-top: 3em;
+  background-color: #F8F8F8;
+  border: 1px solid #e7e7e7;
+  border-collapse: separate;
+  border-radius: .2em;
+  caption {
+    font-size: 20px;
+  }
+  th, td {
+    padding-right: 1.6em;
+  }
+  td {
+    border-bottom: .2em;
+  }
+}

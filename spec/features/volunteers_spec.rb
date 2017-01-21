@@ -52,8 +52,8 @@ RSpec.feature "Volunteers", type: :feature do
         expect(page).to have_content("Give laptops")
         click_button "Volunteer!"
         expect(page).to have_content("Hi Tomas!")
-        expect(page).to have_content("Email: 1@yahoo.com")
-        expect(page).to have_content("Location: Rome Depleted")
+        expect(page).to have_content("1@yahoo.com")
+        expect(page).to have_content("Rome Depleted")
         expect(page).to have_content("Give laptops")
       end
       And "I can click the 'Cancel Your RSVP'" do
