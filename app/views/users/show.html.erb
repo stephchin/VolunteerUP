@@ -7,7 +7,7 @@
   <span class="glyphicon glyphicon-map-marker"></span> <%= @user.city + ' ' + @user.state %>
   </p>
   <p>
-  <%= link_to "My Organizations:", organizations_path %>
+  My Organizations:
   <%= safe_join(@user.organizations.map {|organization| link_to organization.name, organization_url(organization)}, (", ").html_safe) %>
   </p>
 </div>
