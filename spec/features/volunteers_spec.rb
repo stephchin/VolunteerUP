@@ -13,6 +13,7 @@ RSpec.feature "Volunteers", type: :feature do
         fill_in "user[password]", with: "123456"
         fill_in "user[password_confirmation]", with: "123456"
         click_button "Sign up"
+        @user = User.find_by_email("1@yahoo.com")
 
         click_link "Organizations"
         click_link "New Organization"
@@ -46,21 +47,29 @@ RSpec.feature "Volunteers", type: :feature do
         fill_in "event[volunteers_needed]", with: 20
         select "Scott's Tots", from: "event_organization_id"
         click_button "Create Event"
+        @event = Event.find_by_name("Give laptops")
+        expect(page).to have_current_path(event_path(@event.id))
       end
-
-      Then "I am on the events page and can click the 'Volunteer!' button" do
-        expect(page).to have_content("Give laptops")
+      Then "I am on the events page and can click the 'Volunteer!' button that
+        redirects to the user's profile page" do
         click_button "Volunteer!"
-        expect(page).to have_content("Hi Tomas!")
-        expect(page).to have_content("1@yahoo.com")
-        expect(page).to have_content("Rome Depleted")
-        expect(page).to have_content("Give laptops")
+        expect(page).to have_current_path(user_path(@user.id))
+        expect(page).to have_content(@user.name)
+        expect(page).to have_content(@user.email)
+        expect(page).to have_content(@user.city)
+        expect(page).to have_content(@user.state)
+        expect(page).to have_content(@user.events.find(@event.id).name)
+      end
+      Then "I can no longer click the 'Volunteer!' button" do
+        visit event_path(@event.id)
+        expect(page).to have_button('Volunteer!', disabled: true)
       end
       And "I can click the 'Cancel Your RSVP'" do
+        visit user_path(@user.id)
         click_link "Cancel Your RSVP"
-        expect(page).to_not have_content("Give laptops")
-        expect(page).to_not have_content("We have batteries!")
-        expect(page).to_not have_content("For the new high school graduates")
+        expect(page).to_not have_content(Event.find(@event.id).name)
+        expect(page).to_not have_content(Event.find(@event.id).description)
+        expect(page).to_not have_content(Event.find(@event.id).cause)
       end
     end
   end
