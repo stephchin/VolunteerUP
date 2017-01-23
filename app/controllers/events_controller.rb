@@ -94,6 +94,7 @@ class EventsController < ApplicationController
       redirect_to user_path(current_user.id)
     elsif event.remaining_vol <= 0
       flash[:notice] = "Sorry, this event is full."
+      redirect_to event_path(event.id)
     else
       flash[:notice] = "You already signed up!"
       redirect_to event_path(event.id)
