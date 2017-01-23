@@ -45,13 +45,13 @@ RSpec.feature "EventPages", type: :feature do
       end
       And 'The event\'s volunteers needed count goes down' do
         expect(page).to have_content "#{@event.name}"
-        expect(page).to have_content "#{@event.volunteers_needed}"
+        expect(page).to have_content "#{@event.volunteers_needed - 1}"
       end
       Then 'I can go back to the event\'s page' do
         click_link (@event.name)
       end
       And 'The event\'s volunteers needed count is updated' do
-        expect(page).to have_content "#{@event.volunteers_needed}"
+        expect(page).to have_content "#{@event.volunteers_needed - 1}"
       end
       Then 'I can log out' do
         click_link "Log out"

@@ -15,6 +15,6 @@ class Event < ApplicationRecord
   end
 
   def remaining_vol
-      volunteers_needed - self.users.count
+    volunteers_needed - self.users.count
   end
 end
