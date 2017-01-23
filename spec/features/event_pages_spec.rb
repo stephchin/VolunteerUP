@@ -5,7 +5,7 @@ RSpec.feature "EventPages", type: :feature do
   before(:each) do
     @organization = Organization.new(name: "ABC", description: "ABC is a helpful org")
     @organization.save
-    @event = Event.create(name: "ABC", start_time:"2017-02-02 01:01:01", end_time:"2017-02-02 02:01:01", volunteers_needed: 100 )
+    @event = Event.create(name: "ABC", start_time:"2017-02-02 01:01:01", end_time:"2017-02-02 02:01:01", volunteers_needed: 1 )
     @event.organization = @organization
     @event.save
     @user = User.create(name: "Michael", city: "San Diego", state: "CA", email: "1@yahoo.com", password: "123456")
@@ -45,13 +45,27 @@ RSpec.feature "EventPages", type: :feature do
       end
       And 'The event\'s volunteers needed count goes down' do
         expect(page).to have_content "#{@event.name}"
-        expect(page).to have_content "#{@event.volunteers_needed - 1}"
+        expect(page).to have_content "#{@event.volunteers_needed}"
       end
       Then 'I can go back to the event\'s page' do
         click_link (@event.name)
       end
       And 'The event\'s volunteers needed count is updated' do
-        expect(page).to have_content "#{@event.volunteers_needed - 1}"
+        expect(page).to have_content "#{@event.volunteers_needed}"
+      end
+      Then 'I can log out' do
+        click_link "Log out"
+      end
+      And 'I can log in as another user and visit the events page' do
+        click_link "Log in"
+        fill_in "user[email]", with: "g@yahoo.com"
+        fill_in "user[password]", with: "123456"
+        click_button "Log in"
+        visit '/events'
+      end
+      Then 'When I try to sign up for a full event, there is no volunteer button' do
+        click_link (@event.name)
+        expect(page).not_to have_button('Volunteer!')
       end
     end
   end
