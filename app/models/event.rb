@@ -1,5 +1,6 @@
 class Event < ApplicationRecord
-  has_many :user_events
+  #if an event is destroyed, this destroys the link between event and user, but not the actual user
+  has_many :user_events, :dependent => :destroy
   has_many :users, through: :user_events
 
   belongs_to :organization
