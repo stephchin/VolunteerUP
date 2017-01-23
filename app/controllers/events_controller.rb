@@ -88,10 +88,12 @@ class EventsController < ApplicationController
     if !user_signed_in?
       flash[:notice] = "Please log in to volunteer."
       redirect_to new_user_session_path
-    elsif !event.users.all.include?(current_user)
+    elsif !event.users.all.include?(current_user) && event.remaining_vol >= 1
       event.user_events.new(user: current_user)
       event.save
       redirect_to user_path(current_user.id)
+    elsif event.remaining_vol <= 0
+      flash[:notice] = "Sorry, this event is full."
     else
       flash[:notice] = "You already signed up!"
       redirect_to event_path(event.id)
