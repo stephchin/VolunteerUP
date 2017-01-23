@@ -65,7 +65,7 @@ RSpec.feature "EventPages", type: :feature do
       end
       Then 'When I try to sign up for a full event, there is no volunteer button' do
         click_link (@event.name)
-        expect(page).not_to have_button('Volunteer!')
+        expect(page).to have_button('Volunteer!', disabled: true)
       end
     end
   end
