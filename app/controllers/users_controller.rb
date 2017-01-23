@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def show
     @events = @user.events.all
-    
+
   end
 
   def remove_event

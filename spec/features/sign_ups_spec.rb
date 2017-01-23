@@ -42,8 +42,8 @@ RSpec.feature "SignUps", type: :feature do
         fill_in "user[email]", with: "123@yahoo.com"
         fill_in "user[password]", with: "123456"
         fill_in "user[password_confirmation]", with: "123456"
-        select "Organizer", from: "role"
-        select @organization.name, from: "organization"
+        # select "Organizer", from: "role"
+        # select @organization.name, from: "organization"
         click_button "Sign up"
         expect(page).to have_content("Welcome! You have signed up successfully.")
       end
@@ -54,11 +54,14 @@ RSpec.feature "SignUps", type: :feature do
         expect(page).to_not have_content("Log in")
         expect(page).to_not have_content("Sign up")
       end
-      Then "I can click a button to go to user profile page" do
+      And "I can see my user profile page" do
         click_link "Profile"
         expect(page).to have_content "Hi Suzan!"
         expect(page).to have_content "123@yahoo.com"
         expect(page).to have_content "Cincinnati OH"
+      end
+      And "I can see that I am assigned a default role of volunteer" do
+        expect(page).to have_content "Volunteer"
       end
     end
   end

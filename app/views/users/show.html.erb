@@ -1,6 +1,12 @@
 <h1>Hi <%= @user.name %>!</h1>
 <div class="user-info">
   <p>
+  <span class="glyphicon glyphicon-user"></span>
+  <% @user.roles.each do |role| %>
+  <%= role.name.capitalize %>
+  <% end %>
+  </p>
+  <p>
   <span class="glyphicon glyphicon-envelope"></span> <%= @user.email %>
   </p>
   <p>
