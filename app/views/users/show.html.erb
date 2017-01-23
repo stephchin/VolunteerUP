@@ -1,13 +1,20 @@
 <h1>Hi <%= @user.name %>!</h1>
 <div class="user-info">
   <p>
+  <span class="glyphicon glyphicon-user"></span>
+  <% @user.roles.each do |role| %>
+  <%= role.name.capitalize %>
+  <% end %>
+  </p>
+  <p>
   <span class="glyphicon glyphicon-envelope"></span> <%= @user.email %>
   </p>
   <p>
   <span class="glyphicon glyphicon-map-marker"></span> <%= @user.city + ' ' + @user.state %>
   </p>
-  <p> <%=link_to "My Organizations:", organizations_path %>
-  <%= @user.organizations.all.pluck(:name).join(", ") %>
+  <p>
+  My Organizations:
+  <%= safe_join(@user.organizations.map {|organization| link_to organization.name, organization_path(organization)}, (", ").html_safe) %>
   </p>
 </div>
 <p>

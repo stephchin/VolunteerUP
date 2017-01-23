@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+
+  get 'about' => 'landing_page#about'
+
   devise_for :users
   resources :users do
     delete :remove_event

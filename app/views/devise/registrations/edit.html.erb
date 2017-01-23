@@ -31,6 +31,11 @@
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
 
+  <div class="field">
+    <%= f.label :role %>
+    <%= select_tag(:role, options_for_select([['Volunteer', 1], ['Organizer', 2]], 1)) %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Update" %>
   </div>
