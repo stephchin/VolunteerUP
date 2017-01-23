@@ -10,7 +10,7 @@ class Ability
       can :manage, :all
     elsif user.has_role? :organizer
       can :read, :all
-      can :manage, Organization
+      can :manage, Organization, user_id: user.id
       can :manage, Event, user_id: user.id
     else user.has_role? :volunteer
       can :read, :all

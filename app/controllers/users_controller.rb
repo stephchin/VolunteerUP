@@ -13,6 +13,10 @@ class UsersController < ApplicationController
     redirect_to user_path(u1)
   end
 
+  def assign_role
+    
+  end
+
   private
 
     #Use callbacks to share common setup or constraints between actions
