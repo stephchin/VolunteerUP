@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   resources :events do
     post :add_user
   end
-  resources :organizations
+  resources :organizations do
+    post :add_user
+  end
 
   root 'landing_page#index'
 

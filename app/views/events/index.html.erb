@@ -34,8 +34,10 @@
         <td>
           <strong><%= link_to event.name, event %></strong><br><br>
           <%= event.description %><br><br>
-          <%= link_to 'Edit', edit_event_path(event), class: "btn btn-xs btn-info" %>
-          <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger"%>
+          <% if user_signed_in? %>
+            <%= link_to 'Edit', edit_event_path(event), class: "btn btn-xs btn-info" %>
+            <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger"%>
+          <% end %>
         </td>
         <td><%= event.cause %></td>
         <td><%= event.organization.name %></td>
@@ -60,4 +62,6 @@
 
 <br>
 
-<%= link_to 'New Event', new_event_path, class: "btn btn-sm btn-primary" %>
+<% if user_signed_in? %>
+  <%= link_to 'New Event', new_event_path, class: "btn btn-sm btn-primary" %>
+<% end %>

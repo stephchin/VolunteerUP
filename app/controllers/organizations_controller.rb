@@ -14,6 +14,19 @@ class OrganizationsController < ApplicationController
   def show
   end
 
+  def add_user
+    @user = current_user
+    @organization = Organization.find(params[:organization_id])
+    if !@user.organizations.all.include?(@organization)
+      @user.user_organizations.new(organization: @organization).save
+      flash[:notice] = "Congrats, you have joined the organization"
+      redirect_to organization_path(@organization.id)
+    else
+      flash[:notice] = "You are already a member of this organization."
+      redirect_to organization_path(@organization.id)
+    end
+  end
+
   # GET /organizations/new
   def new
     @organization = Organization.new
