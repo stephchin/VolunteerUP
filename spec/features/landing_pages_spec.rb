@@ -10,7 +10,7 @@ RSpec.feature "LandingPages", type: :feature do
         expect(page).to have_content('VolunteerUP is')
       end
       And 'I can see the navigation bar' do
-        expect(page).to have_content('About')
+        expect(page).to have_link(:href=>"/about")
       end
       Then 'I can click the sign up link to take me to a sign up page' do
         click_button('Sign up')
