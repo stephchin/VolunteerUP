@@ -12,12 +12,9 @@ RSpec.feature "SignUps", type: :feature do
       Given "I am on the landing page" do
         visit '/'
       end
-      Then "I can see the sign up page" do
-        expect(page).to have_content "Sign up"
-      end
       Then "I can press the 'Sign up' button and go to sign up page" do
         click_link('Sign up')
-        expect(page).to have_content "Sign up"
+        expect(page).to have_current_path(new_user_registration_path)
       end
       #FYI: testing cannot be done for jquery hide/show
       # Then "I can see that I'm given a default role of 'Volunteer'" do

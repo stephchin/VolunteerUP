@@ -9,7 +9,7 @@ RSpec.describe UserOrganization, type: :model do
 
   describe "User" do
     it "can be created and saved" do
-      u1 = User.create(email: "a@yahoo.com", password: @pw, name: "Stephen")
+      u1 = User.create(email: "1@yahoo.com", password: @pw, name: "Stephen")
       e1 = Event.create(name: "Blood", start_time: @start, end_time: @end,
         volunteers_needed: 10)
       e2 = Event.new(name: "Pestilence", start_time: @start, end_time: @end,
@@ -24,7 +24,7 @@ RSpec.describe UserOrganization, type: :model do
     end
 
     it "can have many organizations" do
-      u1 = User.create(email: "a@yahoo.com", password: @pw, name: "Stephen")
+      u1 = User.create(email: "1@yahoo.com", password: @pw, name: "Stephen")
       org = Organization.new(name: "The Red Cross", description: "A non-profit organization")
       expect(org.save).to eq true
       org2 = Organization.new(name: "WWF", description: "A non-profit organization for animals")
@@ -36,17 +36,16 @@ RSpec.describe UserOrganization, type: :model do
   end
 
   describe "Organization" do
-
     it "can be created and saved" do
       o1 = Organization.create(name: "WWF", description: "animal lovers")
-      u1 = User.create(email: "b@yahoo.com", password: @pw, name: "Stephen")
-      u2 = User.create(email: "c@yahoo.com", password: @pw, name: "Stephen")
+      u1 = User.create(email: "2@yahoo.com", password: @pw, name: "Stephen")
+      u2 = User.create(email: "3@yahoo.com", password: @pw, name: "Stephen")
     end
 
     it "can have many users" do
       o1 = Organization.create(name: "WWF", description: "animal lovers")
-      u1 = User.create(email: "b@yahoo.com", password: @pw, name: "Stephen")
-      u2 = User.create(email: "c@yahoo.com", password: @pw, name: "Steph")
+      u1 = User.create(email: "2@yahoo.com", password: @pw, name: "Stephen")
+      u2 = User.create(email: "3@yahoo.com", password: @pw, name: "Steph")
       expect(o1.user_organizations.new(user: u1).save).to eq true
       expect(o1.user_organizations.new(user: u2).save).to eq true
       expect(o1.users.length).to eq 2
