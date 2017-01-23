@@ -11,24 +11,26 @@ RSpec.feature "LandingPages", type: :feature do
       end
       And 'I can see the navigation bar' do
         expect(page).to have_link(:href=>"/about")
+        expect(page).to have_link(:href=>"/events")
+        expect(page).to have_link(:href=>"/organizations")
       end
       Then 'I can click the sign up link to take me to a sign up page' do
         click_button('Sign up')
       end
       And 'I will see the registration fields' do
-        expect(page).to have_content('Sign up')
+        expect(page).to have_current_path(new_user_registration_path)
       end
       Then 'I can click on the logo to go back to the landing page' do
         click_link('VolunteerUP')
       end
       And 'I will be on the home page again' do
-        expect(page).to have_content('VolunteerUP!')
+        expect(page).to have_current_path(root_path)
       end
       Then 'I can click the log in link' do
         click_link('Log in')
       end
       And 'I am taken to the log in page' do
-        expect(page).to have_content('Log in')
+        expect(page).to have_current_path(user_session_path)
       end
       Given 'We are on the landing page' do
         visit '/'
