@@ -1,7 +1,6 @@
 class User < ApplicationRecord
-  # after_create :assign_role
+  after_commit :assign_role
 
-  rolify
   #if a user is destroyed, this destroys the link between user and event, but not the actual event
   has_many :user_events, :dependent => :destroy
   has_many :events, through: :user_events
@@ -13,8 +12,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   validates :name, presence: true
 
-  # def assign_role
-  #   add_role(:student)
-  # end
+  def assign_role
+    add_role(:volunteer) if self.roles.blank?
+  end
 
+  rolify
 end
