@@ -39,12 +39,13 @@
 </p>
 
 
-<% if user_signed_in? && !current_user.events.all.include?(Event.find(@event.id)) %>
+<% if user_signed_in? && !current_user.events.all.include?(Event.find(@event.id)) && (@event.remaining_vol > 0) %>
   <%= button_to "Volunteer!", event_add_user_path(@event.id), class: "btn btn-primary btn-sm"%>
 <% else %>
   <%= button_to "Volunteer!", {}, disabled: true, class: "btn btn-primary btn-sm" %>
 <% end %>
 <br />
+
 <% if user_signed_in? %>
 <%= link_to 'Edit', edit_event_path(@event), class: "btn btn-xs btn-info" %>|
 <% end %>
