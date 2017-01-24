@@ -94,7 +94,7 @@ function loadAndCreateGmapAll() {
       url: myurl,
       method: 'GET',
       success: function(dataFromServer) {
-        createGmaps(dataFromServer)
+        createGmapAll(dataFromServer)
       },
       error: function(jqXHR, textStatus, errorThrown) {
         alert("Getting map data failed: " + errorThrown);
