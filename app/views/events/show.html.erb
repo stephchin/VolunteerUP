@@ -38,14 +38,19 @@
    <%= "#{@event.remaining_vol} out of #{@event.volunteers_needed}" %>
 </p>
 
-
-<% if user_signed_in? && !current_user.events.all.include?(Event.find(@event.id)) %>
+<div class="event-notice">
+<% if user_signed_in? && !current_user.events.all.include?(Event.find(@event.id)) && (@event.remaining_vol > 0) %>
   <%= button_to "Volunteer!", event_add_user_path(@event.id), class: "btn btn-primary btn-sm"%>
-<% else %>
-  <%= button_to "Volunteer!", {}, disabled: true, class: "btn btn-primary btn-sm" %>
+<% elsif user_signed_in? && current_user.events.all.include?(Event.find(@event.id)) %>
+  <p>You are already signed up for this event! <span class="glyphicon glyphicon-thumbs-up"></span></p>
+<% elsif !user_signed_in? %>
+  <p><%= link_to "Sign In to Volunteer!", new_user_session_path, class: "btn btn-info" %></p>
 <% end %>
 <br />
+
 <% if @ability.can? :manage, @event%>
 <%= link_to 'Edit', edit_event_path(@event), class: "btn btn-xs btn-info" %>
+</div>
+
 <% end %>
 <%= link_to 'Back', events_path, class: "btn btn-xs btn-info" %>
