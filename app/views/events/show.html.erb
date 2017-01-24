@@ -48,9 +48,12 @@
 <% end %>
 <br />
 
+
 <% if @ability.can? :manage, @event%>
 <%= link_to 'Edit', edit_event_path(@event), class: "btn btn-xs btn-info" %>
 </div>
 
 <% end %>
 <%= link_to 'Back', events_path, class: "btn btn-xs btn-info" %>
+
+<div class="center-block" id="event_map" data-event-id="<%= @event.id %>"></div>

@@ -65,3 +65,10 @@
 <% if user_signed_in? %>
   <%= link_to 'New Event', new_event_path, class: "btn btn-sm btn-primary" %>
 <% end %>
+
+
+<div id="events_map" class="center-block" data-events-id="<%=@events%>">Gmap</div>
+
+<!-- <script>
+    markers = handler.addMarkers(<%=raw @hash.to_json %>);
+</script> -->
