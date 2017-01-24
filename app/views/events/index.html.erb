@@ -62,7 +62,7 @@
 
 <br>
 
-<% if @ability.can? :manage, @event %>
+<% if @ability.can? :new, Event %>
   <%= link_to 'New Event', new_event_path, class: "btn btn-sm btn-primary" %>
 <% end %>
 
