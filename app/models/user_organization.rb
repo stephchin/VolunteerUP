@@ -11,15 +11,20 @@ class UserOrganization < ApplicationRecord
     @user.add_role(:organizer)
   end
 
-  # sets the is_creator field in join table to true if the organization is new
+  # # sets the is_creator field in join table to true if the organization is new
   # def set_is_creator
   #   @set = UserOrganization.all
+  #   #this should pull all relationships in join table
   #
+  #   #this ensures that an org_id exists before running through checks
   #   if self.organization_id.present?
-  #     if @set.where(organization_id: self.organization_id) <= 1
-  #       self.is_creator = true
+  #     #this checks that if the org_id count is less than or equal to 1
+  #     if @set.where(organization_id: UserOrganization.last.organization_id).all.length <= 1
+  #       #then this is the first org
+  #       UserOrganization.last.is_creator = true
   #     else
-  #       self.is_creator = false
+  #       #then this is not the first org
+  #       UserOrganization.last.is_creator = false
   #     end
   #   end
   # end
