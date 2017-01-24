@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   end
   resources :events do
     post :add_user
+    get 'map_location'
+    get :map_locations, on: :collection
   end
   resources :organizations do
     post :add_user
