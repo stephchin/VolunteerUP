@@ -1,24 +1,31 @@
 class OrganizationsController < ApplicationController
   before_action :set_organization, only: [:show, :edit, :update, :destroy]
+  before_action :set_ability
   before_action :authenticate_user!, except: [:index, :show]
-  # load_and_authorize_resource
+  load_and_authorize_resource
 
   # GET /organizations
   # GET /organizations.json
   def index
     @organizations = Organization.all
+    # @ability = Ability.new(current_user)
   end
 
   # GET /organizations/1
   # GET /organizations/1.json
   def show
+    # @ability = Ability.new(current_user)
   end
 
   def add_user
     @user = current_user
     @organization = Organization.find(params[:organization_id])
     if !@user.organizations.all.include?(@organization)
-      @user.user_organizations.new(organization: @organization).save
+      #this creates a new association between user and organization, with is_creator field set to false
+      @user.user_organizations.new(organization: @organization, is_creator: false)
+      #this adds the organizer role to the user
+      @user.add_role :organizer
+      @user.save
       flash[:notice] = "Congrats, you have joined the organization"
       redirect_to organization_path(@organization.id)
     else
@@ -40,6 +47,12 @@ class OrganizationsController < ApplicationController
   # POST /organizations.json
   def create
     @organization = Organization.new(organization_params)
+    @user = current_user
+    #this creates a new association between user and organization, with is_creator field set to true
+    @user.user_organizations.new(organization: @organization, is_creator: true)
+    #this adds the organizer role to the user
+    @user.add_role :organizer
+    @user.save
 
     respond_to do |format|
       if @organization.save
@@ -80,6 +93,10 @@ class OrganizationsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_organization
       @organization = Organization.find(params[:id])
+    end
+
+    def set_ability
+      @ability = Ability.new(current_user)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

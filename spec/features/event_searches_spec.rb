@@ -9,15 +9,18 @@ RSpec.feature "EventSearches", type: :feature do
     @org.save
     @org2 = Organization.new(name: "The Puppy Shelter", description: "A non-profit organization")
     @org2.save
+    @user.organizations << @org << @org2
   end
 
   context 'Searching for events' do
     Steps 'To search for events' do
-      Given 'I am on the events page and I am logged in' do
+      Given 'I am on the events page, I am logged in, and I am an organizer' do
         visit '/users/sign_in'
         fill_in "user[email]", with: @user.email
         fill_in "user[password]", with: @user.password
         click_button "Log in"
+        expect(page).to have_current_path(user_path(@user))
+        expect(page).to have_content "Organizer"
         visit '/events'
       end
       Then 'I can create a new event' do

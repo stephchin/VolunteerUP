@@ -1,7 +1,8 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_ability
   before_action :authenticate_user!, except: [:index, :show]
-  # load_and_authorize_resource
+  load_and_authorize_resource
 
   def map_locations
     @events = Event.all
@@ -16,6 +17,7 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = Event.all
+    # @ability = Ability.new(current_user)
     if params[:search].present?
       #uses fuzzy search for all event string fields
       @search_events = Event.fuzzy_search(params[:search])
@@ -29,6 +31,7 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+    # @ability = Ability.new(current_user)
   end
 
   # GET /events/new
@@ -114,6 +117,10 @@ class EventsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_event
       @event = Event.find(params[:id])
+    end
+
+    def set_ability
+      @ability = Ability.new(current_user)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
