@@ -24,16 +24,20 @@ RSpec.feature "UserCancelAccounts", type: :feature do
       And 'I can click a button to cancel my account' do
         click_button 'Cancel my account'
       end
-      # Then "I can click the OK button on the alert" do
-      #   @browser.alert.ok
-      # end
-      Then "I am taken to the homepage where I can sign up again" do
-        expect(page).to have_current_path('/')
+      Then "I am taken to the homepage where I can try to sign up again" do
+        expect(page).to have_current_path(root_path)
         expect(page).to have_content('Sign up')
+        click_link "Log in"
       end
-      # And "I can see a list of my RSVP'd events" do
-      #   expect(page).to have_content @event.name
-      # end
+      Then "I can try to sign in with my old login" do
+        fill_in "user[email]", with: @u1.email
+        fill_in "user[password]", with: '123456'
+        click_button "Log in"
+      end
+      And "I will not be able to log in" do
+        expect(page).to have_content("Invalid Email or password.")
+        expect(page).to have_current_path(new_user_session_path)
+      end
     end
   end
 end
