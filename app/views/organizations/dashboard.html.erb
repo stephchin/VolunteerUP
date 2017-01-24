@@ -1,0 +1,21 @@
+<% @all_orgs.each do |org| %>
+  <table class="table" id="org-dash">
+    <caption><%= org.name %></caption>
+    <tr>
+      <th>User</th>
+      <th>Status</th>
+    </tr>
+      <% org.users.all.each do |user| %>
+    <tr>
+        <td><%= user.name %></td  >
+        <td>
+          <% if user.user_organizations.all.find_by(organization_id: org.id).is_creator %>
+            <%= "Creator" %>
+          <% else %>
+            <%= "Organizer" %>
+          <% end %>
+        </td>
+    </tr>
+    <% end %>
+  </table>
+<% end %>

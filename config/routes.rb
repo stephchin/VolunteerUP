@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   end
   resources :organizations do
     post :add_user
+    get :dashboard, on: :collection
   end
 
   root 'landing_page#index'
