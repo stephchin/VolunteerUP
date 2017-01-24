@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-
-
   get 'about' => 'landing_page#about'
 
   devise_for :users
@@ -9,6 +7,8 @@ Rails.application.routes.draw do
   end
   resources :events do
     post :add_user
+    get 'map_location'
+    get :map_locations, on: :collection
   end
   resources :organizations do
     post :add_user

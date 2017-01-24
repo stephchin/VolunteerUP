@@ -1,8 +1,11 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :set_ability
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :map_location, :map_locations]
   load_and_authorize_resource
+  skip_authorize_resource only: [:map_location, :map_locations]
+
+
 
   # GET /events
   # GET /events.json
@@ -25,6 +28,28 @@ class EventsController < ApplicationController
     # @ability = Ability.new(current_user)
   end
 
+  def map_location
+    @event = Event.find(params[:event_id])
+    @hash = Gmaps4rails.build_markers(@event) do |event, marker|
+      marker.lat(event.latitude)
+      marker.lng(event.longitude)
+      marker.infowindow("<em>" + event.address + "</em>")
+    end
+    render json: @hash.to_json
+  end
+
+  def map_locations
+    @events = Event.all
+    if params[:search]
+      @events = event.search(params[:search])
+    end
+
+    @hash = Gmaps4rails.build_markers(@events) do |event,marker|
+      marker.lat(event.latitude)
+      marker.lng(event.longitude)
+    end
+    render json: @hash.to_json
+  end
   # GET /events/new
   def new
     @event = Event.new
