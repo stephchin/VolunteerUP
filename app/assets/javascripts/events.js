@@ -1,6 +1,15 @@
-// # Place all the behaviors and hooks related to the matching controller here.
-// # All this logic will automatically be available in application.js.
-// # You can use CoffeeScript in this file: http://coffeescript.org/
+
+$(document).ready(function(){
+  createTweet();
+
+  function createTweet() {
+    console.log("updateTweet running");
+    var event = $("#event-name").text();
+    var org = $("#organization").text();
+    $("#tweet").attr('data-text', "Excited for "+ org + "'s " + event + "! Join us " + "#volunteerup");
+  }
+
+});
 
 function placeMakers(dataFromServer, markers) {
   markers = handler.addMarkers(dataFromServer);
@@ -38,7 +47,7 @@ function createGmap(dataFromServer) {
   });
 };
 
-function createGmaps(dataFromServer) {
+function createGmapAll(dataFromServer) {
   console.log(dataFromServer);
   handler = Gmaps.build('Google');
   handler.buildMap({
@@ -72,7 +81,7 @@ function loadAndCreateGmap() {
   }
 };
 
-function loadAndCreateGmaps() {
+function loadAndCreateGmapAll() {
   if ($("#events_map").length > 0) {
     var myurl = "/events/map_locations";
     if ($("#search").val()) {
@@ -85,7 +94,7 @@ function loadAndCreateGmaps() {
       url: myurl,
       method: 'GET',
       success: function(dataFromServer) {
-        createGmaps(dataFromServer)
+        createGmapAll(dataFromServer)
       },
       error: function(jqXHR, textStatus, errorThrown) {
         alert("Getting map data failed: " + errorThrown);
@@ -96,5 +105,5 @@ function loadAndCreateGmaps() {
 
 $(document).on('ready', loadAndCreateGmap);
 $(document).on('turbolinks:load', loadAndCreateGmap);
-$(document).on('ready', loadAndCreateGmaps);
-$(document).on('turbolinks:load', loadAndCreateGmaps);
+$(document).on('ready', loadAndCreateGmapAll);
+$(document).on('turbolinks:load', loadAndCreateGmapAll);

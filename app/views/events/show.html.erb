@@ -1,25 +1,25 @@
 <h1>
-  <strong><%= @event.name %></strong>
+  <div id="event-name"><strong><%= @event.name %></strong></div>
 </h1><hr>
 
 <p>
   <strong>Organization: <br></strong>
-  <%= @event.organization.name %>
+  <div id="organization"><%= @event.organization.name %></div>
 </p>
 
 <p>
   <strong>Description:</strong><br>
-  <%= @event.description %>
+  <div id="event"><%= @event.description %></div>
 </p>
 
 <p>
   <strong>Cause:</strong><br>
-  <%= @event.cause %>
+  <div id="cause"><%= @event.cause %></div>
 </p>
 
 <p>
   <strong>Date and Time:</strong><br>
-  <%= @event.start_time.strftime("%b %e, %Y ") %><br>
+  <div id="date"><%= @event.start_time.strftime("%b %e, %Y ") %></div><br>
   <%= @event.start_time.strftime("%l:%M %p") %> -
   <%= @event.end_time.strftime("%l:%M %p") %>
 </p>
@@ -52,8 +52,31 @@
 <% if @ability.can? :manage, @event%>
 <%= link_to 'Edit', edit_event_path(@event), class: "btn btn-xs btn-info" %>
 </div>
-
 <% end %>
+
+<div id="tweetBtn">
+  <a class="twitter-share-button"
+    id="tweet"
+    href="https://twitter.com/share"
+    data-size="small"
+    data-text="VolunteerUP!">
+  </a>
+  <script>window.twttr = (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+    if (d.getElementById(id)) return t;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "https://platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+    t._e = [];
+    t.ready = function(f) {
+      t._e.push(f);
+    };
+    return t;
+  }(document, "script", "twitter-wjs"));</script>
+</div><br>
+
 <%= link_to 'Back', events_path, class: "btn btn-xs btn-info" %>
 
 <div class="center-block" id="event_map" data-event-id="<%= @event.id %>"></div>
