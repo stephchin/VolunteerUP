@@ -35,7 +35,7 @@ class EventsController < ApplicationController
     @hash = Gmaps4rails.build_markers(@event) do |event, marker|
       marker.lat(event.latitude)
       marker.lng(event.longitude)
-      marker.infowindow("<em>" + event.address + "</em>")
+      marker.infowindow("<p style='text-align: center;'>#{event.name}</p>Hosted By:  #{event.organization.name}")
     end
     render json: @hash.to_json
   end
