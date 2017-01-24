@@ -112,7 +112,7 @@ class EventsController < ApplicationController
   end
 
   def add_user
-    event = Event.all(params[:event_id])
+    event = Event.find(params[:event_id])
     if !user_signed_in?
       flash[:notice] = "Please log in to volunteer."
       redirect_to new_user_session_path
