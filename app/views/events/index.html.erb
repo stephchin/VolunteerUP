@@ -67,9 +67,7 @@
 <% end %>
 
 
-<div style='width: 800px;'>
-  <div id="event_map" style='width: 800px; height: 400px;' data-events-id="<%= @events %>"></div>
-</div>
+<div id="events_map" class="center-block" data-events-id="<%=@events%>">Gmap</div>
 
 <!-- <script>
     markers = handler.addMarkers(<%=raw @hash.to_json %>);

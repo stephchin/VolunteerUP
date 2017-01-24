@@ -2,7 +2,6 @@
 // # All this logic will automatically be available in application.js.
 // # You can use CoffeeScript in this file: http://coffeescript.org/
 
-
 function placeMakers(dataFromServer, markers) {
   markers = handler.addMarkers(dataFromServer);
   handler.bounds.extendWith(markers);
@@ -26,7 +25,6 @@ function showLocations(dataFromServer) {
 }
 
 function createGmap(dataFromServer) {
-  alert(dataFromServer);
   handler = Gmaps.build('Google');
   handler.buildMap({
     provider: {},
@@ -41,6 +39,7 @@ function createGmap(dataFromServer) {
 };
 
 function createGmaps(dataFromServer) {
+  console.log(dataFromServer);
   handler = Gmaps.build('Google');
   handler.buildMap({
     provider: {},
