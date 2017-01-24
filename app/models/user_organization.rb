@@ -1,11 +1,11 @@
 class UserOrganization < ApplicationRecord
-  # after_commit :assign_organizer
+  after_commit :assign_organizer
   # after_create :set_is_creator
 
   belongs_to :user
   belongs_to :organization
 
-  # validates :is_creator, presence: {allow_nil: false} 
+  # validates :is_creator, presence: {allow_nil: false}
 
   # assigns organizer role to user if they create/join an org
   def assign_organizer

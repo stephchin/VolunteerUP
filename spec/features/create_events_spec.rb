@@ -5,7 +5,7 @@ RSpec.feature "CreateEvents", type: :feature do
   before(:each) do
     @org = Organization.find_by_name("Red Cross")
     @user = User.find_by_email("a@yahoo.com")
-    @user.organizations << @org
+    @user.user_organizations.create(organization: @org, is_creator: true)
   end
 
   context "Creating an event" do
