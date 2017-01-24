@@ -8,7 +8,8 @@ RSpec.feature "EventPages", type: :feature do
     @event = Event.create(name: "ABC", start_time:"2017-02-02 01:01:01", end_time:"2017-02-02 02:01:01", volunteers_needed: 100 )
     @event.organization = @organization
     @event.save
-    @user = User.create(name: "Michael", city: "San Diego", state: "CA", email: "1@yahoo.com", password: "123456")
+    @user = User.find_by_email("a@yahoo.com")
+    @user.add_role :volunteer
   end
 
   context 'I can go to the event page' do
@@ -16,9 +17,10 @@ RSpec.feature "EventPages", type: :feature do
       Given 'I am on the events page and logged in' do
         visit '/'
         click_link "Log in"
-        fill_in "user[email]", with: "1@yahoo.com"
+        fill_in "user[email]", with: @user.email
         fill_in "user[password]", with: "123456"
         click_button "Log in"
+        expect(page).to have_current_path(user_path(@user))
         visit '/events'
       end
       Then 'I can click the event name' do

@@ -3,26 +3,30 @@ require 'rails_helper'
 RSpec.feature "CreateEvents", type: :feature do
 
   before(:each) do
-    @org = Organization.new(name: "The Red Cross", description: "A non-profit organization")
-    @org.save
+    @org = Organization.find_by_name("Red Cross")
+    @user = User.find_by_email("a@yahoo.com")
+    @user.organizations << @org
   end
 
-  context "I can go to the events page" do
-    Steps "I can go to the events page" do
-      Given "I have an account" do
-        visit '/users/sign_up'
-        fill_in "user[name]", with: 'Stephanie'
-        fill_in "user[city]", with: 'San Francisco'
-        fill_in "user[state]", with: 'CA'
-        fill_in "user[email]", with: '1@yahoo.com'
-        fill_in "user[password]", with: '123456'
-        fill_in "user[password_confirmation]", with: '123456'
-        click_button "Sign up"
+  context "Creating an event" do
+    Steps "I can create an event" do
+      Given "I am on the sign in page" do
+        visit '/users/sign_in'
       end
-      And "I am on the Events Page" do
+      And 'I can sign in with my account' do
+        fill_in "user[email]", with: @user.email
+        fill_in "user[password]", with: '123456'
+        # fill_in "user[password_confirmation]", with: '123456'
+        click_button "Log in"
+        expect(page).to have_current_path(user_path(@user))
+      end
+      And "I am an organizer" do
+        expect(page).to have_content("Organizer")
+      end
+      Then "I can go to the Events Page" do
         visit '/events'
       end
-      Then "I can click the New Event button" do
+      And "I can click the New Event button" do
         click_link 'New Event'
         expect(page).to have_content "New Event"
       end
@@ -50,6 +54,7 @@ RSpec.feature "CreateEvents", type: :feature do
       end
       And "I can see the success message" do
         expect(page).to have_content "Adopt-A-Puppy"
+        expect(page).to have_content "Event was successfully created"
       end
     end
   end

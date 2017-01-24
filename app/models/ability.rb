@@ -9,10 +9,25 @@ class Ability
     if user.has_role? :admin
       can :manage, :all
     elsif user.has_role? :organizer
+      #organizers can manage organizations that they are organizers of
+      can :manage, Organization do |org|
+        org.user_ids.include? user.id
+      end
+      #organizers can manage events for organizations that they are organizers of
+      can :manage, Event do |event|
+        event.organization.user_ids.include? user.id
+      end
+      #organizers can new/create organizations and events
+      can [:new, :create], Organization
+      can [:new, :create], Event
+      #organizers can read everything
       can :read, :all
-      can :manage, Organization, user_id: user.id
-      can :manage, Event, user_id: user.id
     else user.has_role? :volunteer
+      #volunteers can new/create organizations, and join organizations
+      can [:new, :create, :add_user], Organization
+      #volunteers can join events
+      can [:add_user], Event
+      #volunteers can read everything
       can :read, :all
     end
   end

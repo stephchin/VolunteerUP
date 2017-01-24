@@ -1,11 +1,13 @@
 class Organization < ApplicationRecord
   has_many :events
-  
+
+  #if an org is destroyed, this destroys the link between user and orgs, but not the actual user
+  has_many :user_organizations, :dependent => :destroy
   has_many :users, through: :user_organizations
-  has_many :user_organizations
 
   validates :name, uniqueness: true, presence: true
   validates :description, presence: true
 
   resourcify
+
 end
