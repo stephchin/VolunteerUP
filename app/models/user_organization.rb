@@ -1,6 +1,6 @@
 class UserOrganization < ApplicationRecord
   after_commit :assign_organizer
-  # after_save :set_is_creator
+  # after_create :set_is_creator
 
   belongs_to :user
   belongs_to :organization
