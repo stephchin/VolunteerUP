@@ -28,6 +28,8 @@ class EventsController < ApplicationController
     # @ability = Ability.new(current_user)
   end
 
+
+  # GMAPS Functions
   def map_location
     @event = Event.find(params[:event_id])
     @hash = Gmaps4rails.build_markers(@event) do |event, marker|
@@ -47,9 +49,12 @@ class EventsController < ApplicationController
     @hash = Gmaps4rails.build_markers(@events) do |event,marker|
       marker.lat(event.latitude)
       marker.lng(event.longitude)
+      marker.infowindow("<p style='text-align: center;'>#{event.name}</p>Hosted By:  #{event.organization.name}")
     end
     render json: @hash.to_json
   end
+
+
   # GET /events/new
   def new
     @event = Event.new
