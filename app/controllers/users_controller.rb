@@ -3,7 +3,6 @@ class UsersController < ApplicationController
 
   def show
     @events = @user.events.all
-
   end
 
   def remove_event
@@ -13,6 +12,7 @@ class UsersController < ApplicationController
     u1.events.delete(e1)
     redirect_to user_path(u1)
   end
+
 
   private
 

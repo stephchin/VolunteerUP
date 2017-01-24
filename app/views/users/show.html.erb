@@ -2,9 +2,7 @@
 <div class="user-info">
   <p>
   <span class="glyphicon glyphicon-user"></span>
-  <% @user.roles.each do |role| %>
-  <%= role.name.capitalize %>
-  <% end %>
+  <%= @user.roles.pluck(:name).map(&:capitalize).join(", ") %>
   </p>
   <p>
   <span class="glyphicon glyphicon-envelope"></span> <%= @user.email %>

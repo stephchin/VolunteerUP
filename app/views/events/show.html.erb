@@ -47,9 +47,10 @@
   <p><%= link_to "Sign In to Volunteer!", new_user_session_path, class: "btn btn-info" %></p>
 <% end %>
 <br />
+
+<% if @ability.can? :manage, @event%>
+<%= link_to 'Edit', edit_event_path(@event), class: "btn btn-xs btn-info" %>
 </div>
 
-<% if user_signed_in? %>
-<%= link_to 'Edit', edit_event_path(@event), class: "btn btn-xs btn-info" %>|
 <% end %>
 <%= link_to 'Back', events_path, class: "btn btn-xs btn-info" %>

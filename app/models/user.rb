@@ -4,8 +4,11 @@ class User < ApplicationRecord
   #if a user is destroyed, this destroys the link between user and event, but not the actual event
   has_many :user_events, :dependent => :destroy
   has_many :events, through: :user_events
-  has_many :user_organizations
+
+  #if a user is destroyed, this destroys the link between user and organization, but not the actual organization
+  has_many :user_organizations, :dependent => :destroy
   has_many :organizations, through: :user_organizations
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
