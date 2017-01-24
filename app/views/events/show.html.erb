@@ -46,7 +46,7 @@
 <% end %>
 <br />
 
-<% if user_signed_in? %>
+<% if user_organization.user == current_user %>
 <%= link_to 'Edit', edit_event_path(@event), class: "btn btn-xs btn-info" %>|
 <% end %>
 <%= link_to 'Back', events_path, class: "btn btn-xs btn-info" %>

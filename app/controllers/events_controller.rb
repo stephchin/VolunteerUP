@@ -3,6 +3,12 @@ class EventsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   # load_and_authorize_resource
 
+  @users = User.all
+  @hash = Gmaps4rails.build_markers(@users) do |user, marker|
+    marker.lat user.latitude
+    marker.lng user.longitude
+  end
+
   # GET /events
   # GET /events.json
   def index
