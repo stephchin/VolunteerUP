@@ -60,10 +60,6 @@ RSpec.feature "Volunteers", type: :feature do
         expect(page).to have_content(@user.state)
         expect(page).to have_content(@user.events.find(@event.id).name)
       end
-      Then "I can no longer click the 'Volunteer!' button" do
-        visit event_path(@event.id)
-        expect(page).to have_button('Volunteer!', disabled: true)
-      end
       And "I can click the 'Cancel Your RSVP'" do
         visit user_path(@user.id)
         click_link "Cancel Your RSVP"
