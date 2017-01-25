@@ -15,11 +15,12 @@
  */
 
  h5, th {
-   font-weight: normal;
-   font-size: 14px;
+   font-weight: bold;
+   font-size: 12px;
    text-transform: uppercase;
-   color: #b4b4b4;
-   letter-spacing: 1.2px;
+   color: black;
+   letter-spacing: 1.1px;
+   margin-top: 2em;
  }
 
 a:hover {
@@ -82,15 +83,17 @@ a:hover {
 }
 
 .text-area, .event-box {
-  background-color: white;
-  border: 1px solid #e7e7e7;
-  border-radius: 2px;
-  padding: 0px 10px 0px 10px;
+  /*background-color: white;*/
+  border-top: 1px solid #ebebeb;
+  /*border-bottom: 1px solid #ebebeb;*/
+  /*border-radius: 5px;*/
+  /*padding: 0px 10px 0px 10px;*/
+  margin-bottom: 2.7em;
   text-align: left;
   vertical-align: top;
 }
 .description {
-  height: 140px;
+  height: 50px;
 }
 .address {
   text-align: right;
@@ -126,8 +129,8 @@ h4{
 .volunteers-needed {
   background-color: #7aae49;
   color: white;
-  border: 1px solid #5f823d;
-  border-radius: 2px;
+  border: 1px solid #618b3a;
+  border-radius: .4em;
   padding-bottom: 15px;
   max-width: 200px;
   margin-left: auto;
@@ -157,6 +160,6 @@ h4{
   height: 400px;
   background-color: white;
   border: 1px solid #e7e7e7;
-  /*border-radius: 50%;*/
+  border-radius: .4em;
   margin: 15px;
 }
