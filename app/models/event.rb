@@ -20,7 +20,7 @@ class Event < ApplicationRecord
   end
 
   filterrific(
-    default_filter_params: { sorted_by: 'name_desc' },
+    default_filter_params: { sorted_by: 'created_at_desc' },
     available_filters: [
       :sorted_by,
       :search_query
@@ -34,12 +34,12 @@ class Event < ApplicationRecord
     # replace "*" with "%" for wildcard searches,
     # append '%', remove duplicate '%'s
     terms = terms.map { |e|
-      (e.gsub('*', '%') + '%').gsub(/%+/, '%')
+      ('%'+e.gsub('*', '%') + '%').gsub(/%+/, '%')
     }
-    num_or_conds = 2
+    num_or_conds = 3
     where(
       terms.map { |term|
-        "(LOWER(events.name) LIKE ? OR LOWER(events.description) LIKE ?)"
+        "(LOWER(events.name) LIKE ? OR LOWER(events.description) LIKE ? OR LOWER(events.cause) LIKE ?)"
       }.join(' AND '),
       *terms.map { |e| [e] * num_or_conds }.flatten
     )
@@ -55,12 +55,19 @@ class Event < ApplicationRecord
       # Joining on other tables is quite common in Filterrific, and almost
       # every ActiveRecord table has a 'created_at' column.
     when /^name_/
-      # Simple sort on the name colums
-      order("LOWER(events.name) #{ direction }, LOWER(events.description) #{ direction }")
+      # Simple sort on the name columns
+      # order("LOWER(events.name) #{ direction }, LOWER(events.description) #{ direction }")
     else
       raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
     end
   }
+
+  def self.options_for_sorted_by
+    [
+      ['Event Name (Accending)', 'name_asc'],
+      ['Event Name (Decending)', 'name_asc'],
+    ]
+  end
 
   resourcify
 end
