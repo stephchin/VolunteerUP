@@ -37,7 +37,7 @@ RSpec.feature "EventPages", type: :feature do
         click_button('Volunteer!')
       end
       And 'I am taken to the user profile page with my upcoming event' do
-        expect(page).to have_content "Your Upcoming Events"
+        expect(page).to have_content "You signed up to volunteer!"
         expect(page).to have_content "#{@event.name}"
       end
       Then 'I can click on a link to go back to the events page' do
