@@ -7,9 +7,11 @@
   <p>
   <span class="glyphicon glyphicon-envelope"></span> <%= @user.email %>
   </p>
-  <p>
-  <span class="glyphicon glyphicon-map-marker"></span> <%= @user.city + ' ' + @user.state %>
-  </p>
+  <% if !@user.city.nil? && !@user.state.nil? %>
+    <p>
+    <span class="glyphicon glyphicon-map-marker"></span> <%= @user.city + ' ' + @user.state %>
+    </p>
+  <% end %>
   <p>
   My Organizations:
   <%= safe_join(@user.organizations.map {|organization| link_to organization.name, organization_path(organization)}, (", ").html_safe) %>
