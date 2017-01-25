@@ -73,13 +73,14 @@ a:hover {
 .about-links a:visited {
   color: white;
 }
-.text-box {
+.section-box {
   background-color: #f8f8f8;
   padding: 5px;
   border: 1px solid #e7e7e7;
   border-radius: 2px;
 
 }
+
 .text-area {
   background-color: white;
   border: 1px solid #e7e7e7;
@@ -101,6 +102,16 @@ h4{
   text-align: center;
   margin: auto auto 0px auto;
 }
+.flex {
+  display: inline-flex;
+  margin-top: 4vh;
+  margin-bottom: 4vh;
+}
+
+.flex-child {
+  margin-left: 4px;
+}
+
 #spots-open {
   margin-top: 0px;
   margin-bottom: 0px;
@@ -128,4 +139,16 @@ h4{
   line-height: 1.5em;
   /*margin-left: 2em;
   text-align: left;*/
+}
+.user-box {
+  margin: 10px;
+  display: inline-table;
+}
+.image-placeholder {
+  width: 60px;
+  height: 60px;
+  background-color: white;
+  border: 1px solid #e7e7e7;
+  border-radius: 50%;
+  margin: 5px;
 }
