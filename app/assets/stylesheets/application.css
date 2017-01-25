@@ -14,8 +14,9 @@
  *= require_self
  */
 
- h5 {
-   font-weight:;
+ h5, th {
+   font-weight: normal;
+   font-size: 14px;
    text-transform: uppercase;
    color: #b4b4b4;
    letter-spacing: 1.2px;
