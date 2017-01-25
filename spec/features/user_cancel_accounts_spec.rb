@@ -19,7 +19,7 @@ RSpec.feature "UserCancelAccounts", type: :feature do
       end
       Then 'I can go to my account settings' do
         click_link 'Account Settings'
-        expect(page).to have_content("Edit User")
+        expect(page).to have_content("Account Settings")
       end
       And 'I can click a button to cancel my account' do
         click_button 'Cancel my account'
