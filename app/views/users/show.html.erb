@@ -2,14 +2,14 @@
 <h1>Hi <%= @user.name %>!</h1>
 <div class="user-info">
   <p>
-  <span class="glyphicon glyphicon-user"></span>
-  <%= @user.roles.pluck(:name).map(&:capitalize).join(", ") %>
-  </p>
-  <p>
   <span class="glyphicon glyphicon-envelope"></span> <%= @user.email %>
   </p>
   <p>
   <span class="glyphicon glyphicon-map-marker"></span> <%= @user.city.to_s + ' ' + @user.state.to_s %>
+  </p>
+  <p>
+  My Roles:
+  <%= @user.roles.pluck(:name).map(&:capitalize).join(", ") %>
   </p>
   <p>
   My Organizations:
