@@ -1,9 +1,6 @@
+<p class="success"><%= success %></p>
 <h1>Hi <%= @user.name %>!</h1>
 <div class="user-info">
-  <p>
-  <span class="glyphicon glyphicon-user"></span>
-  <%= @user.roles.pluck(:name).map(&:capitalize).join(", ") %>
-  </p>
   <p>
   <span class="glyphicon glyphicon-envelope"></span> <%= @user.email %>
   </p>
@@ -12,6 +9,11 @@
     <span class="glyphicon glyphicon-map-marker"></span> <%= @user.city + ' ' + @user.state %>
     </p>
   <% end %>
+
+  <p>
+  My Roles:
+  <%= @user.roles.pluck(:name).map(&:capitalize).join(", ") %>
+  </p>
   <p>
   My Organizations:
   <%= safe_join(@user.organizations.map {|organization| link_to organization.name, organization_path(organization)}, (", ").html_safe) %>
@@ -19,9 +21,6 @@
 </div>
 <p>
 <%= link_to 'Account Settings', edit_user_registration_path, class: "btn btn-xs btn-info" %>
-</p>
-<p>
-<%= link_to 'Home', root_path, class: "btn btn-xs btn-info" %>
 </p>
 
 
