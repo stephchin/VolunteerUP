@@ -22,8 +22,6 @@
 <%= link_to 'Home', root_path, class: "btn btn-xs btn-info" %>
 </p>
 
-
-
 <!-- Begin Events Table -->
 <table class="table" id="user-events-table">
   <caption>Your Upcoming Events</caption>
@@ -69,3 +67,6 @@
     <% end %>
   </tbody>
 </table>
+
+<div id="calendar"></div>
+<input id="hid" type="hidden" value="<%=@user.id%>"

@@ -13,6 +13,15 @@ class UsersController < ApplicationController
     redirect_to user_path(u1)
   end
 
+  # GET all events for calendar
+ def get_events
+   @events = Event.all
+   events = []
+   @events.each do |event|
+     events << { id: event.id, title: event.name, start: event.start_time, end: event.end_time }
+   end
+   render :json => events.to_json
+ end
 
   private
 
