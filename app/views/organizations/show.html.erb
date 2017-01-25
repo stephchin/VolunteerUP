@@ -61,10 +61,12 @@
           <%= organizer.email %><br></div>
         <% end %>
       </p>
-      <% if user_signed_in? && !current_user.organizations.includes(@organization) %>
+      <% if user_signed_in? && !current_user.organizations.include?(@organization) %>
         <%= button_to "Join!", organization_add_user_path(@organization.id), class: "btn btn-primary btn-lg"%><br>
-      <% elsif user_signed_in? %>
+      <% elsif user_signed_in? && current_user.organizations.include?(@organization) %>
         <p>You've already joined!<span class="glyphicon glyphicon-thumbs-up"></span></p>
+      <% else %>
+        <p><%= link_to "Sign In to Join!", new_user_session_path, class: "btn btn-info" %></p>
       <% end %>
     </div>
     <!-- events column -->

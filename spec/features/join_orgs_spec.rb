@@ -25,10 +25,14 @@ RSpec.feature "JoinOrgs", type: :feature do
          expect(page).to have_content "ABC"
        end
        Then 'I can view and join the organization' do
+         save_and_open_page
          click_button "Join!"
        end
        And 'I can see a message saying you have joined' do
          expect(page).to have_content('Congrats, you have joined the organization')
+       end
+       Then 'I can see a message saying I have already joined' do
+         expect(page).to have_content("You've already joined")
        end
      end
 
