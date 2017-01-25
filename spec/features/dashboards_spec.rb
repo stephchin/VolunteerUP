@@ -22,10 +22,20 @@ RSpec.feature "Dashboards", type: :feature do
         expect(page).to have_content("Organizer")
         expect(page).to have_selector("tr", count: 3)
       end
-      Then "I can delete only the other organizer" do
+      Then "As a creator, I can delete the organizer" do
         click_button "X"
         expect(page).to have_content("Creator")
         expect(page).to have_selector("tr", count: 2)
+      end
+      Then "As an organizer, I can Edit/Delete an Organization" do
+        click_link "Edit"
+        expect(page).to have_current_path(edit_organization_path(@org.id))
+        visit dashboard_organizations_path
+        expect(page).to have_link("Delete", "/organizations/" + @org.id.to_s)
+      end
+      Then "I can click the link to go to that organization's page" do
+        click_link @org.name
+        expect(page).to have_current_path(organization_path(@org.id))
       end
     end
   end

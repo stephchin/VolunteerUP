@@ -1,7 +1,11 @@
 <%= flash[:notice] %>
 <% @all_orgs.each do |org| %>
   <table class="table" id="org-dash">
-    <caption><%= org.name %></caption>
+    <caption>
+      <h2><%= link_to org.name, organization_path(org.id) %></h2>
+      <%= link_to "Edit", edit_organization_path(org.id), class: "btn btn-info" %>
+      <%= link_to "Delete", "/organizations/" + org.id.to_s, method: :delete, class: "btn btn-danger"%>
+    </caption>
     <tr>
       <th>User</th>
       <th>Status</th>
