@@ -10,7 +10,22 @@ class UsersController < ApplicationController
     e1 = Event.find(params[:event])
     u1.user_events.delete(event: e1)
     u1.events.delete(e1)
+
+    event_waitlist = e1.user_events.where.not(waitlist: nil)
+
+    if event_waitlist.length > 1
+      event_waitlist.sort
+      event_waitlist[0].waitlist = nil
+      event_waitlist[0].save
+    end
+
     redirect_to user_path(u1)
+  end
+
+  def update_waitslist
+
+    # update_waitslist
+
   end
 
 

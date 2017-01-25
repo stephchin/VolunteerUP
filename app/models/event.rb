@@ -14,12 +14,20 @@ class Event < ApplicationRecord
   geocoded_by :address
   after_validation :geocode
 
+  def initialize
+    waitlist = 0
+  end
+
   def address
     "#{street}, #{city} #{state} #{postal_code}"
   end
 
   def remaining_vol
     volunteers_needed - self.users.count
+  end
+
+  def add_waitlist
+    waitlist += 1
   end
 
   resourcify

@@ -127,15 +127,26 @@ h4{
   font-size: 14px;
 }
 .volunteers-needed {
-  background-color: #7aae49;
-  color: white;
-  border: 1px solid #618b3a;
-  border-radius: .4em;
   padding-bottom: 15px;
   max-width: 200px;
   margin-left: auto;
   margin-right: auto;
 }
+
+  #colored-vols-needed {
+    background-color: #7aae49;
+    color: white;
+    border: 1px solid #618b3a;
+    border-radius: .4em;
+  }
+
+  #greyed-out-vols-needed {
+    background-color: #cfcfcf;
+    color: white;
+    border: 1px solid #a5a5a5;
+    border-radius: .4em;
+  }
+
 #volunteers-list {
   margin-top: 0px;
   font-size: 16px;

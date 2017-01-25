@@ -51,8 +51,15 @@
           <%= event.postal_code %>
           <%= event.country %>
         </td>
-        <td><%= "#{event.remaining_vol} needed / " %>
-        <%= "#{event.volunteers_needed} total" %></td>
+        <td>
+          <% if event.remaining_vol > 0 %>
+            <%= "#{event.remaining_vol} needed / " %>
+            <%= "#{event.volunteers_needed} total" %>
+          <% else %>
+            <%= "0 needed / " %>
+            <%= "#{event.volunteers_needed} total" %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

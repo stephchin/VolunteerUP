@@ -126,13 +126,17 @@ class EventsController < ApplicationController
       event.save
       redirect_to user_path(current_user.id)
     elsif event.remaining_vol <= 0
+      event.add_waitlist
       flash[:notice] = "Sorry, this event is full."
+      event.user_events.new(user: current_user, waitlist: event.waitlist)
+      event.save
       redirect_to event_path(event.id)
     else
       flash[:notice] = "You already signed up!"
       redirect_to event_path(event.id)
     end
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

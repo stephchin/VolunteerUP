@@ -4,9 +4,16 @@
 .event-notice p {
   margin-top: 0px;
   font-size: 1.5em;
-  color: #7aae49;
   line-height: 1.5em;
 }
+
+#signed-up {
+  color: #7aae49;
+}
+#on-waitlist {
+  color: #F2C91C;
+}
+
 #events_map, #event_map {
   margin-top: 1em;
   height: 400px;
