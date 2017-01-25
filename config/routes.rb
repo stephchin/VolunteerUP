@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'about' => 'landing_page#about'
 
-  devise_for :users
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   resources :users do
     delete :remove_event
   end
