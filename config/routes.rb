@@ -1,17 +1,19 @@
 Rails.application.routes.draw do
-
-
   get 'about' => 'landing_page#about'
 
-  devise_for :users
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   resources :users do
     delete :remove_event
   end
   resources :events do
     post :add_user
+    get 'map_location'
+    get :map_locations, on: :collection
   end
   resources :organizations do
     post :add_user
+    get :dashboard, on: :collection
+    post :remove_organizer
   end
 
   root 'landing_page#index'

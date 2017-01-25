@@ -1,56 +1,157 @@
-<h1>
-  <strong><%= @event.name %></strong>
-</h1><hr>
+<p class="notice"><%= notice %></p>
+<!-- Twitter share button -->
+<script>window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+  t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+  return t;
+}(document, "script", "twitter-wjs"));</script>
 
-<p>
-  <strong>Organization: <br></strong>
-  <%= @event.organization.name %>
-</p>
+<!-- Facebook share button -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=188871088255070";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
-<p>
-  <strong>Description:</strong><br>
-  <%= @event.description %>
-</p>
+<!-- Title Containger -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>
+        <div id="event-name"><%= @event.name %></div>
+      </h1>
+    </div>
+  </div> <!--end row -->
+</div> <!--end title container -->
 
-<p>
-  <strong>Cause:</strong><br>
-  <%= @event.cause %>
-</p>
+<hr>
 
-<p>
-  <strong>Date and Time:</strong><br>
-  <%= @event.start_time.strftime("%b %e, %Y ") %><br>
-  <%= @event.start_time.strftime("%l:%M %p") %> -
-  <%= @event.end_time.strftime("%l:%M %p") %>
-</p>
+<!-- Info Container -->
+<div class="container-fluid">
+  <div class="row section-box">
+    <div class="col-md-2 text-center">
+      <div class="event-notice"><br><br>
+        <!-- Volunteer! button -->
+        <% if user_signed_in? && !current_user.events.all.include?(Event.find(@event.id)) && (@event.remaining_vol > 0)%>
+          <%= button_to "Volunteer!", event_add_user_path(@event.id), class: "btn btn-primary btn-lg"%>
+        <% elsif user_signed_in? && current_user.events.all.include?(Event.find(@event.id)) %>
+          <p>You're signed up! <span class="glyphicon glyphicon-thumbs-up"></span></p>
+        <% elsif !user_signed_in? %>
+          <p><%= link_to "Sign In to Volunteer!", new_user_session_path, class: "btn btn-info" %></p>
+        <% end %><br />
+      </div>
 
-<p>
-  <strong>Address:</strong><br>
-  <%= @event.street %><br>
-  <%= @event.city %>,
-  <%= @event.state %>
-  <%= @event.postal_code %>
-  <%= @event.country %>
-</p>
+      <div class="volunteers-needed">
+        <h4><%="#{@event.remaining_vol}"%></h4>
+        <br>
+        <p id="spots-open">Volunteers Needed</p><br>
+        <p id="total-vol"><%= "out of #{@event.volunteers_needed}"%>
+        </p>
+      </div><br>
 
-<p>
-  <strong>Spots Remaining:</strong><br>
-   <%= "#{@event.remaining_vol} out of #{@event.volunteers_needed}" %>
-</p>
+      <div class="flex align-bottom">
+        <!-- tweet button -->
+        <div id="tweetBtn" class="flex-child">
+          <a class="twitter-share-button" id="tweet" href="https://twitter.com/share" data-size="mall" data-text="VolunteerUP!">
+          </a>
+        </div>
+        <!-- facebok button -->
+        <div class="fb-share-button flex-child" data-href="https://www.google.com/#q=volunteerup" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A3000%2F&amp;src=sdkpreparse">Share</a>
+        </div>
+      </div>
 
-<div class="event-notice">
-<% if user_signed_in? && !current_user.events.all.include?(Event.find(@event.id)) && (@event.remaining_vol > 0) %>
-  <%= button_to "Volunteer!", event_add_user_path(@event.id), class: "btn btn-primary btn-sm"%>
-<% elsif user_signed_in? && current_user.events.all.include?(Event.find(@event.id)) %>
-  <p>You are already signed up for this event! <span class="glyphicon glyphicon-thumbs-up"></span></p>
-<% elsif !user_signed_in? %>
-  <p><%= link_to "Sign In to Volunteer!", new_user_session_path, class: "btn btn-info" %></p>
-<% end %>
-<br />
+    </div> <!-- left column end -->
 
+    <!-- middle column -->
+    <div class="col-md-6">
+      <h5>Organization</h5>
+      <div class="text-area">
+        <p id="organization"><%= link_to @event.organization.name, organization_path(@event.organization) %></p>
+      </div>
+
+      <h5>Description</h5>
+      <div class="text-area">
+        <p id="event-description" class="description"><%= @event.description %></p>
+      </div>
+      <h5>Date and Time</h5>
+      <div class="text-area">
+        <p id="date"><%= @event.start_time.strftime("%b %e, %Y ") %><br>
+        <%= @event.start_time.strftime("%l:%M %p") %> - <%= @event.end_time.strftime("%l:%M %p") %></p>
+      </div>
+      <h5>Cause</h5>
+      <div class="text-area"><p id="cause"><%= @event.cause %></p>
+      </div>
+      <!-- <%= link_to 'Back', events_path, class: "btn btn-xs btn-info" %> -->
+    </div> <!-- middle col end -->
+
+
+    <!-- right end column -->
+    <div class="col-md-4">
+      <h5 class="">Location</h5>
+      <div class="center-block" id="event_map" data-event-id="<%= @event.id %>">
+      </div>
+      <div class="address">
+        <p class=><%= @event.street %>
+        <%= @event.city %>,
+        <%= @event.state %>
+        <%= @event.postal_code %>
+        <%= @event.country %></p>
+      </div>
+    </div> <!-- end 2nd col -->
+  </div> <!-- end row -->
+  <br>
+
+</div> <!-- End info container -->
+
+<!-- Volunteer List Container -->
+<div class="container-fluid">
+  <div class="row section-box">
+    <div class="col-md-6">
+      <h5><%= link_to "Volunteers" %></h5>
+      <p id="volunteers-list">
+        <% @event.users.sort.each do |volunteer| %>
+          <div class="user-box">
+            <div class="image-placeholder"></div>
+          <%= link_to volunteer.name, user_path(volunteer) %><br>
+          <%= volunteer.email %><br></div>
+        <% end %>
+      </p><br>
+    </div>
+    <div class="col-md-6">
+      <h5><%= link_to "Organizers" %></h5>
+      <p id="volunteers-list">
+        <% @event.organization.users.sort.each do |organizer| %>
+          <div class="user-box">
+            <div class="image-placeholder"></div>
+          <%= link_to organizer.name, user_path(organizer) %><br>
+          <%= organizer.email %><br></div>
+        <% end %>
+      </p><br>
+      <h5>Contact Info</h5>
+      <div class="text-area">
+        <p><%= @event.organization.phone %><br><br>
+        <%= @event.organization.email %><br><br>
+        <%= @event.organization.website %></p>
+      </div>
+      <br>
+    </div>
+  </div>
+</div> <!-- end Volunteers list container -->
+<br>
+<!-- edit and destroy buttons -->
 <% if @ability.can? :manage, @event%>
-<%= link_to 'Edit', edit_event_path(@event), class: "btn btn-xs btn-info" %>
-</div>
-
+<%= link_to 'Edit Event', edit_event_path(@event), class: "btn btn-sm btn-info" %>
+<%= link_to 'Destroy', @event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger"%>
 <% end %>
-<%= link_to 'Back', events_path, class: "btn btn-xs btn-info" %>

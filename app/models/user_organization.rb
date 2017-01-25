@@ -5,6 +5,8 @@ class UserOrganization < ApplicationRecord
   belongs_to :user
   belongs_to :organization
 
+  # validates :is_creator, presence: {allow_nil: false}
+
   # assigns organizer role to user if they create/join an org
   def assign_organizer
     @user = User.find(self.user_id)

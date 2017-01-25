@@ -1,10 +1,15 @@
 <div class="row">
+  <p id="notice"><%= notice %></p>
+</div>
+
+>>>>>>> master
+<div class="row">
   <div class="col-md-8">
     <h1 class= "vertical-align">Events</h1>
   </div>
   <div class="col-md-4 text-right" id="search-bar">
     <%= form_for_filterrific @filterrific, html: { id: 'filterrific-no-ajax-auto-submit' } do |f| %>
-      <div>Search 
+      <div>Search
         <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
         <%= f.text_field(
           :search_query,
@@ -45,10 +50,7 @@
     <% end %>
   </div>
 </div>
-
-<div class="row">
-  <p id="notice"><%= notice %></p>
-</div>
+<br>
 
 <%= render(
   partial: 'events/list',
@@ -57,6 +59,13 @@
 
 <br>
 
-<% if user_signed_in? %>
+<% if @ability.can? :new, Event %>
   <%= link_to 'New Event', new_event_path, class: "btn btn-sm btn-primary" %>
 <% end %>
+
+
+<div id="events_map" class="center-block" data-events-id="<%=@events%>"></div>
+
+<!-- <script>
+    markers = handler.addMarkers(<%=raw @hash.to_json %>);
+</script> -->

@@ -11,6 +11,9 @@ class Event < ApplicationRecord
   validates :volunteers_needed, presence: true
   validates :organization, presence:true
 
+  geocoded_by :address
+  after_validation :geocode
+
   def address
     "#{street}, #{city} #{state} #{postal_code}"
   end

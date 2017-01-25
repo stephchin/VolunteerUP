@@ -22,7 +22,7 @@ class OrganizationsController < ApplicationController
     @organization = Organization.find(params[:organization_id])
     if !@user.organizations.all.include?(@organization)
       #this creates a new association between user and organization, with is_creator field set to false
-      @user.user_organizations.new(organization: @organization, is_creator: false)
+      @user.user_organizations.create(organization: @organization, is_creator: false)
       #this adds the organizer role to the user
       @user.add_role :organizer
       @user.save
@@ -82,11 +82,26 @@ class OrganizationsController < ApplicationController
   # DELETE /organizations/1
   # DELETE /organizations/1.json
   def destroy
-    @organization.destroy
+    @organization.destroy 
     respond_to do |format|
       format.html { redirect_to organizations_url, notice: 'Organization was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def dashboard
+    all_orgs = []
+    org_ids = current_user.organizations.all.map(&:id)
+    @all_orgs = org_ids.map{ |id| Organization.find(id) }
+  end
+
+  def remove_organizer
+    org = Organization.find(params[:organization_id])
+    user = User.find(params[:user])
+    user.user_organizations.delete(organization: org)
+    user.organizations.delete(org)
+    flash[:notice] = "You have removed an organizer."
+    redirect_to dashboard_organizations_path
   end
 
   private

@@ -8,7 +8,7 @@ RSpec.feature "Volunteers", type: :feature do
         click_link('Sign up')
         fill_in "user[name]", with: "Tomas"
         fill_in "user[city]", with: "Rome"
-        fill_in "user[state]", with: "Depleted"
+        select 'CA', from: 'user_state'
         fill_in "user[email]", with: "1@yahoo.com"
         fill_in "user[password]", with: "123456"
         fill_in "user[password_confirmation]", with: "123456"
@@ -24,7 +24,7 @@ RSpec.feature "Volunteers", type: :feature do
         fill_in "organization[website]", with: "www.dundermifflin.com"
         click_button "Create Organization"
 
-        click_link "Events"
+        visit events_path
         click_link "New Event"
         fill_in "event[name]", with: "Give laptops"
         fill_in "event[description]", with: "We have batteries"
@@ -41,7 +41,7 @@ RSpec.feature "Volunteers", type: :feature do
         select "20", from: "event_end_time_5i"
         fill_in "event[street]", with: "2615 Flagstaff Ct"
         fill_in "event[city]", with: "Chula Vista"
-        fill_in "event[state]", with: "CA"
+        select 'CA', from: 'state'
         fill_in "event[postal_code]", with: "91914"
         fill_in "event[country]", with: "USA"
         fill_in "event[volunteers_needed]", with: 20

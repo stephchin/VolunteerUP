@@ -7,7 +7,8 @@ Devise.setup do |config|
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
   # config.secret_key = 'c748addcd61d537f63a30845edd716dbd96f430ef5c9b8dc02c8005039ea183902af12390efe1dbdd63121419fab6d0d82064315db57c78ba666b9b3e029c185'
-
+  config.omniauth :twitter, "uXeWC6nEIy4Ls75Ukd1G89poz", "JvZHp4TJA2zp42Qnb3WQFCIW7WfdS5brCHXF8YuIlfLCWuhbpg",
+    callback_url: "http://127.0.0.1:3000/auth/twitter/callback"
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class

@@ -1,8 +1,11 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :set_ability
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :map_location, :map_locations]
   load_and_authorize_resource
+  skip_authorize_resource only: [:map_location, :map_locations]
+
+
 
   # GET /events
   # GET /events.json
@@ -109,6 +112,33 @@ class EventsController < ApplicationController
     # @ability = Ability.new(current_user)
   end
 
+
+  # GMAPS Functions
+  def map_location
+    @event = Event.find(params[:event_id])
+    @hash = Gmaps4rails.build_markers(@event) do |event, marker|
+      marker.lat(event.latitude)
+      marker.lng(event.longitude)
+      marker.infowindow("<p style='text-align: center;'>#{event.name}</p>Hosted By:  #{event.organization.name}")
+    end
+    render json: @hash.to_json
+  end
+
+  def map_locations
+    @events = Event.all
+    if params[:search]
+      @events = Event.search(params[:search])
+    end
+
+    @hash = Gmaps4rails.build_markers(@events) do |event,marker|
+      marker.lat(event.latitude)
+      marker.lng(event.longitude)
+      marker.infowindow("<p style='text-align: center;'>#{event.name}</p>Hosted By:  #{event.organization.name}")
+    end
+    render json: @hash.to_json
+  end
+
+
   # GET /events/new
   def new
     @event = Event.new
@@ -178,6 +208,7 @@ class EventsController < ApplicationController
     elsif !event.users.all.include?(current_user) && event.remaining_vol >= 1
       event.user_events.new(user: current_user)
       event.save
+      flash[:success] = "You signed up to volunteer!"
       redirect_to user_path(current_user.id)
     elsif event.remaining_vol <= 0
       flash[:notice] = "Sorry, this event is full."

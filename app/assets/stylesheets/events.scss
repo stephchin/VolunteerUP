@@ -2,6 +2,14 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .event-notice p {
-  padding-top: 1em;
-  font-size: 1.3em;
+  margin-top: 0px;
+  font-size: 1.5em;
+  color: #7aae49;
+  line-height: 1.5em;
+}
+#events_map, #event_map {
+  margin-top: 1em;
+  height: 400px;
+  width: 100%;
+  border-radius: .4em;
 }
