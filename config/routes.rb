@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :organizations do
     post :add_user
     get :dashboard, on: :collection
+    post :remove_organizer
   end
 
   root 'landing_page#index'

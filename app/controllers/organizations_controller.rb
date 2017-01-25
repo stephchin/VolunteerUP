@@ -95,6 +95,14 @@ class OrganizationsController < ApplicationController
     @all_orgs = org_ids.map{ |id| Organization.find(id) }
   end
 
+  def remove_organizer
+    org = Organization.find(params[:organization_id])
+    user = User.find(params[:user])
+    user.user_organizations.delete(organization: org)
+    user.organizations.delete(org)
+    redirect_to dashboard_organizations_path
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_organization
