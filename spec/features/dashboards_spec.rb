@@ -37,6 +37,11 @@ RSpec.feature "Dashboards", type: :feature do
         click_link @org.name
         expect(page).to have_current_path(organization_path(@org.id))
       end
+      Then "I can click the user's name to go to their page" do
+        visit dashboard_organizations_path
+        click_link @u2.name
+        expect(page).to have_current_path(user_path(@u2.id))
+      end
     end
   end
 end
