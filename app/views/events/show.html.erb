@@ -1,82 +1,133 @@
-<h1>
-  <div id="event-name"><strong><%= @event.name %></strong></div>
-</h1><hr>
+<!-- Twitter share button -->
+<script>window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+  t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+  return t;
+}(document, "script", "twitter-wjs"));</script>
 
-<p>
-  <strong>Organization: <br></strong>
-  <div id="organization"><%= @event.organization.name %></div>
-</p>
+<!-- Facebook share button -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=188871088255070";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
-<p>
-  <strong>Description:</strong><br>
-  <div id="event"><%= @event.description %></div>
-</p>
+<!-- Beginning page -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-9">
+      <h1>
+        <div id="event-name"><strong><%= @event.name %></strong></div>
+      </h1>
+    </div>
+    <div class="col-md-3 text-right">
 
-<p>
-  <strong>Cause:</strong><br>
-  <div id="cause"><%= @event.cause %></div>
-</p>
+  </div> <!--end 2nd col -->
+  </div> <!--end row -->
+</div> <!--end container -->
 
-<p>
-  <strong>Date and Time:</strong><br>
-  <div id="date"><%= @event.start_time.strftime("%b %e, %Y ") %></div><br>
-  <%= @event.start_time.strftime("%l:%M %p") %> -
-  <%= @event.end_time.strftime("%l:%M %p") %>
-</p>
+<hr>
+<div class="container-fluid">
+  <div class="row text-box">
+    <div class="col-md-2 text-center">
+      <div class="event-notice">
+        <br><br>
 
-<p>
-  <strong>Address:</strong><br>
-  <%= @event.street %><br>
-  <%= @event.city %>,
-  <%= @event.state %>
-  <%= @event.postal_code %>
-  <%= @event.country %>
-</p>
+        <% if user_signed_in? && !current_user.events.all.include?(Event.find(@event.id)) && (@event.remaining_vol > 0)%>
+          <%= button_to "Volunteer!", event_add_user_path(@event.id), class: "btn btn-primary btn-lg"%>
+        <% elsif user_signed_in? && current_user.events.all.include?(Event.find(@event.id)) %>
+          <p>You're signed up! <span class="glyphicon glyphicon-thumbs-up"></span></p>
+        <% elsif !user_signed_in? %>
+          <p><%= link_to "Sign In to Volunteer!", new_user_session_path, class: "btn btn-info" %></p>
+        <% end %><br />
+      </div>
 
-<p>
-  <strong>Spots Remaining:</strong><br>
-   <%= "#{@event.remaining_vol} out of #{@event.volunteers_needed}" %>
-</p>
+       <div class="volunteers-needed">
+         <h4><%="#{@event.remaining_vol}"%></h4>
+         <br>
+         <p id="spots-open">Volunteers Needed</p><br>
+           <p id="total-vol"><%= "out of #{@event.volunteers_needed} total"%>
+         </p>
+       </div>
 
-<div class="event-notice">
-<% if user_signed_in? && !current_user.events.all.include?(Event.find(@event.id)) && (@event.remaining_vol > 0) %>
-  <%= button_to "Volunteer!", event_add_user_path(@event.id), class: "btn btn-primary btn-sm"%>
-<% elsif user_signed_in? && current_user.events.all.include?(Event.find(@event.id)) %>
-  <p>You are already signed up for this event! <span class="glyphicon glyphicon-thumbs-up"></span></p>
-<% elsif !user_signed_in? %>
-  <p><%= link_to "Sign In to Volunteer!", new_user_session_path, class: "btn btn-info" %></p>
-<% end %>
-<br />
+      <br>
+
+      <h5>Volunteers</h5><br>
+      <p id="volunteers-list"><% @event.users.each do |volunteer| %>
+      <%= volunteer.name %><br>
+      <% end %></p>
+
+      <br>
+
+      <div class="flex align-bottom">
+        <div id="tweetBtn" class="flex-child">
+          <a class="twitter-share-button"
+            id="tweet"
+            href="https://twitter.com/share"
+            data-size="mall"
+            data-text="VolunteerUP!">
+          </a>
+        </div>
+        <div class="fb-share-button flex-child" data-href="http://localhost:3000/" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A3000%2F&amp;src=sdkpreparse">Share</a>
+      </div>
+    </div>
+
+    </div>
+    <div class="col-md-6">
+
+      <h5>Organization</h5>
+        <div class="text-area"><p id="organization"><%= @event.organization.name %></p></div>
+
+      <h5>Description</h5>
+        <div class="text-area"><p id="event"><%= @event.description %></p></div>
 
 
-<% if @ability.can? :manage, @event%>
-<%= link_to 'Edit', edit_event_path(@event), class: "btn btn-xs btn-info" %>
-</div>
-<% end %>
 
-<div id="tweetBtn">
-  <a class="twitter-share-button"
-    id="tweet"
-    href="https://twitter.com/share"
-    data-size="small"
-    data-text="VolunteerUP!">
-  </a>
-  <script>window.twttr = (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0],
-    t = window.twttr || {};
-    if (d.getElementById(id)) return t;
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "https://platform.twitter.com/widgets.js";
-    fjs.parentNode.insertBefore(js, fjs);
-    t._e = [];
-    t.ready = function(f) {
-      t._e.push(f);
-    };
-    return t;
-  }(document, "script", "twitter-wjs"));</script>
-</div><br>
+      <h5>Date and Time</h5>
+        <div class="text-area"><p id="date"><%= @event.start_time.strftime("%b %e, %Y ") %><br>
+        <%= @event.start_time.strftime("%l:%M %p") %> - <%= @event.end_time.strftime("%l:%M %p") %></p></div>
 
-<%= link_to 'Back', events_path, class: "btn btn-xs btn-info" %>
+      <h5>Cause</h5>
+        <div class="text-area"><p id="cause"><%= @event.cause %></p></div>
 
-<div class="center-block" id="event_map" data-event-id="<%= @event.id %>"></div>
+
+
+
+
+
+      <!-- <%= link_to 'Back', events_path, class: "btn btn-xs btn-info" %> -->
+    </div> <!-- first col end -->
+    <div class="col-md-4">
+
+      <h5 class="">Location</h5>
+
+      <div class="center-block" id="event_map" data-event-id="<%= @event.id %>"></div>
+
+      <!-- <h5 class="address">Address</h5> -->
+      <div class="address"><p class=><%= @event.street %>
+      <%= @event.city %>,
+      <%= @event.state %>
+      <%= @event.postal_code %>
+      <%= @event.country %></p></div>
+
+
+
+    </div> <!-- end 2nd col -->
+  </div> <!-- end row -->
+  <br>
+  <% if @ability.can? :manage, @event%>
+  <%= link_to 'Edit Event', edit_event_path(@event), class: "btn btn-sm btn-info" %>
+  <% end %>
+</div> <!-- end container -->
