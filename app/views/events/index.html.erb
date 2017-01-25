@@ -1,13 +1,28 @@
-
 <div class="row">
   <div class="col-md-8">
     <h1 class= "vertical-align">Events</h1>
   </div>
-
   <div class="col-md-4 text-right" id="search-bar">
-    <%= form_tag(events_path, method: 'get', id: 'search-form') do %>
-    <span class="vertical-align" id = "search_box"> <%= text_field_tag :search, params[:search], placeholder: "Search" %> </span>
-    <span id = "search_button"><%= submit_tag "Search All", name: nil %></span>
+    <%= form_for_filterrific @filterrific do |f| %>
+      <div>
+        Search
+        <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
+        <%= f.text_field(
+          :search_query,
+          class: 'filterrific-periodically-observed'
+        ) %>
+      </div>
+      <div>
+        Sorted by
+        <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
+      </div>
+      <div>
+        <%= link_to(
+          'Reset filters',
+          reset_filterrific_url,
+        ) %>
+      </div>
+      <%= render_filterrific_spinner %>
     <% end %>
   </div>
 </div>
@@ -15,6 +30,11 @@
 <div class="row">
   <p id="notice"><%= notice %></p>
 </div>
+
+<%= render(
+  partial: 'events/list',
+  locals: { events: @events }
+) %>
 
 <table class="table table-hover">
   <thead>
