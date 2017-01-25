@@ -24,10 +24,10 @@ RSpec.feature "EventPages", type: :feature do
         visit '/events'
       end
       Then 'I can click the event name' do
-        # save_and_open_page
+        save_and_open_page
         click_link (@event.name)
       end
-      Then 'I can see that event\'s page with event info' do
+      Then 'I can see that event\'s show page with event info' do
         expect(page).to have_content "#{@event.name}"
         expect(page).to have_content "#{@event.description}"
         expect(page).to have_content "#{@event.organization.name}"

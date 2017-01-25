@@ -28,7 +28,7 @@ class Event < ApplicationRecord
       :sorted_by,
       :search_query,
       :with_start_time,
-      :with_end_time,
+      :with_end_time
     ]
   )
 
@@ -59,6 +59,7 @@ class Event < ApplicationRecord
       # Make sure to include the table name to avoid ambiguous column names.
       # Joining on other tables is quite common in Filterrific, and almost
       # every ActiveRecord table has a 'created_at' column.
+      order("(events.created_at) #{ direction }")
     when /^name_/
       # Simple sort on the name columns
       order("LOWER(events.name) #{ direction }")
