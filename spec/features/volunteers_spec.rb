@@ -8,7 +8,7 @@ RSpec.feature "Volunteers", type: :feature do
         click_link('Sign up')
         fill_in "user[name]", with: "Tomas"
         fill_in "user[city]", with: "Rome"
-        select 'CA', from: 'state'
+        select 'CA', from: 'user_state'
         fill_in "user[email]", with: "1@yahoo.com"
         fill_in "user[password]", with: "123456"
         fill_in "user[password_confirmation]", with: "123456"

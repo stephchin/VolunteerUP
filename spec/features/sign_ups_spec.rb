@@ -38,7 +38,7 @@ RSpec.feature "SignUps", type: :feature do
       Then "I can fill out the sign-up form as an organizer" do
         fill_in "user[name]", with: "Suzan"
         fill_in "user[city]", with: "Cincinnati"
-        fill_in "user[state]", with: "OH"
+        select 'OH', from: 'user_state'
         fill_in "user[email]", with: "123@yahoo.com"
         fill_in "user[password]", with: "123456"
         fill_in "user[password_confirmation]", with: "123456"
