@@ -71,6 +71,10 @@
     <%= select(:event, :organization_id, @organizations_for_select, {prompt: '- Select One -'}) %>
   </div>
 
+  <div class="field">
+    <%= f.file_field :image %>
+  </div>
+
   <div class="actions">
     <%= f.submit class: "btn btn-sm btn-primary" %>
   </div>
