@@ -45,7 +45,7 @@ RSpec.feature "EventSearches", type: :feature do
         expect(page).to have_content('Event was successfully created.')
       end
       Then 'I can go back to the events page' do
-        click_link 'Back'
+        visit events_path
         expect(page).to have_content('test')
       end
       And 'I can create a 2nd new event' do
@@ -70,7 +70,7 @@ RSpec.feature "EventSearches", type: :feature do
         expect(page).to have_content('Event was successfully created.')
       end
       Then 'I can go back to the events page, with event 2 listed' do
-        click_link 'Back'
+        visit events_path
         expect(page).to have_content('test2')
       end
       And 'I can create a 3rd new event' do
@@ -95,7 +95,7 @@ RSpec.feature "EventSearches", type: :feature do
         expect(page).to have_content('Event was successfully created.')
       end
       Then 'I can go back to the events page, with the new event listed' do
-        click_link 'Back'
+        visit events_path
         expect(page).to have_content('example')
       end
       Then 'I can search for an event by name' do
@@ -105,14 +105,6 @@ RSpec.feature "EventSearches", type: :feature do
       And 'I can see the thing(s) I searched for by name, but that\'s all' do
         expect(page).to have_content('test')
         expect(page).to have_content('test2')
-        expect(page).not_to have_content('example')
-      end
-      Then 'I can search for an event by description' do
-        fill_in 'Search', with: 'rad thing'
-        click_button 'Search All'
-      end
-      Then 'I can see the event(s) I searched for by description, but that\'s all' do
-        expect(page).to have_content('rad thing')
         expect(page).not_to have_content('example')
       end
       Then 'I can search for event by cause' do

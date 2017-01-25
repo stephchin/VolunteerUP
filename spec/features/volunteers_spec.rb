@@ -24,7 +24,7 @@ RSpec.feature "Volunteers", type: :feature do
         fill_in "organization[website]", with: "www.dundermifflin.com"
         click_button "Create Organization"
 
-        click_link "Events"
+        visit events_path
         click_link "New Event"
         fill_in "event[name]", with: "Give laptops"
         fill_in "event[description]", with: "We have batteries"
