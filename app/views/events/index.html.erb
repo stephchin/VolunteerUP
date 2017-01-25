@@ -3,19 +3,34 @@
     <h1 class= "vertical-align">Events</h1>
   </div>
   <div class="col-md-4 text-right" id="search-bar">
-    <%= form_for_filterrific @filterrific do |f| %>
-      <div>
-        Search
+    <%= form_for_filterrific @filterrific, html: { id: 'filterrific-no-ajax-auto-submit' } do |f| %>
+      <div>Search 
         <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
         <%= f.text_field(
           :search_query,
           class: 'filterrific-periodically-observed'
         ) %>
+        <%= f.submit 'Search' %>
       </div>
       <div>
         <br>
         Advanced Filters
       </div>
+      <!-- <div>
+        From
+        <%= f.text_field(:with_start_time, class: 'js-datepicker form-control') %>
+      </div>
+      <div>
+        To
+        <%= f.text_field(:with_end_time, class: 'js-datepicker form-control') %>
+      </div>
+      <script>
+      $('.js-datepicker').datepicker();
+      $('#overlayTrigger').click(function(event) {
+        event.preventDefault();
+        $('body').chardinJs('start');
+      });
+      </script> -->
       <div>
         Sort by
         <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>

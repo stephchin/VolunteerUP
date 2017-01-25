@@ -23,9 +23,9 @@ class Event < ApplicationRecord
     default_filter_params: { sorted_by: 'created_at_desc' },
     available_filters: [
       :sorted_by,
-      :search_query
-      # :with_start_time,
-      # :with_end_time
+      :search_query,
+      :with_start_time,
+      :with_end_time,
     ]
   )
 
@@ -58,26 +58,29 @@ class Event < ApplicationRecord
       # every ActiveRecord table has a 'created_at' column.
     when /^name_/
       # Simple sort on the name columns
-      order("LOWER(events.name) #{ direction }, LOWER(events.description) #{ direction }")
+      order("LOWER(events.name) #{ direction }")
+    when /^start_time_/
+      # Simple sort on the date column
+      order("(events.start_time)")
     else
       raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
     end
   }
 
-  # scope :with_start_time, lambda { |reference_time|
-  #   where('events.start_time >= ?', reference_time)
-  # }
-  #
-  # # always exclude the upper boundary for semi open intervals
-  # scope :with_end_time, lambda { |reference_time|
-  #   where('events.end_time <= ?', reference_time)
-  # }
+  scope :with_start_time, lambda { |reference_time|
+    where('events.start_time >= ?', reference_time)
+  }
+
+  # always exclude the upper boundary for semi open intervals
+  scope :with_end_time, lambda { |reference_time|
+    where('events.end_time <= ?', reference_time)
+  }
 
   def self.options_for_sorted_by
     [
       ['Event Name (Accending)', 'name_asc'],
-      ['Event Name (Decending)', 'name_desc']
-      # ['Date', 'start_time_desc']
+      ['Event Name (Decending)', 'name_desc'],
+      ['Date', 'start_time_desc']
     ]
   end
 
