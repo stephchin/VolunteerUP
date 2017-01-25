@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-md-12">
       <h1>
-        <div id="org-name"><strong><%= @organization.name %></strong></div>
+        <div id="org-name"><%= @organization.name %></div>
       </h1>
     </div>
   </div> <!--end row -->
@@ -33,17 +33,17 @@
       <div class="text-area">
         <p class="description"><%= @organization.description %></p>
       </div>
-      <h5>Phone:</h5>
+      <h5>Phone</h5>
       <div class="text-area">
         <p><%= @organization.phone %></p>
       </div>
 
-      <h5>Email:</h5>
+      <h5>Email</h5>
       <div class="text-area">
         <p><%= @organization.email %></p>
       </div>
 
-      <h5>Website:</h5>
+      <h5>Website</h5>
       <div class="text-area">
         <p><%= @organization.website %></p>
       </div><br>
@@ -57,7 +57,7 @@
 <div class="container-fluid"> <!-- organier and event container -->
   <div class="row section-box">
     <!-- organizer column -->
-    <div class="col-md-6">
+    <div class="col-md-6 org-notice">
       <h5><%= link_to "Organizers" %></h5>
       <p id="organizer-list">
         <% @organization.users.sort.each do |organizer| %>
@@ -67,8 +67,12 @@
           <%= organizer.email %><br></div>
         <% end %>
       </p>
-      <% if user_signed_in? %>
+      <% if user_signed_in? && !current_user.organizations.include?(@organization) %>
         <%= button_to "Join!", organization_add_user_path(@organization.id), class: "btn btn-primary btn-lg"%><br>
+      <% elsif user_signed_in? && current_user.organizations.include?(@organization) %>
+        <p>You've already joined!<span class="glyphicon glyphicon-thumbs-up"></span></p>
+      <% else %>
+        <p><%= link_to "Sign In to Join!", new_user_session_path, class: "btn btn-info" %></p>
       <% end %>
     </div>
     <!-- events column -->

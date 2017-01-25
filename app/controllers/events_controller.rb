@@ -124,6 +124,7 @@ class EventsController < ApplicationController
     elsif !event.users.all.include?(current_user) && event.remaining_vol >= 1
       event.user_events.new(user: current_user)
       event.save
+      flash[:success] = "You signed up to volunteer!"
       redirect_to user_path(current_user.id)
     elsif event.remaining_vol <= 0
       flash[:notice] = "Sorry, this event is full."

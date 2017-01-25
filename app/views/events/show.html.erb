@@ -1,3 +1,4 @@
+<p class="notice"><%= notice %></p>
 <!-- Twitter share button -->
 <script>window.twttr = (function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0],
@@ -29,7 +30,7 @@
   <div class="row">
     <div class="col-md-12">
       <h1>
-        <div id="event-name"><strong><%= @event.name %></strong></div>
+        <div id="event-name"><%= @event.name %></div>
       </h1>
     </div>
   </div> <!--end row -->
@@ -79,6 +80,7 @@
       <div class="text-area">
         <p id="organization"><%= link_to @event.organization.name, organization_path(@event.organization) %></p>
       </div>
+
       <h5>Description</h5>
       <div class="text-area">
         <p id="event-description" class="description"><%= @event.description %></p>
