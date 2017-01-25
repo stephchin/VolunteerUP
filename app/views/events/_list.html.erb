@@ -22,14 +22,13 @@
         <tr>
           <td>
             <strong><%= link_to event.name, event %></strong><br><br>
-            <%= event.description %><br><br>
             <% if @ability.can? :manage, event %>
               <%= link_to 'Edit', edit_event_path(event), class: "btn btn-xs btn-info" %>
               <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger"%>
             <% end %>
           </td>
           <td><%= event.cause %></td>
-          <td><%= event.organization.name %></td>
+          <td><%= link_to event.organization.name, event.organization %></td>
           <td>
             <%= event.start_time.strftime("%b %e, %Y")%><br>
             <%= event.start_time.strftime("%l:%M %p") %> -

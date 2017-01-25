@@ -24,22 +24,24 @@ class Event < ApplicationRecord
     available_filters: [
       :sorted_by,
       :search_query
+      # :with_start_time,
+      # :with_end_time
     ]
   )
 
   scope :search_query, lambda { |query|
-    return nil  if query.blank?
-    # condition query, parse into individual keywords
-    terms = query.downcase.split(/\s+/)
+    return nil if query.blank?
+    # condition query, parse into individual keywords from a string
+    terms = query.to_s.downcase.split(/\s+/)
     # replace "*" with "%" for wildcard searches,
     # append '%', remove duplicate '%'s
     terms = terms.map { |e|
-      ('%'+e.gsub('*', '%') + '%').gsub(/%+/, '%')
+      ('%' + e.gsub('*', '%') + '%').gsub(/%+/, '%')
     }
-    num_or_conds = 3
+    num_or_conds = 2
     where(
       terms.map { |term|
-        "(LOWER(events.name) LIKE ? OR LOWER(events.description) LIKE ? OR LOWER(events.cause) LIKE ?)"
+        "(LOWER(events.name) LIKE ? OR LOWER(events.cause) LIKE ?)"
       }.join(' AND '),
       *terms.map { |e| [e] * num_or_conds }.flatten
     )
@@ -56,16 +58,26 @@ class Event < ApplicationRecord
       # every ActiveRecord table has a 'created_at' column.
     when /^name_/
       # Simple sort on the name columns
-      # order("LOWER(events.name) #{ direction }, LOWER(events.description) #{ direction }")
+      order("LOWER(events.name) #{ direction }, LOWER(events.description) #{ direction }")
     else
       raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
     end
   }
 
+  # scope :with_start_time, lambda { |reference_time|
+  #   where('events.start_time >= ?', reference_time)
+  # }
+  #
+  # # always exclude the upper boundary for semi open intervals
+  # scope :with_end_time, lambda { |reference_time|
+  #   where('events.end_time <= ?', reference_time)
+  # }
+
   def self.options_for_sorted_by
     [
       ['Event Name (Accending)', 'name_asc'],
-      ['Event Name (Decending)', 'name_asc'],
+      ['Event Name (Decending)', 'name_desc']
+      # ['Date', 'start_time_desc']
     ]
   end
 
