@@ -1,3 +1,6 @@
+<div class="row">
+  <p id="notice"><%= notice %></p>
+</div>
 
 <div class="row">
   <div class="col-md-8">
@@ -11,10 +14,8 @@
     <% end %>
   </div>
 </div>
+<br>
 
-<div class="row">
-  <p id="notice"><%= notice %></p>
-</div>
 
 <table class="table table-hover">
   <thead>
@@ -32,7 +33,7 @@
     <% @events.each do |event| %>
       <tr>
         <td>
-          <strong><%= link_to event.name, event %></strong><br><br>
+          <%= link_to event.name, event %><br><br>
           <!-- <%= event.description %><br><br> -->
         </td>
         <td><%= event.cause %></td>
