@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature "EventPages", type: :feature do
 
   before(:each) do
-    @organization = Organization.new(name: "ABC", description: "ABC is a helpful org")
+    @organization = Organization.find_by_name("We Help")
     @organization.save
     @event = Event.create(name: "ABC", start_time:"2017-02-02 01:01:01", end_time:"2017-02-02 02:01:01", volunteers_needed: 1 )
     @event.organization = @organization
@@ -24,6 +24,7 @@ RSpec.feature "EventPages", type: :feature do
         visit '/events'
       end
       Then 'I can click the event name' do
+        # save_and_open_page
         click_link (@event.name)
       end
       Then 'I can see that event\'s page with event info' do
@@ -31,9 +32,6 @@ RSpec.feature "EventPages", type: :feature do
         expect(page).to have_content "#{@event.description}"
         expect(page).to have_content "#{@event.organization.name}"
         expect(page).to have_content "#{@event.volunteers_needed}"
-      end
-      Then 'I have the option to go back to events page' do
-        expect(page).to have_link("Back", href: "/events")
       end
       And 'I can click the volunteer button' do
         click_button('Volunteer!')

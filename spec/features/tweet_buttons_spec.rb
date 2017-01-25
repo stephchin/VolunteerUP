@@ -24,9 +24,9 @@ RSpec.feature "TweetButtons", type: :feature do
       Then 'I can see a tweet button' do
         expect(page).to have_xpath "//a[contains(@href,'twitter')]"
       end
-      # Then 'I can see a pop up of the tweet' do
-      #   pending
-      # end
+      Then 'I can share a facebook event' do
+        expect(page).to have_xpath "//a[contains(@href,'facebook')]"
+      end
     end
   end
 

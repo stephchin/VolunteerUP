@@ -14,6 +14,14 @@
  *= require_self
  */
 
+ h5, th {
+   font-weight: normal;
+   font-size: 14px;
+   text-transform: uppercase;
+   color: #b4b4b4;
+   letter-spacing: 1.2px;
+ }
+
 a:hover {
   background-color: inherit;
 }
@@ -64,4 +72,91 @@ a:hover {
 }
 .about-links a:visited {
   color: white;
+}
+.section-box {
+  background-color: #f8f8f8;
+  padding: 5px;
+  border: 1px solid #e7e7e7;
+  border-radius: 2px;
+
+}
+
+.text-area, .event-box {
+  background-color: white;
+  border: 1px solid #e7e7e7;
+  border-radius: 2px;
+  padding: 0px 10px 0px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+.description {
+  height: 140px;
+}
+.address {
+  text-align: right;
+}
+h4{
+  font-size: 40px;
+  padding: 20px 20px 0px 20px;
+  width: 3em;
+  text-align: center;
+  margin: auto auto 0px auto;
+}
+.flex {
+  display: inline-flex;
+  margin-top: 4vh;
+  margin-bottom: 4vh;
+}
+
+.flex-child {
+  margin-left: 4px;
+}
+
+#spots-open {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: 18px;
+  line-height: 1.2em;
+}
+
+#total-vol {
+  margin-top: 0px;
+  font-size: 14px;
+}
+.volunteers-needed {
+  background-color: #7aae49;
+  color: white;
+  border: 1px solid #5f823d;
+  border-radius: 2px;
+  padding-bottom: 15px;
+  max-width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#volunteers-list {
+  margin-top: 0px;
+  font-size: 16px;
+  line-height: 1.5em;
+  /*margin-left: 2em;
+  text-align: left;*/
+}
+.user-box {
+  margin: 10px;
+  display: inline-table;
+}
+.image-placeholder {
+  width: 60px;
+  height: 60px;
+  background-color: white;
+  border: 1px solid #e7e7e7;
+  border-radius: 50%;
+  margin: 5px;
+}
+.large-image-placeholder {
+  max-width: 500px;
+  height: 400px;
+  background-color: white;
+  border: 1px solid #e7e7e7;
+  /*border-radius: 50%;*/
+  margin: 15px;
 }
