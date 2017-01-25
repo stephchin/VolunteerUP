@@ -51,7 +51,7 @@
 <div class="container-fluid"> <!-- organier and event container -->
   <div class="row section-box">
     <!-- organizer column -->
-    <div class="col-md-6">
+    <div class="col-md-6 org-notice">
       <h5><%= link_to "Organizers" %></h5>
       <p id="organizer-list">
         <% @organization.users.sort.each do |organizer| %>
@@ -61,8 +61,10 @@
           <%= organizer.email %><br></div>
         <% end %>
       </p>
-      <% if user_signed_in? %>
+      <% if user_signed_in? && !current_user.organizations.includes(@organization) %>
         <%= button_to "Join!", organization_add_user_path(@organization.id), class: "btn btn-primary btn-lg"%><br>
+      <% elsif user_signed_in? %>
+        <p>You've already joined!<span class="glyphicon glyphicon-thumbs-up"></span></p>
       <% end %>
     </div>
     <!-- events column -->
