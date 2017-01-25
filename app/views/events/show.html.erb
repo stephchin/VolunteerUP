@@ -77,11 +77,11 @@
     <div class="col-md-6">
       <h5>Organization</h5>
       <div class="text-area">
-        <p id="organization"><%= @event.organization.name %></p>
+        <p id="organization"><%= link_to @event.organization.name, organization_path(@event.organization) %></p>
       </div>
       <h5>Description</h5>
       <div class="text-area">
-        <p id="event"><%= @event.description %></p>
+        <p id="event-description" class="description"><%= @event.description %></p>
       </div>
       <h5>Date and Time</h5>
       <div class="text-area">
@@ -117,7 +117,7 @@
 <div class="container-fluid">
   <div class="row section-box">
     <div class="col-md-6">
-      <h5>Volunteers</h5>
+      <h5><%= link_to "Volunteers" %></h5>
       <p id="volunteers-list">
         <% @event.users.sort.each do |volunteer| %>
           <div class="user-box">
@@ -128,7 +128,7 @@
       </p><br>
     </div>
     <div class="col-md-6">
-      <h5>Organizers</h5>
+      <h5><%= link_to "Organizers" %></h5>
       <p id="volunteers-list">
         <% @event.organization.users.sort.each do |organizer| %>
           <div class="user-box">

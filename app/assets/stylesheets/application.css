@@ -81,7 +81,7 @@ a:hover {
 
 }
 
-.text-area {
+.text-area, .event-box {
   background-color: white;
   border: 1px solid #e7e7e7;
   border-radius: 2px;
@@ -89,7 +89,7 @@ a:hover {
   text-align: left;
   vertical-align: top;
 }
-#event {
+.description {
   height: 140px;
 }
 .address {
@@ -151,4 +151,12 @@ h4{
   border: 1px solid #e7e7e7;
   border-radius: 50%;
   margin: 5px;
+}
+.large-image-placeholder {
+  max-width: 500px;
+  height: 400px;
+  background-color: white;
+  border: 1px solid #e7e7e7;
+  /*border-radius: 50%;*/
+  margin: 15px;
 }
