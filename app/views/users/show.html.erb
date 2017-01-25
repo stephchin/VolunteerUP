@@ -8,7 +8,7 @@
   <span class="glyphicon glyphicon-envelope"></span> <%= @user.email %>
   </p>
   <p>
-  <span class="glyphicon glyphicon-map-marker"></span> <%= @user.city + ' ' + @user.state %>
+  <span class="glyphicon glyphicon-map-marker"></span> <%= @user.city.to_s + ' ' + @user.state.to_s %>
   </p>
   <p>
   My Organizations:
