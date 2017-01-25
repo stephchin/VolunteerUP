@@ -3,13 +3,18 @@ require 'rails_helper'
 RSpec.feature "Dashboards", type: :feature do
   before(:each) do
     @u1 = User.find_by_email("t@yahoo.com")
-    @u2 = User.find_by_email("k@yahoo.com")
-    @org = Organization.find(@u2.user_organizations.all.find_by(is_creator: true).organization_id)
-    @event = Event.first
+    @u2 = User.find_by_email("z@yahoo.com")
+    @org = Organization.create(name: "Yes", description: "We do everything",
+      phone: "555-555-5555", email: "yes@yahoo.com", website: "www.yes.com")
+    @event = Event.create(name: "ABC", start_time:"2017-02-02 01:01:01",
+      end_time:"2017-02-02 02:01:01", volunteers_needed: 1 )
+    @event.organization = @org
+    @event.save
     @event.user_events.create(user: @u2)
     @event.user_events.create(user: @u1)
     @pw = "123456"
     @u1.user_organizations.create(organization: @org, is_creator: false)
+    @u2.user_organizations.create(organization: @org, is_creator: true)
   end
   context "Organizer Dashboard" do
     Steps "At the dashboard" do
@@ -34,7 +39,7 @@ RSpec.feature "Dashboards", type: :feature do
         click_link "Edit"
         expect(page).to have_current_path(edit_organization_path(@org.id))
         visit dashboard_organizations_path
-        expect(page).to have_link("Delete", "/organizations/" + @org.id.to_s)
+        expect(page).to have_link("Delete", "organizations/" + @org.id.to_s)
       end
       Then "I can click the link to go to that organization's page" do
         click_link @org.name
