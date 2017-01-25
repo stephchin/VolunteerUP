@@ -12,7 +12,7 @@ user_names = ["Ally", "Barney", "Carson", "Dierdre", "Esther", "Fox", "Gary",
               "Newton", "Odell", "Pierce", "Queen", "Robin", "Sia", "Ted",
               "Utah", "Vinnie", "Washington", "Xanthipe", "Yosh", "Zeke"]
 password = "123456"
-city = ["Carlsbad", "Chula Vista", "Coronado", "Del Mar", "El Cajon", "Enciniatas",
+city = ["Carlsbad", "Chula Vista", "Coronado", "Del Mar", "El Cajon", "Encinitas",
         "Escondido", "Imperial Beach", "La Mesa", "Lemon Grove", "National City",
         "Oceanside", "Poway", "San Diego", "San Marcos", "Santee", "Solana Beach",
         "Vista"]
@@ -37,6 +37,19 @@ org_names.each_with_index do |org, index|
     website: "www.#{org.split(" ").join("")}.org")
 end
 
+u1 = User.find_by_email("j@yahoo.com")
+u2 = User.find_by_email("k@yahoo.com")
+u3 = User.find_by_email("l@yahoo.com")
+u4 = User.find_by_email("m@yahoo.com")
+u5 = User.find_by_email("n@yahoo.com")
+[u1, u2, u3, u4, u5].each_with_index do |u, index|
+  u.add_role :organizer
+  u.user_organizations.create!(
+    organization: Organization.find_by_name(org_names[index]),
+    is_creator: true)
+end
+
+
 # To create all Events
 event_locations = [
   {"Carlsbad" => { street: "2924 Carlsbad Blvd", postal_code: "92008" }},
@@ -58,14 +71,23 @@ event_locations = [
   {"Solana Beach" => { street: "125 Lomas  Santa Fe Dr", postal_code: "92075" }},
   {"Vista" => { street: "170 Emerald Dr", postal_code: "92083" }}
 ]
-causes = ["For the children", "For the animals", "For the environment",
-  "For the poor", "For the schools", "For the disaster victims", "For the hungry"]
+causes = ["Underprivileged Children", "Animals", "Environment",
+  "Homeless", "Schools", "Disaster Victims", "Hungry", "Short People", "Alcoholics",
+  "Unfun People"]
 event_names = [
-  { "Blood Drive" => { description: "Give blood", cause: causes[rand(causes.length)] }},
-  { "Toy Drive" => { description: "Give toys", cause: causes[rand(causes.length)] }},
-  { "Canned Goods Drive" => { description: "Give Canned Goods", cause: causes[rand(causes.length)] }},
-  { "Clothes Drive" => { description: "Give Clothes", cause: causes[rand(causes.length)] }},
-  { "Pick Up Waste" => { description: "Pick up trash", cause: causes[rand(causes.length)] }}
+  { "Blood Drive" => { description: "Give blood so that Jesus won't have to.
+    Cookies won't be provided, but probably fish and bread.",
+    cause: causes[rand(causes.length)] }},
+  { "Toy Drive" => { description: "Give toys to those who wish they had a childhood.
+    For once, think of the children!", cause: causes[rand(causes.length)] }},
+  { "Canned Goods Drive" => { description: "Give canned goods to people who
+    would like food that can store for more than a day. We know you're never
+    using those canned chickpeas or green beans, so bring them on down.",
+    cause: causes[rand(causes.length)] }},
+  { "Clothes Drive" => { description: "Give clothes to those who need them.
+    Ain't no one want to see that.", cause: causes[rand(causes.length)] }},
+  { "Pick Up Waste" => { description: "Pick up trash. Just do it.",
+    cause: causes[rand(causes.length)] }}
 ]
 
 15.times do |iter|

@@ -43,7 +43,7 @@ class EventsController < ApplicationController
   def map_locations
     @events = Event.all
     if params[:search]
-      @events = event.search(params[:search])
+      @events = Event.search(params[:search])
     end
 
     @hash = Gmaps4rails.build_markers(@events) do |event,marker|

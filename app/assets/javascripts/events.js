@@ -13,7 +13,7 @@ $(document).ready(function(){
 
 function placeMakers(dataFromServer, markers) {
   markers = handler.addMarkers(dataFromServer);
-  handler.bounds.extendWith(markers);
+  // handler.bounds.extendWith(markers);
   handler.fitMapToBounds();
 }
 
