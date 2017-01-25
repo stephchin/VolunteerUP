@@ -100,6 +100,7 @@ class OrganizationsController < ApplicationController
     user = User.find(params[:user])
     user.user_organizations.delete(organization: org)
     user.organizations.delete(org)
+    flash[:notice] = "You have removed an organizer."
     redirect_to dashboard_organizations_path
   end
 
