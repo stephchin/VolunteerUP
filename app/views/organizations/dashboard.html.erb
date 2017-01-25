@@ -11,7 +11,7 @@
       <th>Status</th>
     </tr>
       <% org.users.all.each do |user| %>
-    <tr>
+    <tr class="organizer">
         <td><%= link_to user.name, user_path(user.id) %></td  >
         <td>
           <% if user.user_organizations.all.find_by(organization_id: org.id).is_creator %>
@@ -31,4 +31,44 @@
     </tr>
     <% end %>
   </table>
+
+  <table>
+    <caption><h2>Events</h2></caption>
+    <tr >
+      <th>Event</th>
+      <th></th>
+    </tr>
+  <% org.events.all.each_with_index do |event, index| %>
+    <tr>
+      <td>
+        <%= link_to event.name, event_path(event.id) %>
+      </td>
+      <td>
+        <%= link_to "Volunteer List", "#org-modal" + index.to_s, "data-toggle" => "modal" %>
+        <div class="modal" id="<%= 'org-modal' + index.to_s %>">
+          <div class="modal-content">
+            <table class="table">
+              <tr>
+                <th></th>
+                <th>Volunteer</th>
+                <th>E-mail</th>
+              </tr>
+              <% event.users.all.each do |user| %>
+                <tr>
+                  <td><div class="image-placeholder"></div></td>
+                  <td><%= user.name %></td>
+                  <td><%= user.email %></td>
+                </tr>
+              <% end %>
+            </table>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
 <% end %>
