@@ -1,5 +1,5 @@
 class Organization < ApplicationRecord
-  has_many :events
+  has_many :events, dependent: :destroy
 
   #if an org is destroyed, this destroys the link between user and orgs, but not the actual user
   has_many :user_organizations, :dependent => :destroy
