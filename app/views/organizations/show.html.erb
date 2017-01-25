@@ -18,12 +18,12 @@
     <!-- image column -->
     <div class="col-md-6 text-center">
       <% if !@organization.image.present? %>
-        <div class="large-image-placeholder">
-          render 'Nope'
+        <div class="org-image">
+          <%= image_tag("default_org.png") %>
         </div>
       <% else %>
-        <div class="image">
-          <%= link_to image_tag(@organization.image.url(:large)), @organization.image.url %>
+        <div class="org-image">
+          <%= image_tag("@organization.image.url(:large)") %>
         </div>
       <% end %>
     </div>
