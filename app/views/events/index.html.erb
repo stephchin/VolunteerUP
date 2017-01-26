@@ -10,11 +10,11 @@
     <%= form_for_filterrific @filterrific do |f| %>
       <div>
         <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
-        <%= f.text_field(
-          :search_query,
+        <span class="glyphicon glyphicon-search"></span> <%= f.text_field(
+          :search_query, placeholder: "Search events",
           class: 'filterrific-periodically-observed'
         ) %>
-      </div>
+      </div><br>
       <!-- <div>
         From
         <%= f.text_field(:with_start_time, class: 'js-datepicker form-control') %>
@@ -33,13 +33,13 @@
       <div>
         Sort by
         <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
-      </div>
+      </div><br>
       <div>
         <%= link_to(
           'Reset filters',
           reset_filterrific_url,
         ) %>
-        <%= f.submit 'Search' %>
+        <%= f.submit 'Search', class: "btn btn-primary btn-xs"%>
       </div>
       <%= render_filterrific_spinner %>
     <% end %>
@@ -47,10 +47,12 @@
 </div>
 <br>
 
+
 <%= render(
   partial: 'events/list',
   locals: { events: @events }
 ) %>
+
 
 <br>
 

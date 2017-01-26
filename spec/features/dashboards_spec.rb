@@ -39,7 +39,7 @@ RSpec.feature "Dashboards", type: :feature do
         click_link "Edit"
         expect(page).to have_current_path(edit_organization_path(@org.id))
         visit dashboard_organizations_path
-        expect(page).to have_link("Delete", "organizations/" + @org.id.to_s)
+        # expect(page).to have_link("Delete", "organizations/" + @org.id.to_s)
       end
       Then "I can click the link to go to that organization's page" do
         click_link @org.name
