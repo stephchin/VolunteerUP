@@ -13,6 +13,20 @@ class UsersController < ApplicationController
     redirect_to user_path(u1)
   end
 
+  def map_locations
+    @events = Event.all
+    if params[:search]
+      @events = Event.search(params[:search])
+    end
+
+    @hash = Gmaps4rails.build_markers(@events) do |event,marker|
+      marker.lat(event.latitude)
+      marker.lng(event.longitude)
+      marker.infowindow("<p style='text-align: center;'>#{event.name}</p>Hosted By:  #{event.organization.name}")
+    end
+    render json: @hash.to_json
+  end
+
 
   private
 

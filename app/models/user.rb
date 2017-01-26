@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   after_commit :assign_role
+  geocoded_by :address
+  after_validation :geocode
 
   #if a user is destroyed, this destroys the link between user and event, but not the actual event
   has_many :user_events, :dependent => :destroy
