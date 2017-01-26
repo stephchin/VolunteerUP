@@ -101,7 +101,17 @@ class OrganizationsController < ApplicationController
     user = User.find(params[:user])
     user.user_organizations.delete(organization: org)
     user.organizations.delete(org)
-    flash[:notice] = "You have removed an organizer."
+    flash[:remove] = "You have removed an organizer."
+    redirect_to dashboard_organizations_path
+  end
+
+  def remove_volunteer
+    org = Organization.find(params[:organization_id])
+    user = User.find(params[:user])
+    event = Event.find(params[:event])
+    user.user_events.delete(event: event)
+    user.events.delete(event)
+    flash[:remove] = "You have removed a volunteer from the #{event.name} event."
     redirect_to dashboard_organizations_path
   end
 

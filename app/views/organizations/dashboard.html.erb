@@ -1,4 +1,4 @@
-<%= flash[:notice] %>
+<p class="remove"><%= flash[:remove] %></p>
 <% @all_orgs.each do |org| %>
   <table class="table" id="org-dash">
     <caption>
@@ -57,6 +57,8 @@
                     <td><div class="image-placeholder"></div></td>
                     <td><%= user.name %></td>
                     <td><%= user.email %></td>
+                    <td><%= button_to "X",
+                    organization_remove_volunteer_path(org.id) + "?user=" + user.id.to_s + "&event=" + event.id.to_s %></td>
                   </tr>
                 <% end %>
               </table>
