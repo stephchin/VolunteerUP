@@ -12,8 +12,7 @@ class UsersController < ApplicationController
     u1.events.delete(e1)
 
     event_waitlist = e1.user_events.where.not(waitlist: nil)
-
-    if event_waitlist.length > 1
+    if event_waitlist.length > 0
       event_waitlist.sort
       event_waitlist[0].waitlist = nil
       event_waitlist[0].save

@@ -144,11 +144,20 @@
     <div class="col-md-6">
       <h5><%= link_to "Volunteers" %></h5>
       <p id="volunteers-list">
-        <% @event.users.sort.each do |volunteer| %>
+        <% @event.user_events.where(waitlist: nil).each do |user_event| %>
           <div class="user-box">
             <div class="image-placeholder"></div>
-          <%= link_to volunteer.name, user_path(volunteer) %><br>
-          <%= volunteer.email %><br></div>
+          <%= link_to user_event.user.name, user_path(user_event.user) %><br>
+          <%= user_event.user.email %><br></div>
+        <% end %>
+      </p><br>
+      <h5>Waitlist</h5>
+      <p id="waitlist-list">
+        <% @event.user_events.where.not(waitlist: nil).each do |user_event| %>
+          <div class="user-box">
+            <div class="image-placeholder"></div>
+          <%= link_to user_event.user.name, user_path(user_event.user) %><br>
+          <%= user_event.user.email %><br></div>
         <% end %>
       </p><br>
     </div>

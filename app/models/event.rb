@@ -1,4 +1,6 @@
 class Event < ApplicationRecord
+  # after_initialize :create_waitlist
+
   #if an event is destroyed, this destroys the link between event and user, but not the actual user
   has_many :user_events, :dependent => :destroy
   has_many :users, through: :user_events
@@ -14,9 +16,6 @@ class Event < ApplicationRecord
   geocoded_by :address
   after_validation :geocode
 
-  def initialize
-    waitlist = 0
-  end
 
   def address
     "#{street}, #{city} #{state} #{postal_code}"
@@ -24,10 +23,6 @@ class Event < ApplicationRecord
 
   def remaining_vol
     volunteers_needed - self.users.count
-  end
-
-  def add_waitlist
-    waitlist += 1
   end
 
   resourcify
