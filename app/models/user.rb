@@ -1,7 +1,6 @@
 class User < ApplicationRecord
   after_commit :assign_role
-  geocoded_by :address
-  after_validation :geocode
+
 
   #if a user is destroyed, this destroys the link between user and event, but not the actual event
   has_many :user_events, :dependent => :destroy
@@ -16,6 +15,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:twitter, :facebook]
   validates :name, presence: true
+
+  # geocoded_by :address
+  # after_validation :geocode
+  #
+  # def address
+  #   "#{street}, #{city} #{state} #{postal_code}"
+  # end
 
   def assign_role
     add_role(:volunteer) if self.roles.blank?
