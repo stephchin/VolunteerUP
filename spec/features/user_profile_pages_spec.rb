@@ -49,10 +49,6 @@ RSpec.feature "UserProfilePages", type: :feature do
         click_link @organization.name
         expect(page).to have_current_path(organization_path(@organization.id))
       end
-      And 'I can see a calendar with the events that I am attending' do
-        
-
-      end
     end
   end
 end
