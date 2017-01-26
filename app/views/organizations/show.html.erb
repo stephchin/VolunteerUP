@@ -17,9 +17,15 @@
   <div class="row section-box">
     <!-- image column -->
     <div class="col-md-6 text-center">
-      <div class="large-image-placeholder">
-      </div>
-
+      <% if !@organization.image.present? %>
+        <div class="org-image">
+          <%= image_tag("default_org.png") %>
+        </div>
+      <% else %>
+        <div class="org-image">
+          <%= image_tag(@organization.image.url(:large)) %>
+        </div>
+      <% end %>
     </div>
     <!-- info column -->
     <div class="col-md-6">
