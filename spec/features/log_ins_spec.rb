@@ -10,7 +10,7 @@ RSpec.feature "LogIns", type: :feature do
         visit '/users/sign_up'
         fill_in "user[name]", with: 'Stephanie'
         fill_in "user[city]", with: 'San Francisco'
-        fill_in "user[state]", with: 'CA'
+        select 'CA', from: "user_state"
         fill_in "user[email]", with: '1@yahoo.com'
         fill_in "user[password]", with: '123456'
         fill_in "user[password_confirmation]", with: '123456'
@@ -27,7 +27,7 @@ RSpec.feature "LogIns", type: :feature do
         click_button "Log in"
       end
       And "I can see the success message" do
-        expect(page).to have_content "Signed in successfully."
+        expect(page).to have_content "All signed in! You're ready to volunteer!"
       end
     end
   end

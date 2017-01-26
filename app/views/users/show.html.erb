@@ -1,14 +1,18 @@
+<p class="success"><%= success %></p>
 <h1>Hi <%= @user.name %>!</h1>
 <div class="user-info">
   <p>
-  <span class="glyphicon glyphicon-user"></span>
-  <%= @user.roles.pluck(:name).map(&:capitalize).join(", ") %>
-  </p>
-  <p>
   <span class="glyphicon glyphicon-envelope"></span> <%= @user.email %>
   </p>
+  <% if !@user.city.nil? && !@user.state.nil? %>
+    <p>
+    <span class="glyphicon glyphicon-map-marker"></span> <%= @user.city + ' ' + @user.state %>
+    </p>
+  <% end %>
+
   <p>
-  <span class="glyphicon glyphicon-map-marker"></span> <%= @user.city + ' ' + @user.state %>
+  My Roles:
+  <%= @user.roles.pluck(:name).map(&:capitalize).join(", ") %>
   </p>
   <p>
   My Organizations:
@@ -18,11 +22,6 @@
 <p>
 <%= link_to 'Account Settings', edit_user_registration_path, class: "btn btn-xs btn-info" %>
 </p>
-<p>
-<%= link_to 'Home', root_path, class: "btn btn-xs btn-info" %>
-</p>
-
-
 
 <!-- Begin Events Table -->
 <table class="table" id="user-events-table">
@@ -67,3 +66,6 @@
     <% end %>
   </tbody>
 </table>
+
+<div id="calendar"></div>
+<input id="hid" type="hidden" value="<%=@user.id%>"

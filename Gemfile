@@ -16,12 +16,20 @@ gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+
+# Paperclip for file uploads
+gem 'paperclip', "~> 5.0.0"
+
 # Use Geocoder & Gmaps4Rails
 gem 'geocoder'
 gem 'underscore-rails'
 gem 'gmaps4rails'
 
 # gem 'poltergeist'
+
+# Use jQuery Fullcalendar plugin
+gem 'fullcalendar-rails', '~> 3.1'
+gem 'momentjs-rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -38,6 +46,7 @@ gem 'devise'
 gem 'cancancan'
 gem 'rolify'
 gem 'omniauth-twitter'
+gem 'omniauth-facebook'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

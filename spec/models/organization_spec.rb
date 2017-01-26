@@ -15,8 +15,13 @@ RSpec.describe Organization, type: :model do
       new_org.description = "ABC is a helpful org"
       expect(new_org.description).to eq "ABC is a helpful org"
     end
+    it "has an image" do
+      new_org = Organization.new
+      new_org.image_file_name = "spec/fixtures/default_org.png"
+      expect(new_org.image_file_name).to eq "spec/fixtures/default_org.png"
+    end
     it "should save" do
-      new_org = Organization.new(name: "ABC", description: "ABC is a helpful org")
+      new_org = Organization.new(name: "ABC", description: "ABC is a helpful org", image_file_name: "spec/fixtures/default_org.png")
       expect{new_org.save}.to_not raise_error
     end
   end
