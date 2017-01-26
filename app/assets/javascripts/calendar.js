@@ -1,11 +1,18 @@
 $(document).ready(function() {
    $("#calendar").fullCalendar({
-     events: "/users/" + $("#hid").val() + "/get_events"
-    //  eventClick: function(event) {
-    //    if (event.url) {
-    //      window.open(event.url);
-    //      return false;
-    //    }
-    //  }
+     events: "/users/" + $("#hid").val() + "/get_events",
+     timeFormat: "LT",
+     defaultView: 'month',
+     header: {
+      right: 'prev,next today',
+      center: 'title',
+      left: 'month,agendaWeek,agendaDay'
+    },
+     eventClick: function(calEvent) {
+      if (calEvent.url) {
+          window.open(calEvent.url);
+          return false;
+      }
+    }
   });
 });

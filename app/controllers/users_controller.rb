@@ -13,15 +13,21 @@ class UsersController < ApplicationController
     redirect_to user_path(u1)
   end
 
-  # GET all events for calendar
+  # GET all events for calendar on user profile
  def get_events
-   @events = Event.all
-   events = []
-   @events.each do |event|
-     events << { id: event.id, title: event.name, start: event.start_time, end: event.end_time }
+   user_events = User.find(params[:user_id]).events
+   calendar_events = []
+   user_events.each do |event|
+     calendar_events << {
+      id: event.id,
+      title: event.name,
+      start: event.start_time,
+      end: event.end_time }
    end
-   render :json => events.to_json
+   render :json => calendar_events.to_json
  end
+
+
 
   private
 
