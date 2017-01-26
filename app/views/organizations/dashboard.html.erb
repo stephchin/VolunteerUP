@@ -1,6 +1,8 @@
 <p class="remove"><%= flash[:remove] %></p>
+<h1>Dashboard</h1>
 <% @all_orgs.each do |org| %>
-  <table class="table" id="org-dash">
+  <div class="organizer">
+  <table class="table table-condensed" id="org-dash">
     <caption>
       <h2><%= link_to org.name, organization_path(org.id) %></h2>
       <%= link_to "Edit", edit_organization_path(org.id), class: "btn btn-info btn-xs" %>
@@ -8,11 +10,14 @@
     </caption>
     <tr>
       <th>User</th>
+      <th>E-mail</th>
       <th>Status</th>
+      <th></th>
     </tr>
       <% org.users.all.each do |user| %>
     <tr class="organizer">
-        <td><%= link_to user.name, user_path(user.id) %></td  >
+        <td><%= link_to user.name, user_path(user.id) %></td>
+        <td><%= user.email %></td>
         <td>
           <% if user.user_organizations.all.find_by(organization_id: org.id).is_creator %>
             <%= "Creator" %>
@@ -24,17 +29,21 @@
         <td>
           <% if !user.user_organizations.all.find_by(organization_id: org.id).is_creator %>
             <%= button_to "X", organization_remove_organizer_path(org.id) + "?user=" + user.id.to_s,
-              class: "btn btn-primary btn-xs"%>
+              class: "btn btn-danger btn-xs"%>
           <% end %>
         </td>
         <% end %>
     </tr>
     <% end %>
   </table>
+</div>
 
-  <table>
+  <div class="volunteer">
+  <table class="table">
     <tr>
       <th>Event</th>
+      <th>Date And Time</th>
+      <th>Location</th>
       <th></th>
     </tr>
     <% org.events.all.each_with_index do |event, index| %>
@@ -43,13 +52,27 @@
           <%= link_to event.name, event_path(event.id) %>
         </td>
         <td>
-          <%= link_to "Volunteer List", "##{org.name.split(" ").join("")}-modal#{index.to_s}", "data-toggle" => "modal" %>
+          <%= event.start_time.strftime("%b %e, %Y")%><br>
+          <%= event.start_time.strftime("%l:%M %p") %> -
+          <%= event.end_time.strftime("%l:%M %p") %><br>
+        </td>
+        <td>
+          <%= event.street %> <br>
+          <%= "#{event.city}, #{event.state} #{event.postal_code} #{event.country}" %>
+        </td>
+        <td>
+          <%= link_to "Volunteer List", "##{org.name.split(" ").join("")}-modal#{index.to_s}",
+            "data-toggle" => "modal", class: "btn btn-info" %>
           <div class="modal fade" id="<%= "#{org.name.split(" ").join("")}-modal#{index.to_s}" %>" role="dialog">
             <div class="modal-content">
-              <table class="table">
+              <div class="modal-header">
+                  <h5>Volunteers</h5>
+                  <button type="button" class="btn btn-default modal-exit" data-dismiss="modal">X</button>
+              </div>
+              <table align="center" class="table table-condensed modal-table">
                 <tr>
                   <th></th>
-                  <th>Volunteer</th>
+                  <th>Name</th>
                   <th>E-mail</th>
                 </tr>
                 <% event.users.all.each do |user| %>
@@ -57,19 +80,21 @@
                     <td><div class="image-placeholder"></div></td>
                     <td><%= user.name %></td>
                     <td><%= user.email %></td>
-                    <td><%= button_to "X",
-                    organization_remove_volunteer_path(org.id) + "?user=" + user.id.to_s + "&event=" + event.id.to_s %></td>
+                    <td>
+                      <%= button_to "X",
+                    organization_remove_volunteer_path(org.id) + "?user=" + user.id.to_s + "&event=" + event.id.to_s,
+                    class: "btn btn-danger btn-xs"
+                    %>
+                    </td>
                   </tr>
                 <% end %>
               </table>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
             </div>
           </div>
         </td>
       </tr>
     <% end %>
   </table>
+</div>
 
 <% end %>
