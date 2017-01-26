@@ -17,6 +17,13 @@
 #events_map, #event_map {
   margin-top: 1em;
   height: 400px;
-  width: 100%;
+  width: 50%;
+  border-radius: .4em;
+}
+
+#user_map, #calendar {
+  margin-top: 1em;
+  height: 335px;
+  width: 50%;
   border-radius: .4em;
 }
