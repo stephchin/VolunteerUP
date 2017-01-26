@@ -9,41 +9,6 @@ class EventsController < ApplicationController
 
   # GET /events
   # GET /events.json
-  #def index
-    # if params[:search].present?
-    #   #uses fuzzy search for all event string fields
-    #   @search_events = Event.fuzzy_search(params[:search])
-    #   #joins org table and uses fuzzy search on just the name
-    #   @search_orgs = Event.joins(:organization).fuzzy_search(organizations: {name: params[:search]})
-    #   s_year = params[:start_time][:year].to_i
-    #   s_month = params[:start_time][:month].to_i
-    #   s_day = params[:start_time][:day].to_i
-    #   s_time = DateTime.new(s_year, s_month, s_day)
-    #   @on = Event.all.where("start_time >= ?", s_time.beginning_of_day)
-    #   #union of both searches which updates the index
-    #   @search = (@search_events | @search_orgs) & @on
-    # else
-    #   @search = Event.all
-    # end
-    # if !params[:end_time].nil? && (!params[:end_time][:year].empty? &&
-    #   !params[:end_time][:month].empty? && !params[:end_time][:day].empty?)
-    #   s_year = params[:start_time][:year].to_i
-    #   s_month = params[:start_time][:month].to_i
-    #   s_day = params[:start_time][:day].to_i
-    #   e_year = params[:end_time][:year].to_i
-    #   e_month = params[:end_time][:month].to_i
-    #   e_day = params[:end_time][:day].to_i
-    #   s_time = DateTime.new(s_year, s_month, s_day)
-    #   e_time = DateTime.new(e_year, e_month, e_day)
-    #   @date = Event.all.where(start_time: s_time.beginning_of_day..e_time.end_of_day)
-    # else
-    #   @date = Event.all
-    # end
-    # @events = @search & @date
-    # @events.sort! do |x, y|
-    #   x.start_time <=> y.start_time
-    # end
-  #end
 
   def index
 
@@ -218,7 +183,6 @@ class EventsController < ApplicationController
       redirect_to event_path(event.id)
     end
   end
-
 
   private
   # Use callbacks to share common setup or constraints between actions.

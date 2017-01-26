@@ -7,18 +7,13 @@
     <h1 class= "vertical-align">Events</h1>
   </div>
   <div class="col-md-4 text-right" id="search-bar">
-    <%= form_for_filterrific @filterrific, html: { id: 'filterrific-no-ajax-auto-submit' } do |f| %>
+    <%= form_for_filterrific @filterrific do |f| %>
       <div>
         <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
         <%= f.text_field(
           :search_query,
           class: 'filterrific-periodically-observed'
         ) %>
-        <%= f.submit 'Search' %>
-      </div>
-      <div>
-        <br>
-        Advanced Filters
       </div>
       <!-- <div>
         From
@@ -44,6 +39,7 @@
           'Reset filters',
           reset_filterrific_url,
         ) %>
+        <%= f.submit 'Search' %>
       </div>
       <%= render_filterrific_spinner %>
     <% end %>

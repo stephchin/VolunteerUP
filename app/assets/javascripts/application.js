@@ -17,4 +17,5 @@
 //= require fullcalendar
 //= require gmaps/google
 //= require_tree .
+//= require filterrific/filterrific-jquery
 //= require bootstrap-datepicker
