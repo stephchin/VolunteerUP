@@ -27,7 +27,7 @@ RSpec.feature "LogIns", type: :feature do
         click_button "Log in"
       end
       And "I can see the success message" do
-        expect(page).to have_content "Signed in successfully."
+        expect(page).to have_content "All signed in! You're ready to volunteer!"
       end
     end
   end

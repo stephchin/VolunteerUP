@@ -4,9 +4,12 @@
   <p>
   <span class="glyphicon glyphicon-envelope"></span> <%= @user.email %>
   </p>
-  <p>
-  <span class="glyphicon glyphicon-map-marker"></span> <%= @user.city.to_s + ' ' + @user.state.to_s %>
-  </p>
+  <% if !@user.city.nil? && !@user.state.nil? %>
+    <p>
+    <span class="glyphicon glyphicon-map-marker"></span> <%= @user.city + ' ' + @user.state %>
+    </p>
+  <% end %>
+
   <p>
   My Roles:
   <%= @user.roles.pluck(:name).map(&:capitalize).join(", ") %>
@@ -19,8 +22,6 @@
 <p>
 <%= link_to 'Account Settings', edit_user_registration_path, class: "btn btn-xs btn-info" %>
 </p>
-
-
 
 <!-- Begin Events Table -->
 <table class="table" id="user-events-table">
@@ -67,3 +68,6 @@
     <% end %>
   </tbody>
 </table>
+
+<div id="calendar"></div>
+<input id="hid" type="hidden" value="<%=@user.id%>"

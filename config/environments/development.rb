@@ -1,6 +1,9 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # Tell Paperclip where to find ImageMagick
+  Paperclip.options[:command_path] = "/usr/local/bin/"
+  
   # default url options for devise dev environment
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 

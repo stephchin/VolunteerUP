@@ -30,7 +30,12 @@ RSpec.feature "Organizers", type: :feature do
         fill_in "organization[phone]", with: @org_phone
         fill_in "organization[email]", with: @org_email
         fill_in "organization[website]", with: @org_website
+        page.attach_file("organization_image", "spec/fixtures/default_org.png")
         click_button "Create Organization"
+      end
+      And "I will be redirected to my new org's show page" do
+        expect(page).to have_content(@org_name)
+        expect(page).to have_css("img[src*='default_org.png']")
       end
       Then "On my profile page, I can see 'Organizer' and 'Dashboard' on my nav bar" do
         visit user_path(@user.id)
