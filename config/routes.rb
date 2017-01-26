@@ -4,11 +4,13 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   resources :users do
     delete :remove_event
+    get :get_events
   end
   resources :events do
     post :add_user
     get 'map_location'
     get :map_locations, on: :collection
+
   end
   resources :organizations do
     post :add_user
