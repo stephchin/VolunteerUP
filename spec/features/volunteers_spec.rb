@@ -50,9 +50,11 @@ RSpec.feature "Volunteers", type: :feature do
         @event = Event.find_by_name("Give laptops")
         expect(page).to have_current_path(event_path(@event.id))
       end
-      Then "I am on the events page and can click the 'Volunteer!' button that
-        redirects to the user's profile page" do
+      Then "I am on the events page and can click the 'Volunteer!' button" do
         click_button "Volunteer!"
+      end
+      Then "I can go to my profile page and see the event" do
+        visit user_path(@user)
         expect(page).to have_current_path(user_path(@user.id))
         expect(page).to have_content(@user.name)
         expect(page).to have_content(@user.email)
