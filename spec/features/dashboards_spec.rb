@@ -59,6 +59,9 @@ RSpec.feature "Dashboards", type: :feature do
         expect(page).to have_css("tr.vol-row:nth-of-type(1)", text: @u2.name)
         expect(page).to have_css("tr.vol-row:nth-of-type(2)", text: @u1.name)
       end
+      Then "I can see the number of volunteers for an event" do
+        expect(page).to have_css("h6", text: "0 needed / 1 total")
+      end
     end
   end
 end
