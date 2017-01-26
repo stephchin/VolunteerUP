@@ -1,10 +1,35 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
 .user-info {
   padding-top: 1em;
   p {
     font-size: 1.1em;
+  }
+}
+.user-img {
+  width: 12em;;
+  height: 12em;
+  border-radius: 50%;
+  margin: 5px;
+  img {
+    // Use max-width: 100% if you do not want to stretch
+    // the user's profile image
+    width: 100%;
+    height: auto;
+    border-radius: inherit;
+  }
+}
+.user-thumb {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin: 5px;
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: inherit;
   }
 }
 #user-events-table{
@@ -22,4 +47,8 @@
   td {
     border-bottom: .2em;
   }
+}
+#user-events-table .btn {
+  width: 150px;
+
 }

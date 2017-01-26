@@ -21,11 +21,9 @@
 <div class="container-fluid">
   <div class="row section-box">
     <!-- image column -->
-    <div class="col-md-6 text-center">
-      <div class="large-image-placeholder">
+      <div class="org-image col-md-6">
+        <%= image_tag(@organization.image.url(:large)) %>
       </div>
-
-    </div>
     <!-- info column -->
     <div class="col-md-6">
       <h5>Description</h5>
@@ -61,7 +59,9 @@
       <p id="organizer-list">
         <% @organization.users.sort.each do |organizer| %>
           <div class="user-box">
-            <div class="image-placeholder"></div>
+            <div class="user-thumb">
+              <%= image_tag(organizer.image.url(:small)) %>
+            </div>
           <%= link_to organizer.name, user_path(organizer) %><br>
           <%= organizer.email %><br></div>
         <% end %>
@@ -69,7 +69,7 @@
       <% if user_signed_in? && !current_user.organizations.include?(@organization) %>
         <%= button_to "Join!", organization_add_user_path(@organization.id), class: "btn btn-primary btn-lg"%><br>
       <% elsif user_signed_in? && current_user.organizations.include?(@organization) %>
-        <p>You've already joined!<span class="glyphicon glyphicon-thumbs-up"></span></p>
+        <p>You've already joined! <span class="glyphicon glyphicon-thumbs-up"></span></p>
       <% else %>
         <p><%= link_to "Sign In to Join!", new_user_session_path, class: "btn btn-info" %></p>
       <% end %>
@@ -80,12 +80,20 @@
       <p id="events-list">
         <% @organization.events.each do |event| %>
           <div class="event-box">
-            <!-- <div class="image-placeholder"></div> -->
-          <p><%= link_to event.name, event_path(event) %><br>
-          <%= event.description %><br>
-          <%= event.start_time.strftime("%b %e, %Y ") %><br>
-          <%= event.start_time.strftime("%l:%M %p") %> - <%= event.end_time.strftime("%l:%M %p") %></p>
-          </div><br>
+            <div class="row">
+              <div class="col-lg-4">
+              <!-- <div class="image-placeholder"></div> -->
+                <p><%= link_to event.name, event_path(event) %><br><br></p>
+              </div>
+
+              <div class="col-lg-8">
+                <p><%= event.start_time.strftime("%b %e, %Y ") %><br>
+                <%= event.start_time.strftime("%l:%M %p") %> - <%= event.end_time.strftime("%l:%M %p") %><br><br>
+
+                <%= event.description %></p>
+              </div>
+            </div>
+          </div>
         <% end %>
       </p>
     </div>
@@ -96,7 +104,6 @@
 
 <% if @ability.can? :manage, @organization %>
   <%= link_to 'Edit', edit_organization_path(@organization), class: "btn btn-sm btn-info"%>
-  <%= link_to 'Destroy', @organization, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" %>
 <% end %>
 
 <!-- <%= link_to 'Back', organizations_path, class: "btn btn-xs btn-info" %> -->

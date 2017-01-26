@@ -13,5 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require underscore
+//= require moment
+//= require fullcalendar
 //= require gmaps/google
 //= require_tree .
+//= require filterrific/filterrific-jquery
+//= require bootstrap-datepicker

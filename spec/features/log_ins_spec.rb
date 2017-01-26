@@ -18,7 +18,7 @@ RSpec.feature "LogIns", type: :feature do
       end
       Then "I can press the 'Log out' button" do
         click_link('Log out')
-        expect(page).to have_content "Signed out successfully"
+        expect(page).to have_content "You've signed out successfully."
       end
       Then "I can Log in" do
         click_link('Log in')
@@ -27,7 +27,7 @@ RSpec.feature "LogIns", type: :feature do
         click_button "Log in"
       end
       And "I can see the success message" do
-        expect(page).to have_content "Signed in successfully."
+        expect(page).to have_content "You're logged in and ready to volunteer!"
       end
     end
   end

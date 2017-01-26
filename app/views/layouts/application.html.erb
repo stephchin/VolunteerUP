@@ -5,6 +5,7 @@
     <%= csrf_meta_tags %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
+
     <meta property="og:url"           content="http://www.volunteerup.com" />
   	<meta property="og:type"          content="website" />
   	<meta property="og:title"         content="VolunteerUP!" />
@@ -66,8 +67,9 @@
     </nav>
 
     <div class="container">
-      <div class="row">
+      <div class="flash-area">
         <p class="notice"><%= notice %></p>
+        <p class="success"><%= success %></p>
         <p class="alert"><%= alert %></p>
       </div>
 

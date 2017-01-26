@@ -5,6 +5,7 @@
 </nav>
 
 <p class="notice"><%= notice %></p>
+
 <!-- Twitter share button -->
 <script>window.twttr = (function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0],
@@ -50,22 +51,46 @@
     <div class="col-md-2 text-center">
       <div class="event-notice"><br><br>
         <!-- Volunteer! button -->
-        <% if user_signed_in? && !current_user.events.all.include?(Event.find(@event.id)) && (@event.remaining_vol > 0)%>
-          <%= button_to "Volunteer!", event_add_user_path(@event.id), class: "btn btn-primary btn-lg"%>
-        <% elsif user_signed_in? && current_user.events.all.include?(Event.find(@event.id)) %>
-          <p>You're signed up! <span class="glyphicon glyphicon-thumbs-up"></span></p>
-        <% elsif !user_signed_in? %>
-          <p><%= link_to "Sign In to Volunteer!", new_user_session_path, class: "btn btn-info" %></p>
+
+        <!-- changes the buttons/meassage above volunteer count -->
+        <% if user_signed_in? %>
+          <% if !current_user.events.all.include?(Event.find(@event.id)) %>
+            <% if (@event.remaining_vol > 0) %>
+              <%= button_to "Volunteer!", event_add_user_path(@event.id), class: "btn btn-primary btn-lg"%>
+            <% else%>
+              <%= button_to "Add to waitlist!", event_add_user_path(@event.id), class: "btn btn-warning"%>
+            <% end %>
+          <% else %>
+            <% if (current_user.user_events.where(event_id: @event.id, waitlist: nil).length > 0) %>
+              <p id="signed-up">You're signed up! <span class="glyphicon glyphicon-thumbs-up"></span></p>
+            <% else %>
+              <p id="on-waitlist">You're on the waitlist!</p>
+            <% end %>
+          <% end %>
+        <% else %>
+          <p><%= link_to "Sign in to volunteer", new_user_session_path, class: "btn btn-info btn-sm" %></p>
         <% end %><br />
       </div>
 
-      <div class="volunteers-needed">
+      <% if @event.remaining_vol > 0 %>
+      <div id="colored-vols-needed" class="volunteers-needed">
         <h4><%="#{@event.remaining_vol}"%></h4>
         <br>
         <p id="spots-open">Volunteers Needed</p><br>
         <p id="total-vol"><%= "out of #{@event.volunteers_needed}"%>
         </p>
+      </div>
+      <% else %>
+      <div id="greyed-out-vols-needed" class="volunteers needed">
+        <h4><%="0"%></h4>
+        <br>
+        <p id="spots-open">Volunteers Needed</p><br>
+        <p id="total-vol"></p>
       </div><br>
+      <% end %>
+
+
+
 
       <div class="flex align-bottom">
         <!-- tweet button -->
@@ -127,11 +152,20 @@
     <div class="col-md-6">
       <h5><%= link_to "Volunteers" %></h5>
       <p id="volunteers-list">
-        <% @event.users.sort.each do |volunteer| %>
+        <% @event.user_events.where(waitlist: nil).each do |user_event| %>
           <div class="user-box">
             <div class="image-placeholder"></div>
-          <%= link_to volunteer.name, user_path(volunteer) %><br>
-          <%= volunteer.email %><br></div>
+          <%= link_to user_event.user.name, user_path(user_event.user) %><br>
+          <%= user_event.user.email %><br></div>
+        <% end %>
+      </p><br>
+      <h5>Waitlist</h5>
+      <p id="waitlist-list">
+        <% @event.user_events.where.not(waitlist: nil).each do |user_event| %>
+          <div class="user-box">
+            <div class="image-placeholder"></div>
+          <%= link_to user_event.user.name, user_path(user_event.user) %><br>
+          <%= user_event.user.email %><br></div>
         <% end %>
       </p><br>
     </div>
@@ -159,5 +193,4 @@
 <!-- edit and destroy buttons -->
 <% if @ability.can? :manage, @event%>
 <%= link_to 'Edit Event', edit_event_path(@event), class: "btn btn-sm btn-info" %>
-<%= link_to 'Destroy', @event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger"%>
 <% end %>

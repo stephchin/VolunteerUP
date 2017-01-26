@@ -24,10 +24,9 @@ RSpec.feature "EventPages", type: :feature do
         visit '/events'
       end
       Then 'I can click the event name' do
-        # save_and_open_page
         click_link (@event.name)
       end
-      Then 'I can see that event\'s page with event info' do
+      Then 'I can see that event\'s show page with event info' do
         expect(page).to have_content "#{@event.name}"
         expect(page).to have_content "#{@event.description}"
         expect(page).to have_content "#{@event.organization.name}"
@@ -36,9 +35,13 @@ RSpec.feature "EventPages", type: :feature do
       And 'I can click the volunteer button' do
         click_button('Volunteer!')
       end
-      And 'I am taken to the user profile page with my upcoming event' do
-        expect(page).to have_content "You signed up to volunteer!"
+      And 'I can see that I have successfully signed up' do
+        expect(page).to have_content('You\'re signed up!')
+      end
+      Then 'I can go to my user profile page and see my upcoming event' do
+        visit user_path(@user)
         expect(page).to have_content "#{@event.name}"
+        expect(page).to have_content "Cancel Your RSVP"
       end
       Then 'I can click on a link to go back to the events page' do
         click_link "Events"

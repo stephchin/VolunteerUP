@@ -7,3 +7,27 @@
   font-size: 1.5em;
   color: #7aae49;
 }
+
+.modal.fade {
+  width: 60%;
+  top: 60px;
+  margin: auto;
+}
+
+.modal-header > h1, .modal-header > h5, .modal-header > h6 {
+  text-align: center;
+}
+
+.organizer {
+  background-color: #f8f8f8;
+}
+
+.volunteer {
+  background-color: #f8f8f8;
+}
+
+.modal-exit {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
