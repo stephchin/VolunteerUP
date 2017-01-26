@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_action :set_ability
   before_action :authenticate_user!
   load_and_authorize_resource
+  skip_authorize_resource only: [:get_events]
 
   def show
     @events = @user.events.all
