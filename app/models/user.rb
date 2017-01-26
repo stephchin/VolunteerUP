@@ -15,6 +15,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:twitter, :facebook]
   validates :name, presence: true
 
+  # has_attached_file :image, styles: { small: "64x64", med: "100x100", large: "200x200" }, default_url: "/images/:style/default_user.png"
+  # validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
+
   def assign_role
     add_role(:volunteer) if self.roles.blank?
   end
