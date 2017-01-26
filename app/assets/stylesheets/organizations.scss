@@ -14,21 +14,10 @@
   margin: auto;
 }
 
-// .modal-table {
-//   width: 30%;
-// }
-
-h1, h5, h6 {
+.modal-header > h1, .modal-header > h5, .modal-header > h6 {
   text-align: center;
 }
 
-h5 {
-  text-align: center;
-}
-
-th {
-  width: 100px;
-}
 .organizer {
   background-color: #f8f8f8;
 }

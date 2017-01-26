@@ -1,112 +1,116 @@
 <p class="remove"><%= flash[:remove] %></p>
 <h1>Dashboard</h1>
 <% @all_orgs.each do |org| %>
-  <div class="organizer">
-    <table class="table table-condensed" id="org-dash">
-      <caption>
-        <h2><%= link_to org.name, organization_path(org.id) %></h2>
-        <%= link_to "Edit", edit_organization_path(org.id), class: "btn btn-info btn-xs" %>
-      </caption>
-      <tr>
-        <th>User</th>
-        <th>E-mail</th>
-        <th>Role</th>
-        <th></th>
-      </tr>
-        <% org.user_organizations.order(is_creator: :desc).pluck(:user_id).map{ |x| User.find(x) }.each do |user| %>
-          <tr class="organizer">
-            <td><%= link_to user.name, user_path(user.id) %></td>
-            <td><%= user.email %></td>
-            <td>
-              <% if user.user_organizations.all.find_by(organization_id: org.id).is_creator %>
-                <%= "Creator" %>
-              <% else %>
-                <%= "Organizer" %>
-              <% end %>
-            </td>
-            <% if current_user.user_organizations.all.find_by(organization: org.id).is_creator %>
+<div class="row section-box">
+  <h2><%= link_to org.name, organization_path(org.id) %></h2>
+  <div class="col-md-6">
+    <div class="organizer">
+      <h5>Organizers </h5>
+      <table class="table table-hover" id="org-dash">
+        <tr>
+          <th>User</th>
+          <th>E-mail</th>
+          <th>Role</th>
+          <th></th>
+        </tr>
+          <% org.user_organizations.order(is_creator: :desc).pluck(:user_id).map{ |x| User.find(x) }.each do |user| %>
+            <tr class="organizer">
+              <td><%= link_to user.name, user_path(user.id) %></td>
+              <td><%= user.email %></td>
               <td>
-                <% if !user.user_organizations.all.find_by(organization_id: org.id).is_creator %>
-                  <%= button_to "X", organization_remove_organizer_path(org.id) + "?user=" + user.id.to_s,
-                  class: "btn btn-danger btn-xs"%>
+                <% if user.user_organizations.all.find_by(organization_id: org.id).is_creator %>
+                  <%= "Creator" %>
+                <% else %>
+                  <%= "Organizer" %>
                 <% end %>
               </td>
-            <% end %>
-          </tr>
-      <% end %>
-    </table>
-  </div>
-
-  <div class="volunteer">
-    <table class="table">
-      <tr>
-        <th>Event</th>
-        <th>Date And Time</th>
-        <th>Location</th>
-        <th>Volunteers Needed</th>
-        <th></th>
-      </tr>
-      <% org.events.all.each_with_index do |event, index| %>
-        <tr>
-          <td>
-            <%= link_to event.name, event_path(event.id) %>
-          </td>
-          <td>
-            <%= event.start_time.strftime("%b %e, %Y")%><br>
-            <%= event.start_time.strftime("%l:%M %p") %> -
-            <%= event.end_time.strftime("%l:%M %p") %><br>
-          </td>
-          <td>
-            <%= event.street %> <br>
-            <%= "#{event.city}, #{event.state} #{event.postal_code} #{event.country}" %>
-          </td>
-          <td>
-            <%= "#{(event.remaining_vol > 0) ? event.remaining_vol : 0} needed / #{event.volunteers_needed} total" %>
-          </td>
-          <td>
-            <%= link_to "Volunteer List", "##{org.name.split(" ").join("")}-modal#{index.to_s}",
-              "data-toggle" => "modal", class: "btn btn-info" %>
-            <div class="modal fade" id="<%= "#{org.name.split(" ").join("")}-modal#{index.to_s}" %>" role="dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5>Volunteers</h5>
-                  <h6><%= "(#{(event.remaining_vol > 0) ? event.remaining_vol : 0} needed / #{event.volunteers_needed} total)" %></h6>
-                  <button type="button" class="btn btn-default modal-exit" data-dismiss="modal">X</button>
-                </div>
-                <table align="center" class="table table-condensed modal-table">
-                  <tr>
-                    <th></th>
-                    <th>Name</th>
-                    <th>E-mail</th>
-                    <th>Status</th>
-                  </tr>
-                  <% event.user_events.order(waitlist: :desc).pluck(:user_id).map{ |x| User.find(x) }.each do |user| %>
-                    <tr class="vol-row">
-                      <td><div class="image-placeholder"></div></td>
-                      <td><%= user.name %></td>
-                      <td><%= user.email %></td>
-                      <td>
-                        <% if user.user_events.find_by(event_id: event.id).waitlist.nil? %>
-                          <%= button_to "Remove From Event",
-                            organization_remove_volunteer_path(org.id) + "?user=" + user.id.to_s + "&event=" + event.id.to_s,
-                            class: "btn btn-danger btn-xs"
-                          %>
-                        <% else %>
-                          <%= button_to "Remove From Waitlist",
-                            organization_remove_volunteer_path(org.id) + "?user=" + user.id.to_s + "&event=" + event.id.to_s,
-                            class: "btn btn-warning btn-xs"
-                          %>
-                        <% end %>
-                      </td>
-                    </tr>
+              <% if current_user.user_organizations.all.find_by(organization: org.id).is_creator %>
+                <td>
+                  <% if !user.user_organizations.all.find_by(organization_id: org.id).is_creator %>
+                    <%= button_to "X", organization_remove_organizer_path(org.id) + "?user=" + user.id.to_s,
+                    class: "btn btn-danger btn-xs"%>
                   <% end %>
-                </table>
-              </div>
-            </div>
-          </td>
-        </tr>
-      <% end %>
-    </table>
+                </td>
+              <% end %>
+            </tr>
+        <% end %>
+      </table>
+    </div>
   </div>
 
+  <div class="col-md-6">
+    <div class="volunteer">
+      <h5>Upcoming Events </h5>
+      <table class="table table-hover">
+        <tr>
+          <th>Event</th>
+          <th>Date And Time</th>
+          <th>Location</th>
+          <th>Volunteers Needed</th>
+          <th></th>
+        </tr>
+        <% org.events.all.each_with_index do |event, index| %>
+          <tr>
+            <td>
+              <%= link_to event.name, event_path(event.id) %>
+            </td>
+            <td>
+              <%= event.start_time.strftime("%b %e, %Y")%><br>
+              <%= event.start_time.strftime("%l:%M %p") %> -
+              <%= event.end_time.strftime("%l:%M %p") %><br>
+            </td>
+            <td>
+              <%= event.street %> <br>
+              <%= "#{event.city}, #{event.state} #{event.postal_code} #{event.country}" %>
+            </td>
+            <td>
+              <%= "#{(event.remaining_vol > 0) ? event.remaining_vol : 0} needed / #{event.volunteers_needed} total" %><br><br>
+              <%= link_to "Volunteer List", "##{org.name.split(" ").join("")}-modal#{index.to_s}",
+                "data-toggle" => "modal", class: "btn btn-info btn-xs" %>
+              <div class="modal fade" id="<%= "#{org.name.split(" ").join("")}-modal#{index.to_s}" %>" role="dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5>Volunteers</h5>
+                    <h6><%= "(#{(event.remaining_vol > 0) ? event.remaining_vol : 0} needed / #{event.volunteers_needed} total)" %></h6>
+                    <button type="button" class="btn btn-default modal-exit" data-dismiss="modal">X</button>
+                  </div>
+                  <table align="center" class="table table-hover modal-table">
+                    <tr>
+                      <th></th>
+                      <th>Name</th>
+                      <th>E-mail</th>
+                      <th>Status</th>
+                    </tr>
+                    <% event.user_events.order(waitlist: :desc).pluck(:user_id).map{ |x| User.find(x) }.each do |user| %>
+                      <tr class="vol-row">
+                        <td><div class="image-placeholder"></div></td>
+                        <td><%= user.name %></td>
+                        <td><%= user.email %></td>
+                        <td>
+                          <% if user.user_events.find_by(event_id: event.id).waitlist.nil? %>
+                            <%= button_to "Remove From Event",
+                              organization_remove_volunteer_path(org.id) + "?user=" + user.id.to_s + "&event=" + event.id.to_s,
+                              class: "btn btn-danger btn-xs"
+                            %>
+                          <% else %>
+                            <%= button_to "Remove From Waitlist",
+                              organization_remove_volunteer_path(org.id) + "?user=" + user.id.to_s + "&event=" + event.id.to_s,
+                              class: "btn btn-warning btn-xs"
+                            %>
+                          <% end %>
+                        </td>
+                      </tr>
+                    <% end %>
+                  </table>
+                </div>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+
+  </div>
+  <%= link_to "Edit", edit_organization_path(org.id), class: "btn btn-info btn-xs" %>
+</div><br>
 <% end %>

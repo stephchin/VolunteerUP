@@ -42,10 +42,11 @@ RSpec.feature "SignUps", type: :feature do
         fill_in "user[email]", with: "123@yahoo.com"
         fill_in "user[password]", with: "123456"
         fill_in "user[password_confirmation]", with: "123456"
+        page.attach_file("user_image", "spec/fixtures/default_user.png")
         # select "Organizer", from: "role"
         # select @organization.name, from: "organization"
         click_button "Sign up"
-        expect(page).to have_content("Welcome! You have signed up successfully.")
+        expect(page).to have_content("Welcome to VolunteerUP! You've successfully signed up.")
       end
       Then "I can see that I am logged in" do
         expect(page).to have_content("Logged in as: Suzan")
@@ -59,6 +60,7 @@ RSpec.feature "SignUps", type: :feature do
         expect(page).to have_content "Hi Suzan!"
         expect(page).to have_content "123@yahoo.com"
         expect(page).to have_content "Cincinnati OH"
+        expect(page).to have_css("img[src*='default_user.png']")
       end
       And "I can see that I am assigned a default role of volunteer" do
         expect(page).to have_content "Volunteer"

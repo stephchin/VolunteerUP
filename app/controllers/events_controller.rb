@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :set_ability
-  before_action :authenticate_user!, except: [:index, :show, :map_location, :map_locations]
+  before_action :authenticate_user!, except: [:index, :show, :map_location, :map_locations, :remove_event]
   load_and_authorize_resource
   skip_authorize_resource only: [:map_location, :map_locations]
 
@@ -84,7 +84,7 @@ class EventsController < ApplicationController
     @hash = Gmaps4rails.build_markers(@event) do |event, marker|
       marker.lat(event.latitude)
       marker.lng(event.longitude)
-      marker.infowindow("<p style='text-align: center;'>#{event.name}</p>Hosted By:  #{event.organization.name}")
+      marker.infowindow("<div style='font-weight: bold;'>#{event.name}</div>#{event.organization.name}<br><br>#{event.street}<br>#{event.city}, #{event.state} #{event.postal_code}")
     end
     render json: @hash.to_json
   end
@@ -98,7 +98,7 @@ class EventsController < ApplicationController
     @hash = Gmaps4rails.build_markers(@events) do |event,marker|
       marker.lat(event.latitude)
       marker.lng(event.longitude)
-      marker.infowindow("<p style='text-align: center;'>#{event.name}</p>Hosted By:  #{event.organization.name}")
+      marker.infowindow("<div style='font-weight: bold;'>#{event.name}</div>#{event.organization.name}<br><br>#{event.street}<br>#{event.city}, #{event.state} #{event.postal_code}")
     end
     render json: @hash.to_json
   end
@@ -132,7 +132,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
+        format.html { redirect_to @event, notice: "#{@event.name} was successfully created!" }
         format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new }
@@ -146,7 +146,7 @@ class EventsController < ApplicationController
   def update
     respond_to do |format|
       if @event.update(event_params)
-        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
+        format.html { redirect_to @event, notice: "#{@event.name} was successfully updated!" }
         format.json { render :show, status: :ok, location: @event }
       else
         format.html { render :edit }
@@ -160,7 +160,7 @@ class EventsController < ApplicationController
   def destroy
     @event.destroy
     respond_to do |format|
-      format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
+      format.html { redirect_to events_url, notice: 'Your event was successfully deleted.' }
       format.json { head :no_content }
     end
   end
@@ -173,22 +173,38 @@ class EventsController < ApplicationController
     elsif !event.users.all.include?(current_user) && event.remaining_vol > 0
       event.user_events.new(user: current_user)
       event.save
-      flash[:success] = "You signed up to volunteer!"
+      flash[:success] = "You're signed up! Happy volunteering."
       redirect_to event_path(event.id)
     elsif event.remaining_vol <= 0
       waitlist_number = event.user_events.maximum("waitlist");
       if waitlist_number.nil?
         waitlist_number = 1
       end
-      flash[:notice] = "Sorry, this event is full."
+      flash[:notice] = "You've been added to the waitlist!"
       event.user_events.new(user: current_user, waitlist: waitlist_number + 1)
       event.save
       redirect_to event_path(event.id)
     else
-      flash[:notice] = "You already signed up!"
+      flash[:notice] = "You're already signed up!"
       redirect_to event_path(event.id)
     end
   end
+
+  def remove_event
+    u1 = User.find(current_user.id)
+    e1 = Event.find(params[:event])
+    u1.user_events.delete(event: e1)
+    u1.events.delete(e1)
+    flash[:notice] = "You've succesfully canceled your RSVP for #{e1.name}."
+    event_waitlist = e1.user_events.where.not(waitlist: nil)
+    if event_waitlist.length > 0
+      event_waitlist.sort
+      event_waitlist[0].waitlist = nil
+      event_waitlist[0].save
+    end
+    redirect_to user_path(u1)
+  end
+
 
   private
   # Use callbacks to share common setup or constraints between actions.
