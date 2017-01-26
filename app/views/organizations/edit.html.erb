@@ -3,4 +3,5 @@
 <%= render 'form', organization: @organization %>
 
 <%= link_to 'Show', @organization, class: "btn btn-xs btn-info" %> |
-<%= link_to 'Back', organizations_path %>
+<%= link_to "Delete", "/organizations/" + @organization.id.to_s, method: :delete,
+  class: "btn btn-danger btn-xs"%>
