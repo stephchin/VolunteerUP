@@ -1,28 +1,8 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
-# To create all Users
-user_names = ["Ally", "Barney", "Carson", "Dierdre", "Esther", "Fox", "Gary",
-              "Hannibal", "Ingrid", "Julius", "Kendra", "Lily", "Marshall",
-              "Newton", "Odell", "Pierce", "Queen", "Robin", "Sia", "Ted",
-              "Utah", "Vinnie", "Washington", "Xanthipe", "Yosh", "Zeke"]
-password = "123456"
 city = ["Carlsbad", "Chula Vista", "Coronado", "Del Mar", "El Cajon", "Encinitas",
         "Escondido", "Imperial Beach", "La Mesa", "Lemon Grove", "National City",
         "Oceanside", "Poway", "San Diego", "San Marcos", "Santee", "Solana Beach",
         "Vista"]
 state = "CA"
-
-user_names.each do |user|
-  User.create!(email: user[0] + "@yahoo.com", name: user, password: password,
-    city: city[rand(17)], state: state)
-end
-
 
 # To create all Organizations
 org_names = ["We Help", "Food Bankers", "Red Cross", "Real Helpers",
@@ -36,19 +16,6 @@ org_names.each_with_index do |org, index|
     phone: phone, email: "#{org.split(" ").join("")}@yahoo.com",
     website: "www.#{org.split(" ").join("")}.org")
 end
-
-u1 = User.find_by_email("j@yahoo.com")
-u2 = User.find_by_email("k@yahoo.com")
-u3 = User.find_by_email("l@yahoo.com")
-u4 = User.find_by_email("m@yahoo.com")
-u5 = User.find_by_email("n@yahoo.com")
-[u1, u2, u3, u4, u5].each_with_index do |u, index|
-  u.add_role :organizer
-  u.user_organizations.create!(
-    organization: Organization.find_by_name(org_names[index]),
-    is_creator: true)
-end
-
 
 # To create all Events
 event_locations = [
@@ -106,4 +73,29 @@ event_names = [
     city: loc_key, state: "CA",
     postal_code: event_locations[loc_index][loc_key][:postal_code], country: "USA",
     volunteers_needed: rand(20) + 1, organization: Organization.order("RANDOM()").first)
+end
+
+
+# To create all Users
+user_names = ["Ally", "Barney", "Carson", "Dierdre", "Esther", "Fox", "Gary",
+              "Hannibal", "Ingrid", "Julius", "Kendra", "Lily", "Marshall",
+              "Newton", "Odell", "Pierce", "Queen", "Robin", "Sia", "Ted",
+              "Utah", "Vinnie", "Washington", "Xanthipe", "Yosh", "Zeke"]
+password = "123456"
+
+user_names.each do |user|
+  User.create!(email: user[0] + "@yahoo.com", name: user, password: password,
+    city: city[rand(17)], state: state)
+end
+
+u1 = User.find_by_email("j@yahoo.com")
+u2 = User.find_by_email("k@yahoo.com")
+u3 = User.find_by_email("l@yahoo.com")
+u4 = User.find_by_email("m@yahoo.com")
+u5 = User.find_by_email("n@yahoo.com")
+[u1, u2, u3, u4, u5].each_with_index do |u, index|
+  u.add_role :organizer
+  u.user_organizations.create!(
+    organization: Organization.find_by_name(org_names[index]),
+    is_creator: true)
 end

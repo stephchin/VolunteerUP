@@ -31,6 +31,9 @@ RSpec.feature "Calendars", type: :feature do
       And 'The event calendar has loaded' do
         page.find("#calendar")
       end
+      Then 'I can click on the specific event' do
+        click_link (@event.name)
+      end
     end
   end
 end

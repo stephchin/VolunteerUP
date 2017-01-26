@@ -54,7 +54,7 @@ RSpec.feature "CreateEvents", type: :feature do
       end
       And "I can see the success message" do
         expect(page).to have_content "Adopt-A-Puppy"
-        expect(page).to have_content "Event was successfully created"
+        expect(page).to have_content "Adopt-A-Puppy was successfully created"
       end
     end
   end

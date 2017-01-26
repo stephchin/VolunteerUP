@@ -16,7 +16,7 @@ RSpec.feature "Waitlists", type: :feature do
     @event.save
   end
 
-  context 'Adding to the waitlist' do
+  context 'Waitlist' do
     Steps 'Adding to the waitlist' do
       Given 'I am on the events page and logged in' do
         visit '/'
@@ -43,6 +43,7 @@ RSpec.feature "Waitlists", type: :feature do
         visit user_path(@user)
         expect(page).to have_content "Your Upcoming Events"
         expect(page).to have_content "#{@event.name}"
+        expect(page).to have_content "Remove From Waitlist"
       end
       And 'If another user logs in and cancels' do
         click_link "Log out"
@@ -66,6 +67,42 @@ RSpec.feature "Waitlists", type: :feature do
       Then 'I can see that I am moved off the waitlist automatically' do
         click_link (@event.name)
         expect(page).to have_content("You're signed up!")
+      end
+    end
+    Steps 'Cancelling from the waitlist' do
+      Given 'I am on the events page and logged in' do
+        visit '/'
+        click_link "Log in"
+        fill_in "user[email]", with: @user.email
+        fill_in "user[password]", with: "123456"
+        click_button "Log in"
+        expect(page).to have_current_path(user_path(@user))
+        visit '/events'
+      end
+      Then 'I can click the event name and see the event is full' do
+        click_link (@event.name)
+        expect(page).to have_content "0 Volunteers Needed"
+      end
+      And 'I can click the waitlist button' do
+        click_button('Add to waitlist!')
+      end
+      Then 'I can see a message that Ive been added to the waitlist' do
+        expect(page).to have_content "You're on the waitlist!"
+      end
+      Then 'I can go to the event in my upcoming event' do
+        visit user_path(@user)
+        expect(page).to have_content "Your Upcoming Events"
+        expect(page).to have_content "#{@event.name}"
+        expect(page).to have_content "Remove From Waitlist"
+      end
+      And 'I can remove myself from the waitlist' do
+        click_link("Remove From Waitlist")
+      end
+      Then 'That event is no longer in my upcoming events' do
+        within('#user-events-table') do
+          expect(page).not_to have_content "#{@event.name}"
+          expect(page).not_to have_content "Remove From Waitlist"
+        end
       end
     end
   end

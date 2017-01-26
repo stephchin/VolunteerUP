@@ -26,10 +26,10 @@ class OrganizationsController < ApplicationController
       #this adds the organizer role to the user
       @user.add_role :organizer
       @user.save
-      flash[:notice] = "Congrats, you have joined the organization"
+      flash[:notice] = "Congrats, you are now an organizer for #{@organization.name}!"
       redirect_to organization_path(@organization.id)
     else
-      flash[:notice] = "You are already a member of this organization."
+      flash[:notice] = "You are already a member of #{@organization.name}."
       redirect_to organization_path(@organization.id)
     end
   end
@@ -71,7 +71,7 @@ class OrganizationsController < ApplicationController
   def update
     respond_to do |format|
       if @organization.update(organization_params)
-        format.html { redirect_to @organization, notice: 'Organization was successfully updated.' }
+        format.html { redirect_to @organization, notice: "#{@organization.name} was successfully updated!" }
         format.json { render :show, status: :ok, location: @organization }
       else
         format.html { render :edit }
@@ -85,7 +85,7 @@ class OrganizationsController < ApplicationController
   def destroy
     @organization.destroy
     respond_to do |format|
-      format.html { redirect_to organizations_url, notice: 'Organization was successfully destroyed.' }
+      format.html { redirect_to organizations_url, notice: 'Your organization was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -101,7 +101,23 @@ class OrganizationsController < ApplicationController
     user = User.find(params[:user])
     user.user_organizations.delete(organization: org)
     user.organizations.delete(org)
-    flash[:notice] = "You have removed an organizer."
+    flash[:notice] = "You have successfully removed #{user.name} from #{org}"
+    redirect_to dashboard_organizations_path
+  end
+
+  def remove_volunteer
+    user = User.find(params[:user])
+    event = Event.find(params[:event])
+    user.user_events.delete(event: event)
+    user.events.delete(event)
+
+    event_waitlist = event.user_events.where.not(waitlist: nil)
+    if event_waitlist.length > 0
+      event_waitlist.sort
+      event_waitlist[0].waitlist = nil
+      event_waitlist[0].save
+    end
+    flash[:remove] = "You have removed a volunteer from the #{event.name} event."
     redirect_to dashboard_organizations_path
   end
 

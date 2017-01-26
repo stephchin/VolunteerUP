@@ -1,4 +1,4 @@
-<p class="notice"><%= notice %></p>
+
 <!-- Twitter share button -->
 <script>window.twttr = (function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0],
@@ -61,7 +61,7 @@
             <% end %>
           <% end %>
         <% else %>
-          <p><%= link_to "Sign In to Volunteer!", new_user_session_path, class: "btn btn-info" %></p>
+          <p><%= link_to "Sign in to volunteer", new_user_session_path, class: "btn btn-info btn-sm" %></p>
         <% end %><br />
       </div>
 
