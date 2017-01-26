@@ -63,12 +63,12 @@
           <% if current_user.events.all.include?(Event.find(event.id)) %>
             <% if (current_user.user_events.where(event_id: event.id, waitlist: nil).length > 0) %>
               <td><%= link_to "Cancel Your RSVP",
-                user_remove_event_path(current_user.id) + "?event=" +
+                event_remove_event_path(current_user.id) + "?event=" +
                 event.id.to_s, method: :delete, class: "btn btn-xs btn-danger" %>
               </td>
             <% else %>
               <td><%= link_to "Remove From Waitlist",
-                user_remove_event_path(current_user.id) + "?event=" +
+                event_remove_event_path(current_user.id) + "?event=" +
                 event.id.to_s, method: :delete, class: "btn btn-xs btn-warning" %>
               </td>
             <% end %>
