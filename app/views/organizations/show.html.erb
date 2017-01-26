@@ -23,7 +23,7 @@
         </div>
       <% else %>
         <div class="org-image">
-          <%= image_tag("@organization.image.url(:large)") %>
+          <%= image_tag(@organization.image.url(:large)) %>
         </div>
       <% end %>
     </div>
