@@ -1,3 +1,8 @@
+<nav class="breadcrumb">
+  <a class="breadcrumb-item" href="/">Home</a>
+  <span class="breadcrumb-item active"> > Sign up</span>
+</nav>
+
 <h2>Sign up</h2>
 <div class="devise-box">
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -36,6 +41,10 @@
     <div class="field">
       <%= f.label :password_confirmation %>
       <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    </div>
+
+    <div class="field">
+      <%= f.file_field :image %>
     </div>
 
     <!-- <div class="field">

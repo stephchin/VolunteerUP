@@ -16,12 +16,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:twitter, :facebook]
   validates :name, presence: true
 
-  # geocoded_by :address
-  # after_validation :geocode
-  #
-  # def address
-  #   "#{street}, #{city} #{state} #{postal_code}"
-  # end
+
+  has_attached_file :image, styles: { small: "64x64", med: "100x100", large: "200x200" }, default_url: "default_user.png"
+  validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
+
 
   def assign_role
     add_role(:volunteer) if self.roles.blank?
@@ -33,8 +31,6 @@ class User < ApplicationRecord
         user.email = auth.info.email
         user.password = Devise.friendly_token[0,20]
         user.name = auth.info.name
-        # user.city = auth.info.first_name
-        # user.state = auth.info.last_name
       end
     elsif auth.provider == "twitter"
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

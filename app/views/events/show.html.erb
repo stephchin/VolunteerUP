@@ -1,3 +1,10 @@
+<nav class="breadcrumb">
+  <a class="breadcrumb-item" href="/">Home</a>
+  <a class="breadcrumb-item" href="/events"> > Events</a>
+  <span class="breadcrumb-item active"> > <%= @event.name %></span>
+</nav>
+
+<p class="notice"><%= notice %></p>
 
 <!-- Twitter share button -->
 <script>window.twttr = (function(d, s, id) {
@@ -186,5 +193,4 @@
 <!-- edit and destroy buttons -->
 <% if @ability.can? :manage, @event%>
 <%= link_to 'Edit Event', edit_event_path(@event), class: "btn btn-sm btn-info" %>
-<%= link_to 'Destroy', @event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger"%>
 <% end %>
