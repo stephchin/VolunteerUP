@@ -31,7 +31,7 @@ RSpec.feature "Dashboards", type: :feature do
         expect(page).to have_selector("tr.organizer", count: 2)
       end
       Then "As a creator, I can delete the organizer" do
-        click_button "X"
+        click_button("X", match: :first)
         expect(page).to have_content("Creator")
         expect(page).to have_selector("tr.organizer", count: 1)
       end
