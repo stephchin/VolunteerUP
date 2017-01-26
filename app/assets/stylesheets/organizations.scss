@@ -8,9 +8,15 @@
   color: #7aae49;
 }
 
-.modal-table {
-  width: 30%;
+.modal.fade {
+  width: 60%;
+  top: 60px;
+  margin: auto;
 }
+
+// .modal-table {
+//   width: 30%;
+// }
 
 h1 {
   text-align: center;
