@@ -14,7 +14,7 @@
       <th>Status</th>
       <th></th>
     </tr>
-      <% org.users.all.each do |user| %>
+      <% org.user_organizations.order(is_creator: :desc).pluck(:user_id).map{ |x| User.find(x) }.each do |user| %>
     <tr class="organizer">
         <td><%= link_to user.name, user_path(user.id) %></td>
         <td><%= user.email %></td>
