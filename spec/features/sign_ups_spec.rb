@@ -45,7 +45,7 @@ RSpec.feature "SignUps", type: :feature do
         # select "Organizer", from: "role"
         # select @organization.name, from: "organization"
         click_button "Sign up"
-        expect(page).to have_content("Welcome! You have signed up successfully.")
+        expect(page).to have_content("Welcome to VolunteerUP! You've successfully signed up.")
       end
       Then "I can see that I am logged in" do
         expect(page).to have_content("Logged in as: Suzan")

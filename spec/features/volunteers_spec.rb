@@ -65,9 +65,11 @@ RSpec.feature "Volunteers", type: :feature do
       And "I can click the 'Cancel Your RSVP'" do
         visit user_path(@user.id)
         click_link "Cancel Your RSVP"
-        expect(page).to_not have_content(Event.find(@event.id).name)
-        expect(page).to_not have_content(Event.find(@event.id).description)
-        expect(page).to_not have_content(Event.find(@event.id).cause)
+        within('#user-events-table') do
+          expect(page).to_not have_content(Event.find(@event.id).name)
+          expect(page).to_not have_content(Event.find(@event.id).description)
+          expect(page).to_not have_content(Event.find(@event.id).cause)
+        end
       end
     end
   end
