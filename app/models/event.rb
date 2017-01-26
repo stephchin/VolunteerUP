@@ -31,7 +31,8 @@ class Event < ApplicationRecord
       :sorted_by,
       :search_query,
       :with_start_time,
-      :with_end_time
+      :with_end_time,
+      :with_distance
     ]
   )
 
@@ -69,6 +70,9 @@ class Event < ApplicationRecord
     when /^start_time_/
       # Simple sort on the date column
       order("(events.start_time)")
+    when /^distance_/
+      # Simple sort on the address column
+      order("(events.geocode)").distance
     else
       raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
     end
@@ -83,11 +87,16 @@ class Event < ApplicationRecord
     where('events.end_time <= ?', reference_time)
   }
 
+  scope :with_distance, lambda { |reference_geocode|
+    where('events.geocode', reference_geocode)
+  }
+
   def self.options_for_sorted_by
     [
       ['Event Name (Accending)', 'name_asc'],
       ['Event Name (Decending)', 'name_desc'],
-      ['Date', 'start_time_desc']
+      ['Date', 'start_time_desc'],
+      ['Distance', 'distance']
     ]
   end
 

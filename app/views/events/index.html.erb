@@ -31,12 +31,18 @@
       });
       </script> -->
       <div>
+        Zip Code
+        <%= f.fields_for :with_distance, OpenStruct.new(@filterrific.with_distance) do |with_distance_fields| %>
+        <%= with_distance_fields.text_field :postal_code %>
+        <% end %>
+      </div>
+      <div>
         Sort by
         <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
       </div><br>
       <div>
         <%= link_to(
-          'Reset filters',
+          'Reset search',
           reset_filterrific_url,
         ) %>
         <%= f.submit 'Search', class: "btn btn-primary btn-xs"%>
@@ -45,14 +51,13 @@
     <% end %>
   </div>
 </div>
-<br>
 
+<br>
 
 <%= render(
   partial: 'events/list',
   locals: { events: @events }
 ) %>
-
 
 <br>
 
