@@ -35,6 +35,7 @@
     <%= f.label :role %>
     <%= select_tag(:role, options_for_select([['Volunteer', 1], ['Organizer', 2]], 1)) %>
   </div> -->
+  <%= f.file_field :image %>
 
   <div class="actions">
     <%= f.submit "Update", class: "btn btn-sm btn-primary" %>

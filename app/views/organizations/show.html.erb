@@ -54,7 +54,9 @@
       <p id="organizer-list">
         <% @organization.users.sort.each do |organizer| %>
           <div class="user-box">
-            <div class="image-placeholder"></div>
+            <div class="user-thumb">
+              <%= image_tag(organizer.image.url(:small)) %>
+            </div>
           <%= link_to organizer.name, user_path(organizer) %><br>
           <%= organizer.email %><br></div>
         <% end %>
