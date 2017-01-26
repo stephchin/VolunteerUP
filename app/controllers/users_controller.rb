@@ -17,7 +17,10 @@ class UsersController < ApplicationController
       id: event.id,
       title: event.name,
       start: event.start_time,
-      end: event.end_time }
+      end: event.end_time,
+      url: '/events/' + event.id.to_s
+      # create url so you can click on a specific event and be taken to that page
+     }
    end
    render :json => calendar_events.to_json
  end

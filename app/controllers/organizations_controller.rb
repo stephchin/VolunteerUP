@@ -105,6 +105,22 @@ class OrganizationsController < ApplicationController
     redirect_to dashboard_organizations_path
   end
 
+  def remove_volunteer
+    user = User.find(params[:user])
+    event = Event.find(params[:event])
+    user.user_events.delete(event: event)
+    user.events.delete(event)
+
+    event_waitlist = event.user_events.where.not(waitlist: nil)
+    if event_waitlist.length > 0
+      event_waitlist.sort
+      event_waitlist[0].waitlist = nil
+      event_waitlist[0].save
+    end
+    flash[:remove] = "You have removed a volunteer from the #{event.name} event."
+    redirect_to dashboard_organizations_path
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_organization

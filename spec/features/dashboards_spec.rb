@@ -31,7 +31,7 @@ RSpec.feature "Dashboards", type: :feature do
         expect(page).to have_selector("tr.organizer", count: 2)
       end
       Then "As a creator, I can delete the organizer" do
-        click_button "X"
+        click_button("X", match: :first)
         expect(page).to have_content("Creator")
         expect(page).to have_selector("tr.organizer", count: 1)
       end
@@ -50,11 +50,17 @@ RSpec.feature "Dashboards", type: :feature do
         click_link @u2.name
         expect(page).to have_current_path(user_path(@u2.id))
       end
-      Then "I can click 'Volunteer List' and see all volunteers" do
+      Then "I can click 'Volunteer List' and see all volunteers in order" do
         visit dashboard_organizations_path
         click_link("Volunteer List", match: :first)
         expect(page).to have_content(@u2.email)
         expect(page).to have_content(@u1.email)
+        expect(page).to have_selector("tr.vol-row", count: 2)
+        expect(page).to have_css("tr.vol-row:nth-of-type(1)", text: @u2.name)
+        expect(page).to have_css("tr.vol-row:nth-of-type(2)", text: @u1.name)
+      end
+      Then "I can see the number of volunteers for an event" do
+        expect(page).to have_css("h6", text: "0 needed / 1 total")
       end
     end
   end
