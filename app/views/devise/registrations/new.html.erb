@@ -38,6 +38,10 @@
       <%= f.password_field :password_confirmation, autocomplete: "off" %>
     </div>
 
+    <div class="field">
+      <%= f.file_field :image %>
+    </div>
+
     <!-- <div class="field">
       <%= f.label :role %>
       <%= select_tag(:role, options_for_select([['Volunteer', 1], ['Organizer', 2]], 1)) %>
