@@ -1,10 +1,9 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show]
-  # before_action :set_ability
+  before_action :set_ability
   before_action :authenticate_user!, except: [:index, :show, :user_map_locations]
   load_and_authorize_resource
   skip_authorize_resource only: [:user_map_locations]
-
 
   def show
     @events = @user.events.all
@@ -46,7 +45,10 @@ class UsersController < ApplicationController
       id: event.id,
       title: event.name,
       start: event.start_time,
-      end: event.end_time }
+      end: event.end_time,
+      url: '/events/' + event.id.to_s
+      # create url so you can click on a specific event and be taken to that page
+     }
    end
    render :json => calendar_events.to_json
  end
@@ -56,6 +58,10 @@ class UsersController < ApplicationController
     #Use callbacks to share common setup or constraints between actions
     def set_user
       @user = User.find(params[:id])
+    end
+
+    def set_ability
+      @ability = Ability.new(current_user)
     end
 
 end

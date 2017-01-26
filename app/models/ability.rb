@@ -25,8 +25,8 @@ class Ability
     else user.has_role? :volunteer
       #volunteers can new/create organizations, and join organizations
       can [:new, :create, :add_user], Organization
-      #volunteers can join events
-      can [:add_user], Event
+      #volunteers can join and remove events
+      can [:add_user, :remove_event], Event
       #volunteers can read everything
       can :read, :all
     end

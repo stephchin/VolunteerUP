@@ -99,8 +99,10 @@ RSpec.feature "Waitlists", type: :feature do
         click_link("Remove From Waitlist")
       end
       Then 'That event is no longer in my upcoming events' do
-        expect(page).not_to have_content "#{@event.name}"
-        expect(page).not_to have_content "Remove From Waitlist"
+        within('#user-events-table') do
+          expect(page).not_to have_content "#{@event.name}"
+          expect(page).not_to have_content "Remove From Waitlist"
+        end
       end
     end
   end
