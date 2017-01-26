@@ -62,7 +62,7 @@
             <%= "#{event.city}, #{event.state} #{event.postal_code} #{event.country}" %>
           </td>
           <td>
-            <%= "#{event.remaining_vol} needed / #{event.volunteers_needed} total" %>
+            <%= "#{(event.remaining_vol > 0) ? event.remaining_vol : 0} needed / #{event.volunteers_needed} total" %>
           </td>
           <td>
             <%= link_to "Volunteer List", "##{org.name.split(" ").join("")}-modal#{index.to_s}",
@@ -71,7 +71,7 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <h5>Volunteers</h5>
-                  <h6><%= "(#{event.remaining_vol} needed / #{event.volunteers_needed} total)" %></h6>
+                  <h6><%= "(#{(event.remaining_vol > 0) ? event.remaining_vol : 0} needed / #{event.volunteers_needed} total)" %></h6>
                   <button type="button" class="btn btn-default modal-exit" data-dismiss="modal">X</button>
                 </div>
                 <table align="center" class="table table-condensed modal-table">
