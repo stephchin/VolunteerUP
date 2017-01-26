@@ -8,7 +8,7 @@
   </div>
   <div class="col-md-4 text-right" id="search-bar">
     <%= form_for_filterrific @filterrific, html: { id: 'filterrific-no-ajax-auto-submit' } do |f| %>
-      <div>Search
+      <div>
         <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
         <%= f.text_field(
           :search_query,

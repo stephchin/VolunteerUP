@@ -24,7 +24,6 @@ RSpec.feature "EventPages", type: :feature do
         visit '/events'
       end
       Then 'I can click the event name' do
-        save_and_open_page
         click_link (@event.name)
       end
       Then 'I can see that event\'s show page with event info' do
