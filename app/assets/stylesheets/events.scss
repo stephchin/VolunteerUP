@@ -4,12 +4,26 @@
 .event-notice p {
   margin-top: 0px;
   font-size: 1.5em;
-  color: #7aae49;
   line-height: 1.5em;
 }
-#events_map, #event_map, #user_map {
+
+#signed-up {
+  color: #7aae49;
+}
+#on-waitlist {
+  color: #F2C91C;
+}
+
+#events_map, #event_map {
   margin-top: 1em;
   height: 400px;
-  width: 100%;
+  width: 50%;
+  border-radius: .4em;
+}
+
+#user_map, #calendar {
+  margin-top: 1em;
+  height: 335px;
+  width: 50%;
   border-radius: .4em;
 }

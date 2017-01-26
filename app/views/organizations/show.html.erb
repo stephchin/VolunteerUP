@@ -17,9 +17,15 @@
   <div class="row section-box">
     <!-- image column -->
     <div class="col-md-6 text-center">
-      <div class="large-image-placeholder">
-      </div>
-
+      <% if !@organization.image.present? %>
+        <div class="org-image">
+          <%= image_tag("default_org.png") %>
+        </div>
+      <% else %>
+        <div class="org-image">
+          <%= image_tag(@organization.image.url(:large)) %>
+        </div>
+      <% end %>
     </div>
     <!-- info column -->
     <div class="col-md-6">
@@ -75,12 +81,20 @@
       <p id="events-list">
         <% @organization.events.each do |event| %>
           <div class="event-box">
-            <!-- <div class="image-placeholder"></div> -->
-          <p><%= link_to event.name, event_path(event) %><br>
-          <%= event.description %><br>
-          <%= event.start_time.strftime("%b %e, %Y ") %><br>
-          <%= event.start_time.strftime("%l:%M %p") %> - <%= event.end_time.strftime("%l:%M %p") %></p>
-          </div><br>
+            <div class="row">
+              <div class="col-lg-4">
+              <!-- <div class="image-placeholder"></div> -->
+                <p><%= link_to event.name, event_path(event) %><br><br></p>
+              </div>
+
+              <div class="col-lg-8">
+                <p><%= event.start_time.strftime("%b %e, %Y ") %><br>
+                <%= event.start_time.strftime("%l:%M %p") %> - <%= event.end_time.strftime("%l:%M %p") %><br><br>
+
+                <%= event.description %></p>
+              </div>
+            </div>
+          </div>
         <% end %>
       </p>
     </div>
