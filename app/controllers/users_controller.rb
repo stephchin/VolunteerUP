@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show]
+  # before_action :set_ability
+  before_action :authenticate_user!, except: [:index, :show, :user_map_locations]
+  load_and_authorize_resource
+  skip_authorize_resource only: [:user_map_locations]
+
 
   def show
     @events = @user.events.all
@@ -19,13 +24,11 @@ class UsersController < ApplicationController
     redirect_to user_path(u1)
   end
 
-  def map_locations
-    @events = Event.all
-    if params[:search]
-      @events = Event.search(params[:search])
-    end
+  def user_map_locations
+    # @user_events = User.find(1).events
+    @user_events = current_user.events
 
-    @hash = Gmaps4rails.build_markers(@events) do |event,marker|
+    @hash = Gmaps4rails.build_markers(@user_events) do |event,marker|
       marker.lat(event.latitude)
       marker.lng(event.longitude)
       marker.infowindow("<p style='text-align: center;'>#{event.name}</p>Hosted By:  #{event.organization.name}")

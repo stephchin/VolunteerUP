@@ -56,7 +56,7 @@ function createGmapUser(dataFromServer) {
 
 function loadAndCreateGmapUser() {
   if ($("#user_map").length > 0) {
-    var myurl = "/events/map_locations";
+    var myurl = "/users/user_map_locations";
     // if ($("#search").val()) {
     //     myurl += "?search=" + $("#search").val();
     // };
