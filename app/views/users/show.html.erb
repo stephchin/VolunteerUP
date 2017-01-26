@@ -4,9 +4,12 @@
   <p>
   <span class="glyphicon glyphicon-envelope"></span> <%= @user.email %>
   </p>
-  <p>
-  <span class="glyphicon glyphicon-map-marker"></span> <%= @user.city.to_s + ' ' + @user.state.to_s %>
-  </p>
+  <% if !@user.city.nil? && !@user.state.nil? %>
+    <p>
+    <span class="glyphicon glyphicon-map-marker"></span> <%= @user.city + ' ' + @user.state %>
+    </p>
+  <% end %>
+
   <p>
   My Roles:
   <%= @user.roles.pluck(:name).map(&:capitalize).join(", ") %>
