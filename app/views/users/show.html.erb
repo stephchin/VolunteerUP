@@ -1,5 +1,8 @@
 <p class="success"><%= success %></p>
 <h1>Hi <%= @user.name %>!</h1>
+<div class="user-img">
+  <%= image_tag(@user.image.url(:large)) %>
+</div>
 <div class="user-info">
   <p>
   <span class="glyphicon glyphicon-envelope"></span> <%= @user.email %>
