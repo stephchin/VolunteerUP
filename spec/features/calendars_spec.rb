@@ -29,7 +29,6 @@ RSpec.feature "Calendars", type: :feature do
         visit user_path(@user)
       end
       And 'The event calendar has loaded' do
-        save_and_open_page
         page.find("#calendar")
       end
       Then 'I can click on the specific event' do
