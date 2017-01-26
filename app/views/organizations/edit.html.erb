@@ -2,5 +2,4 @@
 
 <%= render 'form', organization: @organization %>
 
-<%= link_to 'Show', @organization, class: "btn btn-xs btn-info" %> |
-<%= link_to 'Back', organizations_path %>
+<%= link_to 'Show', @organization, class: "btn btn-sm btn-info" %> <%= link_to 'Destroy', @organization, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" %>
