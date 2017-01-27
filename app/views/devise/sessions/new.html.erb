@@ -12,9 +12,9 @@
     </div>
 
     <% if devise_mapping.rememberable? -%>
-      <div class="field">
+      <div class="field display-inline-flex">
         <%= f.check_box :remember_me %>
-        <%= f.label :remember_me %>
+        <p id="user_remember_me_words"><%= f.label :remember_me %></p>
       </div>
     <% end -%>
 
