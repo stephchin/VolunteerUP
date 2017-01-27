@@ -69,6 +69,7 @@ function createGmapAll(dataFromServer) {
 );
 };
 
+
 function loadAndCreateGmap() {
   if ($("#event_map").length > 0) {
     var eventId = $('#event_map').attr('data-event-id');
@@ -101,6 +102,28 @@ function loadAndCreateGmapAll() {
       method: 'GET',
       success: function(dataFromServer) {
         createGmapAll(dataFromServer)
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        alert("Getting map data failed: " + errorThrown);
+      }
+    });
+  }
+};
+
+function loadAndCreateGmap() {
+  if ($("#event_map").length > 0) {
+    var myurl = "/events/map_locations";
+    // if ($("#search").val()) {
+    //     myurl += "?search=" + $("#search").val();
+    // };
+
+
+    $.ajax({
+      dataType: 'json',
+      url: myurl,
+      method: 'GET',
+      success: function(dataFromServer) {
+        createGmapUser(dataFromServer)
       },
       error: function(jqXHR, textStatus, errorThrown) {
         alert("Getting map data failed: " + errorThrown);
