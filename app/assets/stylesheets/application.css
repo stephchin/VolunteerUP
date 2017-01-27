@@ -16,14 +16,14 @@
  *= require bootstrap-datepicker
  */
 
- h5, th {
-   font-weight: bold;
-   font-size: 12px;
-   text-transform: uppercase;
-   color: black;
-   letter-spacing: 1.1px;
-   margin-top: 2em;
- }
+h5, th {
+ font-weight: bold;
+ font-size: 12px;
+ text-transform: uppercase;
+ color: black;
+ letter-spacing: 1.1px;
+ margin-top: 2em;
+}
 
 .flash-area {
   height: 20px;
@@ -47,6 +47,7 @@ a:hover {
 .btn {
   border-radius: 2px;
 }
+
 .navbar {
   margin-bottom: 0px;
   border-radius: 0px;
@@ -73,21 +74,22 @@ a:hover {
 .vertical-align {
   vertical-align: middle;
   /*display: inline-block;*/
-
 }
+
 .about-links button {
   width: 200px;
   text-align: left;
 }
+
 .about-links a:visited {
   color: white;
 }
+
 .section-box {
   background-color: #f8f8f8;
   padding: 5px;
   border: 1px solid #e7e7e7;
   border-radius: 2px;
-
 }
 
 .text-area, .event-box {
@@ -100,19 +102,23 @@ a:hover {
   text-align: left;
   vertical-align: top;
 }
+
 .description {
   height: 50px;
 }
+
 .address {
   text-align: right;
 }
-h4{
+
+h4 {
   font-size: 40px;
   padding: 20px 20px 0px 20px;
   width: 3em;
   text-align: center;
   margin: auto auto 0px auto;
 }
+
 .flex {
   display: inline-flex;
   margin-top: 4vh;
@@ -134,6 +140,7 @@ h4{
   margin-top: 0px;
   font-size: 14px;
 }
+
 .volunteers-needed {
   padding-bottom: 15px;
   max-width: 200px;
@@ -141,19 +148,19 @@ h4{
   margin-right: auto;
 }
 
-  #colored-vols-needed {
-    background-color: #7aae49;
-    color: white;
-    border: 1px solid #618b3a;
-    border-radius: .4em;
-  }
+#colored-vols-needed {
+  background-color: #7aae49;
+  color: white;
+  border: 1px solid #618b3a;
+  border-radius: .4em;
+}
 
-  #greyed-out-vols-needed {
-    background-color: #cfcfcf;
-    color: white;
-    border: 1px solid #a5a5a5;
-    border-radius: .4em;
-  }
+#greyed-out-vols-needed {
+  background-color: #cfcfcf;
+  color: white;
+  border: 1px solid #a5a5a5;
+  border-radius: .4em;
+}
 
 #volunteers-list, #waitlist-list {
   margin-top: 0px;
@@ -162,10 +169,12 @@ h4{
   /*margin-left: 2em;
   text-align: left;*/
 }
+
 .user-box {
   margin: 10px;
   display: inline-table;
 }
+
 .image-placeholder {
   width: 60px;
   height: 60px;
@@ -174,6 +183,7 @@ h4{
   border-radius: 50%;
   margin: 5px;
 }
+
 .large-image-placeholder {
   max-width: 500px;
   height: 400px;
