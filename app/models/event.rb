@@ -1,5 +1,6 @@
 class Event < ApplicationRecord
   # after_initialize :create_waitlist
+  before_save :set_cause
 
   #if an event is destroyed, this destroys the link between event and user, but not the actual user
   has_many :user_events, :dependent => :destroy
@@ -24,6 +25,11 @@ class Event < ApplicationRecord
   def remaining_vol
     volunteers_needed - self.users.count
   end
+
+  def set_cause
+    self.cause = "Other" if self.cause.nil?
+  end
+
 
   filterrific(
     default_filter_params: { sorted_by: 'created_at_desc' },
