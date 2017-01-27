@@ -28,7 +28,7 @@ RSpec.feature "Volunteers", type: :feature do
         click_link "New Event"
         fill_in "event[name]", with: "Give laptops"
         fill_in "event[description]", with: "We have batteries"
-        fill_in "event[cause]", with: "For the new high school graduates"
+        select "Animals", from: 'event_cause'
         select "2017", from: "event_start_time_1i"
         select "January", from: "event_start_time_2i"
         select "20", from: "event_start_time_3i"
@@ -41,7 +41,7 @@ RSpec.feature "Volunteers", type: :feature do
         select "20", from: "event_end_time_5i"
         fill_in "event[street]", with: "2615 Flagstaff Ct"
         fill_in "event[city]", with: "Chula Vista"
-        select 'CA', from: 'state'
+        select 'CA', from: 'event_state'
         fill_in "event[postal_code]", with: "91914"
         fill_in "event[country]", with: "USA"
         fill_in "event[volunteers_needed]", with: 20
