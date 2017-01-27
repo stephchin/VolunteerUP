@@ -86,8 +86,6 @@ a:hover {
   font-size: 12px;
   line-height: 3em;
   margin-bottom: 2px;
-  box-align:center;
-  /*border: 1px solid black;*/
 }
 
 .login-with > i {
@@ -104,13 +102,11 @@ a:hover {
   width: 17px;
   padding-top: 0px;
   margin-top: 0px
-  box-align: center;
 }
 #user_remember_me_words{
   width: 220px;
   margin-left: .2em;
   margin-top: 10px;
-  box-align: center;
 }
 
 #city-field > input {
