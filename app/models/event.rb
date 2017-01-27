@@ -84,11 +84,11 @@ class Event < ApplicationRecord
     where('events.end_time <= ?', reference_time)
   }
 
-  # scope :with_distance, lambda { |reference_dist|
-  #   x = reference_dist["city"]
-  #   y = reference_dist["max_distance"]
-  #   Event.near(reference_dist["zip"].to_s, reference_dist["max_distance"].to_i)
-  # }
+  scope :with_distance, lambda { |reference_dist|
+    x = reference_dist["city"]
+    y = reference_dist["max_distance"]
+    Event.near(reference_dist["zip"].to_s, reference_dist["max_distance"].to_i)
+  }
 
   def self.options_for_sorted_by
     [

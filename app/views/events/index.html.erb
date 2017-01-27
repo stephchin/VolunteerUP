@@ -23,7 +23,7 @@
         ) %>
       </div><br>
       <div>
-      <%= f.fields_for :with_distance, OpenStruct.new(@filterrific.with_distance) do |with_distance_fields| %>
+      <%= f.fields_for :with_distance do |with_distance_fields| %>
         <%= with_distance_fields.text_field :zip %>
         <%= with_distance_fields.text_field :max_distance %>
       <% end %>

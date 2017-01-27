@@ -10,6 +10,7 @@ class EventsController < ApplicationController
 
   def index
 
+    @events = Event.all
     # Initialize filterrific with the following params:
     @filterrific = initialize_filterrific(
       Event,
