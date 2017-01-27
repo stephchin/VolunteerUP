@@ -4,7 +4,7 @@
   <span class="breadcrumb-item active"> > <%= @organization.name %></span>
 </nav>
 
-<!-- Title Containger -->
+<!-- Title Container -->
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
@@ -17,13 +17,13 @@
 
 <hr>
 
-<!-- Info Containger -->
+<!-- Info Container -->
 <div class="container-fluid">
   <div class="row section-box">
     <!-- image column -->
-      <div class="org-image col-md-6">
-        <%= image_tag(@organization.image.url(:large)) %>
-      </div>
+    <div class="col-md-6 vertical-align text-center">
+      <%= image_tag(@organization.image.url(:large), class: 'img-responsive center-block') %>
+    </div>
     <!-- info column -->
     <div class="col-md-6">
       <h5>Description</h5>
@@ -37,21 +37,21 @@
 
       <h5>Email</h5>
       <div class="text-area">
-        <p><%= @organization.email %></p>
+        <p><%= mail_to @organization.email, @organization.email %></p>
       </div>
 
       <h5>Website</h5>
       <div class="text-area">
-        <p><%= @organization.website %></p>
+        <p><%= link_to @organization.website, "http://#{@organization.website}" %></p>
       </div><br>
     </div>
     <!-- organizers column -->
-
   </div> <!-- end section -->
-
 </div> <!-- end info container -->
+
 <br>
-<div class="container-fluid"> <!-- organier and event container -->
+
+<div class="container-fluid"> <!-- organizer and event container -->
   <div class="row section-box">
     <!-- organizer column -->
     <div class="col-md-6 org-notice">
