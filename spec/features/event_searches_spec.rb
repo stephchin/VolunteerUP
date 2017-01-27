@@ -4,7 +4,7 @@ RSpec.feature "EventSearches", type: :feature do
 
   before(:each) do
     @cause = Event.first.cause
-    @org = Organization.create(name: "Zzzoooo Org", description: "Zzzzz test org")
+    @org = Organization.create(name: "ZZZ Org", description: "ZZZ test org")
     @event = Event.create(name: 'AAA Helpful Fundraiser', description: 'Raising money to help people', cause: @cause, organization: @org, start_time: Time.now, end_time: Time.now+7200, street: '324 NW 23rd St', city: 'Oklahoma City', state: 'CA', postal_code: 73118, volunteers_needed: 10)
     @event2 = Event.first
   end
@@ -39,23 +39,37 @@ RSpec.feature "EventSearches", type: :feature do
       end
       And 'I can see all events in order of start time' do
         # page.body.index(@event.name) < page.body.index(Event.first.name)
-        # expect(page.find('tr:nth-child(1)')).to have_content @event.name
-        expect(page.find('tr:nth-child(2)')).to have_content @event2.name
+        expect(page.find('tbody tr:nth-child(1)')).to have_content @event.name
       end
-      Then 'I can sort the events I searched for name, ascending' do
+      Then 'I can sort the events I searched for by event name, ascending' do
         page.select('Event Name (Ascending)', from: 'filterrific_sorted_by')
         click_button 'Search'
       end
-      And 'I can see all events in order of name, ascending' do
+      And 'I can see all events in order of event name, ascending' do
         expect(page.find('tbody tr:nth-child(1)')).to have_content @event.name
       end
-      Then 'I can sort the events I searched for name, descending' do
+      Then 'I can sort the events I searched for by event name, descending' do
         page.select('Event Name (Descending)', from: 'filterrific_sorted_by')
         click_button 'Search'
       end
-      And 'I can see all events in order of name, descending' do
+      And 'I can see all events in order of event name, descending' do
         # save_and_open_page
         expect(page.find('tbody tr:nth-last-child(1)')).to have_content @event.name
+      end
+      Then 'I can sort the events I searched for by org name, ascending' do
+        page.select('Organization (Ascending)', from: 'filterrific_sorted_by')
+        click_button 'Search'
+      end
+      And 'I can see all events in order of org name, ascending' do
+        expect(page.find('tbody tr:nth-last-child(1)')).to have_content @event.name
+      end
+      Then 'I can sort the events I searched for by org name, descending' do
+        page.select('Organization (Descending)', from: 'filterrific_sorted_by')
+        click_button 'Search'
+      end
+      And 'I can see all events in order of org name, descending' do
+        # save_and_open_page
+        expect(page.find('tbody tr:nth-child(1)')).to have_content @event.name
       end
     end
   end
