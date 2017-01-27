@@ -5,7 +5,7 @@ RSpec.feature "EventPages", type: :feature do
   before(:each) do
     @organization = Organization.find_by_name("We Help")
     @organization.save
-    @event = Event.create(name: "ABC", start_time:"2017-02-02 01:01:01", end_time:"2017-02-02 02:01:01", volunteers_needed: 1 )
+    @event = Event.create(name: "ABC", cause: "Other", start_time:"2017-02-02 01:01:01", end_time:"2017-02-02 02:01:01", volunteers_needed: 1 )
     @event.organization = @organization
     @event.save
     @user = User.find_by_email("a@yahoo.com")
@@ -28,6 +28,9 @@ RSpec.feature "EventPages", type: :feature do
       end
       Then 'I can see that event\'s show page with event info' do
         expect(page).to have_content "#{@event.name}"
+        within('#cause') do
+        expect(page).to have_content "Other"
+        end
         expect(page).to have_content "#{@event.description}"
         expect(page).to have_content "#{@event.organization.name}"
         expect(page).to have_content "#{@event.volunteers_needed}"

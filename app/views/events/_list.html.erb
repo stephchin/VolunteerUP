@@ -21,7 +21,7 @@
             <%= link_to event.name, event %><br><br>
             <!-- <%= event.description %><br><br> -->
           </td>
-          <td><%= event.cause %></td>
+          <td><div class="cause <%=event.cause.sub(/\W+/, '-').downcase%>"><%= event.cause %></div></td>
           <td><%= link_to event.organization.name, organization_path(event.organization) %></td>
           <td>
             <%= event.start_time.strftime("%b %e, %Y")%><br>

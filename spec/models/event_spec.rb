@@ -15,6 +15,11 @@ RSpec.describe Event, type: :model do
       new_event.description = "a non profit org"
       expect(new_event.description).to eq "a non profit org"
     end
+    it "has a cause" do
+      new_event = Event.new
+      new_event.cause = "Animals"
+      expect(new_event.cause).to eq "Animals"
+    end
     it "has a start time" do
       new_event = Event.new
       new_event.start_time = DateTime.new(2017,1,18,1,30)
@@ -34,7 +39,7 @@ RSpec.describe Event, type: :model do
       expect(new_event.end_time.min).to eq 30
     end
     it "has an organization" do
-      new_event = Event.new(name: "ABC", start_time: DateTime.new(2017,1,18,1,30), end_time: DateTime.new(2017,1,18,5,30), volunteers_needed: 100)
+      new_event = Event.new(name: "ABC", cause: "Animals", start_time: DateTime.new(2017,1,18,1,30), end_time: DateTime.new(2017,1,18,5,30), volunteers_needed: 100)
       new_org = Organization.new(name: "The Red Cross", description: "A non-profit organization")
       new_org.save
       new_event.organization = new_org
@@ -47,11 +52,17 @@ RSpec.describe Event, type: :model do
       expect(new_event.volunteers_needed).to eq 100
     end
     it "should save" do
-      new_event = Event.new(name: "ABC", start_time: DateTime.new(2017,1,18,1,30), end_time: DateTime.new(2017,1,18,5,30), volunteers_needed: 100)
+      new_event = Event.new(name: "ABC", description: "Helping the animals", cause: "Animals", start_time: DateTime.new(2017,1,18,1,30), end_time: DateTime.new(2017,1,18,5,30), volunteers_needed: 100)
       new_org = Organization.new(name: "The Red Cross", description: "A non-profit organization")
       new_org.save
       new_event.organization = new_org
       expect{new_event.save}.to_not raise_error
+      @event = Event.find_by_name("ABC")
+      expect(new_event.description).to eq @event.description
+      expect(new_event.cause).to eq @event.cause
+      expect(new_event.start_time).to eq @event.start_time
+      expect(new_event.end_time).to eq @event.end_time
+      expect(new_event.organization.name).to eq @event.organization.name
     end
   end
 end
