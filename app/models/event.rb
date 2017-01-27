@@ -92,8 +92,8 @@ class Event < ApplicationRecord
 
   def self.options_for_sorted_by
     [
-      ['Event Name (Accending)', 'name_asc'],
-      ['Event Name (Decending)', 'name_desc'],
+      ['Event Name (Ascending)', 'name_asc'],
+      ['Event Name (Descending)', 'name_desc'],
       ['Date', 'start_time_desc']#      ['Distance', 'distance']
     ]
   end
