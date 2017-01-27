@@ -7,13 +7,13 @@
 <div class="devise-box">
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <!-- <%= devise_error_messages! %> -->
+    <%= devise_error_messages! %>
     <%#= devise_error! %>
 
     <div class="field">
       <%= f.label :name %>
       <%= f.text_field :name, autocomplete: "off" %>
-      <div class="display-error"><%= display_error(:name) %></div>
+      <!-- <div class="display-error">< display_error(:name) ></div> -->
     </div>
 
     <div class="display-inline-flex">
@@ -32,7 +32,7 @@
     <div class="field">
       <%= f.label :email %>
       <%= f.email_field :email, autofocus: true %>
-      <div class="display-error"><%= display_error(:email) %></div>
+      <!-- <div class="display-error">< display_error(:email) ></div> -->
     </div>
 
     <div class="field">
@@ -41,7 +41,7 @@
       <em>(<%= @minimum_password_length %> characters minimum)</em>
       <% end %><br />
       <%= f.password_field :password, autocomplete: "off" %>
-      <div class="display-error"><%= display_error(:password) %></div>
+      <!-- <div class="display-error">< display_error(:password) ></div> -->
     </div>
 
     <div class="field">

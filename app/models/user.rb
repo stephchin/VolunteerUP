@@ -41,5 +41,6 @@ class User < ApplicationRecord
     end
   end
 
+
   rolify
 end
