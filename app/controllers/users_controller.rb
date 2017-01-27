@@ -3,7 +3,8 @@ class UsersController < ApplicationController
   before_action :set_ability
   before_action :authenticate_user!, except: [:index, :show, :user_map_locations]
   load_and_authorize_resource
-  skip_authorize_resource only: [:user_map_locations]
+  skip_authorize_resource only: [:get_events, :user_map_locations]
+
 
   def show
     @events = @user.events.all

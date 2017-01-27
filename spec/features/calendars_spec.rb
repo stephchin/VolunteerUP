@@ -5,7 +5,7 @@ RSpec.feature "Calendars", type: :feature do
   before(:each) do
     @user = User.create(name: "YungTony", email:"t_eazy@bigmoney.com", password:"password", password_confirmation: "password", city: "Cincinnasty", state: "OH" )
     @user.save
-    @event = Event.create(name: "Event1", start_time:"2017-02-02 01:01:01", end_time:"2017-02-02 02:01:01", volunteers_needed: 100 )
+    @event = Event.create(name: "Event1", start_time:"2017-01-01 01:01:01", end_time:"2017-02-02 02:01:01", volunteers_needed: 100 )
     @event.save
     @organization = Organization.create(name: "ABC", description: "ABC is a helpful org")
     @organization.save
@@ -27,12 +27,15 @@ RSpec.feature "Calendars", type: :feature do
         fill_in "user[password]", with: "password"
         click_button "Log in"
         visit user_path(@user)
+        expect(page).to have_content(@user.name)
       end
       And 'The event calendar has loaded' do
         page.find("#calendar")
+        save_and_open_page
       end
       Then 'I can click on the specific event' do
-        click_link (@event.name)
+        visit '/users/' + @user.id.to_s + '/get_events'
+        expect(page).to have_content(@event.name)
       end
     end
   end
