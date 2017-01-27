@@ -45,6 +45,7 @@ RSpec.feature "CreateEvents", type: :feature do
         select '30', from: 'event_end_time_5i'
         fill_in "event[street]", with: '704 J St'
         fill_in "event[city]", with: 'San Diego'
+        select 'Animals', from: 'event_cause'
         select 'CA', from: 'event_state'
         fill_in "event[postal_code]", with: '92101'
         fill_in "event[country]", with: 'USA'
@@ -52,9 +53,17 @@ RSpec.feature "CreateEvents", type: :feature do
         select @org.name, from: "event_organization_id"
         click_button "Create Event"
       end
-      And "I can see the success message" do
-        expect(page).to have_content "Adopt-A-Puppy"
-        expect(page).to have_content "Adopt-A-Puppy was successfully created"
+      And "I can see the success message and the correct event info" do
+        @event = Event.find_by_name("Adopt-A-Puppy")
+        expect(page).to have_content "#{@event.name} was successfully created"
+        expect(page).to have_content @event.cause
+        expect(page).to have_content @event.name
+        expect(page).to have_content @event.description
+        expect(page).to have_content @event.organization.name
+        expect(page).to have_content @event.street
+        expect(page).to have_content @event.city
+        expect(page).to have_content @event.state
+        expect(page).to have_content @event.postal_code
       end
     end
   end
