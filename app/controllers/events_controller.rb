@@ -26,14 +26,16 @@ class EventsController < ApplicationController
       format.js
     end
 
-    zip = params[:filterrific][:with_distance][:zip]
-    max_distance = params[:filterrific][:with_distance][:max_distance]
+    if !params[:filterrific].nil?
+      zip = params[:filterrific][:with_distance][:zip]
+      max_distance = params[:filterrific][:with_distance][:max_distance]
 
-    if zip.empty? || max_distance.empty?
-      @events = @filterrific.find.page(params[:page])
-    else
-      @events = @filterrific.find.near(params[:filterrific][:with_distance][:zip],
-        params[:filterrific][:with_distance][:max_distance]).page(params[:page])
+      if zip.empty? || max_distance.empty?
+        @events = @filterrific.find.page(params[:page])
+      else
+        @events = @filterrific.find.near(params[:filterrific][:with_distance][:zip],
+          params[:filterrific][:with_distance][:max_distance]).page(params[:page])
+      end
     end
     # kaminari pagination
     @events = @events.page(params[:page]).per(5)

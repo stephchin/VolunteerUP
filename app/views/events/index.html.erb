@@ -13,7 +13,7 @@
     <h1><%= @z %></h1>
   </div>
   <div class="col-md-4 text-right" id="search-bar">
-    <%= form_for_filterrific @filterrific, html: {id: 'filterrific-no-ajax-auto-submit'} do |f| %>
+    <%= form_for_filterrific @filterrific do |f| %>
       <div>
         <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
         <span class="glyphicon glyphicon-search"></span>
