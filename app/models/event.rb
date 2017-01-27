@@ -32,6 +32,7 @@ class Event < ApplicationRecord
       :search_query,
       :with_start_time,
       :with_end_time
+    #  :with_distance
     ]
   )
 
@@ -83,11 +84,17 @@ class Event < ApplicationRecord
     where('events.end_time <= ?', reference_time)
   }
 
+  # scope :with_distance, lambda { |reference_dist|
+  #   x = reference_dist["city"]
+  #   y = reference_dist["max_distance"]
+  #   Event.near(reference_dist["zip"].to_s, reference_dist["max_distance"].to_i)
+  # }
+
   def self.options_for_sorted_by
     [
-      ['Event Name (Ascending)', 'name_asc'],
-      ['Event Name (Descending)', 'name_desc'],
-      ['Date', 'start_time_desc']
+      ['Event Name (Accending)', 'name_asc'],
+      ['Event Name (Decending)', 'name_desc'],
+      ['Date', 'start_time_desc']#      ['Distance', 'distance']
     ]
   end
 

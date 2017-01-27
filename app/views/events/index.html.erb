@@ -10,38 +10,31 @@
 <div class="row">
   <div class="col-md-8">
     <h1 class= "vertical-align">Events</h1>
+    <h1><%= @z %></h1>
   </div>
   <div class="col-md-4 text-right" id="search-bar">
-    <%= form_for_filterrific @filterrific do |f| %>
+    <%= form_for_filterrific @filterrific, html: {id: 'filterrific-no-ajax-auto-submit'} do |f| %>
       <div>
         <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
-        <span class="glyphicon glyphicon-search"></span> <%= f.text_field(
+        <span class="glyphicon glyphicon-search"></span>
+        <%= f.text_field(
           :search_query, placeholder: "Search events",
           class: 'filterrific-periodically-observed'
         ) %>
       </div><br>
-      <!-- <div>
-        From
-        <%= f.text_field(:with_start_time, class: 'js-datepicker form-control') %>
-      </div>
       <div>
-        To
-        <%= f.text_field(:with_end_time, class: 'js-datepicker form-control') %>
+      <%= f.fields_for :with_distance, OpenStruct.new(@filterrific.with_distance) do |with_distance_fields| %>
+        <%= with_distance_fields.text_field :zip %>
+        <%= with_distance_fields.text_field :max_distance %>
+      <% end %>
       </div>
-      <script>
-      $('.js-datepicker').datepicker();
-      $('#overlayTrigger').click(function(event) {
-        event.preventDefault();
-        $('body').chardinJs('start');
-      });
-      </script> -->
       <div>
         Sort by
         <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
       </div><br>
       <div>
         <%= link_to(
-          'Reset filters',
+          'Reset search',
           reset_filterrific_url,
         ) %>
         <%= f.submit 'Search', class: "btn btn-primary btn-xs"%>
@@ -50,14 +43,13 @@
     <% end %>
   </div>
 </div>
-<br>
 
+<br>
 
 <%= render(
   partial: 'events/list',
   locals: { events: @events }
 ) %>
-
 
 <br>
 
