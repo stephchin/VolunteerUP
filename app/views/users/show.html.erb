@@ -1,34 +1,54 @@
+<nav class="breadcrumb">
+  <a class="breadcrumb-item" href="/">Home</a>
+  <span class="breadcrumb-item active"> > My Profile</span>
+</nav>
 
 <p class="success"><%= success %></p>
-<h1>Hi <%= @user.name %>!</h1>
-<div class="user-img">
-  <%= image_tag(@user.image.url(:large)) %>
-</div>
-<div class="user-info">
-  <p>
-  <span class="glyphicon glyphicon-envelope"></span> <%= @user.email %>
-  </p>
-  <% if !@user.city.nil? && !@user.state.nil? %>
-    <p>
-    <span class="glyphicon glyphicon-map-marker"></span> <%= @user.city + ' ' + @user.state %>
-    </p>
-  <% end %>
+  <div class="row">
+    <div class="col-md-4">
+      <h1>Hi <%= @user.name %>!</h1>
+      <div class="user-img">
+        <%= image_tag(@user.image.url(:large)) %>
+      </div>
+      <div class="user-info">
+        <p>
+        <span class="glyphicon glyphicon-envelope"></span> <%= @user.email %>
+        </p>
+        <% if !@user.city.nil? && !@user.state.nil? %>
+          <p>
+          <span class="glyphicon glyphicon-map-marker"></span> <%= @user.city + ' ' + @user.state %>
+          </p>
+        <% end %>
+        <p>
+        My Roles:
+        <%= @user.roles.pluck(:name).map(&:capitalize).join(", ") %>
+        </p>
+        <p>
+        My Organizations:
+        <%= safe_join(@user.organizations.map {|organization| link_to organization.name, organization_path(organization)}, (", ").html_safe) %>
+        </p>
+      </div>
+      <% if current_user.id.to_s == params[:id] %>
+        <p>
+        <%= link_to 'Account Settings', edit_user_registration_path, class: "btn btn-xs btn-info" %>
+        </p>
+    </div><!--ends col-md-4-->
 
-  <p>
-  My Roles:
-  <%= @user.roles.pluck(:name).map(&:capitalize).join(", ") %>
-  </p>
-  <p>
-  My Organizations:
-  <%= safe_join(@user.organizations.map {|organization| link_to organization.name, organization_path(organization)}, (", ").html_safe) %>
-  </p>
-</div>
+    <div class="col-md-8">
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#calendar">Calendar</a></li>
+        <li><a data-toggle="tab" href="#user_map"> Map</a></li>
+      </ul>
+      <div class="tab-content">
+        <div id="calendar" class="tab-pane fade in active"></div>
+        <div id="user_map"  data-event-id="<%= @events%>" class="tab-pane fade"></div>
+      </div>
 
+      <input id="user_id" type="hidden" value="<%=@user.id%>"/>
+    </div> <!--ends col-md-8-->
+  </div> <!--ends row-->
 
-<% if current_user.id.to_s == params[:id] %>
-  <p>
-  <%= link_to 'Account Settings', edit_user_registration_path, class: "btn btn-xs btn-info" %>
-  </p>
+  <!--use hidden to pass through the model and so it dosen't show up on the page(why it's hidden)  -->
 
   <!-- Begin Events Table -->
   <table class="table" id="user-events-table">
@@ -88,16 +108,3 @@
 
 
 <% end %>
-
-
-<div class="row">
-
-  <div class="center-block col-sm-6" id="user_map" data-event-id="<%= @events %>">
-  </div>
-
-  <div id="calendar" class="col-sm-6"></div>
-
-  <input id="user_id" type="hidden" value="<%=@user.id%>"/>
-</div>
-
-<!--use hidden to pass through the model and so it dosen't show up on the page(why it's hidden)  -->

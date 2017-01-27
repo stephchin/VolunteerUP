@@ -8,6 +8,7 @@
     font-size: 1.1em;
   }
 }
+
 .user-img {
   width: 12em;;
   height: 12em;
@@ -32,6 +33,16 @@
     border-radius: inherit;
   }
 }
+
+.fc-toolbar {
+  text-align: center;
+  align-items: center;
+}
+
+.fc-view-container {
+  width: 150%;
+}
+
 #user-events-table{
   margin-top: 3em;
   background-color: #F8F8F8;
@@ -50,5 +61,4 @@
 }
 #user-events-table .btn {
   width: 150px;
-
 }
