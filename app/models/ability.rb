@@ -27,6 +27,8 @@ class Ability
       can [:new, :create, :add_user], Organization
       #volunteers can join and remove events
       can [:add_user, :remove_event], Event
+
+      can [:get_events], User
       #volunteers can read everything
       can :read, :all
     end
