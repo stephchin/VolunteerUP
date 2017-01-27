@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "TweetButtons", type: :feature do
+RSpec.feature "SocialMediaShareButtons", type: :feature do
   before(:each) do
     @organization = Organization.find_by_name("We Help")
     @event = Event.create(name: "ABC", start_time:"2017-02-02 01:01:01", end_time:"2017-02-02 02:01:01", volunteers_needed: 1 )
