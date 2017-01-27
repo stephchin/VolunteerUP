@@ -63,7 +63,7 @@ a:hover {
 
 .devise-box input, .devise-box a {
   width: 300px;
-  height: 33px;
+  height: 28px;
   margin-bottom: 2px
 }
 
@@ -116,8 +116,8 @@ a:hover {
 }
 
 #user_state {
-  height: 30px;
-  background-color: white;
+  height: 28px;
+  background-color: #f8f8f8;
 }
 
 .vertical-align {
