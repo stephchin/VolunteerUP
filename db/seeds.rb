@@ -38,9 +38,8 @@ event_locations = [
   {"Solana Beach" => { street: "125 Lomas  Santa Fe Dr", postal_code: "92075" }},
   {"Vista" => { street: "170 Emerald Dr", postal_code: "92083" }}
 ]
-causes = ["Underprivileged Children", "Animals", "Environment",
-  "Homeless", "Schools", "Disaster Victims", "Hungry", "Short People", "Alcoholics",
-  "Unfun People"]
+causes = ["Children/Youth", "Animals", "Arts & Culture",
+  "Community Development", "Health/Hospitals", "Mental Health", "Education/Literacy", "Homelessness", "Other"]
 event_names = [
   { "Blood Drive" => { description: "Give blood so that Jesus won't have to.
     Cookies won't be provided, but probably fish and bread.",
