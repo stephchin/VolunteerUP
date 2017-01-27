@@ -45,7 +45,7 @@ RSpec.feature "CreateEvents", type: :feature do
         select '30', from: 'event_end_time_5i'
         fill_in "event[street]", with: '704 J St'
         fill_in "event[city]", with: 'San Diego'
-        select 'CA', from: 'state'
+        select 'CA', from: 'event_state'
         fill_in "event[postal_code]", with: '92101'
         fill_in "event[country]", with: 'USA'
         fill_in "event[volunteers_needed]", with: '100'
