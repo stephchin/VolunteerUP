@@ -86,9 +86,18 @@
     </tbody>
   </table>
 
-  <div id="calendar"></div>
 
 <% end %>
 
-<input id="user_id" type="hidden" value="<%=@user.id%>"/>
+
+<div class="row">
+
+  <div class="center-block col-sm-6" id="user_map" data-event-id="<%= @events %>">
+  </div>
+
+  <div id="calendar" class="col-sm-6"></div>
+
+  <input id="user_id" type="hidden" value="<%=@user.id%>"/>
+</div>
+
 <!--use hidden to pass through the model and so it dosen't show up on the page(why it's hidden)  -->
