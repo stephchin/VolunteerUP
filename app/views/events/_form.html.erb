@@ -14,7 +14,7 @@
   <div class="field">
     <%= f.label :name %>
     <%= f.text_field :name %>
-    <!-- <div class="display-error">< display_error(:name) ></div> -->
+    <div class="display-error"><%= display_error_events(:name) %></div>
   </div>
 
   <div class="field">
@@ -66,13 +66,13 @@
   <div class="field">
     <%= f.label :volunteers_needed %>
     <%= f.number_field :volunteers_needed %>
-    <!-- <div class="display-error">< display_error(:volunteers_needed) ></div> -->
+    <div class="display-error"><%= display_error_events(:volunteers_needed) %></div>
   </div>
 
   <div class="field">
     <%= f.label :organization %>
     <%= select(:event, :organization_id, @organizations_for_select, {prompt: '- Select One -'}) %>
-    <!-- <div class="display-error">< display_error(:organization) ></div> -->
+    <div class="display-error"><%= display_error_events(:organization) %></div>
   </div>
 
   <div class="field">

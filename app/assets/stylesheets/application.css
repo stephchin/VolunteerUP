@@ -64,7 +64,7 @@ a:hover {
 .devise-box input, .devise-box a {
   width: 300px;
   height: 28px;
-  margin-bottom: 2px
+  margin-bottom: 2px;
 }
 
 .devise-box label {
@@ -110,7 +110,7 @@ a:hover {
 }
 
 #city-field > input {
-  width: 240px;
+  width: 225px;
   margin-right: 11px;
   font-size: 12px;
 }
