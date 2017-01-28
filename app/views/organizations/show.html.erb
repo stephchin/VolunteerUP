@@ -43,6 +43,13 @@
       <h5>Website</h5>
       <div class="text-area">
         <p><%= link_to @organization.website, "http://#{@organization.website}" %></p>
+
+        <% if !@organization.twitter.nil? && !@organization.facebook.nil? %>
+        <p class="org-social-media">
+          <a href="<%= @organization.twitter %>"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a>
+          <a href="<%= @organization.facebook %>"><i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i></a>
+        </p>
+        <% end %>
       </div><br>
     </div>
     <!-- organizers column -->

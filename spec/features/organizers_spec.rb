@@ -9,6 +9,8 @@ RSpec.feature "Organizers", type: :feature do
     @org_phone = "(555)-555-5555"
     @org_email = "me@yahoo.com"
     @org_website = "www.niceguys.com"
+    @org_twitter = "http://www.twitter.com/niceguys"
+    @org_facebook = "http://www.facebook.com/niceguys"
     @org = Organization.find_by_name("We Help")
     @user2 = User.find_by_email("b@yahoo.com")
     @user3 = User.find_by_email("c@yahoo.com")
@@ -30,10 +32,12 @@ RSpec.feature "Organizers", type: :feature do
         fill_in "organization[phone]", with: @org_phone
         fill_in "organization[email]", with: @org_email
         fill_in "organization[website]", with: @org_website
+        fill_in "organization[twitter]", with: @org_twitter
+        fill_in "organization[facebook]", with: @org_facebook
         page.attach_file("organization_image", "spec/fixtures/default_org.png")
         click_button "Create Organization"
       end
-      And "I will be redirected to my new org's show page" do
+      And "I will be redirected to my dashboard page" do
         expect(page).to have_content(@org_name)
         expect(page).to have_css("img[src*='default_org.png']")
       end
