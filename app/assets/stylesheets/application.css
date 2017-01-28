@@ -241,3 +241,7 @@ h4 {
   border-radius: .4em;
   margin: 15px;
 }
+.breadcrumb {
+  background-color: transparent;
+  margin-bottom: 5px;
+}

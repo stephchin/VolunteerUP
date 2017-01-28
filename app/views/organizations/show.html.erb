@@ -1,7 +1,7 @@
 <nav class="breadcrumb">
   <a class="breadcrumb-item" href="/">Home</a>
-  <a class="breadcrumb-item" href="/organizations"> > Organizations</a>
-  <span class="breadcrumb-item active"> > <%= @organization.name %></span>
+  <a class="breadcrumb-item" href="/organizations"> / Organizations</a>
+  <span class="breadcrumb-item active"> / <%= @organization.name %></span>
 </nav>
 
 <!-- Title Container -->
@@ -81,16 +81,18 @@
         <% @organization.events.each do |event| %>
           <div class="event-box">
             <div class="row">
-              <div class="col-lg-4">
+              <div class="col-sm-5">
               <!-- <div class="image-placeholder"></div> -->
-                <p><%= link_to event.name, event_path(event) %><br><br></p>
+                <p><%= link_to event.name, event_path(event) %><br><br>
+                <%= event.description %></p>
               </div>
 
-              <div class="col-lg-8">
-                <p><%= event.start_time.strftime("%b %e, %Y ") %><br>
+              <div class="col-sm-7">
+                <p><span class="glyphicon glyphicon-time"></span> <%= event.start_time.strftime("%b %e, %Y ") %><br>
                 <%= event.start_time.strftime("%l:%M %p") %> - <%= event.end_time.strftime("%l:%M %p") %><br><br>
-
-                <%= event.description %></p>
+                <span class="glyphicon glyphicon-map-marker"></span> <%= event.street %> <br>
+                <%= "#{event.city}, #{event.state} #{event.postal_code} #{event.country}" %><br><br>
+                </p>
               </div>
             </div>
           </div>
