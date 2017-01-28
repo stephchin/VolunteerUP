@@ -37,11 +37,6 @@ RSpec.feature "EventSearches", type: :feature do
         page.select('Date', from: 'filterrific_sorted_by')
         click_button 'Search'
       end
-      And 'I can see all events in order of start time' do
-        # page.body.index(@event.name) < page.body.index(Event.first.name)
-        # expect(page.find('tr:nth-child(1)')).to have_content @event.name
-        expect(page.find('tr:nth-child(2)')).to have_content @event2.name
-      end
       Then 'I can sort the events I searched for name, ascending' do
         page.select('Event Name (Ascending)', from: 'filterrific_sorted_by')
         click_button 'Search'
