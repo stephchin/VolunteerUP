@@ -4,7 +4,7 @@ $(document).ready(function() {
      timeFormat: "LT",
      defaultView: 'month',
      header: {
-        right: 'prev,next today',
+        right: 'prev,next',
         center: 'title',
         left: 'month,agendaWeek,agendaDay'
       },
