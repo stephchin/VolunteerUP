@@ -34,13 +34,21 @@
   }
 }
 
-.fc-toolbar {
-  text-align: center;
-  align-items: center;
+.fc-button-group {
+  margin-left: 60%;
+}
+
+.fc-center {
+  margin-left: 40%;
+  padding: 2%;
+  border: 0%;
+  font-size: 16px;
 }
 
 .fc-view-container {
   width: 150%;
+  height: 300%;
+  position: relative;
 }
 
 #user-events-table{
