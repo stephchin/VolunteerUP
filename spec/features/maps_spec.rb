@@ -13,6 +13,7 @@ RSpec.feature "Maps", type: :feature do
     @event2 = Event.create(name: "CBA", start_time:"2017-03-03 01:01:01", end_time:"2017-03-03 02:01:01", volunteers_needed: 1, latitude: 40, longitude: 40)
     @event2.organization = @organization
     @event2.save
+    @e1 = Event.first
   end
 
   context 'I can see a map on the events page' do
@@ -28,6 +29,17 @@ RSpec.feature "Maps", type: :feature do
       end
       And 'I will see the JSON object includes a lat and long' do
         expect(page).to have_content "#{Event.first.latitude}"
+      end
+    end
+  end
+
+  context 'As a user I can see a map on an individual event\'s page' do
+    Steps 'Go to the event\'s page' do
+      Given 'I am on the event\'s JSON page' do
+        visit event_path(@e1.id) + '/map_location'
+      end
+      Then 'I can see the JSON for the marker on the map' do
+        expect(page).to have_content "#{@e1.latitude}"
       end
     end
   end
