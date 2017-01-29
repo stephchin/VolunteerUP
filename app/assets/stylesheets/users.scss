@@ -22,6 +22,7 @@
     border-radius: inherit;
   }
 }
+
 .user-thumb {
   width: 60px;
   height: 60px;
@@ -33,6 +34,8 @@
     border-radius: inherit;
   }
 }
+
+// Tabbed Column Calendar
 
 .fc-button-group {
   margin-left: 60%;
@@ -46,8 +49,6 @@
 }
 
 .fc-view-container {
-  width: 150%;
-  height: 300%;
   position: relative;
 }
 
@@ -67,6 +68,7 @@
     border-bottom: .2em;
   }
 }
+
 #user-events-table .btn {
   width: 150px;
 }

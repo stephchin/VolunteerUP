@@ -16,6 +16,31 @@
  *= require bootstrap-datepicker
  */
 
+// Makes columns same height in row
+.row-tall {
+ display: -webkit-box;
+ display: -webkit-flex;
+ display: -ms-flexbox;
+ display: flex;
+ flex-wrap: wrap;
+}
+
+// Aligns items in column vertically
+.vertical-align {
+ display: flex;
+ align-items: center;
+}
+
+// Text
+
+h4 {
+  font-size: 40px;
+  padding: 20px 20px 0px 20px;
+  width: 3em;
+  text-align: center;
+  margin: auto auto 0px auto;
+}
+
 h5, th {
  font-weight: bold;
  font-size: 12px;
@@ -33,25 +58,26 @@ h5, th {
 
 a:hover {
   background-color: inherit;
+  color: #005eb4;
+  text-decoration: none;
 }
 
 a.btn {
   color: white;
 }
 
-a:hover {
-  color: #005eb4;
-  text-decoration: none;
-}
-
 .btn {
   border-radius: 2px;
 }
+
+// Navigation
 
 .navbar {
   margin-bottom: 0px;
   border-radius: 0px;
 }
+
+// Devise
 
 .devise-box {
   border: 1px solid #e7e7e7;
@@ -99,11 +125,13 @@ a:hover {
 .display-inline-flex{
   display: flex;
 }
+
 .devise-box input[type=checkbox]{
   width: 17px;
   padding-top: 0px;
   margin-top: 0px
 }
+
 #user_remember_me_words{
   width: 220px;
   margin-left: .2em;
@@ -119,10 +147,6 @@ a:hover {
 #user_state {
   height: 28px;
   background-color: #f8f8f8;
-}
-
-.vertical-align {
-  vertical-align: middle;
 }
 
 .about-links button {
@@ -160,14 +184,6 @@ a:hover {
   text-align: right;
 }
 
-h4 {
-  font-size: 40px;
-  padding: 20px 20px 0px 20px;
-  width: 3em;
-  text-align: center;
-  margin: auto auto 0px auto;
-}
-
 .flex {
   display: inline-flex;
   margin-top: 4vh;
@@ -177,6 +193,8 @@ h4 {
 .flex-child {
   margin-left: 4px;
 }
+
+// Volunteers
 
 #spots-open {
   margin-top: 0px;
@@ -219,6 +237,8 @@ h4 {
   text-align: left;*/
 }
 
+// Profile images
+
 .user-box {
   margin: 10px;
   display: inline-table;
@@ -241,6 +261,9 @@ h4 {
   border-radius: .4em;
   margin: 15px;
 }
+
+// Breadcrumb
+
 .breadcrumb {
   background-color: transparent;
   margin-bottom: 5px;

@@ -1,26 +1,27 @@
 // Place all the styles related to the Organizations controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// Makes columns same height in row
+.row-tall {
+ display: -webkit-box;
+ display: -webkit-flex;
+ display: -ms-flexbox;
+ display: flex;
+ flex-wrap: wrap;
+}
+
+// Aligns items in column vertically
+.vertical-align {
+ display: flex;
+ align-items: center;
+}
+
 .org-notice p {
   margin-top: 0px;
   line-height: 1.5em;
   font-size: 1.5em;
   color: #7aae49;
-}
-
-// Makes columns same height in row
-.row {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-// Aligns items in column vertically
-.vertical-align {
-  display: flex;
-  align-items: center;
 }
 
 .modal.fade {
