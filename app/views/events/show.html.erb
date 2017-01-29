@@ -68,7 +68,7 @@
             <% end %>
           <% end %>
         <% else %>
-          <p><%= link_to "Sign in to volunteer", new_user_session_path, class: "btn btn-info btn-sm" %></p>
+          <p><%= link_to "Sign in to volunteer", event_add_user_path(@event.id), method: :post, class: "btn btn-info btn-sm" %></p>
         <% end %><br />
       </div>
 

@@ -56,7 +56,7 @@ class EventsController < ApplicationController
       format.html
       format.js
     end
-    
+
     # kaminari pagination
     @events = @events.page(params[:page]).per(5)
 
@@ -168,7 +168,6 @@ class EventsController < ApplicationController
   def add_user
     event = Event.find(params[:event_id])
     if !user_signed_in?
-      flash[:notice] = "Please log in to volunteer."
       redirect_to new_user_session_path
     elsif !event.users.all.include?(current_user) && event.remaining_vol > 0
       event.user_events.new(user: current_user)
@@ -183,9 +182,6 @@ class EventsController < ApplicationController
       flash[:notice] = "You've been added to the waitlist!"
       event.user_events.new(user: current_user, waitlist: waitlist_number + 1)
       event.save
-      redirect_to event_path(event.id)
-    else
-      flash[:notice] = "You're already signed up!"
       redirect_to event_path(event.id)
     end
   end
