@@ -66,12 +66,17 @@ RSpec.feature "CreateEvents", type: :feature do
         expect(page).to have_content @event.state
         expect(page).to have_content @event.postal_code
       end
-      Then "I can edit that event" do
+      Then "I can edit the event" do
         click_link "Edit Event"
         fill_in "event[description]", with: @new_desc
         click_button "Update Event"
         expect(page).to have_content "#{@event.name} was successfully updated!"
         expect(page).to have_content @new_desc
+      end
+      Then "I can delete the event" do
+        click_link "Edit Event"
+        click_link "Destroy"
+        expect(page).to have_content 'Your event was successfully deleted.'
       end
     end
   end
