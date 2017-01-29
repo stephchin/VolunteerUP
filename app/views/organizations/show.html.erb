@@ -46,8 +46,8 @@
 
         <% if !@organization.twitter.nil? && !@organization.facebook.nil? %>
         <p class="org-social-media">
-          <a href="<%= @organization.twitter %>"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a>
-          <a href="<%= @organization.facebook %>"><i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i></a>
+          <a href="http://<%= @organization.twitter %>"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a>
+          <a href="http://<%= @organization.facebook %>"><i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i></a>
         </p>
         <% end %>
       </div><br>
