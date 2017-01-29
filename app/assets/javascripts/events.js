@@ -12,12 +12,14 @@ $(document).ready(function(){
 });
 
 function placeMakers(dataFromServer, markers) {
+  console.log("placeMakers running");
   markers = handler.addMarkers(dataFromServer);
   // handler.bounds.extendWith(markers);
   handler.fitMapToBounds();
 }
 
 function showLocations(dataFromServer) {
+  console.log("showLocations running");
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
         dataFromServer[dataFromServer.length] = {
@@ -39,6 +41,7 @@ function showLocations(dataFromServer) {
 }
 
 function createGmap(dataFromServer) {
+  console.log("createGmap running");
   handler = Gmaps.build('Google');
   handler.buildMap({
     provider: {},
@@ -71,6 +74,7 @@ function createGmapAll(dataFromServer) {
 
 
 function loadAndCreateGmap() {
+  console.log("loadAndCreateGmap running");
   if ($("#event_map").length > 0) {
     var eventId = $('#event_map').attr('data-event-id');
 
@@ -110,7 +114,9 @@ function loadAndCreateGmapAll() {
   }
 };
 
-function loadAndCreateGmap() {
+// THIS FUNCTION HAS BEEN RENAMED
+function loadAndCreateGmapSearch() {
+  console.log("loadAndCreateGmap running");
   if ($("#event_map").length > 0) {
     var myurl = "/events/map_locations";
     // if ($("#search").val()) {
