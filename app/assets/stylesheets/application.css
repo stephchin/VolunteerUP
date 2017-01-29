@@ -101,15 +101,15 @@ a.btn {
 .login-with {
   width: 300px;
   height: 35px;
+  margin: .2em;
 }
-.login-with p {
-  display: inline-block;
-  text-align: center;
-}
-
 .login-with a {
   color: white;
-
+  font-size: .85em;
+}
+.login-with i {
+  padding-right: .2em;
+}
 .display-inline-flex{
   display: flex;
 }
