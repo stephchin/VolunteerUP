@@ -113,6 +113,7 @@ function loadAndCreateGmapAll() {
   }
 };
 
+
 // function loadAndCreateGmapSearch() {
 //   console.log("loadAndCreateGmap running");
 //   if ($("#event_map").length > 0) {

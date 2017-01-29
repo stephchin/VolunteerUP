@@ -60,7 +60,7 @@ function createGmapUser(dataFromServer) {
 function loadAndCreateGmapUser() {
   console.log("loadAndCreateGmapUser running");
   if ($("#user_map").length > 0) {
-    var myurl = "/users/user_map_locations";
+    var myurl = "/users/" + $("#user_id").val() + "/user_map_locations";
     // if ($("#search").val()) {
     //     myurl += "?search=" + $("#search").val();
     // };
