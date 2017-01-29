@@ -13,7 +13,6 @@ Rails.application.routes.draw do
     delete :remove_event
     get 'map_location'
     get :map_locations, on: :collection
-    get :login, on: :collection
   end
   resources :organizations do
     post :add_user
