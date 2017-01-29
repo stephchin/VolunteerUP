@@ -40,7 +40,11 @@ RSpec.feature "CreateOrgs", type: :feature do
         click_button "Update Organization"
         expect(page).to have_content("#{@org.name} was successfully updated!")
       end
-
+      Then "I can delete the organization" do
+        click_link "Edit"
+        click_link "Delete"
+        expect(page).to have_content("Your organization was successfully destroyed.")
+      end
     end
   end
 end
