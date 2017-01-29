@@ -48,7 +48,7 @@ RSpec.feature "Maps", type: :feature do
         expect(page).to have_content("You're signed up!")
       end
       Then 'The user map JSON page has my event, and no others' do
-        visit '/users/user_map_locations'
+        visit user_path(@user.id) + "/user_map_locations"
         expect(page).to have_content "#{@event.latitude}"
         expect(page).to_not have_content "#{@event2.latitude}"
       end

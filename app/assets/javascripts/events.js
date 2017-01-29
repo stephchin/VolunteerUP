@@ -110,27 +110,27 @@ function loadAndCreateGmapAll() {
   }
 };
 
-function loadAndCreateGmap() {
-  if ($("#event_map").length > 0) {
-    var myurl = "/events/map_locations";
-    // if ($("#search").val()) {
-    //     myurl += "?search=" + $("#search").val();
-    // };
-
-
-    $.ajax({
-      dataType: 'json',
-      url: myurl,
-      method: 'GET',
-      success: function(dataFromServer) {
-        createGmapUser(dataFromServer)
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        alert("Getting map data failed: " + errorThrown);
-      }
-    });
-  }
-};
+// function loadAndCreateGmap() {
+//   if ($("#event_map").length > 0) {
+//     var myurl = "/events/map_locations";
+//     // if ($("#search").val()) {
+//     //     myurl += "?search=" + $("#search").val();
+//     // };
+//
+//
+//     $.ajax({
+//       dataType: 'json',
+//       url: myurl,
+//       method: 'GET',
+//       success: function(dataFromServer) {
+//         createGmapUser(dataFromServer)
+//       },
+//       error: function(jqXHR, textStatus, errorThrown) {
+//         alert("Getting map data failed: " + errorThrown);
+//       }
+//     });
+//   }
+// };
 
 $(document).on('ready', loadAndCreateGmap);
 $(document).on('turbolinks:load', loadAndCreateGmap);
