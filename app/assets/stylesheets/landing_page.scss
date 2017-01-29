@@ -18,9 +18,8 @@
     Counter Style
     ========================================================================== */
 #counter {
-  background: url("../img/bg/counter-bg.jpg") center center no-repeat;
   background-size: cover;
-  color: #fff;
+  color: black;
   padding: 60px 0;
   text-align: center;
 }
@@ -32,7 +31,7 @@
   border: 3px solid #fff;
   text-align: center;
   width: 80px;
-  background: #444;
+  background: #e6e6e6;
   height: 80px;
   border-radius: 50%;
   position: relative;
@@ -44,7 +43,7 @@
   transition: all .3s linear;
 }
 .counting .icon span i {
-  color: #fff;
+  color: #5c5c5c;
   display: inline-block;
   font-size: 30px;
   line-height: 80px;
@@ -53,7 +52,7 @@
 }
 .counting .desc h3 {
   font-size: 24px;
-  color: #fff;
+  color: black;
 }
 .counting .desc p {
   font-size: 16px;
