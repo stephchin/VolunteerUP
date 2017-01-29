@@ -5,7 +5,7 @@
         jQuery(document).ready(function($) {
             $('.counter').counterUp({
                 delay: 10,
-                time: 5000
+                time: 1000
             });
         });
     </script>
@@ -22,7 +22,7 @@
             </span>
           </div>
           <div class="desc">
-            <h3 class="counter">87</h3>
+            <h3 class="counter"><%= @organizations.length %></h3>
             <p>Participating Organizations</p>
           </div>
         </div>
@@ -35,7 +35,7 @@
             </span>
           </div>
           <div class="desc">
-            <h3 class="counter">115</h3>
+            <h3 class="counter"><%= @users.length %></h3>
             <p>Current Volunteers</p>
           </div>
         </div>
@@ -48,7 +48,7 @@
             </span>
           </div>
           <div class="desc">
-            <h3 class="counter">53</h3>
+            <h3 class="counter"><%= @locations.length %></h3>
             <p>Neighborhoods Served</p>
           </div>
         </div>
@@ -61,7 +61,7 @@
             </span>
           </div>
           <div class="desc">
-            <h3 class="counter">150</h3>
+            <h3 class="counter"><%= @events.length %></h3>
             <p>Active Events</p>
           </div>
         </div>
