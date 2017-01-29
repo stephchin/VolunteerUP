@@ -13,3 +13,55 @@
     }
   }
 }
+
+/* ==========================================================================
+    Counter Style
+    ========================================================================== */
+#counter {
+  background-size: cover;
+  color: black;
+  padding: 60px 0;
+  text-align: center;
+}
+.counting .icon {
+  margin-bottom: 10px;
+}
+.counting .icon span {
+  display: inline-block;
+  border: 3px solid #fff;
+  text-align: center;
+  width: 80px;
+  background: #e6e6e6;
+  height: 80px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  -webkit-transition: all .3s linear;
+  -moz-transition: all .3s linear;
+  -ms-transition: all .3s linear;
+  -o-transition: all .3s linear;
+  transition: all .3s linear;
+}
+.counting .icon span i {
+  color: #5c5c5c;
+  display: inline-block;
+  font-size: 30px;
+  line-height: 80px;
+  z-index: 99;
+  text-shadow: 5px 5px 2px rgba(56, 49, 49, 0.5);
+}
+.counting .desc h3 {
+  font-size: 24px;
+  color: black;
+}
+.counting .desc p {
+  font-size: 16px;
+}
+.counting:hover span {
+  background: #3498db;
+  -webkit-transform: scale(1.1, 1.1);
+  -moz-transform: scale(1.1, 1.1);
+  -ms-transform: scale(1.1, 1.1);
+  -o-transform: scale(1.1, 1.1);
+  transform: scale(1.1, 1.1);
+}
