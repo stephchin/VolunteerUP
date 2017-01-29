@@ -16,7 +16,7 @@
  *= require bootstrap-datepicker
  */
 
-// Makes columns same height in row
+/* Makes columns same height in row */
 .row-tall {
  display: -webkit-box;
  display: -webkit-flex;
@@ -25,13 +25,13 @@
  flex-wrap: wrap;
 }
 
-// Aligns items in column vertically
+/* Aligns items in column vertically */
 .vertical-align {
  display: flex;
  align-items: center;
 }
 
-// Text
+/* Text */
 
 h4 {
   font-size: 40px;
@@ -70,14 +70,14 @@ a.btn {
   border-radius: 2px;
 }
 
-// Navigation
+/* Navigation */
 
 .navbar {
   margin-bottom: 0px;
   border-radius: 0px;
 }
 
-// Devise
+/* Sign in and login pages */
 
 .devise-box {
   border: 1px solid #e7e7e7;
@@ -194,7 +194,7 @@ a.btn {
   margin-left: 4px;
 }
 
-// Volunteers
+/*Volunteers*/
 
 #spots-open {
   margin-top: 0px;
@@ -237,7 +237,7 @@ a.btn {
   text-align: left;*/
 }
 
-// Profile images
+/* Profile images */
 
 .user-box {
   margin: 10px;
@@ -262,7 +262,7 @@ a.btn {
   margin: 15px;
 }
 
-// Breadcrumb
+/* Breadcrumb */
 
 .breadcrumb {
   background-color: transparent;
