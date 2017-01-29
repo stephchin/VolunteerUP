@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   resources :users do
     # delete :remove_event
     get :get_events
-    get 'user_map_location'
-    get :user_map_locations, on: :collection
+    get 'user_map_locations'
+    # get :user_map_locations, on: :collection
   end
   resources :events do
     post :add_user
