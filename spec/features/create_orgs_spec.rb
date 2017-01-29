@@ -9,6 +9,7 @@ RSpec.feature "CreateOrgs", type: :feature do
     @org_phone = "619-555-5555"
     @org_email = "fth@yahoo.com"
     @org_website = "www.fth.com"
+    @org_desc_new = "Just a prank, bro"
   end
 
   context "Create Organization" do
@@ -29,8 +30,17 @@ RSpec.feature "CreateOrgs", type: :feature do
         fill_in "organization[email]", with: @org_email
         fill_in "organization[website]", with: @org_website
         click_button "Create Organization"
+        @org = Organization.find_by_name(@org_name)
         expect(page).to have_content(@u1.name)
       end
+      Then "I can edit the organization" do
+        click_link "Edit"
+        expect(page).to have_current_path(edit_organization_path(@org.id))
+        fill_in "organization[description]", with: @org_desc_new
+        click_button "Update Organization"
+        expect(page).to have_content("#{@org.name} was successfully updated!")
+      end
+
     end
   end
 end
