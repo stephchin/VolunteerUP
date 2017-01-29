@@ -36,13 +36,13 @@ class EventsController < ApplicationController
     # kaminari pagination
     @events = @events.page(params[:page]).per(5)
 
-  # Recover from invalid param sets, e.g., when a filter refers to the
-  # database id of a record that doesn’t exist any more.
-  # In this case we reset filterrific and discard all filter params.
-  rescue ActiveRecord::RecordNotFound => e
-    # There is an issue with the persisted param_set. Reset it.
-    puts "Had to reset filterrific params: #{ e.message }"
-    redirect_to(reset_filterrific_url(format: :html)) and return
+    # Recover from invalid param sets, e.g., when a filter refers to the
+    # database id of a record that doesn’t exist any more.
+    # In this case we reset filterrific and discard all filter params.
+    rescue ActiveRecord::RecordNotFound => e
+      # There is an issue with the persisted param_set. Reset it.
+      puts "Had to reset filterrific params: #{ e.message }"
+      redirect_to(reset_filterrific_url(format: :html)) and return
 
   end
 
