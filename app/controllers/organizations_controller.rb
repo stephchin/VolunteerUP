@@ -28,9 +28,6 @@ class OrganizationsController < ApplicationController
       @user.save
       flash[:notice] = "Congrats, you are now an organizer for #{@organization.name}!"
       redirect_to organization_path(@organization.id)
-    else
-      flash[:notice] = "You are already a member of #{@organization.name}."
-      redirect_to organization_path(@organization.id)
     end
   end
 
