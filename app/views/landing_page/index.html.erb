@@ -1,7 +1,33 @@
-<h1>VolunteerUP!</h1><br>
-<p>VolunteerUP is a great way to help the community, meet cool new people, and add stuff to LinkedIn, Facebook, and Twitter all at once! With VolunteerUp you can see which events are near you, see if any friends are volunteering, and invite them to join you. You can also share events on social media, and share volunteered work!</p><br><br>
+<style>
+  body {
+    background-color: #efefef;
+  }
+  .container {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+  }
+</style>
 
 
-<%= button_to "Sign up", new_user_registration_path, method: :get, class: "btn btn-md btn-primary" %>
+<div id="splashpg">
+  <div class="wrapper">
+    <span class="hugetxt">VolunteerUP</span>
+    <div class="abouttxt">
+    <h6>VolunteerUP connects you with charity events in your area.</h6>
+    <p></p>
+    <h6>Help the community. Meet people. Gain experience.</h6>
+    <p></p>
+    <h6>Be the Change.</h6>
+    <p></p>
+
+<%= button_to "Start Volunteering >>", new_user_registration_path, method: :get, class: "btn btn-md btn-opaque" %>
+</div>
+</div>
+
+
 
 <%= render partial: "counter" %>
+</article>
+</div>

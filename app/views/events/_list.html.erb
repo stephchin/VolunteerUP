@@ -1,8 +1,7 @@
 
 <div id="filterrific_results">
   <!-- Pagination -->
-  <div class="no-margin pull-right"><%= paginate @events, remote: true %></div>
-  <div class="align-right"><%= page_entries_info @events %></div>
+  <%= paginate @events, remote: true%>
   <div class="table-responsive">
     <table class="table table-hover">
       <thead>
@@ -51,5 +50,6 @@
     </table>
   </div>
   <!-- Pagination -->
+  <div class="align-right"><%= page_entries_info @events %></div>
   <%= paginate @events, remote: true %>
 </div>

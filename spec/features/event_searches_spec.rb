@@ -22,7 +22,7 @@ RSpec.feature "EventSearches", type: :feature do
       Then 'I can search for an event by name' do
         fill_in 'filterrific_search_query', with: @event2.name
         fill_in 'filterrific_with_distance_zip', with: 73118
-        select "5", from: "filterrific_with_distance_max_distance"
+        select "5 miles", from: "filterrific_with_distance_max_distance"
         click_button 'Search'
       end
       And 'I can see the event(s) I searched for by name, but that\'s all' do
@@ -44,7 +44,7 @@ RSpec.feature "EventSearches", type: :feature do
       Then 'I can sort the events I searched for name, ascending' do
         page.select('Event Name (Ascending)', from: 'filterrific_sorted_by')
         fill_in 'filterrific_with_distance_zip', with: 73118
-        select "5", from: "filterrific_with_distance_max_distance"
+        select "5 miles", from: "filterrific_with_distance_max_distance"
         click_button 'Search'
       end
       And 'I can see all events in order of event name, ascending' do
@@ -54,7 +54,7 @@ RSpec.feature "EventSearches", type: :feature do
         click_link "Reset Search"
         page.select('Event Name (Descending)', from: 'filterrific_sorted_by')
         fill_in 'filterrific_with_distance_zip', with: 73118
-        select "5", from: "filterrific_with_distance_max_distance"
+        select "5 miles", from: "filterrific_with_distance_max_distance"
         click_button 'Search'
       end
       And 'I can see all events in order of event name, descending' do
@@ -65,7 +65,7 @@ RSpec.feature "EventSearches", type: :feature do
         click_link "Reset Search"
         page.select('Organization (Ascending)', from: 'filterrific_sorted_by')
         fill_in 'filterrific_with_distance_zip', with: 73118
-        select "5", from: "filterrific_with_distance_max_distance"
+        select "5 miles", from: "filterrific_with_distance_max_distance"
         click_button 'Search'
       end
       And 'I can see all events in order of org name, ascending' do
@@ -75,7 +75,7 @@ RSpec.feature "EventSearches", type: :feature do
         click_link "Reset Search"
         page.select('Organization (Descending)', from: 'filterrific_sorted_by')
         fill_in 'filterrific_with_distance_zip', with: 73118
-        select "5", from: "filterrific_with_distance_max_distance"
+        select "5 miles", from: "filterrific_with_distance_max_distance"
         click_button 'Search'
       end
       And 'I can see all events in order of org name, descending' do
