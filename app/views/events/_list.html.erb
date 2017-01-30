@@ -2,53 +2,54 @@
 <div id="filterrific_results">
   <!-- Pagination -->
   <%= paginate @events, remote: true %>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Event</th>
-        <th>Cause</th>
-        <th>Organization</th>
-        <th>Date and Time</th>
-        <th>Event Location</th>
-        <th>Volunteers Needed</th>
-        <!-- <th colspan="3"></th> -->
-      </tr>
-    </thead>
-    <tbody>
-      <% @events.each do |event| %>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
         <tr>
-          <td>
-            <%= link_to event.name, event %><br><br>
-            <!-- <%= event.description %><br><br> -->
-          </td>
-          <td><div class="cause <%=event.cause.sub(/\W+/, '-').downcase%>"><%= event.cause %></div></td>
-          <td><%= link_to event.organization.name, organization_path(event.organization) %></td>
-          <td>
-            <%= event.start_time.strftime("%b %e, %Y")%><br>
-            <%= event.start_time.strftime("%l:%M %p") %> -
-            <%= event.end_time.strftime("%l:%M %p") %><br>
-            (<%= ((event.end_time-event.start_time)/3600).round(1)  %> hours)
-          </td>
-          <td>
-            <%= event.street %><br>
-            <%= event.city %>,
-            <%= event.state %>
-            <%= event.postal_code %>
-            <%= event.country %>
-          </td>
-          <td>
-            <% if event.remaining_vol > 0 %>
-              <%= "#{event.remaining_vol} needed / " %>
-              <%= "#{event.volunteers_needed} total" %>
-            <% else %>
-              <%= "0 needed / " %>
-              <%= "#{event.volunteers_needed} total" %>
-            <% end %>
-          </td>
+          <th>Event</th>
+          <th>Cause</th>
+          <th>Organization</th>
+          <th>Date and Time</th>
+          <th>Event Location</th>
+          <th>Volunteers Needed</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @events.each do |event| %>
+          <tr>
+            <td>
+              <%= link_to event.name, event %><br><br>
+              <!-- <%= event.description %><br><br> -->
+            </td>
+            <td><div class="cause <%=event.cause.sub(/\W+/, '-').downcase%>"><%= event.cause %></div></td>
+            <td><%= link_to event.organization.name, organization_path(event.organization) %></td>
+            <td>
+              <%= event.start_time.strftime("%b %e, %Y")%><br>
+              <%= event.start_time.strftime("%l:%M %p") %> -
+              <%= event.end_time.strftime("%l:%M %p") %><br>
+              (<%= ((event.end_time-event.start_time)/3600).round(1)  %> hours)
+            </td>
+            <td>
+              <%= event.street %><br>
+              <%= event.city %>,
+              <%= event.state %>
+              <%= event.postal_code %>
+              <%= event.country %>
+            </td>
+            <td>
+              <% if event.remaining_vol > 0 %>
+                <%= "#{event.remaining_vol} needed / " %>
+                <%= "#{event.volunteers_needed} total" %>
+              <% else %>
+                <%= "0 needed / " %>
+                <%= "#{event.volunteers_needed} total" %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
   <!-- Pagination -->
   <%= paginate @events, remote: true %>
 </div>
