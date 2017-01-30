@@ -100,6 +100,19 @@ a.btn {
   border-radius: 0px;
 }
 
+/* Breadcrumb */
+
+.breadcrumb {
+  background-color: transparent;
+  margin-bottom: 5px;
+}
+
+/* Pagination */
+
+.align-right {
+  text-align: right;
+}
+
 /* Sign in and login pages */
 
 .devise-box {
