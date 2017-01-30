@@ -77,6 +77,20 @@ a.btn {
   border-radius: 0px;
 }
 
+/* Breadcrumb */
+
+.breadcrumb {
+  background-color: transparent;
+  margin-bottom: 5px;
+}
+
+/* Pagination */
+
+.align-right {
+  display: flex;
+  align-content: flex-end;
+}
+
 /* Sign in and login pages */
 
 .devise-box {
@@ -248,11 +262,4 @@ a.btn {
   border: 1px solid #e7e7e7;
   border-radius: .4em;
   margin: 15px;
-}
-
-/* Breadcrumb */
-
-.breadcrumb {
-  background-color: transparent;
-  margin-bottom: 5px;
 }
