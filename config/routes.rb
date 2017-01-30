@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :organizations do
     post :add_user
     get :dashboard, on: :collection
+    get :get_orgevents
     post :remove_organizer
     post :remove_volunteer
   end

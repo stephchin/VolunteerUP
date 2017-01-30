@@ -118,6 +118,22 @@ class OrganizationsController < ApplicationController
     redirect_to dashboard_organizations_path
   end
 
+  def get_orgevents
+    org_events = Organization.find(params[:organization_id]).events
+    calendar_orgevents = []
+    org_events.each do |event|
+      calendar_orgevents << {
+       id: event.id,
+       title: event.name,
+       start: event.start_time,
+       end: event.end_time,
+       url: '/events/' + event.id.to_s
+       # create url so you can click on a specific event and be taken to that page
+      }
+    end
+    render :json => calendar_orgevents.to_json
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_organization

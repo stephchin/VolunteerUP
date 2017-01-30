@@ -25,6 +25,9 @@ RSpec.feature "JoinOrgs", type: :feature do
          expect(page).to have_content "ABC"
 
        end
+       Then 'I can see a calendar of events the organization is hosting' do
+         page.has_selector?('orgcalendar', :text => 'Month', :visible => true)
+       end
        Then 'I can view and join the organization' do
          click_button "Join!"
        end
