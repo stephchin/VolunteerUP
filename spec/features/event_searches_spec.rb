@@ -58,8 +58,8 @@ RSpec.feature "EventSearches", type: :feature do
         click_button 'Search'
       end
       And 'I can see all events in order of event name, descending' do
-        # save_and_open_page
-        expect(page.find('tbody tr:nth-last-child(1)')).to have_content @event.name
+        # expect(page.find('tbody tr:nth-last-child(1)')).to have_content @event.name
+        expect(page.find('tbody tr:nth-child(1)')).to_not have_content @event.name
       end
       Then 'I can sort the events I searched for by org name, ascending' do
         click_link "Reset Search"

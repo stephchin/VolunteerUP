@@ -51,3 +51,29 @@
 .org-social-media a i {
   margin-left: 8%;
 }
+
+.fc-button-group {
+  margin-left: 60%;
+}
+
+#body #orgcalendar .fc-left, h2 {
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 1.5em;
+  text-transform: uppercase;
+  color: black;
+}
+
+.fc-view-container {
+  position: relative;
+}
+
+.eventname {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.eventdescription {
+  font-weight: lighter;;
+  font-style: italic;
+}
