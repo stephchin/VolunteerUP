@@ -9,6 +9,9 @@ class OrganizationsController < ApplicationController
   def index
     @organizations = Organization.all
     # @ability = Ability.new(current_user)
+
+    # kaminari pagination
+    @organizations = @organizations.page(params[:page]).per(4)
   end
 
   # GET /organizations/1

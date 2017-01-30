@@ -11,6 +11,8 @@
 <h1>Organizations</h1>
 <br>
 
+<!-- Pagination -->
+<%= paginate @organizations, remote: true %>
 <table class="table table-hover">
   <thead>
     <tr>
@@ -42,6 +44,8 @@
     <% end %>
   </tbody>
 </table>
+<!-- Pagination -->
+<%= paginate @organizations, remote: true %>
 
 <br>
 
