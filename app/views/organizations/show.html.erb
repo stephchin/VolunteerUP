@@ -80,6 +80,8 @@
       <% else %>
         <p><%= link_to "Sign In to Join!", new_user_session_path, class: "btn btn-info" %></p>
       <% end %>
+      <div id="orgcalendar"></div>
+      <input id="organization_id" type="hidden" value="<%= @organization.id %>"/>
     </div>
     <!-- events column -->
     <div class="col-md-6">
@@ -90,8 +92,9 @@
             <div class="row">
               <div class="col-sm-5">
               <!-- <div class="image-placeholder"></div> -->
-                <p><%= link_to event.name, event_path(event) %><br><br>
-                <%= event.description %></p>
+                <p><div class="eventname"><%= link_to event.name, event_path(event) %></div><br><br>
+                <div class="eventdescription">
+                <%= event.description %></div></p>
               </div>
 
               <div class="col-sm-7">

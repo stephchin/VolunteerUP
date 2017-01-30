@@ -28,6 +28,8 @@ RSpec.feature "Waitlists", type: :feature do
         visit '/events'
       end
       Then 'I can click the event name' do
+        fill_in "filterrific_search_query", with: @event.name
+        click_button "Search"
         click_link (@event.name)
       end
       Then 'I can see that the event is full' do
@@ -65,6 +67,8 @@ RSpec.feature "Waitlists", type: :feature do
         visit '/events'
       end
       Then 'I can see that I am moved off the waitlist automatically' do
+        fill_in "filterrific_search_query", with: @event.name
+        click_button "Search"
         click_link (@event.name)
         expect(page).to have_content("You're signed up!")
       end
@@ -80,6 +84,8 @@ RSpec.feature "Waitlists", type: :feature do
         visit '/events'
       end
       Then 'I can click the event name and see the event is full' do
+        fill_in "filterrific_search_query", with: @event.name
+        click_button "Search"
         click_link (@event.name)
         expect(page).to have_content "0 Volunteers Needed"
       end

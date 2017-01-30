@@ -5,17 +5,13 @@ class EventsController < ApplicationController
   load_and_authorize_resource
   skip_authorize_resource only: [:map_location, :map_locations]
 
-
-
   # GET /events
   # GET /events.json
 
   def index
-    # Initialize filterrific
-    # This method also persists the params in the session and handles resetting
-    # the filterrific params.
-    # Add the `or return` bit after the call to `initialize_filterrific`.
-    # Otherwise the redirect will not work.
+
+    @events = Event.all
+    # Initialize filterrific with the following params:
     @filterrific = initialize_filterrific(
       Event,
       params[:filterrific],
@@ -24,8 +20,6 @@ class EventsController < ApplicationController
       },
       persistence_id: false,
     ) or return
-    # Get an ActiveRecord::Relation for all event that match the filter settings.
-    @events = @filterrific.find.page(params[:page])
 
     # Respond to html for initial page load and to js for AJAX filter updates.
     respond_to do |format|
@@ -36,14 +30,31 @@ class EventsController < ApplicationController
     # kaminari pagination
     @events = @events.page(params[:page]).per(5)
 
-    # Recover from invalid param sets, e.g., when a filter refers to the
-    # database id of a record that doesn’t exist any more.
-    # In this case we reset filterrific and discard all filter params.
-    rescue ActiveRecord::RecordNotFound => e
-      # There is an issue with the persisted param_set. Reset it.
-      puts "Had to reset filterrific params: #{ e.message }"
-      redirect_to(reset_filterrific_url(format: :html)) and return
+    if !params[:filterrific].nil?
+      @zip = params[:filterrific][:with_distance][:zip]
+      @max_distance = params[:filterrific][:with_distance][:max_distance]
+      @search = params[:filterrific][:search_query]
 
+      if @zip.empty? || @max_distance.empty?
+        @events = @filterrific.find.page(params[:page])
+      else
+        #@filterrific = @filterrific.find | @filterrific.find.where(postal_code: zip)
+        #Event.where(id: @filterrific(&:id))
+        # @events = @filterrific.near(zip, max_distance).page(params[:page])
+        # @e1 = Event.where(postal_code: zip)
+        @events = @filterrific.find.near(@zip, @max_distance).page(params[:page])
+      end
+    end
+    # kaminari pagination
+    @events = @events.page(params[:page]).per(5)
+
+  # Recover from invalid param sets, e.g., when a filter refers to the
+  # database id of a record that doesn’t exist any more.
+  # In this case we reset filterrific and discard all filter params.
+  rescue ActiveRecord::RecordNotFound => e
+    # There is an issue with the persisted param_set. Reset it.
+    puts "Had to reset filterrific params: #{ e.message }"
+    redirect_to(reset_filterrific_url(format: :html)) and return
   end
 
 
@@ -67,8 +78,38 @@ class EventsController < ApplicationController
 
   def map_locations
     @events = Event.all
-    if params[:search]
-      @events = Event.search(params[:search])
+    # if params[:search]
+    #   @events = Event.search(params[:search])
+    # end
+
+    @filterrific = initialize_filterrific(
+      Event,
+      params[:filterrific],
+      select_options: {
+        sorted_by: Event.options_for_sorted_by
+      },
+      persistence_id: false,
+    ) or return
+
+    # Respond to html for initial page load and to js for AJAX filter updates.
+    respond_to do |format|
+      format.html
+      format.js
+    end
+
+    if !params[:filterrific].nil?
+      @zip = params[:filterrific][:with_distance][:zip]
+      @max_distance = params[:filterrific][:with_distance][:max_distance]
+
+      if @zip.empty? || @max_distance.empty?
+        @events = @filterrific.find.page(params[:page])
+      else
+        #@filterrific = @filterrific.find | @filterrific.find.where(postal_code: zip)
+        #Event.where(id: @filterrific(&:id))
+        # @events = @filterrific.near(zip, max_distance).page(params[:page])
+        # @e1 = Event.where(postal_code: zip)
+        @events = @filterrific.find.near(@zip, @max_distance).page(params[:page])
+      end
     end
 
     @hash = Gmaps4rails.build_markers(@events) do |event,marker|
