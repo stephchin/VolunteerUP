@@ -132,7 +132,7 @@ a.btn {
   font-size: 12px;
 }
 
-#user_state {
+.user_state {
   height: 28px;
   background-color: #f8f8f8;
 }
@@ -255,4 +255,63 @@ a.btn {
 .breadcrumb {
   background-color: transparent;
   margin-bottom: 5px;
+}
+
+/* new and edit forms*/
+
+.form-size {
+  width: 65em;
+}
+
+@media (max-width: 991px) {
+  .form-size {
+    width: 35em;
+  }
+}
+
+.form-box {
+  border: 1px solid #e7e7e7;
+  border-radius: 2px;
+  background-color: #f8f8f8;
+  padding: 20px;
+  margin: 10px 0px 10px 0px;
+}
+
+.form-box input {
+  height: 28px;
+  margin-bottom: 2px;
+}
+
+.field-input input {
+  width: 28em;
+}
+
+.form-box label {
+  margin-top: 2px;
+}
+
+.org-selector {
+  margin-right: 1.4em;
+}
+.org-selector select{
+  width: 13em;
+}
+
+.cause-selector select {
+  width: 13em;
+}
+
+.form-box textarea {
+  width: 28em;
+  height: 12em;
+}
+
+.postal-field input{
+  width: 8em;
+}
+.city-field > input, .country-field input {
+  width: 19em;
+  margin-right: 11px;
+}
+.state-field select {
 }
