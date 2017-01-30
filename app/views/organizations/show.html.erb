@@ -92,8 +92,9 @@
             <div class="row">
               <div class="col-sm-5">
               <!-- <div class="image-placeholder"></div> -->
-                <p><%= link_to event.name, event_path(event) %><br><br>
-                <%= event.description %></p>
+                <p><div class="eventname"><%= link_to event.name, event_path(event) %></div><br><br>
+                <div class="eventdescription">
+                <%= event.description %></div></p>
               </div>
 
               <div class="col-sm-7">
