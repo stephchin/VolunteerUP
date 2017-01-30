@@ -19,7 +19,6 @@
           <tr>
             <td>
               <%= link_to event.name, event %><br><br>
-              <!-- <%= event.description %><br><br> -->
             </td>
             <td><div class="cause <%=event.cause.sub(/\W+/, '-').downcase%>"><%= event.cause %></div></td>
             <td><%= link_to event.organization.name, organization_path(event.organization) %></td>
