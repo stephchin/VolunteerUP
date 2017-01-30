@@ -1,6 +1,52 @@
 // Place all the styles related to the LandingPage controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+// Font Imports
+@import url('https://fonts.googleapis.com/css?family=BenchNine:700|Signika');
+
+// Font Defaults
+$header: 'BenchNine', sans-serif;
+$main: 'Signika', sans-serif;
+
+// Color Scheme
+$sky: #CAEBF2;
+$carbon: #A9A9A9;
+$watermelon: #FF3B3F;
+$neutral: #EFEFEF;
+
+
+#splashpg {
+  width: 100%;
+  display: block;
+  margin-top: 10%;
+  .hugetxt {
+    font-family: $header;
+    color: $carbon;
+    font-size: 12em;
+    text-transform: uppercase;
+    width: 100%;
+    letter-spacing: -5px;
+    display: inline-block;
+    text-align: center;
+  }
+  .abouttxt {
+    display: block;
+    text-align: center;
+    h6 {
+      font-size: 2em;
+      line-height: 2em;
+      display: inline-block;
+      margin: 0;
+      background: rgba(194,235,239,0.76);
+    }
+  }
+  h6 {
+    font-family: $main;
+  }
+}
+
 .about-container {
   max-width: 70%;
 }
@@ -14,9 +60,9 @@
   }
 }
 
-/* ==========================================================================
-    Counter Style
-  ========================================================================== */
+
+//Counter Style
+
 #counter {
   background-size: cover;
   color: black;
