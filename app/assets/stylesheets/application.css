@@ -263,7 +263,7 @@ a.btn {
   width: 65em;
 }
 
-@media (max-width: 950px) {
+@media (max-width: 991px) {
   .form-size {
     width: 35em;
   }
