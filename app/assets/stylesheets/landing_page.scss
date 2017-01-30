@@ -13,6 +13,7 @@ $main: 'Signika', sans-serif;
 // Color Scheme
 $sky: #CAEBF2;
 $carbon: #A9A9A9;
+$darkcarbon: #656565;
 $watermelon: #FF3B3F;
 $neutral: #EFEFEF;
 
@@ -32,18 +33,24 @@ $neutral: #EFEFEF;
     text-align: center;
   }
   .abouttxt {
+    margin-top: 2%;
     display: block;
     text-align: center;
     h6 {
-      font-size: 2em;
+      font-size: 1.7em;
+      color: $darkcarbon;
       line-height: 2em;
       display: inline-block;
       margin: 0;
       background: rgba(194,235,239,0.76);
+      font-family: $main;
     }
-  }
-  h6 {
-    font-family: $main;
+    .btn-opaque {
+      background: none;
+      font-family: $header;
+      text-transform: uppercase;
+      font-size: 2em;
+    }
   }
 }
 
