@@ -58,7 +58,10 @@
 <% end %>
 
 
-<div id="events_map" class="center-block" data-events-id="<%=@events%>"></div>
+<div id="events_map" class="center-block" data-events-id="<%=@events%>"
+  data-zip="<%= @zip %>"
+  data-distance="<%= @max_distance %>"
+  data-search="<%= @search %>"></div>
 
 <!-- <script>
     markers = handler.addMarkers(<%=raw @hash.to_json %>);

@@ -31,17 +31,18 @@ class EventsController < ApplicationController
     @events = @events.page(params[:page]).per(5)
 
     if !params[:filterrific].nil?
-      zip = params[:filterrific][:with_distance][:zip]
-      max_distance = params[:filterrific][:with_distance][:max_distance]
+      @zip = params[:filterrific][:with_distance][:zip]
+      @max_distance = params[:filterrific][:with_distance][:max_distance]
+      @search = params[:filterrific][:search_query]
 
-      if zip.empty? || max_distance.empty?
+      if @zip.empty? || @max_distance.empty?
         @events = @filterrific.find.page(params[:page])
       else
         #@filterrific = @filterrific.find | @filterrific.find.where(postal_code: zip)
         #Event.where(id: @filterrific(&:id))
         # @events = @filterrific.near(zip, max_distance).page(params[:page])
         # @e1 = Event.where(postal_code: zip)
-        @events = @filterrific.find.near(zip, max_distance).page(params[:page])
+        @events = @filterrific.find.near(@zip, @max_distance).page(params[:page])
       end
     end
     # kaminari pagination
@@ -77,9 +78,45 @@ class EventsController < ApplicationController
 
   def map_locations
     @events = Event.all
-    if params[:search]
-      @events = Event.search(params[:search])
+    # if params[:search]
+    #   @events = Event.search(params[:search])
+    # end
+
+    @events = @events.page(params[:page]).per(5)
+    @filterrific = initialize_filterrific(
+      Event,
+      params[:filterrific],
+      select_options: {
+        sorted_by: Event.options_for_sorted_by
+      },
+      persistence_id: false,
+    ) or return
+
+    # Respond to html for initial page load and to js for AJAX filter updates.
+    respond_to do |format|
+      format.html
+      format.js
     end
+
+    # kaminari pagination
+    @events = @events.page(params[:page]).per(5)
+
+    if !params[:filterrific].nil?
+      @zip = params[:filterrific][:with_distance][:zip]
+      @max_distance = params[:filterrific][:with_distance][:max_distance]
+
+      if @zip.empty? || @max_distance.empty?
+        @events = @filterrific.find.page(params[:page])
+      else
+        #@filterrific = @filterrific.find | @filterrific.find.where(postal_code: zip)
+        #Event.where(id: @filterrific(&:id))
+        # @events = @filterrific.near(zip, max_distance).page(params[:page])
+        # @e1 = Event.where(postal_code: zip)
+        @events = @filterrific.find.near(@zip, @max_distance).page(params[:page])
+      end
+    end
+    # kaminari pagination
+    @events = @events.page(params[:page]).per(5)
 
     @hash = Gmaps4rails.build_markers(@events) do |event,marker|
       marker.lat(event.latitude)
