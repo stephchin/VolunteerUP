@@ -1,10 +1,16 @@
 class User < ApplicationRecord
+  after_create_commit  { NotificationBroadcastJob.perform_later(Notification.count,self)}
   after_commit :assign_role
+  after_create_commit { notify }
 
 
   #if a user is destroyed, this destroys the link between user and event, but not the actual event
   has_many :user_events, :dependent => :destroy
   has_many :events, through: :user_events
+
+
+  has_many :notifications
+  has_many :messages
 
   #if a user is destroyed, this destroys the link between user and organization, but not the actual organization
   has_many :user_organizations, :dependent => :destroy
@@ -44,6 +50,13 @@ class User < ApplicationRecord
     end
   end
 
-
   rolify
+
+  private
+
+
+  def notify
+    Notification.create(event: "New Notification (#{self.body})")
+  end
+
 end

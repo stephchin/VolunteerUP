@@ -18,4 +18,5 @@
 //= require gmaps/google
 //= require_tree .
 //= require filterrific/filterrific-jquery
+//= require jquery.transit.min
 //= require bootstrap-datepicker
