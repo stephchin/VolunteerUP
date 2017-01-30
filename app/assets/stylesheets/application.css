@@ -34,13 +34,22 @@
 /* Text */
 
 h1 {
-  background-color: #c2ebef;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  padding-left:10px;
-  font-family: 'ITC Franklin Gothic W01';
-  font-weight: 400;
-  font-style: normal;
+  font-family: 'BenchNine', sans-serif;
+  color: #A9A9A9;
+  font-size: 8em;
+  text-transform: uppercase;
+}
+
+#about-para {
+  /*background-color: #c2ebef;*/
+  background-color: rgba(194,235,239,0.76);
+  font-size: 1.7em;
+  color: #656565;
+  line-height: 2em;
+  padding: 10px;
+  /*display: inline-block;
+  background: rgba(194,235,239,0.76);*/
+  font-family: 'Signika', sans-serif;
 }
 
 h4 {
@@ -89,6 +98,19 @@ a.btn {
 .navbar {
   margin-bottom: 0px;
   border-radius: 0px;
+}
+
+/* Breadcrumb */
+
+.breadcrumb {
+  background-color: transparent;
+  margin-bottom: 5px;
+}
+
+/* Pagination */
+
+.align-right {
+  text-align: right;
 }
 
 /* Sign in and login pages */

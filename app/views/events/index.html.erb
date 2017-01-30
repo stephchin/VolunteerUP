@@ -24,8 +24,8 @@
       </div><br>
       <div>
       <%= f.fields_for :with_distance do |with_distance_fields| %>
-        <%= with_distance_fields.text_field :zip %>
-        <%= with_distance_fields.select(:max_distance, [[5, 5], [10, 10], [15, 15], [25, 25], [50, 50]]) %>
+        <%= with_distance_fields.text_field :zip, placeholder: 'Zip code' %>
+        <%= with_distance_fields.select(:max_distance, [['5 miles', 5], ['10 miles', 10], ['15 miles', 15], ['25 miles', 25], ['50 miles', 50]]) %>
       <% end %>
       </div>
       <div>

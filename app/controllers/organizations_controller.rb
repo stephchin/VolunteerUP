@@ -1,8 +1,9 @@
 class OrganizationsController < ApplicationController
   before_action :set_organization, only: [:show, :edit, :update, :destroy]
   before_action :set_ability
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :get_orgevents]
   load_and_authorize_resource
+  skip_authorize_resource only: [:get_orgevents]
 
   # GET /organizations
   # GET /organizations.json
