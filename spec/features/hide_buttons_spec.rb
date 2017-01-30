@@ -12,6 +12,8 @@ RSpec.feature "HideButtons", type: :feature do
     Steps "Go to the events page" do
       Given "I am on the events page" do
         visit '/events'
+        fill_in "filterrific_search_query", with: @event.name
+        click_button "Search"
         expect(page).to have_content(@org.name)
       end
       Then "I cannot see the 'Edit', 'Destroy', or 'New Event' button" do

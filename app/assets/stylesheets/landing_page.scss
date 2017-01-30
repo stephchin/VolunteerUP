@@ -1,6 +1,65 @@
 // Place all the styles related to the LandingPage controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+// Font Imports
+@import url('https://fonts.googleapis.com/css?family=BenchNine:700|Signika');
+
+// Font Defaults
+$header: 'BenchNine', sans-serif;
+$main: 'Signika', sans-serif;
+
+// Color Scheme
+$sky: #CAEBF2;
+$carbon: #A9A9A9;
+$darkcarbon: #656565;
+$watermelon: #FF3B3F;
+$neutral: #EFEFEF;
+
+
+#splashpg {
+  width: 100%;
+  display: block;
+  margin-top: 10%;
+  .hugetxt {
+    font-family: $header;
+    color: $carbon;
+    font-size: 12em;
+    text-transform: uppercase;
+    width: 100%;
+    letter-spacing: -5px;
+    display: inline-block;
+    text-align: center;
+  }
+  .abouttxt {
+    margin-top: 2%;
+    display: block;
+    text-align: center;
+    h6 {
+      font-size: 1.7em;
+      color: $darkcarbon;
+      line-height: 2em;
+      display: inline-block;
+      margin: 0;
+      background: rgba(194,235,239,0.76);
+      font-family: $main;
+    }
+    .btn-opaque {
+      background: none;
+      font-family: $header;
+      text-transform: uppercase;
+      font-size: 1.5em;
+      color: $darkcarbon;
+      transition: all .3s linear;
+      &:hover {
+        color: $watermelon;
+        transform: scale(1.1, 1.1);
+      }
+    }
+  }
+}
+
 .about-container {
   max-width: 70%;
 }
@@ -12,4 +71,55 @@
     font-size: 1em;
     }
   }
+}
+
+
+//Counter Style
+
+#counter {
+  background-size: cover;
+  color: $darkcarbon;
+  padding: 60px 0;
+  text-align: center;
+}
+.counting .icon {
+  margin-bottom: 10px;
+}
+.counting .icon span {
+  display: inline-block;
+  text-align: center;
+  width: 80px;
+  background: rgba(255,59,63,.4);
+  height: 80px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  -webkit-transition: all .3s linear;
+  -moz-transition: all .3s linear;
+  -ms-transition: all .3s linear;
+  -o-transition: all .3s linear;
+  transition: all .3s linear;
+}
+.counting .icon span i {
+  color: #fff;
+  display: inline-block;
+  font-size: 30px;
+  line-height: 80px;
+  z-index: 99;
+  // text-shadow: 5px 5px 2px rgba(56, 49, 49, 0.5);
+}
+.counting .desc h3 {
+  font-size: 24px;
+  color: $darkcarbon;
+}
+.counting .desc p {
+  font-size: 16px;
+}
+.counting:hover span {
+  background: $watermelon;
+  -webkit-transform: scale(1.1, 1.1);
+  -moz-transform: scale(1.1, 1.1);
+  -ms-transform: scale(1.1, 1.1);
+  -o-transform: scale(1.1, 1.1);
+  transform: scale(1.1, 1.1);
 }

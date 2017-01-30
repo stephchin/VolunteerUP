@@ -9,6 +9,9 @@ class OrganizationsController < ApplicationController
   def index
     @organizations = Organization.all
     # @ability = Ability.new(current_user)
+
+    # kaminari pagination
+    @organizations = @organizations.page(params[:page]).per(4)
   end
 
   # GET /organizations/1
@@ -27,9 +30,6 @@ class OrganizationsController < ApplicationController
       @user.add_role :organizer
       @user.save
       flash[:notice] = "Congrats, you are now an organizer for #{@organization.name}!"
-      redirect_to organization_path(@organization.id)
-    else
-      flash[:notice] = "You are already a member of #{@organization.name}."
       redirect_to organization_path(@organization.id)
     end
   end
@@ -121,6 +121,22 @@ class OrganizationsController < ApplicationController
     redirect_to dashboard_organizations_path
   end
 
+  def get_orgevents
+    org_events = Organization.find(params[:organization_id]).events
+    calendar_orgevents = []
+    org_events.each do |event|
+      calendar_orgevents << {
+       id: event.id,
+       title: event.name,
+       start: event.start_time,
+       end: event.end_time,
+       url: '/events/' + event.id.to_s
+       # create url so you can click on a specific event and be taken to that page
+      }
+    end
+    render :json => calendar_orgevents.to_json
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_organization
@@ -133,6 +149,6 @@ class OrganizationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def organization_params
-      params.require(:organization).permit(:name, :description, :phone, :email, :website, :image)
+      params.require(:organization).permit(:name, :description, :phone, :email, :website, :image, :facebook, :twitter)
     end
 end

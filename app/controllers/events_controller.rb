@@ -5,37 +5,13 @@ class EventsController < ApplicationController
   load_and_authorize_resource
   skip_authorize_resource only: [:map_location, :map_locations]
 
-
-
   # GET /events
   # GET /events.json
 
   def index
 
+    @events = Event.all
     # Initialize filterrific with the following params:
-    # * `Student` is the ActiveRecord based model class.
-    # * `params[:filterrific]` are any params submitted via web request.
-    #   If they are blank, filterrific will try params persisted in the session
-    #   next. If those are blank, too, filterrific will use the model's default
-    #   filter settings.
-    # * Options:
-    #     * select_options: You can store any options for `<select>` inputs in
-    #       the filterrific form here. In this example, the `#options_for_...`
-    #       methods return arrays that can be passed as options to `f.select`
-    #       These methods are defined in the model.
-    #     * persistence_id: optional, defaults to "<controller>#<action>" string
-    #       to isolate session persistence of multiple filterrific instances.
-    #       Override this to share session persisted filter params between
-    #       multiple filterrific instances. Set to `false` to disable session
-    #       persistence.
-    #     * default_filter_params: optional, to override model defaults
-    #     * available_filters: optional, to further restrict which filters are
-    #       in this filterrific instance.
-    # This method also persists the params in the session and handles resetting
-    # the filterrific params.
-    # In order for reset_filterrific to work, it's important that you add the
-    # `or return` bit after the call to `initialize_filterrific`. Otherwise the
-    # redirect will not work.
     @filterrific = initialize_filterrific(
       Event,
       params[:filterrific],
@@ -44,12 +20,6 @@ class EventsController < ApplicationController
       },
       persistence_id: false,
     ) or return
-    # Get an ActiveRecord::Relation for all students that match the filter settings.
-    # You can paginate with will_paginate or kaminari.
-    # NOTE: filterrific_find returns an ActiveRecord Relation that can be
-    # chained with other scopes to further narrow down the scope of the list,
-    # e.g., to apply permissions or to hard coded exclude certain types of records.
-    @events = @filterrific.find.page(params[:page])
 
     # Respond to html for initial page load and to js for AJAX filter updates.
     respond_to do |format|
@@ -57,17 +27,34 @@ class EventsController < ApplicationController
       format.js
     end
 
-  # Recover from invalid param sets, e.g., when a filter refers to the
-  # database id of a record that doesn’t exist any more.
-  # In this case we reset filterrific and discard all filter params.
-  # rescue ActiveRecord::RecordNotFound => e
-  #   # There is an issue with the persisted param_set. Reset it.
-  #   puts "Had to reset filterrific params: #{ e.message }"
-  #   redirect_to(reset_filterrific_url(format: :html)) and return
-
     # kaminari pagination
     @events = @events.page(params[:page]).per(5)
 
+    if !params[:filterrific].nil?
+      @zip = params[:filterrific][:with_distance][:zip]
+      @max_distance = params[:filterrific][:with_distance][:max_distance]
+      @search = params[:filterrific][:search_query]
+
+      if @zip.empty? || @max_distance.empty?
+        @events = @filterrific.find.page(params[:page])
+      else
+        #@filterrific = @filterrific.find | @filterrific.find.where(postal_code: zip)
+        #Event.where(id: @filterrific(&:id))
+        # @events = @filterrific.near(zip, max_distance).page(params[:page])
+        # @e1 = Event.where(postal_code: zip)
+        @events = @filterrific.find.near(@zip, @max_distance).page(params[:page])
+      end
+    end
+    # kaminari pagination
+    @events = @events.page(params[:page]).per(5)
+
+  # Recover from invalid param sets, e.g., when a filter refers to the
+  # database id of a record that doesn’t exist any more.
+  # In this case we reset filterrific and discard all filter params.
+  rescue ActiveRecord::RecordNotFound => e
+    # There is an issue with the persisted param_set. Reset it.
+    puts "Had to reset filterrific params: #{ e.message }"
+    redirect_to(reset_filterrific_url(format: :html)) and return
   end
 
 
@@ -91,8 +78,38 @@ class EventsController < ApplicationController
 
   def map_locations
     @events = Event.all
-    if params[:search]
-      @events = Event.search(params[:search])
+    # if params[:search]
+    #   @events = Event.search(params[:search])
+    # end
+
+    @filterrific = initialize_filterrific(
+      Event,
+      params[:filterrific],
+      select_options: {
+        sorted_by: Event.options_for_sorted_by
+      },
+      persistence_id: false,
+    ) or return
+
+    # Respond to html for initial page load and to js for AJAX filter updates.
+    respond_to do |format|
+      format.html
+      format.js
+    end
+
+    if !params[:filterrific].nil?
+      @zip = params[:filterrific][:with_distance][:zip]
+      @max_distance = params[:filterrific][:with_distance][:max_distance]
+
+      if @zip.empty? || @max_distance.empty?
+        @events = @filterrific.find.page(params[:page])
+      else
+        #@filterrific = @filterrific.find | @filterrific.find.where(postal_code: zip)
+        #Event.where(id: @filterrific(&:id))
+        # @events = @filterrific.near(zip, max_distance).page(params[:page])
+        # @e1 = Event.where(postal_code: zip)
+        @events = @filterrific.find.near(@zip, @max_distance).page(params[:page])
+      end
     end
 
     @hash = Gmaps4rails.build_markers(@events) do |event,marker|
@@ -144,6 +161,10 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
+    @organizations_for_select = Organization.all.map do |org|
+      [org.name, org.id]
+    end
+
     respond_to do |format|
       if @event.update(event_params)
         format.html { redirect_to @event, notice: "#{@event.name} was successfully updated!" }
@@ -168,7 +189,6 @@ class EventsController < ApplicationController
   def add_user
     event = Event.find(params[:event_id])
     if !user_signed_in?
-      flash[:notice] = "Please log in to volunteer."
       redirect_to new_user_session_path
     elsif !event.users.all.include?(current_user) && event.remaining_vol > 0
       event.user_events.new(user: current_user)
@@ -183,9 +203,6 @@ class EventsController < ApplicationController
       flash[:notice] = "You've been added to the waitlist!"
       event.user_events.new(user: current_user, waitlist: waitlist_number + 1)
       event.save
-      redirect_to event_path(event.id)
-    else
-      flash[:notice] = "You're already signed up!"
       redirect_to event_path(event.id)
     end
   end

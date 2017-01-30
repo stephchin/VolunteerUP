@@ -18,24 +18,32 @@
 #events_map, #event_map {
   margin-top: 1em;
   height: 400px;
-  width: 50%;
   border-radius: .4em;
 }
 
 #user_map, #calendar {
   margin-top: 1em;
-  height: 335px;
-  width: 50%;
+  // height: 335px;
+  // width: 50%;
   border-radius: .4em;
 }
 
+#calendar h2 {
+  font-size: 20px;
+}
+
+.fc-toolbar.fc-header-toolbar {
+  // width: 45em;
+  margin: 0px;
+}
+
 .cause {
-  padding: .6em .4em .6em .4em;
-  width: 10.5em;
+  padding: .4em .2em .4em .2em;
+  width: 10em;
   border: 1px solid transparent;
   border-radius: .25em;
   color: white;
-  font-size: 9px;
+  font-size: 11px;
   text-align: center;
 }
 

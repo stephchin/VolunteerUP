@@ -1,85 +1,103 @@
-<%= form_for(event) do |f| %>
-  <!-- <% if event.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+<div class="form-size">
+  <%= form_for(event) do |f| %>
+    <!-- <% if event.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
 
-      <ul>
-      <% event.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %> -->
+        <ul>
+        <% event.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %> -->
+    <div class="row form-box">
+        <div class="col-md-6">
 
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-    <div class="display-error"><%= display_error_events(:name) %></div>
-  </div>
+          <div class="field field-input">
+            <%= f.label :name %>
+            <%= f.text_field :name, placeholder: "Event name" %>
+            <div class="display-error"><%= display_error_events(:name) %></div>
+          </div>
 
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_field :description %>
-  </div>
+          <div class="field">
+            <%= f.label :event_image %>
+            <%= f.file_field :image %>
+          </div>
 
-  <div class="field">
-    <%= f.label :cause %>
-    <%= f.select(:cause, options_for_select([["In support of...", "Other"], ["Children/Youth", "Children/Youth"], ["Animals", "Animals"], ["Arts & Culture", "Arts & Culture"], ["Community Development", "Community Development"], ["Health/Hospitals", "Health/Hospitals"], ["Mental Health", "Mental Health"], ["Education/Literacy", "Education/Literacy"], ["Homelessness", "Homelessness"], ["Other", "Other"]])) %> <br>
-  </div>
+          <div class="display-inline-flex">
+            <div class="field org-selector">
+              <%= f.label :organization %>
+              <%= select(:event, :organization_id, @organizations_for_select, {prompt: 'Hosted by...'}) %>
+              <div class="display-error"><%= display_error_events(:organization) %></div>
+            </div>
 
-  <div class="field">
-    <%= f.label :start_time %>
-    <%= f.datetime_select :start_time %>
-  </div>
+            <div class="field cause-selector">
+              <%= f.label :cause %>
+              <%= f.select(:cause, options_for_select([["In support of...", "Other"], ["Children/Youth", "Children/Youth"], ["Animals", "Animals"], ["Arts & Culture", "Arts & Culture"], ["Community Development", "Community Development"], ["Health/Hospitals", "Health/Hospitals"], ["Mental Health", "Mental Health"], ["Education/Literacy", "Education/Literacy"], ["Homelessness", "Homelessness"], ["Other", "Other"]])) %> <br>
+            </div>
+          </div>
 
-  <div class="field">
-    <%= f.label :end_time %>
-    <%= f.datetime_select :end_time %>
-  </div>
+          <div class="field">
+            <%= f.label :description %>
+            <%= f.text_area :description, placeholder: "Tell us about your event!" %>
+          </div>
 
-  <div class="field">
-    <%= f.label :street %>
-    <%= f.text_field :street %>
-  </div>
+        </div> <!-- end col -->
 
-  <div class="field">
-    <%= f.label :city %>
-    <%= f.text_field :city %>
-  </div>
+        <div class="col-md-6">
 
-  <div class="field state_selector">
-    <%= f.label :state %>
-    <%= f.select(:state, options_for_select([["Located in...", ""], ["AL", "AL"], ["AK", "AK"], ["AZ", "AZ"], ["AR", "AR"], ["CA", "CA"], ["CO", "CO"], ["CT", "CT"], ["DE", "DE"], ["FL", "FL"],  ["GA", "GA"], ["HI", "HI"], ["ID", "ID"], ["IL", "IL"], ["IN", "IN"], ["IA", "IA"], ["KS", "KS"], ["KY", "KY"], ["LA", "LA"], ["ME", "ME"], ["MD", "MD"], ["MA", "MA"], ["MI", "MI"], ["MN", "MN"], ["MS", "MS"], ["MO", "MO"], ["MT", "MT"], ["NE", "NE"], ["NV", "NV"], ["NH", "NH"], ["NJ", "NJ"], ["NM", "NM"], ["NY", "NY"], ["NC", "NC"], ["ND", "ND"], ["OH", "OH"], ["OK", "OK"], ["OR", "OR"], ["PA", "PA"], ["RI", "RI"], ["SC", "SC"], ["SD", "SD"], ["TN", "TN"], ["TX", "TX"], ["UT", "UT"], ["VT", "VT"], ["VA", "VA"], ["WA", "WA"], ["WV", "WV"], ["WI", "WI"], ["WY", "WY"]
-    ])) %> <br>
-  </div>
+          <div class="field">
+            <%= f.label :volunteers_needed %>
+            <%= f.number_field :volunteers_needed, placeholder: "# of volunteers" %>
+            <div class="display-error"><%= display_error_events(:volunteers_needed) %></div>
+          </div>
 
-  <div class="field">
-    <%= f.label :postal_code %>
-    <%= f.text_field :postal_code %>
-  </div>
+          <div class="field">
+            <%= f.label :start_time %>
+            <%= f.datetime_select :start_time %>
+          </div>
 
-  <div class="field">
-    <%= f.label :country %>
-    <%= f.text_field :country %>
-  </div>
+          <div class="field">
+            <%= f.label :end_time %>
+            <%= f.datetime_select :end_time %>
+          </div>
 
-  <div class="field">
-    <%= f.label :volunteers_needed %>
-    <%= f.number_field :volunteers_needed %>
-    <div class="display-error"><%= display_error_events(:volunteers_needed) %></div>
-  </div>
+          <div class="field field-input">
+            <%= f.label :street %>
+            <%= f.text_field :street, placeholder: "Street address"%>
+          </div>
 
-  <div class="field">
-    <%= f.label :organization %>
-    <%= select(:event, :organization_id, @organizations_for_select, {prompt: 'Hosted by...'}) %>
-    <div class="display-error"><%= display_error_events(:organization) %></div>
-  </div>
+          <div class="display-inline-flex">
+            <div class="field city-field">
+              <%= f.label :city %>
+              <%= f.text_field :city, placeholder: "City" %>
+            </div>
 
-  <div class="field">
-    <%= f.file_field :image %>
-  </div>
+            <div class="field state-field">
+              <%= f.label :state %>
+              <%= f.select(:state, options_for_select([["Located in...", ""], ["AL", "AL"], ["AK", "AK"], ["AZ", "AZ"], ["AR", "AR"], ["CA", "CA"], ["CO", "CO"], ["CT", "CT"], ["DE", "DE"], ["FL", "FL"],  ["GA", "GA"], ["HI", "HI"], ["ID", "ID"], ["IL", "IL"], ["IN", "IN"], ["IA", "IA"], ["KS", "KS"], ["KY", "KY"], ["LA", "LA"], ["ME", "ME"], ["MD", "MD"], ["MA", "MA"], ["MI", "MI"], ["MN", "MN"], ["MS", "MS"], ["MO", "MO"], ["MT", "MT"], ["NE", "NE"], ["NV", "NV"], ["NH", "NH"], ["NJ", "NJ"], ["NM", "NM"], ["NY", "NY"], ["NC", "NC"], ["ND", "ND"], ["OH", "OH"], ["OK", "OK"], ["OR", "OR"], ["PA", "PA"], ["RI", "RI"], ["SC", "SC"], ["SD", "SD"], ["TN", "TN"], ["TX", "TX"], ["UT", "UT"], ["VT", "VT"], ["VA", "VA"], ["WA", "WA"], ["WV", "WV"], ["WI", "WI"], ["WY", "WY"]
+              ])) %> <br>
+            </div>
 
-  <div class="actions">
-    <%= f.submit class: "btn btn-sm btn-primary" %>
-  </div>
-<% end %>
+          </div>
+          <div class="display-inline-flex">
+            <div class="field country-field">
+              <%= f.label :country %>
+              <%= f.text_field :country, placeholder: "Country" %>
+            </div>
+
+            <div class="postal-field field">
+              <%= f.label :postal_code %>
+              <%= f.text_field :postal_code, placeholder: "Postal code" %>
+            </div>
+          </div>
+          <br>
+          <div class="actions">
+            <%= f.submit class: "btn btn-sm btn-primary" %>
+          </div>
+
+      </div> <!-- end col -->
+    </div> <!-- end row -->
+    <% end %>
+</div>

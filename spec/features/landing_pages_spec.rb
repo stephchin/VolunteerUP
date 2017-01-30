@@ -7,7 +7,7 @@ RSpec.feature "LandingPages", type: :feature do
         visit '/'
       end
       Then 'I can see a description of the service' do
-        expect(page).to have_content('VolunteerUP is')
+        expect(page).to have_content('VolunteerUP')
       end
       And 'I can see the navigation bar' do
         expect(page).to have_link(:href=>"/about")
@@ -15,7 +15,7 @@ RSpec.feature "LandingPages", type: :feature do
         expect(page).to have_link(:href=>"/organizations")
       end
       Then 'I can click the sign up link to take me to a sign up page' do
-        click_button('Sign up')
+        click_button('Start Volunteering')
       end
       And 'I will see the registration fields' do
         expect(page).to have_current_path(new_user_registration_path)

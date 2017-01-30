@@ -1,5 +1,9 @@
+<nav class="breadcrumb">
+  <a class="breadcrumb-item" href="/">Home</a>
+  <a class="breadcrumb-item" href="/events"> / Events</a>
+  <span class="breadcrumb-item active"> / New Event </span>
+</nav>
+
 <h1>New Event</h1>
 
 <%= render 'form', event: @event %>
-
-<%= link_to 'Back', events_path, class: "btn btn-xs btn-info" %>

@@ -1,7 +1,7 @@
 <nav class="breadcrumb">
   <a class="breadcrumb-item" href="/">Home</a>
-  <a class="breadcrumb-item" href="/organizations"> > Organizations</a>
-  <span class="breadcrumb-item active"> > <%= @organization.name %></span>
+  <a class="breadcrumb-item" href="/organizations"> / Organizations</a>
+  <span class="breadcrumb-item active"> / <%= @organization.name %></span>
 </nav>
 
 <!-- Title Container -->
@@ -19,7 +19,7 @@
 
 <!-- Info Container -->
 <div class="container-fluid">
-  <div class="row section-box">
+  <div class="row row-tall section-box">
     <!-- image column -->
     <div class="col-md-6 vertical-align text-center">
       <%= image_tag(@organization.image.url(:large), class: 'img-responsive center-block') %>
@@ -43,6 +43,13 @@
       <h5>Website</h5>
       <div class="text-area">
         <p><%= link_to @organization.website, "http://#{@organization.website}" %></p>
+
+        <% if !@organization.twitter.nil? && !@organization.facebook.nil? %>
+        <p class="org-social-media">
+          <a href="http://<%= @organization.twitter %>"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a>
+          <a href="http://<%= @organization.facebook %>"><i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i></a>
+        </p>
+        <% end %>
       </div><br>
     </div>
     <!-- organizers column -->
@@ -73,24 +80,29 @@
       <% else %>
         <p><%= link_to "Sign In to Join!", new_user_session_path, class: "btn btn-info" %></p>
       <% end %>
+      <div id="orgcalendar"></div>
+      <input id="organization_id" type="hidden" value="<%= @organization.id %>"/>
     </div>
     <!-- events column -->
     <div class="col-md-6">
       <h5><%= link_to "Events", events_path %></h5>
       <p id="events-list">
-        <% @organization.events.each do |event| %>
+        <% @organization.events.order(:start_time).each do |event| %>
           <div class="event-box">
             <div class="row">
-              <div class="col-lg-4">
+              <div class="col-sm-5">
               <!-- <div class="image-placeholder"></div> -->
-                <p><%= link_to event.name, event_path(event) %><br><br></p>
+                <p><div class="eventname"><%= link_to event.name, event_path(event) %></div><br><br>
+                <div class="eventdescription">
+                <%= event.description %></div></p>
               </div>
 
-              <div class="col-lg-8">
-                <p><%= event.start_time.strftime("%b %e, %Y ") %><br>
+              <div class="col-sm-7">
+                <p><span class="glyphicon glyphicon-time"></span> <%= event.start_time.strftime("%b %e, %Y ") %><br>
                 <%= event.start_time.strftime("%l:%M %p") %> - <%= event.end_time.strftime("%l:%M %p") %><br><br>
-
-                <%= event.description %></p>
+                <span class="glyphicon glyphicon-map-marker"></span> <%= event.street %> <br>
+                <%= "#{event.city}, #{event.state} #{event.postal_code} #{event.country}" %><br><br>
+                </p>
               </div>
             </div>
           </div>

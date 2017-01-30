@@ -20,7 +20,7 @@ end
 # To create all Events
 event_locations = [
   {"Carlsbad" => { street: "2924 Carlsbad Blvd", postal_code: "92008" }},
-  {"Chula Visat" => { street: "2127 Olympic Parkway", postal_code: "91915" }},
+  {"Chula Vista" => { street: "2127 Olympic Parkway", postal_code: "91915" }},
   {"Coronado" => { street: "960 Orange Ave", postal_code: "92118" }},
   {"Del Mar" => { street: "1435 Camino Del Mar", postal_code: "92014" }},
   {"El Cajon" => { street: "1591 Magnolia Ave", postal_code: "92020" }},

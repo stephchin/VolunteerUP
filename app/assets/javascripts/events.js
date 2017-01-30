@@ -10,17 +10,18 @@ $(document).ready(function(){
   }
 
 });
-
 function placeMakers(dataFromServer, markers) {
+  console.log("placeMakers running");
   markers = handler.addMarkers(dataFromServer);
   // handler.bounds.extendWith(markers);
   handler.fitMapToBounds();
 }
 
 function showLocations(dataFromServer) {
+  console.log("showLocations running");
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
-        dataFromServer[dataFromServer.length] = {
+      dataFromServer[dataFromServer.length] = {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
         "picture": {
@@ -34,11 +35,12 @@ function showLocations(dataFromServer) {
     });
   } else {
     alert("Geolocation is not available");
-    placeMakers(dataFromServer, markers)
+    placeMakers(dataFromServer, markers);
   }
 }
 
 function createGmap(dataFromServer) {
+  console.log("createGmap running");
   handler = Gmaps.build('Google');
   handler.buildMap({
     provider: {},
@@ -48,12 +50,13 @@ function createGmap(dataFromServer) {
     showLocations(dataFromServer);
     markers = handler.addMarkers(dataFromServer);
     handler.bounds.extendWith(markers);
-    handler.fitMapToBounds();
+    // handler.fitMapToBounds();
     handler.getMap().setZoom(15);
   });
 };
 
 function createGmapAll(dataFromServer) {
+  console.log("createGmapAll running");
   console.log(dataFromServer);
   handler = Gmaps.build('Google');
   handler.buildMap({
@@ -71,9 +74,9 @@ function createGmapAll(dataFromServer) {
 
 
 function loadAndCreateGmap() {
+  console.log("loadAndCreateGmap running");
   if ($("#event_map").length > 0) {
     var eventId = $('#event_map').attr('data-event-id');
-
     $.ajax({
       dataType: 'json',
       url: '/events/' + eventId + '/map_location',
@@ -86,44 +89,29 @@ function loadAndCreateGmap() {
       }
     });
   }
-};
+}
 
 function loadAndCreateGmapAll() {
   if ($("#events_map").length > 0) {
     var myurl = "/events/map_locations";
-    if ($("#search").val()) {
-        myurl += "?search=" + $("#search").val();
-    };
+    // var zip = $("#filterrific_with_distance_zip").val()
+    var zip = $("#events_map").attr("data-zip");
+    // var max_dist = $("#filterrific_with_distance_max_distnace").val()
+    var max_dist = $("#events_map").attr("data-distance");
+    var search = $("#events_map").attr("data-search");
 
-
-    $.ajax({
-      dataType: 'json',
-      url: myurl,
-      method: 'GET',
-      success: function(dataFromServer) {
-        createGmapAll(dataFromServer)
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        alert("Getting map data failed: " + errorThrown);
-      }
-    });
-  }
-};
-
-function loadAndCreateGmap() {
-  if ($("#event_map").length > 0) {
-    var myurl = "/events/map_locations";
-    // if ($("#search").val()) {
-    //     myurl += "?search=" + $("#search").val();
-    // };
-
+    if (search || (zip && max_dist)) {
+      myurl += "?filterrific[with_distance][zip]=" + zip +
+        "&filterrific[with_distance][max_distance]=" + max_dist +
+        "&filterrific[search_query]=" + search;
+    }
 
     $.ajax({
       dataType: 'json',
       url: myurl,
       method: 'GET',
       success: function(dataFromServer) {
-        createGmapUser(dataFromServer)
+        createGmapAll(dataFromServer);
       },
       error: function(jqXHR, textStatus, errorThrown) {
         alert("Getting map data failed: " + errorThrown);

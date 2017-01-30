@@ -11,13 +11,15 @@
 //
 // });
 
-function placeMakers(dataFromServer, markers) {
+function placeMakersUser(dataFromServer, markers) {
+  console.log("user placeMarkers running");
   markers = handler.addMarkers(dataFromServer);
-  // handler.bounds.extendWith(markers);
+  handler.bounds.extendWith(markers);
   handler.fitMapToBounds();
 }
 
 function showLocations(dataFromServer) {
+  console.log("user showLocations running");
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
         dataFromServer[dataFromServer.length] = {
@@ -30,15 +32,16 @@ function showLocations(dataFromServer) {
         },
         infowindow: "You!"
       };
-      placeMakers(dataFromServer, markers);
+      placeMakersUser(dataFromServer, markers);
     });
   } else {
     alert("Geolocation is not available");
-    placeMakers(dataFromServer, markers)
+    placeMakersUser(dataFromServer, markers)
   }
 }
 
 function createGmapUser(dataFromServer) {
+  console.log("createGmapUser running");
   console.log(dataFromServer);
   handler = Gmaps.build('Google');
   handler.buildMap({
@@ -55,8 +58,9 @@ function createGmapUser(dataFromServer) {
 };
 
 function loadAndCreateGmapUser() {
+  console.log("loadAndCreateGmapUser running");
   if ($("#user_map").length > 0) {
-    var myurl = "/users/user_map_locations";
+    var myurl = "/users/" + $("#user_id").val() + "/user_map_locations";
     // if ($("#search").val()) {
     //     myurl += "?search=" + $("#search").val();
     // };
