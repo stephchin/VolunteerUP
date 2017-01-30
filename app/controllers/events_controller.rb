@@ -40,7 +40,7 @@ class EventsController < ApplicationController
         #@filterrific = @filterrific.find | @filterrific.find.where(postal_code: zip)
         #Event.where(id: @filterrific(&:id))
         # @events = @filterrific.near(zip, max_distance).page(params[:page])
-        @e1 = Event.where(postal_code: zip)
+        # @e1 = Event.where(postal_code: zip)
         @events = @filterrific.find.near(zip, max_distance).page(params[:page])
       end
     end
@@ -154,7 +154,6 @@ class EventsController < ApplicationController
   def add_user
     event = Event.find(params[:event_id])
     if !user_signed_in?
-      flash[:notice] = "Please log in to volunteer."
       redirect_to new_user_session_path
     elsif !event.users.all.include?(current_user) && event.remaining_vol > 0
       event.user_events.new(user: current_user)
@@ -169,9 +168,6 @@ class EventsController < ApplicationController
       flash[:notice] = "You've been added to the waitlist!"
       event.user_events.new(user: current_user, waitlist: waitlist_number + 1)
       event.save
-      redirect_to event_path(event.id)
-    else
-      flash[:notice] = "You're already signed up!"
       redirect_to event_path(event.id)
     end
   end

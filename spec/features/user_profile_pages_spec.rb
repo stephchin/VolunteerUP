@@ -46,6 +46,13 @@ RSpec.feature "UserProfilePages", type: :feature do
           end
         expect(page).to have_current_path(organization_path(@o1.id))
       end
+      And 'I can see a calendar of events that I am attending' do
+        page.has_selector?('calendar', :text => 'Calendar', :visible => true)
+      end
+      Then 'I can click on the specific event on the calendar' do
+        visit '/users/' + @user.id.to_s + '/get_events'
+        expect(page).to have_content(@event.name)
+      end
     end
   end
 end

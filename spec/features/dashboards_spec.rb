@@ -11,7 +11,7 @@ RSpec.feature "Dashboards", type: :feature do
     @event.organization = @org
     @event.save
     @event.user_events.create(user: @u2)
-    @event.user_events.create(user: @u1)
+    @event.user_events.create(user: @u1, waitlist: 1)
     @pw = "123456"
     @u1.user_organizations.create(organization: @org, is_creator: false)
     @u2.user_organizations.create(organization: @org, is_creator: true)
@@ -61,6 +61,11 @@ RSpec.feature "Dashboards", type: :feature do
       end
       Then "I can see the number of volunteers for an event" do
         expect(page).to have_css("h6", text: "0 needed / 1 total")
+      end
+      Then "I can remove a volunteer from an event" do
+        click_button "Remove From Event"
+        expect(page).to have_selector("form > input[value='Remove From Event']",
+          count: 1)
       end
     end
   end

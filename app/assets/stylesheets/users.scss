@@ -8,6 +8,7 @@
     font-size: 1.1em;
   }
 }
+
 .user-img {
   width: 12em;;
   height: 12em;
@@ -21,6 +22,7 @@
     border-radius: inherit;
   }
 }
+
 .user-thumb {
   width: 60px;
   height: 60px;
@@ -32,6 +34,24 @@
     border-radius: inherit;
   }
 }
+
+// Tabbed Column Calendar
+
+.fc-button-group {
+  margin-left: 60%;
+}
+
+.fc-center {
+  margin-left: 40%;
+  padding: 2%;
+  border: 0%;
+  font-size: 16px;
+}
+
+.fc-view-container {
+  position: relative;
+}
+
 #user-events-table{
   margin-top: 3em;
   background-color: #F8F8F8;
@@ -48,7 +68,7 @@
     border-bottom: .2em;
   }
 }
+
 #user-events-table .btn {
   width: 150px;
-
 }

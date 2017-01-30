@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature "JoinOrgs", type: :feature do
   before(:each) do
     @user = User.create(name: "YungTony", email:"t_eazy@bigmoney.com", password:"password", password_confirmation: "password", city: "Cincinnasty", state: "OH" )
-    @organization = Organization.new(name: "ABC", description: "ABC is a helpful org")
+    @organization = Organization.new(name: "ABC", description: "ABC is a helpful org", twitter: "http://twitter.com/org", facebook: "http://www.facebook.com/org")
     @organization.save
   end
    context 'A user can have many organizations' do
@@ -23,6 +23,7 @@ RSpec.feature "JoinOrgs", type: :feature do
        And 'I can visit the specific organization' do
          click_link 'ABC'
          expect(page).to have_content "ABC"
+
        end
        Then 'I can view and join the organization' do
          click_button "Join!"
