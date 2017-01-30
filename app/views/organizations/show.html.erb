@@ -80,6 +80,8 @@
       <% else %>
         <p><%= link_to "Sign In to Join!", new_user_session_path, class: "btn btn-info" %></p>
       <% end %>
+      <div id="orgcalendar"></div>
+      <input id="organization_id" type="hidden" value="<%= @organization.id %>"/>
     </div>
     <!-- events column -->
     <div class="col-md-6">
