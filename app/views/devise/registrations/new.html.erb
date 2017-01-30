@@ -1,3 +1,4 @@
+<div class="signup">
 <h2>Sign up</h2>
 <div class="devise-box">
 
@@ -49,25 +50,13 @@
       <%= f.file_field :image %>
     </div>
 
-    <!-- <div class="field">
-      <%= f.label :role %>
-      <%= select_tag(:role, options_for_select([['Volunteer', 1], ['Organizer', 2]], 1)) %>
-    </div>
-
-    <div class="field", id="org_selector">
-      <%= f.label :organization %>
-      <%= select_tag(:organization, options_for_select( Organization.all.map do |org|
-        [org.name, org.id]
-      end), {prompt: '- Select One -'}) %><br>
-
-    <%= link_to 'Or create a new organization', new_organization_path %>
-    </div><br> -->
-
-
     <div class="actions">
-      <%= f.submit "Sign up", class: "btn btn-sm btn-info" %>
+      <%= f.submit "Sign up", class: "btn btn-sm btn-login" %>
     </div>
   <% end %>
-  <%= link_to "Already have an account? Log in", new_session_path(resource_name) %><br><br />
+  <div class="loginlinks">
+  <%= link_to "Already have an account? Log in >>", new_session_path(resource_name) %>
   <%= render "devise/shared/links" %>
+</div>
+</div>
 </div>

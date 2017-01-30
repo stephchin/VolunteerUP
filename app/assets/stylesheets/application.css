@@ -91,60 +91,7 @@ a.btn {
   border-radius: 0px;
 }
 
-/* Sign in and login pages */
 
-.devise-box {
-  border: 1px solid #e7e7e7;
-  border-radius: 2px;
-  background-color: #f8f8f8;
-  padding: 15px;
-  margin: 10px 0px 10px 0px;
-  max-width: 337px;
-}
-
-.devise-box input, .devise-box a {
-  width: 300px;
-  height: 28px;
-  margin-bottom: 2px;
-}
-
-.devise-box label {
-  margin-top: 2px;
-}
-
-.login-with {
-  width: 300px;
-  height: 35px;
-  margin: .2em;
-}
-.login-with a {
-  color: white;
-  font-size: .85em;
-}
-.login-with i {
-  padding-right: .2em;
-}
-.display-inline-flex{
-  display: flex;
-}
-
-.devise-box input[type=checkbox]{
-  width: 17px;
-  padding-top: 0px;
-  margin-top: 0px
-}
-
-#user_remember_me_words{
-  width: 220px;
-  margin-left: .2em;
-  margin-top: 10px;
-}
-
-#city-field > input {
-  width: 225px;
-  margin-right: 11px;
-  font-size: 12px;
-}
 
 .user_state {
   height: 28px;
@@ -271,7 +218,7 @@ a.btn {
   margin-bottom: 5px;
 }
 
-/* new and edit forms*/
+/* org new and edit forms*/
 
 .form-size {
   width: 65em;
