@@ -15,6 +15,8 @@ RSpec.feature "VolunteerLogInRedirects", type: :feature do
       Given "I can go the Events page and go to the specific event" do
         visit '/'
         click_link 'Events'
+        fill_in 'filterrific_search_query', with: @event.name
+        click_button 'Search'
         click_link 'Some Event'
         expect(page).to have_current_path(event_path(@event.id))
       end
