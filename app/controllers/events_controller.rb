@@ -82,7 +82,6 @@ class EventsController < ApplicationController
     #   @events = Event.search(params[:search])
     # end
 
-    @events = @events.page(params[:page]).per(5)
     @filterrific = initialize_filterrific(
       Event,
       params[:filterrific],
@@ -98,9 +97,6 @@ class EventsController < ApplicationController
       format.js
     end
 
-    # kaminari pagination
-    @events = @events.page(params[:page]).per(5)
-
     if !params[:filterrific].nil?
       @zip = params[:filterrific][:with_distance][:zip]
       @max_distance = params[:filterrific][:with_distance][:max_distance]
@@ -115,8 +111,6 @@ class EventsController < ApplicationController
         @events = @filterrific.find.near(@zip, @max_distance).page(params[:page])
       end
     end
-    # kaminari pagination
-    @events = @events.page(params[:page]).per(5)
 
     @hash = Gmaps4rails.build_markers(@events) do |event,marker|
       marker.lat(event.latitude)
