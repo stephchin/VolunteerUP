@@ -50,7 +50,7 @@
   <div class="col-md-6">
     <div class="volunteer">
       <h5>Upcoming Events</h5>
-        <% org.events.all.each_with_index do |event, index| %>
+        <% org.events.order(:start_time).all.each_with_index do |event, index| %>
         <div class="event-box">
           <div class="row">
             <div class="col-sm-5">
