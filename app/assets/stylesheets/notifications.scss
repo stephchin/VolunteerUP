@@ -3,6 +3,7 @@ ul.notificator {
   display: inline-block;
   float:right;
   margin: 0;
+  z-index: -1000;
   li
   {
     // position: relative;
@@ -45,6 +46,7 @@ ul #notificationList
 
 #notificationsBody  ul
 {
+  z-index: -1000;
   padding-left: 0;
 }
 

@@ -1,12 +1,12 @@
 <ul class="notificator">
   <a href="#" id="open_notification">
-    <%= render 'counter', counter: @notifications.count %>
+    <%= render 'layouts/counter', counter: @notifications.count %>
   </a>
   <div id="notificationContainer">
     <div id="notificationTitle">Notifications</div>
     <div id="notificationsBody" class="notifications">
       <ul id="notificationList">
-        <%= render 'notification' %>
+        <%= render 'layouts/notification' %>
       </ul>
     </div>
     <div id="notificationFooter"></div>

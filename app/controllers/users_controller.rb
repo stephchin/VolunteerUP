@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show]
   before_action :set_ability
-  before_action :set_notification
   before_action :authenticate_user!, except: [:index, :show, :user_map_locations]
   load_and_authorize_resource
   skip_authorize_resource only: [:get_events, :user_map_locations]
@@ -50,14 +49,6 @@ class UsersController < ApplicationController
 
     def set_ability
       @ability = Ability.new(current_user)
-    end
-
-    def set_notification
-      if Notification.all.nil?
-        @notifications = []
-      else
-        @notifications = Notification.all.reverse
-      end
     end
 
 end
