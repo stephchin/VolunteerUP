@@ -65,6 +65,15 @@
           </tr>
         </thead>
       <tbody>
+        <% if @events.length == 0 %>
+          <tr>
+            <td>
+              <p id="noevents">You Have No Upcoming Events <i class="fa fa-frown-o fa-lg" aria-hidden="true"></i>
+              </p>
+              <%= link_to "Find Some!", events_path, class: "btn btn-info" %>
+            </td>
+          </tr>
+        <% else %>
         <% @events.each do |event| %>
           <tr>
             <td>
@@ -103,6 +112,7 @@
             <% end %>
           </tr>
         <% end %>
+      <% end %>
       </tbody>
     </table>
   </div>
