@@ -91,7 +91,6 @@ class OrganizationsController < ApplicationController
     all_orgs = []
     org_ids = current_user.organizations.all.map(&:id)
     @all_orgs = org_ids.map{ |id| Organization.find(id) }
-
   end
 
   def remove_organizer

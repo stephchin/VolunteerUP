@@ -85,7 +85,7 @@
     <div class="col-md-6">
       <h5><%= link_to "Events", events_path %></h5>
       <p id="events-list">
-        <% @organization.events.each do |event| %>
+        <% @organization.events.order(:start_time).each do |event| %>
           <div class="event-box">
             <div class="row">
               <div class="col-sm-5">
