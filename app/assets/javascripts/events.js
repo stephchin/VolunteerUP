@@ -10,6 +10,8 @@ $(document).ready(function(){
   }
 
 });
+
+
 function placeMakers(dataFromServer, markers) {
   console.log("placeMakers running");
   markers = handler.addMarkers(dataFromServer);
