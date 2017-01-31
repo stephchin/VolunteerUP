@@ -75,7 +75,7 @@ RSpec.feature "CreateEvents", type: :feature do
       end
       Then "I can delete the event" do
         click_link "Edit Event"
-        click_link "Destroy"
+        click_link "Delete Event"
         expect(page).to have_content 'Your event was successfully deleted.'
       end
     end

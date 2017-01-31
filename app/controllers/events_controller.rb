@@ -167,6 +167,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.update(event_params)
+        add_notification("has been updated!")
         format.html { redirect_to @event, notice: "#{@event.name} was successfully updated!" }
         format.json { render :show, status: :ok, location: @event }
       else
@@ -179,6 +180,7 @@ class EventsController < ApplicationController
   # DELETE /events/1
   # DELETE /events/1.json
   def destroy
+    add_notification("has been cancelled.")
     @event.destroy
     respond_to do |format|
       format.html { redirect_to events_url, notice: 'Your event was successfully deleted.' }
@@ -217,6 +219,7 @@ class EventsController < ApplicationController
     if event_waitlist.length > 0
       event_waitlist.sort
       event_waitlist[0].waitlist = nil
+      Notification.create(event: "You've been added to the event!", user_id: event_waitlist[0].user_id)
       event_waitlist[0].save
     end
     redirect_to user_path(u1)
@@ -236,4 +239,11 @@ class EventsController < ApplicationController
   def event_params
     params.require(:event).permit(:name, :description, :cause, :start_time, :end_time, :street, :city, :state, :postal_code, :country, :volunteers_needed, :organization_id)
   end
+
+  def add_notification(str)
+    @event.users.all.each do |user|
+      Notification.create(event: "#{@event.name} #{str}", user_id: user.id)
+    end
+  end
+
 end

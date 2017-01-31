@@ -116,6 +116,7 @@ class OrganizationsController < ApplicationController
     if event_waitlist.length > 0
       event_waitlist.sort
       event_waitlist[0].waitlist = nil
+      Notification.create(event: "You've been added to the event!", user_id: event_waitlist[0].user_id)
       event_waitlist[0].save
     end
     flash[:remove] = "You have removed a volunteer from the #{event.name} event."
@@ -152,4 +153,5 @@ class OrganizationsController < ApplicationController
     def organization_params
       params.require(:organization).permit(:name, :description, :phone, :email, :website, :image, :facebook, :twitter)
     end
+
 end

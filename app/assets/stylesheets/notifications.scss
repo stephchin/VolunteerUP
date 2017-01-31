@@ -1,0 +1,129 @@
+// Color Scheme
+$sky: #CAEBF2;
+$carbon: #A9A9A9;
+$middlecarbon: #878787;
+$darkcarbon: #656565;
+$watermelon: #FF3B3F;
+$neutral: #EFEFEF;
+
+
+ul.notificator {
+  display: inline-block;
+  float:right;
+  margin-top: .5em;
+  z-index: -1000;
+  li
+  {
+    // position: relative;
+    list-style: none;
+
+    i
+    {
+      color: #fff;
+    }
+  }
+}
+
+#notification-counter {
+  position: absolute;
+  top: -2px;
+  left: 25px;
+  margin-top: .5em;
+
+  background-color: $watermelon;
+  color: #fff;
+  border-radius: 3px;
+  padding: 2px 5px;
+  font: 8px Verdana;
+}
+
+.notification-img {
+  margin-top: 5px;
+}
+
+ul #notificationList
+{
+  li
+  {
+    position:relative;
+    border-bottom: #dddddd 1px solid;
+  }
+  span
+  {
+    color: #989494;
+    font-size: 8px;
+  }
+
+}
+
+#notificationsBody  ul
+{
+  z-index: -1000;
+  padding-left: 0;
+}
+
+#notificationContainer
+{
+  background-color: #fff;
+  border: 1px solid rgba(100, 100, 100, .4);
+  -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+  overflow: visible;
+  position: absolute;
+  top: 70px;
+  margin-left: -280px;
+  width: 300px;
+  z-index: 30;
+  display: none;
+}
+
+
+// #notificationContainer:before {
+//   content: '';
+//   display: block;
+//   position: absolute;
+//   width: 0;
+//   height: 0;
+//   color: transparent;
+//   border: 10px solid black;
+//   border-color: transparent transparent white;
+//   margin-top: -20px;
+//   margin-left: 258px;
+// }
+
+#notificationTitle
+{
+  font-weight: bold;
+  padding: 8px;
+  font-size: 13px;
+  background-color: #fbfdfd;
+  // position: absolute;
+  z-index: 1;
+  border-bottom: 1px solid $watermelon;
+  color: $watermelon;
+}
+
+#notificationsBody
+{
+  padding: 3px 0px 0px 0px !important;
+  min-height:300px;
+  max-height:300px;
+  overflow: auto;
+  position: relative;
+  width: 100%;
+}
+
+
+#notificationFooter
+{
+  background-color: #fbfdfd;
+  text-align: center;
+  font-weight: bold;
+  padding: 8px;
+  font-size: 12px;
+  border-top: 1px solid #eeeeee;
+}
+
+ul#notificationList > li
+{
+  padding: 3px;
+}

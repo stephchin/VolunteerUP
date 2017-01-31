@@ -10,10 +10,12 @@ $(document).ready(function(){
   }
 
 });
+
+
 function placeMakers(dataFromServer, markers) {
   console.log("placeMakers running");
   markers = handler.addMarkers(dataFromServer);
-  // handler.bounds.extendWith(markers);
+  handler.bounds.extendWith(markers);
   handler.fitMapToBounds();
 }
 
@@ -50,8 +52,7 @@ function createGmap(dataFromServer) {
     showLocations(dataFromServer);
     markers = handler.addMarkers(dataFromServer);
     handler.bounds.extendWith(markers);
-    // handler.fitMapToBounds();
-    handler.getMap().setZoom(15);
+    handler.fitMapToBounds();
   });
 };
 

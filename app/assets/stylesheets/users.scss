@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.hi-user {
+  font-size: 2.8em;
+}
+
 .user-info {
   padding-top: 1em;
   p {
@@ -56,8 +60,8 @@
 
 #user-events-table{
   margin-top: 3em;
-  background-color: #F8F8F8;
-  border: 1px solid #e7e7e7;
+  background-color: #EFEFEF;
+  border: 1px solid #EFEFEF;
   border-collapse: separate;
   border-radius: .2em;
   min-width: 960px;
@@ -70,15 +74,15 @@
   td {
     border-bottom: .2em;
   }
-  .btn { width: 150px; }
-  th:nth-child(1){ width:35%; }
-  th:nth-child(2){ width:10%; }
-  th:nth-child(3){ width:10%; }
-  th:nth-child(4){ width:15%; }
-  th:nth-child(5){ width:20%; }
-  th:nth-child(6){ width:10%; }
+  .btn { width: 125px; }
+  th:nth-child(1){ width:25%; }
+  th:nth-child(2){ width:20%; }
+  th:nth-child(3){ width:20%; }
+  th:nth-child(4){ width:20%; }
+  th:nth-child(5){ width:15%; }
 }
 
 #noevents {
-  font-size: 1.5em;
+  font-size: 1.2em;
+
 }

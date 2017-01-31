@@ -1,15 +1,28 @@
+// Font Defaults
+$header: 'BenchNine', sans-serif;
+$main: 'Signika', sans-serif;
+
+// Color Scheme
+$sky: #CAEBF2;
+$carbon: #A9A9A9;
+$darkcarbon: #656565;
+$watermelon: #FF3B3F;
+$neutral: #EFEFEF;
+
 body {
   background-color: #fff;
   color: #333;
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
+  font-family: $main;
+  font-size: 15px;
+  font-weight: 300;
   line-height: 18px;
   margin: 0px 0px 33px 0px;
 }
 
 p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
+  font-family: $main;
+  font-size: 15px;
+  font-weight: 300;
   line-height: 18px;
   margin-top: 15px;
 }
@@ -59,32 +72,8 @@ div {
 
 .field_with_errors > input, .field_with_errors > textarea {
   border: 1px solid #de4b39;
+  border-radius: .2em;
 }
-
-// #error_explanation {
-//   width: 450px;
-//   border: 2px solid red;
-//   padding: 7px;
-//   padding-bottom: 0;
-//   margin-bottom: 20px;
-//   background-color: #f0f0f0;
-//
-//   h2 {
-//     text-align: left;
-//     font-weight: bold;
-//     padding: 5px 5px 5px 15px;
-//     font-size: 12px;
-//     margin: -7px;
-//     margin-bottom: 0;
-//     background-color: #c00;
-//     color: #fff;
-//   }
-//
-//   ul li {
-//     font-size: 12px;
-//     list-style: square;
-//   }
-// }
 
 label {
   display: block;

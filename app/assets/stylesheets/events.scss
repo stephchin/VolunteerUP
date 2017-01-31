@@ -1,6 +1,21 @@
 // Place all the styles related to the Events controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// Font Defaults
+$header: 'BenchNine', sans-serif;
+$main: 'Signika', sans-serif;
+
+// Color Scheme
+$sky: #CAEBF2;
+$carbon: #A9A9A9;
+$darkcarbon: #656565;
+$watermelon: #FF3B3F;
+$neutral: #EFEFEF;
+
+//events
+
+
 .event-notice p {
   margin-top: 0px;
   font-size: 1.5em;
@@ -8,7 +23,7 @@
 }
 
 #signed-up {
-  color: #7aae49;
+  color: #2ecc71;
 }
 
 #on-waitlist {
@@ -29,7 +44,11 @@
 }
 
 #calendar h2 {
-  font-size: 20px;
+  font-family: $header;
+  text-transform: uppercase;
+  font-size: 2em;
+  text-align: center;
+  color: $darkcarbon;
 }
 
 .fc-toolbar.fc-header-toolbar {
@@ -49,41 +68,48 @@
 
 .children-youth{
   //purple
-  background-color: #e8b3f9;
-  color: #656565;
+  background-color: #9b59b6;
+  color: rgba(255,255,255,.6)
 }
 .animals{
   // red
-  background-color: #ff8282;
-  // color: #656565;
+  background-color: #f1c40f;
+  color: rgba(255,255,255,.6);
 }
 .arts-culture{
   //orange-red
-  background-color: #ffb368;
+  background-color: #e67e22;
+  color: rgba(255,255,255,.6);
 }
 .community-development{
   //pink
-  background-color: #fcb3df;
+  background-color: #2ecc71;
+  color: rgba(255,255,255,.6);
 }
 .health-hospitals{
   //teal
-  background-color: #31c6b7;
+  background-color: #1abc9c;
+  color: rgba(255,255,255,.6);
 }
 .mental-health{
   //orange-yellow
-  background-color: #f7dc2e;
+  background-color: #34495e;
+  color: rgba(255,255,255,.6);
 }
 .education-literacy{
   //blue
-  background-color: #26b8f0;
+  background-color: #e74c3c;
+  color: rgba(255,255,255,.6);
 }
 .homelessness{
   //light blue
-  background-color: #b6bef9;
+  background-color: #3498db;
+  color: rgba(255,255,255,.6);
 }
 .other{
   //light green
-  background-color: #6b9176;
+  background-color: #95a5a6;
+  color: rgba(255,255,255,.5);
 }
 
 // Search bar

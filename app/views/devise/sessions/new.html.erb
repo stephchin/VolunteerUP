@@ -1,3 +1,4 @@
+<div class="signup">
 <h2>Log in</h2>
 <div class="devise-box">
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -12,16 +13,18 @@
     </div>
 
     <% if devise_mapping.rememberable? -%>
-      <div class="field display-inline-flex">
-        <%= f.check_box :remember_me %>
-        <p id="user_remember_me_words"><%= f.label :remember_me %></p>
+      <div class="field" id="remember-box">
+        <%= f.check_box :remember_me, style: "display: inline-block;" %>
+        <%= f.label :remember_me, style: "display: inline-block;" %>
       </div>
     <% end -%>
 
     <div class="actions">
-      <%= f.submit "Log in", class: "btn btn-sm btn-info" %>
+      <%= f.submit "Log in", class: "btn btn-sm btn-login" %>
     </div>
   <% end %>
-
+  <div class="loginlinks">
   <%= render "devise/shared/links" %>
+</div>
+</div>
 </div>
