@@ -70,7 +70,7 @@ $neutral: #EFEFEF;
   display: block;
   margin-top: .5em;
 }
-.login-with a {
+.login-with a, .login-with a:hover {
   color: white;
   font-size: .85em;
 }

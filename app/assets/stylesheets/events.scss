@@ -2,6 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+// Font Defaults
+$header: 'BenchNine', sans-serif;
+$main: 'Signika', sans-serif;
+
+// Color Scheme
+$sky: #CAEBF2;
+$carbon: #A9A9A9;
+$darkcarbon: #656565;
+$watermelon: #FF3B3F;
+$neutral: #EFEFEF;
+
+//events
+
 
 .event-notice p {
   margin-top: 0px;
@@ -31,7 +44,11 @@
 }
 
 #calendar h2 {
-  font-size: 20px;
+  font-family: $header;
+  text-transform: uppercase;
+  font-size: 2em;
+  text-align: center;
+  color: $darkcarbon;
 }
 
 .fc-toolbar.fc-header-toolbar {

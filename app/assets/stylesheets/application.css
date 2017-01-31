@@ -36,9 +36,18 @@
    background-color: #656565;
    border-color: #656565;
  }
- .btn-primary:hover {
+ .btn-primary:hover. .btn-primary:active {
    background-color: #f04242;
    border-color: #f04242;
+ }
+
+ .btn-info {
+   background-color:  #a1bcc1;
+   border-color:  #a1bcc1;
+ }
+ .btn-info:hover, .btn-info:active, .btn-info:focus  {
+   background-color: #CAEBF2;
+   border-color: #CAEBF2;
  }
 
  .btn-warning {
@@ -46,7 +55,7 @@
    border-color: #f1c40f;
  }
 
- .btn-warning:hover {
+ .btn-warning:hover, .btn-warning:active {
    background-color: #f39c12;
    border-color: #f39c12;
  }
@@ -104,7 +113,7 @@ a:hover, a.breadcrumb-item:hover {
 h1 {
   font-family: 'BenchNine', sans-serif;
   color: #A9A9A9;
-  font-size: 6em;
+  font-size: 4em;
   text-transform: uppercase;
 }
 
@@ -130,7 +139,7 @@ h4 {
 
 h5, th {
  font-weight: bold;
- font-size: 12px;
+ font-size: 16px;
  text-transform: uppercase;
  color: #656565;
  letter-spacing: 1.1px;
@@ -168,7 +177,7 @@ h5, th {
 
 .user_state {
   height: 28px;
-  background-color: #f8f8f8;
+  background-color: #EFEFEF;
 }
 
 .about-links button {

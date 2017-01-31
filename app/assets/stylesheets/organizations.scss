@@ -1,6 +1,13 @@
-// Place all the styles related to the Organizations controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+// Font Defaults
+$header: 'BenchNine', sans-serif;
+$main: 'Signika', sans-serif;
+
+// Color Scheme
+$sky: #CAEBF2;
+$carbon: #A9A9A9;
+$darkcarbon: #656565;
+$watermelon: #FF3B3F;
+$neutral: #EFEFEF;
 
 // Makes columns same height in row
 .row-tall {
@@ -41,11 +48,11 @@
 }
 
 .organizer {
-  background-color: #f8f8f8;
+  background-color: #EFEFEF;
 }
 
 .volunteer {
-  background-color: #f8f8f8;
+  background-color: #EFEFEF;
 }
 
 .org-social-media a i {
@@ -76,4 +83,9 @@
 .eventdescription {
   font-weight: lighter;;
   font-style: italic;
+}
+
+.dashboardh2 {
+  font-family: $main;
+  font-size: 1.8em;
 }
