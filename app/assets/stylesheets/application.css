@@ -36,7 +36,7 @@
    background-color: #656565;
    border-color: #656565;
  }
- .btn-primary:hover. .btn-primary:active {
+ .btn-primary:hover, .btn-primary:active {
    background-color: #f04242;
    border-color: #f04242;
  }
