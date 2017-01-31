@@ -1,3 +1,7 @@
+<% content_for(:body_attributes) do %>
+   data-no-turbolink="true"
+ <% end %>
+
 <nav class="breadcrumb">
   <a class="breadcrumb-item" href="/">Home</a>
   <span class="breadcrumb-item active"> / My Profile</span>
@@ -12,8 +16,8 @@
 <% end %>
 <p class="success"><%= success %></p>
   <div class="row">
-    <div class="col-md-4">
-      <h1>Hi <%= @user.name %>!</h1>
+    <div class="col-md-5">
+      <h1 class="hi-user">Hi <%= @user.name %>!</h1>
       <div class="user-img">
         <%= image_tag(@user.image.url(:large)) %>
       </div>
@@ -41,10 +45,10 @@
         </p>
     </div><!--ends col-md-4-->
 
-    <div class="col-md-8">
-      <ul class="nav nav-tabs">
+    <div class="col-md-7">
+      <ul class="nav nav-tabs" id="user-tabs">
         <li class="active"><a data-toggle="tab" href="#calendar">Calendar</a></li>
-        <li><a data-toggle="tab" href="#user_map"> Map</a></li>
+        <li id="map-tab"><a data-toggle="tab" href="#user_map"> Map</a></li>
       </ul>
       <div class="tab-content">
         <div id="calendar" class="tab-pane fade in active"></div>
@@ -61,46 +65,46 @@
   <div class="table-responsive">
     <table class="table" id="user-events-table">
       <caption>Your Upcoming Events</caption>
+        <% if @events.length == 0 %>
+          <tr>
+            <td>
+              <p id="noevents">You aren't currently signed up for any events...</p><br>
+              <%= link_to "Volunteer now!", events_path, class: "btn btn-lg btn-primary" %><br><br>
+            </td>
+          </tr>
+        <% else %>
         <thead>
           <tr>
             <th>Event</th>
-            <th>Cause</th>
             <th>Organization</th>
             <th>Date and Time</th>
-            <th>Event Location</th>
+            <th>Date Location</th>
             <th>Can't Make It?</th>
           </tr>
         </thead>
       <tbody>
-        <% if @events.length == 0 %>
-          <tr>
-            <td>
-              <p id="noevents">You Have No Upcoming Events <i class="fa fa-frown-o fa-lg" aria-hidden="true"></i>
-              </p>
-              <%= link_to "Find Some!", events_path, class: "btn btn-info" %>
-            </td>
-          </tr>
-        <% else %>
         <% @events.each do |event| %>
           <tr>
             <td>
-              <strong><%= link_to event.name, event %></strong><br><br>
-              <%= event.description %><br><br>
-            </td>
-            <td><%= event.cause %></td>
-            <td><%= link_to event.organization.name, organization_path(event.organization) %></td>
-            <td>
-              <%= event.start_time.strftime("%b %e, %Y")%><br>
-              <%= event.start_time.strftime("%l:%M %p") %> -
-              <%= event.end_time.strftime("%l:%M %p") %><br>
-              (<%= ((event.end_time-event.start_time)/3600).round(1)  %> hours)
+              <strong><%= link_to event.name, event %></strong><br>
             </td>
             <td>
-              <%= event.street %><br>
-              <%= event.city %>,
-              <%= event.state %>
-              <%= event.postal_code %>
-              <%= event.country %>
+              <%= link_to event.organization.name, organization_path(event.organization) %>
+            </td>
+            <td>
+                <span class="glyphicon glyphicon-time"></span>
+                <%= event.start_time.strftime("%b %e, %Y")%><br>
+                <%= event.start_time.strftime("%l:%M %p") %> -
+                <%= event.end_time.strftime("%l:%M %p") %><br>
+                (<%= ((event.end_time-event.start_time)/3600).round(1)  %> hours)
+            </td>
+            <td>
+                <span class="glyphicon glyphicon-map-marker"></span>
+                <%= event.street %><br>
+                <%= event.city %>,
+                <%= event.state %>
+                <%= event.postal_code %>
+                <%= event.country %>
             </td>
             <% if user_signed_in? %>
               <% if current_user.events.all.include?(Event.find(event.id)) %>

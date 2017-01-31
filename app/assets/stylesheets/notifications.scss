@@ -1,8 +1,16 @@
+// Color Scheme
+$sky: #CAEBF2;
+$carbon: #A9A9A9;
+$middlecarbon: #878787;
+$darkcarbon: #656565;
+$watermelon: #FF3B3F;
+$neutral: #EFEFEF;
+
 
 ul.notificator {
   display: inline-block;
   float:right;
-  margin: 0;
+  margin-top: .5em;
   z-index: -1000;
   li
   {
@@ -20,14 +28,18 @@ ul.notificator {
   position: absolute;
   top: -2px;
   left: 25px;
+  margin-top: .5em;
 
-  background-color: rgb(212, 78, 3);
+  background-color: $watermelon;
   color: #fff;
   border-radius: 3px;
-  padding: 1px 3px;
+  padding: 2px 5px;
   font: 8px Verdana;
 }
 
+.notification-img {
+  margin-top: 5px;
+}
 
 ul #notificationList
 {
@@ -58,9 +70,9 @@ ul #notificationList
   overflow: visible;
   position: absolute;
   top: 70px;
-  margin-left: -253px;
+  margin-left: -280px;
   width: 300px;
-  z-index: 0;
+  z-index: 30;
   display: none;
 }
 
@@ -83,11 +95,11 @@ ul #notificationList
   font-weight: bold;
   padding: 8px;
   font-size: 13px;
-  background-color: #f0f0f0;
+  background-color: #fbfdfd;
   // position: absolute;
   z-index: 1;
-  border-bottom: 1px solid #d44e03;
-  color: #d44e03;
+  border-bottom: 1px solid $watermelon;
+  color: $watermelon;
 }
 
 #notificationsBody
@@ -103,12 +115,12 @@ ul #notificationList
 
 #notificationFooter
 {
-  background-color: #e9eaed;
+  background-color: #fbfdfd;
   text-align: center;
   font-weight: bold;
   padding: 8px;
   font-size: 12px;
-  border-top: 1px solid #dddddd;
+  border-top: 1px solid #eeeeee;
 }
 
 ul#notificationList > li

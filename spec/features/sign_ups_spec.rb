@@ -49,14 +49,15 @@ RSpec.feature "SignUps", type: :feature do
         expect(page).to have_content("Welcome to VolunteerUP! You've successfully signed up.")
       end
       Then "I can see that I am logged in" do
-        expect(page).to have_content("Logged in as: Suzan")
+        expect(page).to have_content("Suzan")
         expect(page).to have_content("Profile")
         expect(page).to have_content("Log out")
         expect(page).to_not have_content("Log in")
         expect(page).to_not have_content("Sign up")
       end
       And "I can see my user profile page" do
-        click_link "Profile"
+        @user = User.find_by_email("123@yahoo.com")
+        visit user_path(@user.id)
         expect(page).to have_content "Hi Suzan!"
         expect(page).to have_content "123@yahoo.com"
         expect(page).to have_content "Cincinnati OH"
