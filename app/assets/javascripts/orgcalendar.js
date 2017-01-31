@@ -4,9 +4,9 @@ $(document).ready(function() {
      timeFormat: "LT",
      defaultView: 'month',
      header: {
-        left: 'title',
-        center: '',
-        right: 'prev,next, month,agendaWeek,agendaDay',
+        left: 'prev,next',
+        center: 'title',
+        right: 'month,agendaWeek',
       },
       height: 395,
      eventClick: function(event) {
