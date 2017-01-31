@@ -1,21 +1,14 @@
 
-// $(document).ready(function(){
-//   createTweet();
-//
-//   function createTweet() {
-//     console.log("updateTweet running");
-//     var event = $("#event-name").text();
-//     var org = $("#organization").text();
-//     $("#tweet").attr('data-text', "Excited for "+ org + "'s " + event + "! Join us " + "#volunteerup");
-//   }
-//
-// });
+$(document).ready(function(){
+
+});
 
 function placeMakersUser(dataFromServer, markers) {
   console.log("user placeMarkers running");
   markers = handler.addMarkers(dataFromServer);
   handler.bounds.extendWith(markers);
   handler.fitMapToBounds();
+  handler.getMap().setZoom(14);
 }
 
 function showLocations(dataFromServer) {
@@ -79,7 +72,6 @@ function loadAndCreateGmapUser() {
     });
   }
 };
-
 
 $(document).on('ready', loadAndCreateGmapUser);
 $(document).on('turbolinks:load', loadAndCreateGmapUser);

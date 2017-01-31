@@ -1,3 +1,7 @@
+<% content_for(:body_attributes) do %>
+   data-no-turbolink="false"
+ <% end %>
+
 <nav class="breadcrumb">
   <a class="breadcrumb-item" href="/">Home</a>
   <span class="breadcrumb-item active"> / My Profile</span>
@@ -35,9 +39,9 @@
     </div><!--ends col-md-4-->
 
     <div class="col-md-7">
-      <ul class="nav nav-tabs">
+      <ul class="nav nav-tabs" id="user-tabs">
         <li class="active"><a data-toggle="tab" href="#calendar">Calendar</a></li>
-        <li><a data-toggle="tab" href="#user_map"> Map</a></li>
+        <li><a data-toggle="tab" href="#user_map" id="map-tab"> Map</a></li>
       </ul>
       <div class="tab-content">
         <div id="calendar" class="tab-pane fade in active"></div>
