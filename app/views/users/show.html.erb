@@ -6,7 +6,7 @@
 <p class="success"><%= success %></p>
   <div class="row">
     <div class="col-md-5">
-      <h1>Hi <%= @user.name %>!</h1>
+      <h1 class="hi-user">Hi <%= @user.name %>!</h1>
       <div class="user-img">
         <%= image_tag(@user.image.url(:large)) %>
       </div>
@@ -54,6 +54,14 @@
   <div class="table-responsive">
     <table class="table" id="user-events-table">
       <caption>Your Upcoming Events</caption>
+        <% if @events.length == 0 %>
+          <tr>
+            <td>
+              <p id="noevents">You aren't currently signed up for any events...</p><br>
+              <%= link_to "Volunteer now!", events_path, class: "btn btn-lg btn-primary" %><br><br>
+            </td>
+          </tr>
+        <% else %>
         <thead>
           <tr>
             <th>Event</th>
@@ -64,15 +72,6 @@
           </tr>
         </thead>
       <tbody>
-        <% if @events.length == 0 %>
-          <tr>
-            <td>
-              <p id="noevents">You Have No Upcoming Events <i class="fa fa-frown-o fa-lg" aria-hidden="true"></i>
-              </p>
-              <%= link_to "Find Some!", events_path, class: "btn btn-info" %>
-            </td>
-          </tr>
-        <% else %>
         <% @events.each do |event| %>
           <tr>
             <td>
