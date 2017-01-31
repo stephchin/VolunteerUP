@@ -50,7 +50,7 @@ function createGmap(dataFromServer) {
     showLocations(dataFromServer);
     markers = handler.addMarkers(dataFromServer);
     handler.bounds.extendWith(markers);
-    // handler.fitMapToBounds();
+    handler.fitMapToBounds();
     handler.getMap().setZoom(15);
   });
 };

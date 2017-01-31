@@ -8,7 +8,6 @@ function placeMakersUser(dataFromServer, markers) {
   markers = handler.addMarkers(dataFromServer);
   handler.bounds.extendWith(markers);
   handler.fitMapToBounds();
-  handler.getMap().setZoom(14);
 }
 
 function showLocations(dataFromServer) {
@@ -46,6 +45,7 @@ function createGmapUser(dataFromServer) {
     markers = handler.addMarkers(dataFromServer);
     handler.bounds.extendWith(markers);
     handler.fitMapToBounds();
+    handler.getMap().setZoom(15);
   }
 );
 };
