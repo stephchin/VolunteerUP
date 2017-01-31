@@ -1,9 +1,12 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  #prevent errors with the ActionCable notifications
+  config.action_cable.allowed_request_origins = ['http://0.0.0.0:3000']
+
   # Tell Paperclip where to find ImageMagick
   Paperclip.options[:command_path] = "/usr/local/bin/"
-  
+
   # default url options for devise dev environment
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
