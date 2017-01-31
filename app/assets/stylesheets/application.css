@@ -16,8 +16,15 @@
  *= require bootstrap-datepicker
  */
 
+/*bootstrap overrides*/
+  .navbar {
+    margin-bottom: 0px;
+    border-radius: 0px;
+  }
+
  .navbar-default {
    background-color: #fbfdfd;
+   border-color: #eeeeee;
  }
  .navbar-default .navbar-nav>li>a, .navbar-default .navbar-brand{
    color: #545454;
@@ -25,7 +32,38 @@
  .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-brand{
    color: #f04242;
  }
+ .btn-primary {
+   background-color: #656565;
+   border-color: #656565;
+ }
+ .btn-primary:hover {
+   background-color: #f04242;
+   border-color: #f04242;
+ }
 
+ .btn-warning {
+   background-color: #f1c40f;
+   border-color: #f1c40f;
+ }
+
+ .btn-warning:hover {
+   background-color: #f39c12;
+   border-color: #f39c12;
+ }
+
+.pagination>li>a, .pagination>li>span {
+  color: #656565;
+}
+
+/*pagination overrides*/
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+  background-color: #656565;
+  border-color: #656565;
+}
+.pagination>li>a:focus, .pagination>li>a:hover, .pagination>li>span:focus, .pagination>li>span:hover {
+  color: #f04242;
+  background-color: white;
+}
 
 
 /* Makes columns same height in row */
@@ -44,6 +82,24 @@
 }
 
 /* Text */
+
+a, a:focus {
+  color: #656565;
+}
+
+a.btn {
+  color: white;
+}
+
+a:hover, a.breadcrumb-item:hover {
+  color: #FF3B3F;
+  background-color: inherit;
+  text-decoration: none;
+}
+
+.breadcrumb>.active {
+  color: #A9A9A9;
+}
 
 h1 {
   font-family: 'BenchNine', sans-serif;
@@ -76,7 +132,7 @@ h5, th {
  font-weight: bold;
  font-size: 12px;
  text-transform: uppercase;
- color: black;
+ color: #656565;
  letter-spacing: 1.1px;
  margin-top: 2em;
 }
@@ -91,25 +147,8 @@ h5, th {
   margin-top: 17px;
 }
 
-a:hover {
-  background-color: inherit;
-  color: #005eb4;
-  text-decoration: none;
-}
-
-a.btn {
-  color: white;
-}
-
 .btn {
   border-radius: 2px;
-}
-
-/* Navigation */
-
-.navbar {
-  margin-bottom: 0px;
-  border-radius: 0px;
 }
 
 /* Breadcrumb */
@@ -203,7 +242,7 @@ a.btn {
 
 .text-area, .event-box {
   /*background-color: white;*/
-  border-top: 1px solid #ebebeb;
+  border-top: 1px solid #A9A9A9;
   /*border-bottom: 1px solid #ebebeb;*/
   /*border-radius: 5px;*/
   /*padding: 0px 10px 0px 10px;*/
@@ -252,15 +291,15 @@ a.btn {
 }
 
 #colored-vols-needed {
-  background-color: #7aae49;
-  color: white;
-  border: 1px solid #618b3a;
+  background-color: #2ecc71;
+  color: rgba(255,255,255,1);
+  border: 1px solid #2ecc71;
   border-radius: .4em;
 }
 
 #greyed-out-vols-needed {
-  background-color: #cfcfcf;
-  color: white;
+  background-color: #A9A9A9;
+  color: rgba(255,255,255,1);
   border: 1px solid #a5a5a5;
   border-radius: .4em;
 }
