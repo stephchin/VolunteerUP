@@ -10,7 +10,7 @@ $neutral: #EFEFEF;
 ul.notificator {
   display: inline-block;
   float:right;
-  margin: 0;
+  margin-top: .5em;
   z-index: -1000;
   li
   {
@@ -28,6 +28,7 @@ ul.notificator {
   position: absolute;
   top: -2px;
   left: 25px;
+  margin-top: .5em;
 
   background-color: $watermelon;
   color: #fff;
@@ -71,7 +72,7 @@ ul #notificationList
   top: 70px;
   margin-left: -280px;
   width: 300px;
-  z-index: 2;
+  z-index: 30;
   display: none;
 }
 
