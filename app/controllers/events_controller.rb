@@ -219,6 +219,7 @@ class EventsController < ApplicationController
     if event_waitlist.length > 0
       event_waitlist.sort
       event_waitlist[0].waitlist = nil
+      Notification.create(event: "You've been added to the event!", user_id: event_waitlist[0].user_id)
       event_waitlist[0].save
     end
     redirect_to user_path(u1)
