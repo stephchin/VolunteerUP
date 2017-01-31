@@ -7,7 +7,8 @@ state = "CA"
 # To create all Organizations
 org_names = ["We Help", "Food Bankers", "Red Cross", "Real Helpers",
   "Salvation Army", "Are We Done Yet", "Not Today", "Big Time Rush", "Sudwerk",
-  "Greendale", "We Have Time For That", "Sacred Honors International Team", "Until Dark"]
+  "Greendale", "We Have Time For That", "Sacred Honors International Team",
+  "Until Dark", "Scott's Tots", "Attractive Women"]
 descriptions = ["We help people.", "Animals are our priority.", "Don't run away",
   "We are serious organization!", "Just like your next door neighbor.",
   "Getting closer and closer to finshing!",
@@ -17,7 +18,13 @@ descriptions = ["We help people.", "Animals are our priority.", "Don't run away"
   "Who is better at being human beings than these human beings! Dean-a-ling-a-ling! Something Something Eartha Kitt.",
   "Tired of hearing 'I ain't got time for that?' Then are you in for a treat! Our organization has just that, time!",
   "Here at Sacred Honors International Team, we are the... well, you can read. We lead the way by flushing everyone's problems away on top of wiping away any stain left behind!",
-  "Listen, I'm tired. It's almost midnight and I have left in the tank. If you want to volunteer, you're more than welcome to. I'm just going to sleep now."
+  "Listen, I'm tired. It's almost midnight and I have left in the tank. If you want to volunteer, you're more than welcome to. I'm just going to sleep now.",
+  "Hey, Mr. Scott. Watcha gonna do, watcha gonna do? Make our dreams come true!
+    Here at Scott's Tots we provide students with college tuition! Or actually
+    laptops. Sorry we mean lithium batteries. Man, has it been 10 years already?
+    Anyways... We promise to do a lot for the children.",
+  "Psych! Now that we've lured you to our webpage, what we really do is run community events for different causes. Please come join us to make a difference!"
+
 ]
 
 org_names.each_with_index do |org, index|
@@ -108,7 +115,7 @@ event_names = [
     of the other, you'll get there eventually."}}
 ]
 
-33.times do |iter|
+28.times do |iter|
   names_index = rand(event_names.length)
   name_key = event_names[names_index].keys[0]
   causes_index = rand(causes.length)
@@ -152,8 +159,10 @@ u8 = User.find_by_email("q@yahoo.com")
 u9 = User.find_by_email("r@yahoo.com")
 u10 = User.find_by_email("s@yahoo.com")
 u13 = User.find_by_email("t@yahoo.com")
+u14 = User.find_by_email("u@yahoo.com")
+u15 = User.find_by_email("v@yahoo.com")
 
-[u1, u2, u3, u4, u5, u6, u7, u8, u9, u10, u11, u12, u13].each_with_index do |u, index|
+[u1, u2, u3, u4, u5, u6, u7, u8, u9, u10, u11, u12, u13, u14, u15].each_with_index do |u, index|
   u.add_role :organizer
   u.user_organizations.create!(
     organization: Organization.find_by_name(org_names[index]),
@@ -180,7 +189,7 @@ user_length = User.all.length
 event_length = Event.all.length
 
 User.all.each do |user|
-  10.times do |iter|
+  (rand(3) + 4).times do |iter|
     e = Event.find(rand(event_length) + 1)
     if !e.users.all.include?(user) && e.remaining_vol > 0
       e.user_events.new(user: user)
