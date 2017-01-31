@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  after_initialize :add_json
+  after_create :add_json
   after_create_commit  { NotificationBroadcastJob.perform_later(Notification.count,self)}
   after_commit :assign_role
 

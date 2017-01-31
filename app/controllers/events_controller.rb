@@ -194,6 +194,9 @@ class EventsController < ApplicationController
       redirect_to new_user_session_path
     elsif !event.users.all.include?(current_user) && event.remaining_vol > 0
       event.user_events.new(user: current_user)
+      current_user.likes[event.cause] += 1
+      hash = current_user.likes.dup
+      current_user.update!(likes: hash)
       event.save
       flash[:success] = "You're signed up! Happy volunteering."
       redirect_to event_path(event.id)
@@ -204,6 +207,8 @@ class EventsController < ApplicationController
       end
       flash[:notice] = "You've been added to the waitlist!"
       event.user_events.new(user: current_user, waitlist: waitlist_number + 1)
+      user.likes[event.cause] += 1
+      current_user.save!
       event.save
       redirect_to event_path(event.id)
     end
