@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
   def show
     @events = @user.events.all
+    @causes = current_user.likes.sort_by{ |key, value| -value }.select{ |cause| Event.where(cause: cause[0]).length > 0 }.first(3)
   end
 
   def user_map_locations

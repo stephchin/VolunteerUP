@@ -4,6 +4,12 @@
 </nav>
 
 <h1><%= current_user.likes %></h1>
+<% @causes.each do |cause| %>
+    <div>
+    <p><%= Event.all.where(cause: cause).first.name %></p>
+    <p><%= cause %></p>
+    </div>
+<% end %>
 <p class="success"><%= success %></p>
   <div class="row">
     <div class="col-md-4">
