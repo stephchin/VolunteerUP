@@ -54,6 +54,7 @@ class User < ApplicationRecord
     causes = ["Children/Youth", "Animals", "Arts & Culture", "Community Development",
       "Health/Hospitals", "Mental Health", "Education/Literacy", "Homelessness", "Other"]
     self.likes = causes.map { |x| [x, 0] }.to_h
+    self.save!
   end
 
   rolify
