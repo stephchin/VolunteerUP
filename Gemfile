@@ -15,6 +15,9 @@ gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+#AWS S3
+gem 'aws-sdk', '~> 2.3'
+
 # Search with filters
 gem 'filterrific'
 # Pagination
