@@ -1,6 +1,8 @@
 // Place all the styles related to the Events controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
 .event-notice p {
   margin-top: 0px;
   font-size: 1.5em;
@@ -8,7 +10,7 @@
 }
 
 #signed-up {
-  color: #7aae49;
+  color: #2ecc71;
 }
 
 #on-waitlist {
@@ -49,37 +51,46 @@
 
 .children-youth{
   //purple
-  background-color: #9048ce;
+  background-color: #9b59b6;
+  color: rgba(255,255,255,.6)
 }
 .animals{
   // red
-  background-color: #ea0000;
+  background-color: #f1c40f;
+  color: rgba(255,255,255,.6);
 }
 .arts-culture{
   //orange-red
-  background-color: #f68900;
+  background-color: #e67e22;
+  color: rgba(255,255,255,.6);
 }
 .community-development{
   //pink
-  background-color: #e50398;
+  background-color: #2ecc71;
+  color: rgba(255,255,255,.6);
 }
 .health-hospitals{
-  //turquoise
-  background-color: #06C5A3;
+  //teal
+  background-color: #1abc9c;
+  color: rgba(255,255,255,.6);
 }
 .mental-health{
   //orange-yellow
-  background-color: #FFD700;
+  background-color: #34495e;
+  color: rgba(255,255,255,.6);
 }
 .education-literacy{
-  //light blue
-  background-color: #26b8f0;
+  //blue
+  background-color: #e74c3c;
+  color: rgba(255,255,255,.6);
 }
 .homelessness{
   //light blue
-  background-color: #3d40ea;
+  background-color: #3498db;
+  color: rgba(255,255,255,.6);
 }
 .other{
   //light green
-  background-color: #6ed44e;
+  background-color: #95a5a6;
+  color: rgba(255,255,255,.5);
 }
