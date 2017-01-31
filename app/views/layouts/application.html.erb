@@ -66,11 +66,10 @@
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
 
-              <li><p>Logged in as: <%= current_user.name %></p></li>
+              <li><%= link_to current_user.name, user_path(current_user.id)%></li>
               <% if current_user.organizations.all.length > 0 %>
                 <li><%= link_to "Dashboard", dashboard_organizations_path %></li>
               <% end %>
-              <li><%= link_to "Profile", user_path(current_user.id) %></li>
               <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
               <li><%= render "layouts/notification_center", notifications: @notifications %></li>
             <% else %>
