@@ -1,0 +1,100 @@
+
+// Font Defaults
+$header: 'BenchNine', sans-serif;
+$main: 'Signika', sans-serif;
+
+// Color Scheme
+$sky: #CAEBF2;
+$carbon: #A9A9A9;
+$darkcarbon: #656565;
+$watermelon: #FF3B3F;
+$neutral: #EFEFEF;
+
+// Signup Page
+
+.signup {
+  background-color: $neutral;
+  padding: 5%;
+  border-radius: 1%;
+  color: $darkcarbon;
+  max-width: 60%;
+  h2 {
+    font-family: $header;
+    text-transform: uppercase;
+    font-size: 2em;
+    text-align: center;
+    color: $darkcarbon;
+  }
+}
+
+.devise-box {
+  label {
+    margin-top: 2px;
+    font-family: $header;
+    text-transform: uppercase;
+    font-size: 1.3em;
+  }
+  input {
+    border: none;
+    border-radius: 1%;
+    width: 100%;
+    height: 2em;
+  }
+  .display-error {
+    font-family: $main;
+  }
+  .btn-login {
+    font-family: $main;
+    background: $watermelon;
+    border-radius: 2%;
+    color: #fff;
+    height: auto;
+    font-size: 1.5em;
+    width: 50%;
+  }
+}
+.loginlinks {
+  margin-top: 5%;
+  a {
+    font-size: 1.3em;
+    font-family: $main;
+    color: $darkcarbon;
+  }
+  .has-acct {
+    margin-bottom: 30px;
+  }
+}
+
+.login-with {
+  width: 50%;
+  display: block;
+  margin-top: .5em;
+}
+.login-with a {
+  color: white;
+  font-size: .85em;
+}
+.login-with i {
+  padding-right: .2em;
+}
+.display-inline-flex{
+  display: flex;
+}
+
+.devise-box input[type=checkbox]{
+  width: 17px;
+  padding-top: 0px;
+  margin-top: 0px
+}
+
+#user_remember_me_words{
+  width: 220px;
+  margin-left: .2em;
+  margin-top: 10px;
+}
+
+#city-field > input {
+  width: 225px;
+  margin-right: 11px;
+  font-size: 12px;
+}
