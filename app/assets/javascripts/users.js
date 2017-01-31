@@ -1,8 +1,6 @@
 
 $(document).ready(function(){
-  // $('#map-tab').on("click", function(){
-  //   google.maps.event.trigger(map, 'resize');
-  // });
+
 });
 
 function placeMakersUser(dataFromServer, markers) {
