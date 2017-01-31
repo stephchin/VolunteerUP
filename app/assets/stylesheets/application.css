@@ -16,6 +16,18 @@
  *= require bootstrap-datepicker
  */
 
+ .navbar-default {
+   background-color: #fbfdfd;
+ }
+ .navbar-default .navbar-nav>li>a, .navbar-default .navbar-brand{
+   color: #545454;
+ }
+ .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-brand{
+   color: #f04242;
+ }
+
+
+
 /* Makes columns same height in row */
 .row-tall {
  display: -webkit-box;
@@ -36,7 +48,7 @@
 h1 {
   font-family: 'BenchNine', sans-serif;
   color: #A9A9A9;
-  font-size: 8em;
+  font-size: 6em;
   text-transform: uppercase;
 }
 
@@ -183,9 +195,9 @@ a.btn {
 }
 
 .section-box {
-  background-color: #f8f8f8;
+  background-color: #EFEFEF;
   padding: 5px;
-  border: 1px solid #e7e7e7;
+  border: 1px solid #EFEFEF;
   border-radius: 2px;
 }
 
