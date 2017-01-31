@@ -189,7 +189,7 @@ user_length = User.all.length
 event_length = Event.all.length
 
 User.all.each do |user|
-  (rand(3) + 4).times do |iter|
+  (rand(3) + 2).times do |iter|
     e = Event.find(rand(event_length) + 1)
     if !e.users.all.include?(user) && e.remaining_vol > 0
       e.user_events.new(user: user)
