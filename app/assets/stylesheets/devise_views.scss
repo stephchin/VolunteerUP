@@ -17,6 +17,7 @@ $neutral: #EFEFEF;
   padding: 5%;
   border-radius: 1%;
   color: $darkcarbon;
+  max-width: 60%;
   h2 {
     font-family: $header;
     text-transform: uppercase;
@@ -57,7 +58,9 @@ $neutral: #EFEFEF;
   a {
     font-size: 1.3em;
     font-family: $main;
-
+  }
+  .has-acct {
+    margin-bottom: 30px;
   }
 }
 
