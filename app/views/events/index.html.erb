@@ -15,9 +15,9 @@
 </div>
 
 <div class="well">
-  <div class="row"
+  <div class="row">
     <%= form_for_filterrific @filterrific do |f| %>
-      <div class="col-lg-4">
+      <div class="col-md-3">
         <div class="inner-addon left-addon">
           <i class="glyphicon glyphicon-search"></i>
           <span class="glyphicon glyphicon-search"></span>
@@ -29,19 +29,17 @@
         </div>
       </div>
 
-      <div class="col-lg-8">
+      <div class="col-lg-5">
         <%= f.fields_for :with_distance do |with_distance_fields| %>
           <%= with_distance_fields.text_field :zip, placeholder: 'Zip code' %>
-          <!-- <div class="dropdown"> -->
-            <%= with_distance_fields.select(:max_distance, [['5 miles', 5], ['10 miles', 10], ['15 miles', 15], ['25 miles', 25], ['50 miles', 50]]) %>
-          <!-- </div> -->
+          <%= with_distance_fields.select(:max_distance, [['5 miles', 5], ['10 miles', 10], ['15 miles', 15], ['25 miles', 25], ['50 miles', 50]]) %>
         <% end %>
         <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
-        <span class="input-group-btn">
-          <%= f.submit 'Search', class: "btn btn-secondary btn-sm"%>
-          <%= link_to('Reset Search', reset_filterrific_url, class: "btn btn-danger btn-sm") %>
-          <%= render_filterrific_spinner %>
-        </span>
+      </div>
+      <div class="col-lg-3">
+        <%= f.submit 'Search', class: "btn btn-primary btn-sm"%>
+        <%= link_to('Reset Search', reset_filterrific_url, class: "btn btn-danger btn-sm") %>
+        <%= render_filterrific_spinner %>
       </div>
 
     <% end %>

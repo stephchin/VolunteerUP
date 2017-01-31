@@ -89,7 +89,7 @@
 // Search bar
 
 .well {
-  min-width: 384px;
+  min-width: 467px;
   select {
     border: 1px solid #ccc;
     background-color: #fff;
@@ -104,6 +104,7 @@
     line-height: 30px;
     left-padding: 20px;
     width: 100%;
+    max-width: 427px;
     margin-top: 7px;
   }
   #filterrific_with_distance_zip {
@@ -111,18 +112,19 @@
     background-color: #fff;
     height: 30px;
     line-height: 30px;
+    width: 120px;
     padding: 5px;
-    min-width: 70px;
   }
   #filterrific_with_distance_max_distance {
-    // width: 35%;
-    // margin-bottom: 7px;
+    width: 120px;
   }
   #filterrific_sorted_by {
-    margin-bottom: 7px;
+    // margin-bottom: 7px;
   }
   .btn-sm {
+    margin-top: 7px;
     width: 120px;
+    margin-bottom: 7px;
   }
 }
 
