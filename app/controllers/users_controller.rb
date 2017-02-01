@@ -8,6 +8,16 @@ class UsersController < ApplicationController
 
   def show
     @events = @user.events.all
+    if user_signed_in?
+      @causes = current_user.likes.sort_by{ |key, value| -value }.select{ |cause| (Event.where(cause: cause[0]).map(&:id) - current_user.events.all.map(&:id)).length > 0 }.first(3)
+      @cause_list = []
+      @causes.each do |cause|
+        a = Event.where(cause: cause[0]).map(&:id) - current_user.events.all.map(&:id)
+        @cause_list << Event.find(a[0])
+      end
+    else
+      @causes = []
+    end
   end
 
   def user_map_locations
@@ -21,7 +31,6 @@ class UsersController < ApplicationController
     end
     render json: @hash.to_json
   end
-
 
   # GET all events for calendar on user profile
  def get_events
