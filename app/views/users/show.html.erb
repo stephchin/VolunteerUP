@@ -57,8 +57,8 @@
 
   <div class="recommended">
     <% @cause_list.each do |cause| %>
-        <p style="font-size: 1.2em;"><%= link_to Event.find(cause).name, Event.find(cause) %>-
-        <%= " hosted by #{Event.find(cause).organization.name} to benefit #{Event.find(cause).cause}" %></p>
+        <p style="font-size: 1.2em;"><%= link_to Event.find(cause.id).name, Event.find(cause.id) %>-
+        <%= " hosted by #{Event.find(cause.id).organization.name} to benefit #{Event.find(cause.id).cause}" %></p>
     <% end %>
   </div>
 
