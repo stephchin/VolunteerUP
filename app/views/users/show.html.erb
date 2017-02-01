@@ -53,11 +53,13 @@
   </div> <!--ends row-->
 
   <!--use hidden to pass through the model and so it dosen't show up on the page(why it's hidden)  -->
-  <div>
-    <h3>Events Recommended for You</h3>
+
+  <div class="recommended">
+    <h3>Recommended for You</h3>
+
     <% @cause_list.each do |cause| %>
-        <p><%= Event.find(cause).name %>-
-        <%= Event.find(cause).organization.name %>- 
+        <p><%= link_to Event.find(cause).name, Event.find(cause) %>-
+        <%= Event.find(cause).organization.name %>-
         <%= Event.find(cause).cause %></p>
     <% end %>
   </div>
