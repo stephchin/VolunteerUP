@@ -9,8 +9,5 @@ class UserEvent < ApplicationRecord
     e = Event.find(event_id)
     u.likes[e.cause] += 1
     u.save
-    # hash = u.likes.dup
-    # u.update(likes: hash)
-    p u.likes
   end
 end
