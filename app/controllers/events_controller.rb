@@ -38,10 +38,6 @@ class EventsController < ApplicationController
       if @zip.empty? || @max_distance.empty?
         @events = @filterrific.find.page(params[:page])
       else
-        #@filterrific = @filterrific.find | @filterrific.find.where(postal_code: zip)
-        #Event.where(id: @filterrific(&:id))
-        # @events = @filterrific.near(zip, max_distance).page(params[:page])
-        # @e1 = Event.where(postal_code: zip)
         @events = @filterrific.find.near(@zip, @max_distance).page(params[:page])
       end
     end
@@ -78,9 +74,6 @@ class EventsController < ApplicationController
 
   def map_locations
     @events = Event.all
-    # if params[:search]
-    #   @events = Event.search(params[:search])
-    # end
 
     @filterrific = initialize_filterrific(
       Event,
@@ -104,10 +97,6 @@ class EventsController < ApplicationController
       if @zip.empty? || @max_distance.empty?
         @events = @filterrific.find.page(params[:page])
       else
-        #@filterrific = @filterrific.find | @filterrific.find.where(postal_code: zip)
-        #Event.where(id: @filterrific(&:id))
-        # @events = @filterrific.near(zip, max_distance).page(params[:page])
-        # @e1 = Event.where(postal_code: zip)
         @events = @filterrific.find.near(@zip, @max_distance).page(params[:page])
       end
     end
