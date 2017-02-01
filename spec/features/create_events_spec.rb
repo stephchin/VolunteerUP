@@ -51,7 +51,7 @@ RSpec.feature "CreateEvents", type: :feature do
         fill_in "event[postal_code]", with: '92101'
         fill_in "event[country]", with: 'USA'
         fill_in "event[volunteers_needed]", with: '100'
-        select @org.name, from: "event_organization_id"
+        select @org.name, from: "event[organization_id]"
         click_button "Create Event"
       end
       And "I can see the success message and the correct event info" do
