@@ -15,9 +15,25 @@ $(document).ready(function()
     });
 
 
-    $("#notificationContainer").click(function()
-    {
-        return false;
+    // $("#notificationContainer").click(function()
+    // {
+    //     return false;
+    // });
+    // alert);
+
+    $("#notificationList").on("click", ".delete-notification", function(){
+
+      $(this).parent().empty();
+      var num = $("#notification-counter").text();
+      $("#notification-counter").text(num - 1);
+
+      if (num - 1 === 0){
+        $("#notification-counter").css("background-color", "grey");
+      };
+
+
     });
+
+
 
 });

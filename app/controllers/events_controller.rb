@@ -214,7 +214,7 @@ class EventsController < ApplicationController
     e1 = Event.find(params[:event])
     u1.user_events.delete(event: e1)
     u1.events.delete(e1)
-    flash[:notice] = "You've succesfully canceled your RSVP for #{e1.name}."
+    flash[:notice] = "You've succesfully cancelled your RSVP for #{e1.name}."
     event_waitlist = e1.user_events.where.not(waitlist: nil)
     if event_waitlist.length > 0
       event_waitlist.sort
