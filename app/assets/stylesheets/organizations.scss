@@ -59,20 +59,44 @@ $neutral: #EFEFEF;
   margin-left: 8%;
 }
 
+.fc-content {
+  background-color: #a1bcc1;
+}
+
+.fc-event, .fc-event-dot {
+  background-color: #a1bcc1;
+}
+
 .fc-button-group {
   margin-left: 60%;
 }
 
 #body #orgcalendar .fc-left, h2 {
-  font-weight: bold;
-  font-size: 12px;
+  font-weight: lighter;
+  font-size: 19px;
   line-height: 1.5em;
   text-transform: uppercase;
-  color: black;
+  color: #656565;
+}
+
+.fc-unthemed th, .fc-unthemed td, .fc-unthemed thead, .fc-unthemed tbody, .fc-unthemed .fc-divider, .fc-unthemed .fc-row, .fc-unthemed .fc-content, .fc-unthemed .fc-popover, .fc-unthemed .fc-list-view, .fc-unthemed .fc-list-heading td {
+  border-color: #a1bcc1;
+}
+
+body .fc {
+  background-color: white;
+}
+
+.fc-toolbar .fc-center {
+  margin-left: 0%;
 }
 
 .fc-view-container {
   position: relative;
+}
+
+.fc-right {
+  padding: 1%;
 }
 
 .eventname {

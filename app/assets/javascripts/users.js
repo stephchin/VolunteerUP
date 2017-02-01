@@ -1,21 +1,20 @@
 
-// $(document).ready(function(){
-//   createTweet();
-//
-//   function createTweet() {
-//     console.log("updateTweet running");
-//     var event = $("#event-name").text();
-//     var org = $("#organization").text();
-//     $("#tweet").attr('data-text', "Excited for "+ org + "'s " + event + "! Join us " + "#volunteerup");
-//   }
-//
-// });
+$(document).ready(function(){
+  console.log("document ready!");
+  $("#map-tab").on("click", function(){
+    console.log("map tab clicked");
+    // timeout needs to be set so that page has time to load tab before calling gmap function
+    setTimeout(loadAndCreateGmapUser, 1000);
+  });
+
+});
 
 function placeMakersUser(dataFromServer, markers) {
   console.log("user placeMarkers running");
   markers = handler.addMarkers(dataFromServer);
-  handler.bounds.extendWith(markers);
+  // handler.bounds.extendWith(markers);
   handler.fitMapToBounds();
+  handler.getMap().setZoom(15);
 }
 
 function showLocations(dataFromServer) {
@@ -61,10 +60,7 @@ function loadAndCreateGmapUser() {
   console.log("loadAndCreateGmapUser running");
   if ($("#user_map").length > 0) {
     var myurl = "/users/" + $("#user_id").val() + "/user_map_locations";
-    // if ($("#search").val()) {
-    //     myurl += "?search=" + $("#search").val();
-    // };
-
+    console.log(myurl);
 
     $.ajax({
       dataType: 'json',
@@ -79,7 +75,6 @@ function loadAndCreateGmapUser() {
     });
   }
 };
-
 
 $(document).on('ready', loadAndCreateGmapUser);
 $(document).on('turbolinks:load', loadAndCreateGmapUser);

@@ -44,6 +44,7 @@
  .btn-info {
    background-color:  #a1bcc1;
    border-color:  #a1bcc1;
+   color: #878787;
  }
  .btn-info:hover, .btn-info:active, .btn-info:focus  {
    background-color: #CAEBF2;
@@ -198,7 +199,7 @@ h5, th {
 
 .text-area, .event-box {
   /*background-color: white;*/
-  border-top: 1px solid #A9A9A9;
+  border-top: 1px solid #e3e3e3;
   /*border-bottom: 1px solid #ebebeb;*/
   /*border-radius: 5px;*/
   /*padding: 0px 10px 0px 10px;*/
@@ -236,7 +237,7 @@ h5, th {
 
 #total-vol {
   margin-top: 0px;
-  font-size: 14px;
+  font-size: 1.125em;
 }
 
 .volunteers-needed {
@@ -313,9 +314,9 @@ h5, th {
 }
 
 .form-box {
-  border: 1px solid #e7e7e7;
+  border: 1px solid #c2ebef;
   border-radius: 2px;
-  background-color: #f8f8f8;
+  background-color: #c2ebef;
   padding: 20px;
   margin: 10px 0px 10px 0px;
 }

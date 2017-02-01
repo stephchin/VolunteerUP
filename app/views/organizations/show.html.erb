@@ -80,6 +80,8 @@
       <% else %>
         <p><%= link_to "Sign In to Join!", new_user_session_path, class: "btn btn-info" %></p>
       <% end %>
+      <br>
+      <div class="calendartitle"><h2>Your Upcoming Events:</h2></div>
       <div id="orgcalendar"></div>
       <input id="organization_id" type="hidden" value="<%= @organization.id %>"/>
     </div>
@@ -115,7 +117,7 @@
 <br>
 
 <% if @ability.can? :manage, @organization %>
-  <%= link_to 'Edit', edit_organization_path(@organization), class: "btn btn-sm btn-info"%>
+  <%= link_to 'Edit Organization', edit_organization_path(@organization), class: "btn btn-sm btn-info"%>
 <% end %>
 
 <!-- <%= link_to 'Back', organizations_path, class: "btn btn-xs btn-info" %> -->
