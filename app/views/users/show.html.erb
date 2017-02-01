@@ -7,10 +7,11 @@
   <span class="breadcrumb-item active"> / My Profile</span>
 </nav>
 
-<% @causes.each do |cause| %>
+<% @cause_list.each do |cause| %>
     <div>
-    <p><%= Event.all.where(cause: cause).first.name %></p>
-    <p><%= cause %></p>
+    <p><%= Event.find(cause).name %></p>
+    <p><%= Event.find(cause).organization.name %></p>
+    <p><%= Event.find(cause).cause %></p>
     </div>
 <% end %>
 <p class="success"><%= success %></p>
