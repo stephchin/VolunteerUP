@@ -6,36 +6,37 @@
 <div class="row">
   <div class="col-md-8">
     <h1 class= "vertical-align">Events</h1>
-    <h1><%= @z %></h1>
   </div>
-  <div class="col-md-4 text-right" id="search-bar">
+</div>
+
+<div class="well">
+  <div class="row">
     <%= form_for_filterrific @filterrific do |f| %>
-      <div>
-        <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
-        <span class="glyphicon glyphicon-search"></span>
-        <%= f.text_field(
-          :search_query, placeholder: "Search events",
-          class: 'filterrific-periodically-observed'
-        ) %>
-      </div><br>
-      <div>
-      <%= f.fields_for :with_distance do |with_distance_fields| %>
-        <%= with_distance_fields.text_field :zip, placeholder: 'Zip code' %>
-        <%= with_distance_fields.select(:max_distance, [['5 miles', 5], ['10 miles', 10], ['15 miles', 15], ['25 miles', 25], ['50 miles', 50]]) %>
-      <% end %>
+      <div class="col-md-3">
+        <div class="inner-addon left-addon">
+          <i class="glyphicon glyphicon-search"></i>
+          <span class="glyphicon glyphicon-search"></span>
+          <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
+          <%= f.text_field(
+            :search_query, placeholder: "Search events",
+            class: 'filterrific-periodically-observed'
+          ) %>
+        </div>
       </div>
-      <div>
-        Sort by
+
+      <div class="col-lg-5">
+        <%= f.fields_for :with_distance do |with_distance_fields| %>
+          <%= with_distance_fields.text_field :zip, placeholder: 'Zip code' %>
+          <%= with_distance_fields.select(:max_distance, [['5 miles', 5], ['10 miles', 10], ['15 miles', 15], ['25 miles', 25], ['50 miles', 50]]) %>
+        <% end %>
         <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
-      </div><br>
-      <div>
-        <%= link_to(
-          'Reset Search',
-          reset_filterrific_url,
-        ) %>
-        <%= f.submit 'Search', class: "btn btn-primary btn-xs"%>
       </div>
-      <%= render_filterrific_spinner %>
+      <div class="col-lg-3">
+        <%= f.submit 'Search', class: "btn btn-primary btn-sm"%>
+        <%= link_to('Reset Search', reset_filterrific_url, class: "btn btn-danger btn-sm") %>
+        <%= render_filterrific_spinner %>
+      </div>
+
     <% end %>
   </div>
 </div>

@@ -1,3 +1,7 @@
+<% content_for(:body_attributes) do %>
+   data-no-turbolink="true"
+ <% end %>
+
 <nav class="breadcrumb">
   <a class="breadcrumb-item" href="/">Home</a>
   <span class="breadcrumb-item active"> / My Profile</span>
@@ -35,9 +39,9 @@
     </div><!--ends col-md-4-->
 
     <div class="col-md-7">
-      <ul class="nav nav-tabs">
+      <ul class="nav nav-tabs" id="user-tabs">
         <li class="active"><a data-toggle="tab" href="#calendar">Calendar</a></li>
-        <li><a data-toggle="tab" href="#user_map"> Map</a></li>
+        <li id="map-tab"><a data-toggle="tab" href="#user_map"> Map</a></li>
       </ul>
       <div class="tab-content">
         <div id="calendar" class="tab-pane fade in active"></div>
@@ -58,7 +62,7 @@
           <tr>
             <td>
               <p id="noevents">You aren't currently signed up for any events...</p><br>
-              <%= link_to "Volunteer now!", events_path, class: "btn btn-lg btn-primary" %><br><br>
+              <%= link_to "Volunteer Now!", events_path, class: "btn btn-lg btn-primary" %><br><br>
             </td>
           </tr>
         <% else %>
@@ -72,7 +76,7 @@
           </tr>
         </thead>
       <tbody>
-        <% @events.each do |event| %>
+        <% @events.order(start_time: :asc).each do |event| %>
           <tr>
             <td>
               <strong><%= link_to event.name, event %></strong><br>
