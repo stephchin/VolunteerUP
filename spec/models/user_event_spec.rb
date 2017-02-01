@@ -9,11 +9,11 @@ RSpec.describe UserEvent, type: :model do
     @u1 = User.find_by_email("a@yahoo.com")
     @u2 = User.find_by_email("b@yahoo.com")
     @e1 = Event.create(name: "Blood Donation", description: "Give Blood",
-      cause: "For the people", start_time: @start, end_time: @end,
+      cause: "Animals", start_time: @start, end_time: @end,
       street: "704 J St", city: "San Diego", state: "CA", postal_code: "92101",
       country: "USA", volunteers_needed: 100)
     @e2 = Event.create(name: "Mercury Donation", description: "Give Mercury",
-      cause: "For the weak", start_time: @start, end_time: @end,
+      cause: "Animals", start_time: @start, end_time: @end,
       street: "704 J St", city: "San Diego", state: "CA", postal_code: "92101",
       country: "USA", volunteers_needed: 10)
     @org = Organization.create(name: "People of Earth", description: "A non-profit",

@@ -12,7 +12,7 @@ RSpec.feature "Breadcrumbs", type: :feature do
   context 'Breadcrumbs show navigation path' do
     Steps 'Using breadcrumbs to navigate' do
       Given 'I am on the Clothes Drive event page' do
-        visit "/events/1"
+        visit event_path(@event.id) 
       end
       Then 'I can see a link back to the Events page' do
         expect(page).to have_selector(:link_or_button, 'Events')
