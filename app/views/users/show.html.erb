@@ -76,7 +76,7 @@
           </tr>
         </thead>
       <tbody>
-        <% @events.each do |event| %>
+        <% @events.order(start_time: :asc).each do |event| %>
           <tr>
             <td>
               <strong><%= link_to event.name, event %></strong><br>

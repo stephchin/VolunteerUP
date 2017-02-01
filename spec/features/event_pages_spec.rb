@@ -25,17 +25,19 @@ RSpec.feature "EventPages", type: :feature do
         visit '/events'
       end
       Then 'I can click the event name' do
-        expect(page).to have_content(@e1.name)
-        click_link(Event.first.name, match: :first)
+        fill_in "filterrific_search_query", with: @event.name
+        click_button "Search"
+        expect(page).to have_content(@event.name)
+        click_link(@event.name, match: :first)
       end
       Then 'I can see that event\'s show page with event info' do
-        expect(page).to have_content @e1.name
+        expect(page).to have_content @event.name
         within('#cause') do
-        expect(page).to have_content @e1.cause
+        expect(page).to have_content @event.cause
         end
-        expect(page).to have_content @e1.description
-        expect(page).to have_content @e1.organization.name
-        expect(page).to have_content @e1.volunteers_needed
+        expect(page).to have_content @event.description
+        expect(page).to have_content @event.organization.name
+        expect(page).to have_content @event.volunteers_needed
       end
       And 'I can click the volunteer button' do
         click_button('Volunteer!')
@@ -45,18 +47,20 @@ RSpec.feature "EventPages", type: :feature do
       end
       Then 'I can go to my user profile page and see my upcoming event' do
         visit user_path(@user)
-        expect(page).to have_content @e1.name
+        expect(page).to have_content @event.name
         expect(page).to have_content "Cancel Your RSVP"
       end
       Then 'I can click on a link to go back to the events page' do
         click_link "Events"
       end
       And 'The event\'s volunteers needed count goes down' do
-        expect(page).to have_content @e1.name
+        fill_in "filterrific_search_query", with: @event.name
+        click_button "Search"
+        expect(page).to have_content @event.name
         expect(page).to have_content "#{@event.volunteers_needed - 1}"
       end
       Then 'I can go back to the event\'s page' do
-        click_link(@e1.name, match: :first)
+        click_link(@event.name, match: :first)
       end
       And 'The event\'s volunteers needed count is updated' do
         expect(page).to have_content "#{@event.volunteers_needed - 1}"

@@ -55,13 +55,15 @@ RSpec.feature "Maps", type: :feature do
       end
       Then 'I can sign up for an event' do
         visit '/events'
-        click_link(@e1.name, match: :first)
+        fill_in "filterrific_search_query", with: @event.name
+        click_button "Search"
+        click_link(@event.name, match: :first)
         click_button 'Volunteer!'
         expect(page).to have_content("You're signed up!")
       end
       Then 'The user map JSON page has my event, and no others' do
         visit user_path(@user.id) + "/user_map_locations"
-        expect(page).to have_content @e1.latitude
+        expect(page).to have_content @event.latitude
         expect(page).to_not have_content "#{@event2.latitude}"
       end
     end
