@@ -16,16 +16,22 @@ $carbon: #A9A9A9;
 }
 
 .user-img {
-  width: 12em;;
-  height: 12em;
   border-radius: 50%;
   margin: 5px;
+  min-width: 180px;
+  min-height: 180px;
+  max-width: 180px;
+  min-width: 180px;
   img {
     // Use max-width: 100% if you do not want to stretch
     // the user's profile image
     width: 100%;
     height: auto;
     border-radius: inherit;
+    min-width: 180px;
+    min-height: 180px;
+    max-width: 180px;
+    min-width: 180px;
   }
 }
 
@@ -76,7 +82,7 @@ $carbon: #A9A9A9;
   border: 1px solid #EFEFEF;
   border-collapse: separate;
   border-radius: .2em;
-  min-width: 960px;
+  // min-width: 960px;
   caption {
     font-size: 20pt;
   }
@@ -88,11 +94,11 @@ $carbon: #A9A9A9;
   }
   .btn-lg { width: 150px; }
   .btn-xs { width: 120px;}
-  th:nth-child(1){ width:25%; }
-  th:nth-child(2){ width:20%; }
-  th:nth-child(3){ width:20%; }
-  th:nth-child(4){ width:20%; }
-  th:nth-child(5){ width:15%; }
+  th:nth-child(1){ width:15%; }
+  th:nth-child(2){ width:15%; }
+  th:nth-child(3){ width:25%; }
+  th:nth-child(4){ width:25%; }
+  th:nth-child(5){ width:20%; }
 }
 
 #noevents {

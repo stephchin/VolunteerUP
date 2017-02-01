@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature "Waitlists", type: :feature do
   before(:each) do
     @org = Organization.find_by_name("We Help")
-    @event = Event.create(name: "Clothes drives", start_time:"2017-02-02 01:01:01", end_time:"2017-02-02 02:01:01", volunteers_needed: 2 )
+    @event = Event.create(name: "Hug a cat", start_time: Time.now, end_time: Time.now + 2400, volunteers_needed: 2 )
     @event.organization = @org
     @event.save
     @user = User.find_by_email("a@yahoo.com")
@@ -47,14 +47,16 @@ RSpec.feature "Waitlists", type: :feature do
         expect(page).to have_content "#{@event.name}"
         expect(page).to have_content "Remove From Waitlist"
       end
-      And 'If another user logs in and cancels' do
+      And 'If another user logs in and cancels their RSVP to that event' do
         click_link "Log out"
         visit '/'
         click_link "Log in"
         fill_in "user[email]", with: @u2.email
         fill_in "user[password]", with: "123456"
         click_button "Log in"
-        click_link "Cancel Your RSVP"
+        within find('tr', text: @event.name) do
+          click_link 'Cancel Your RSVP'
+          end
         click_link "Log out"
       end
       And 'I log back in' do

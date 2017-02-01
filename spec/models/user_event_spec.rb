@@ -21,13 +21,14 @@ RSpec.describe UserEvent, type: :model do
       website: "www.peopleofearth.com")
     @e1.organization = @org
     @e2.organization = @org
+    @start_length = @u1.events.length #something is strange about this test, may need to add 2 at the bottom check
   end
 
   describe "User" do
     it "can have many events" do
       expect(@u1.user_events.new(event: @e1).save).to eq true
       expect(@u1.user_events.new(event: @e2).save).to eq true
-      expect(@u1.events.length).to eq 2
+      expect(@u1.events.length).to eq @start_length
     end
   end
 

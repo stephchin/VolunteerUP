@@ -36,7 +36,7 @@
    background-color: #656565;
    border-color: #656565;
  }
- .btn-primary:hover, .btn-primary:active {
+ .btn-primary:hover, .btn-primary:active, .btn-primary:focus {
    background-color: #f04242;
    border-color: #f04242;
  }
@@ -46,7 +46,7 @@
    border-color:  #a1bcc1;
    color: #878787;
  }
- .btn-info:hover, .btn-info:active, .btn-info:focus  {
+ .btn-info:hover, .btn-info:active, .btn-info:focus, .btn-info.active:hover, .btn-info:active.focus,  {
    background-color: #CAEBF2;
    border-color: #CAEBF2;
  }
@@ -56,9 +56,19 @@
    border-color: #f1c40f;
  }
 
- .btn-warning:hover, .btn-warning:active {
+ .btn-warning:hover, .btn-warning:active, .btn-warning:focuse {
    background-color: #f39c12;
    border-color: #f39c12;
+ }
+
+ .btn-danger {
+   background-color: #e74c3c;
+   border-color: #e74c3c;
+ }
+
+ .btn-danger:hover, .btn-danger:active, .btn-danger:focuse {
+   background-color: #c0392b;
+   border-color: #c0392b;
  }
 
 .pagination>li>a, .pagination>li>span {
@@ -325,9 +335,9 @@ h5, th {
 }
 
 .form-box {
-  border: 1px solid #c2ebef;
+  border: 1px solid #EFEFEF;
   border-radius: 2px;
-  background-color: #c2ebef;
+  background-color: #EFEFEF;
   padding: 20px;
   margin: 10px 0px 10px 0px;
 }
