@@ -14,16 +14,22 @@
 }
 
 .user-img {
-  width: 12em;;
-  height: 12em;
   border-radius: 50%;
   margin: 5px;
+  min-width: 180px;
+  min-height: 180px;
+  max-width: 180px;
+  min-width: 180px;
   img {
     // Use max-width: 100% if you do not want to stretch
     // the user's profile image
     width: 100%;
     height: auto;
     border-radius: inherit;
+    min-width: 180px;
+    min-height: 180px;
+    max-width: 180px;
+    min-width: 180px;
   }
 }
 
