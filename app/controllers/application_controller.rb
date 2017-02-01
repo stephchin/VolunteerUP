@@ -1,10 +1,19 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_notification
+  # before_action :delete_notification
   # protect_from_forgery with: :exception
   add_flash_types :success, :remove
 
 
+  def delete_notification
+    @notification = Notification.find(params[:notif_id])
+    current_user.notifications.delete(notification:@notification)
+    # respond_to do |format|
+    #   format.html { redirect_to root_path, notice: 'Bye notifelicia' }
+    #   format.json { head :no_content }
+    # end
+  end
 
   protected
 
@@ -21,5 +30,6 @@ class ApplicationController < ActionController::Base
       @notifications = current_user.notifications.all.reverse
     end
   end
+
 
 end

@@ -1,7 +1,11 @@
 
+
+
 <% @notifications.each do |notification| %>
 <li>
   <%= notification.event %>
   <span> <%= notification.created_at.strftime("%d %b. %Y") %></span>
+  <span class="delete-notification">
+  <%= link_to "X", "/application/" + notification.id.to_s + "/delete_notification", method: :delete %></span>
 </li>
 <% end %>

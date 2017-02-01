@@ -1,4 +1,12 @@
+
 <li>
   <%= image_tag("icons/notification_bell", class: "notification-img")%>
   <span id="notification-counter"><%= counter %></span>
+  <% if counter == 0 %>
+    <style>
+      #notification-counter {
+        background-color: grey;
+      }
+    </style>
+  <% end %>
 </li>
