@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_notification
   # before_action :delete_notification
+  #adding
   # protect_from_forgery with: :exception
   add_flash_types :success, :remove
 
