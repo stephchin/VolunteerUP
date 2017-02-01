@@ -17,7 +17,7 @@ RSpec.feature "Volunteers", type: :feature do
 
         click_link "Organizations"
         click_link "New Organization"
-        fill_in "organization[name]", with: "Scott's Tots"
+        fill_in "organization[name]", with: "Scott's Dogs"
         fill_in "organization[description]", with: "Make your dreams come true"
         fill_in "organization[phone]", with: "555-555-5555"
         fill_in "organization[email]", with: "st@yahoo.com"
@@ -45,7 +45,10 @@ RSpec.feature "Volunteers", type: :feature do
         fill_in "event[postal_code]", with: "91914"
         fill_in "event[country]", with: "USA"
         fill_in "event[volunteers_needed]", with: 20
-        select "Scott's Tots", from: "event_organization_id"
+        @org = Organization.find_by_email("st@yahoo.com")
+        @user.organizations << @org
+        @user.save
+        select @org.name, from: "event[organization_id]"
         click_button "Create Event"
         @event = Event.find_by_name("Give laptops")
         expect(page).to have_current_path(event_path(@event.id))

@@ -15,8 +15,7 @@ RSpec.feature "JoinOrgs", type: :feature do
          fill_in "user[email]", with: "t_eazy@bigmoney.com"
          fill_in "user[password]", with: "password"
          click_button "Log in"
-
-         visit user_path(@user)
+         expect(page).to have_current_path(user_path(@user.id))
        end
        Then 'I can visit the organizations page' do
          click_link 'Organizations'
@@ -24,7 +23,6 @@ RSpec.feature "JoinOrgs", type: :feature do
        And 'I can visit the specific organization' do
          click_link @org.name
          expect(page).to have_content @org.name
-
        end
        Then 'I can see a calendar of events the organization is hosting' do
          page.has_selector?('orgcalendar', :text => 'Month', :visible => true)

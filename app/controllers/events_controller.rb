@@ -114,7 +114,7 @@ class EventsController < ApplicationController
   def new
     @event = Event.new
 
-    @organizations_for_select = Organization.all.map do |org|
+    @organizations_for_select = Organization.joins(:user_organizations).where(user_organizations: {user_id: current_user.id}).map do |org|
       [org.name, org.id]
     end
 
@@ -122,7 +122,7 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
-    @organizations_for_select = Organization.all.map do |org|
+    @organizations_for_select = Organization.joins(:user_organizations).where(user_organizations: {user_id: current_user.id}).map do |org|
       [org.name, org.id]
     end
   end
@@ -132,7 +132,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
 
-    @organizations_for_select = Organization.all.map do |org|
+    @organizations_for_select = Organization.joins(:user_organizations).where(user_organizations: {user_id: current_user.id}).map do |org|
       [org.name, org.id]
     end
 

@@ -127,6 +127,17 @@ h1 {
   font-size: 4em;
   text-transform: uppercase;
 }
+h2 {
+  font-family: 'Signika', sans-serif;
+  color: #A9A9A9;
+  font-size: 2.5em;
+  text-transform: uppercase;
+}
+h3 {
+  font-family: 'Signika', sans-serif;
+  color: #A9A9A9;
+  font-size: 1.5em;
+}
 
 #about-para {
   /*background-color: #c2ebef;*/

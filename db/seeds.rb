@@ -32,6 +32,7 @@ org_names.each_with_index do |org, index|
   Organization.create!(name: org, description: descriptions[index],
     phone: phone, email: "#{org.split(" ").join("")}@yahoo.com",
     website: "www.#{org.split(" ").join("")}.org")
+  p "Created Organization #{index}!"
 end
 
 # To create all Events
@@ -56,10 +57,10 @@ event_locations = [
   {"La Mesa" => { street: "5746 Amaya Dr", postal_code: "91941" }},
   {"Lemon Grove" => { street: "3521 Lemon Grove Ave", postal_code: "91945" }},
   {"Lemon Grove" => { street: "1501 Skyline Dr", postal_code: "91945" }},
-  {"National City" => { street: "1401 E Plaze Blvd", postal_code: "91950" }},
+  {"National City" => { street: "1401 E Plaza Blvd", postal_code: "91950" }},
   {"National City" => { street: "500 Mile of Cars Way", postal_code: "91950" }},
   {"Oceanside" => { street: "1779 Oceanside Blbd", postal_code: "92054" }},
-  {"Oceanside" => { street: "Melorse Dr", postal_code: "92057" }},
+  {"Oceanside" => { street: "Melrose Dr", postal_code: "92057" }},
   {"Poway" => { street: "12202 Poway Rd", postal_code: "92064" }},
   {"Poway" => { street: "13404 Cricket Hill", postal_code: "92064" }},
   {"San Diego" => { street: "1011 Market St", postal_code: "92101" }},
@@ -80,7 +81,6 @@ causes = ["Children/Youth", "Animals", "Arts & Culture",
 event_names = [
   { "Blood Drive" => { description: "Give blood so that Jesus won't have to.
     Cookies won't be provided, but probably fish and bread."}},
-    #cause: causes[rand(causes.length)] }},
   { "Toy Drive" => { description: "Give toys to those who wish they had a childhood.
     For once, think of the children!"}},
   { "Canned Goods Drive" => { description: "Give canned goods to people who
@@ -115,7 +115,7 @@ event_names = [
     of the other, you'll get there eventually."}}
 ]
 
-28.times do |iter|
+30.times do |iter|
   names_index = rand(event_names.length)
   name_key = event_names[names_index].keys[0]
   causes_index = rand(causes.length)
@@ -131,6 +131,7 @@ event_names = [
     city: loc_key, state: "CA",
     postal_code: event_locations[loc_index][loc_key][:postal_code], country: "USA",
     volunteers_needed: rand(20) + 1, organization: Organization.order("RANDOM()").first)
+  p "Created Event #{iter}!"
 end
 
 
@@ -144,6 +145,7 @@ password = "123456"
 user_names.each do |user|
   User.create!(email: user[0] + "@yahoo.com", name: user, password: password,
     city: city[rand(17)], state: state)
+  p "Created User #{user}!"
 end
 
 u12 = User.find_by_email("h@yahoo.com")
@@ -167,6 +169,7 @@ u15 = User.find_by_email("v@yahoo.com")
   u.user_organizations.create!(
     organization: Organization.find_by_name(org_names[index]),
     is_creator: true)
+  p "Created Organizer #{u.name}!"
 end
 
 # Changes
@@ -182,6 +185,7 @@ first_names.each do |first|
   last_names.each do |last|
     User.create!(email: "#{first[0]}#{last[0]}@yahoo.com", name: "#{first} #{last}",
       password: password, city: city[rand(17)], state: state)
+    p "Created User #{first} #{last}!"
   end
 end
 
@@ -202,5 +206,8 @@ User.all.each do |user|
       e.user_events.new(user: user, waitlist: waitlist_number + 1)
       e.save!
     end
+    p "Added #{user.name} to #{e.name} event!"
   end
 end
+
+p "All done!"
