@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :messages
   get 'notifications/index'
+  delete 'application/:notif_id/delete_notification' => "application#delete_notification"
 
   get 'about' => 'landing_page#about'
 

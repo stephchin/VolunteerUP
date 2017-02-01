@@ -1,6 +1,13 @@
-// Place all the styles related to the Organizations controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+// Font Defaults
+$header: 'BenchNine', sans-serif;
+$main: 'Signika', sans-serif;
+
+// Color Scheme
+$sky: #CAEBF2;
+$carbon: #A9A9A9;
+$darkcarbon: #656565;
+$watermelon: #FF3B3F;
+$neutral: #EFEFEF;
 
 // Makes columns same height in row
 .row-tall {
@@ -41,15 +48,23 @@
 }
 
 .organizer {
-  background-color: #f8f8f8;
+  background-color: #EFEFEF;
 }
 
 .volunteer {
-  background-color: #f8f8f8;
+  background-color: #EFEFEF;
 }
 
 .org-social-media a i {
   margin-left: 8%;
+}
+
+.fc-content {
+  background-color: #a1bcc1;
+}
+
+.fc-event, .fc-event-dot {
+  background-color: #a1bcc1;
 }
 
 .fc-button-group {
@@ -57,15 +72,31 @@
 }
 
 #body #orgcalendar .fc-left, h2 {
-  font-weight: bold;
-  font-size: 12px;
+  font-weight: lighter;
+  font-size: 19px;
   line-height: 1.5em;
   text-transform: uppercase;
-  color: black;
+  color: #656565;
+}
+
+.fc-unthemed th, .fc-unthemed td, .fc-unthemed thead, .fc-unthemed tbody, .fc-unthemed .fc-divider, .fc-unthemed .fc-row, .fc-unthemed .fc-content, .fc-unthemed .fc-popover, .fc-unthemed .fc-list-view, .fc-unthemed .fc-list-heading td {
+  border-color: #a1bcc1;
+}
+
+body .fc {
+  background-color: white;
+}
+
+.fc-toolbar .fc-center {
+  margin-left: 0%;
 }
 
 .fc-view-container {
   position: relative;
+}
+
+.fc-right {
+  padding: 1%;
 }
 
 .eventname {
@@ -76,4 +107,9 @@
 .eventdescription {
   font-weight: lighter;;
   font-style: italic;
+}
+
+.dashboardh2 {
+  font-family: $main;
+  font-size: 1.8em;
 }

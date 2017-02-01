@@ -6,7 +6,7 @@ $(document).ready(function() {
      header: {
         left: 'title',
         center: '',
-        right: 'prev,next today month,agendaWeek,agendaDay',
+        right: 'prev,next month,agendaWeek,agendaDay',
       },
       height: 350,
      eventClick: function(event) {

@@ -214,11 +214,12 @@ class EventsController < ApplicationController
     e1 = Event.find(params[:event])
     u1.user_events.delete(event: e1)
     u1.events.delete(e1)
-    flash[:notice] = "You've succesfully canceled your RSVP for #{e1.name}."
+    flash[:notice] = "You've succesfully cancelled your RSVP for #{e1.name}."
     event_waitlist = e1.user_events.where.not(waitlist: nil)
     if event_waitlist.length > 0
       event_waitlist.sort
       event_waitlist[0].waitlist = nil
+      Notification.create(event: "You've been added to the event!", user_id: event_waitlist[0].user_id)
       event_waitlist[0].save
     end
     redirect_to user_path(u1)

@@ -1,10 +1,15 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_notification
+  # before_action :delete_notification
   # protect_from_forgery with: :exception
   add_flash_types :success, :remove
 
-
+  #This method deletes notifications when you click the "X", without refreshing the page
+  def delete_notification
+    @notification = Notification.find(params[:notif_id])
+    @notification.delete
+  end
 
   protected
 
@@ -21,5 +26,6 @@ class ApplicationController < ActionController::Base
       @notifications = current_user.notifications.all.reverse
     end
   end
+
 
 end

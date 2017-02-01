@@ -2,6 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+// Font Defaults
+$header: 'BenchNine', sans-serif;
+$main: 'Signika', sans-serif;
+
+// Color Scheme
+$sky: #CAEBF2;
+$carbon: #A9A9A9;
+$darkcarbon: #656565;
+$watermelon: #FF3B3F;
+$neutral: #EFEFEF;
+
+//events
+
 
 .event-notice p {
   margin-top: 0px;
@@ -31,7 +44,11 @@
 }
 
 #calendar h2 {
-  font-size: 20px;
+  font-family: $header;
+  text-transform: uppercase;
+  font-size: 2em;
+  text-align: center;
+  color: $darkcarbon;
 }
 
 .fc-toolbar.fc-header-toolbar {
@@ -94,3 +111,65 @@
   background-color: #95a5a6;
   color: rgba(255,255,255,.5);
 }
+
+// Search bar
+
+.well {
+  min-width: 467px;
+  select {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    height: 30px;
+    line-height: 30px;
+    margin-top: 7px;;
+  }
+  #filterrific_search_query {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    height: 30px;
+    line-height: 30px;
+    left-padding: 20px;
+    width: 100%;
+    max-width: 427px;
+    margin-top: 7px;
+  }
+  #filterrific_with_distance_zip {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    height: 30px;
+    line-height: 30px;
+    width: 120px;
+    padding: 5px;
+  }
+  #filterrific_with_distance_max_distance {
+    width: 120px;
+  }
+  #filterrific_sorted_by {
+    // margin-bottom: 7px;
+  }
+  .btn-sm {
+    margin-top: 7px;
+    width: 120px;
+    margin-bottom: 7px;
+  }
+}
+
+/* enable absolute positioning */
+.inner-addon {
+    position: relative;
+}
+
+/* style icon */
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 14px 0 0 8px;
+  pointer-events: none;
+}
+
+/* align icon */
+.left-addon .glyphicon  { left:  0px;}
+.right-addon .glyphicon { right: 0px;}
+
+/* add padding  */
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }
