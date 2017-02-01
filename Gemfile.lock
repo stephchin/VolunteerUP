@@ -84,6 +84,10 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
     docile (1.1.5)
+    dotenv (2.2.0)
+    dotenv-rails (2.2.0)
+      dotenv (= 2.2.0)
+      railties (>= 3.2, < 5.1)
     erubis (2.7.0)
     execjs (2.7.0)
     faraday (0.10.1)
@@ -296,6 +300,7 @@ DEPENDENCIES
   capybara
   coffee-rails (~> 4.2)
   devise
+  dotenv-rails
   filterrific
   fullcalendar-rails (~> 3.1)
   geocoder
