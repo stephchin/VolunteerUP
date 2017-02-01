@@ -12,9 +12,8 @@ $(document).ready(function(){
 function placeMakersUser(dataFromServer, markers) {
   console.log("user placeMarkers running");
   markers = handler.addMarkers(dataFromServer);
-  // handler.bounds.extendWith(markers);
+  handler.bounds.extendWith(markers);
   handler.fitMapToBounds();
-  handler.getMap().setZoom(15);
 }
 
 function showLocations(dataFromServer) {
