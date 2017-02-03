@@ -95,8 +95,13 @@ $neutral: #EFEFEF;
   margin-top: 10px;
 }
 
+.signup-location {
+  overflow: hidden;
+}
+
 #city-field > input {
   width: 225px;
   margin-right: 11px;
   font-size: 12px;
+  float: right;
 }
