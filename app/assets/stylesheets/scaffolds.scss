@@ -78,3 +78,20 @@ div {
 label {
   display: block;
 }
+
+
+.user-box {
+  margin: 10px;
+  width: 90px;
+  display: inline-table;
+  text-align: center;
+
+  img  {
+    border: 1px solid transparent;
+    border-radius: 50%;
+  }
+}
+
+.user-name {
+  text-align: center;
+}

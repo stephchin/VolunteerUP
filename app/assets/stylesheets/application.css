@@ -294,17 +294,19 @@ h5, th {
 
 .user-box {
   margin: 10px;
+  width: 100px;
   display: inline-table;
+  text-align: center;
 }
 
-.image-placeholder {
+/*.image-placeholder {
   width: 60px;
   height: 60px;
   background-color: white;
   border: 1px solid #e7e7e7;
   border-radius: 50%;
   margin: 5px;
-}
+}*/
 
 .large-image-placeholder {
   max-width: 500px;
