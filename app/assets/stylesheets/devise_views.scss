@@ -28,7 +28,7 @@ $neutral: #EFEFEF;
 }
 
 .devise-box {
-  label {
+  label, .img-label {
     margin-top: 2px;
     font-family: $header;
     text-transform: uppercase;
@@ -42,6 +42,8 @@ $neutral: #EFEFEF;
   }
   .display-error {
     font-family: $main;
+  }
+  .user_image {
   }
   .btn-login {
     font-family: $main;
