@@ -154,18 +154,18 @@
       <p id="volunteers-list">
         <% @event.user_events.where(waitlist: nil).each do |user_event| %>
           <div class="user-box">
-            <div class="image-placeholder"></div>
-          <%= link_to user_event.user.name, user_path(user_event.user) %><br>
-          <%= user_event.user.email %><br></div>
+            <div><%= link_to image_tag(user_event.user.image.url(:small)), user_path(user_event.user) %></div>
+          <div class="user-name"><%= user_event.user.name.split(" ")[0] %></div>
+          </div>
         <% end %>
       </p><br>
       <h5>Waitlist</h5>
       <p id="waitlist-list">
         <% @event.user_events.where.not(waitlist: nil).each do |user_event| %>
           <div class="user-box">
-            <div class="image-placeholder"></div>
-          <%= link_to user_event.user.name, user_path(user_event.user) %><br>
-          <%= user_event.user.email %><br></div>
+            <div><%= link_to image_tag(user_event.user.image.url(:small)), user_path(user_event.user) %></div>
+          <div class="user-name"><%= user_event.user.name.split(" ")[0] %></div>
+          </div>
         <% end %>
       </p><br>
     </div>
@@ -174,9 +174,9 @@
       <p id="volunteers-list">
         <% @event.organization.users.sort.each do |organizer| %>
           <div class="user-box">
-            <div class="image-placeholder"></div>
-          <%= link_to organizer.name, user_path(organizer) %><br>
-          <%= organizer.email %><br></div>
+            <div><%= link_to image_tag(organizer.image.url(:small)), user_path(organizer) %></div>
+          <div class="user-name"><%= organizer.name.split(" ")[0] %></div>
+          </div>
         <% end %>
       </p><br>
       <h5>Contact Info</h5>
