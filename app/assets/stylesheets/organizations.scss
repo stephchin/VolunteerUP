@@ -59,6 +59,21 @@ $neutral: #EFEFEF;
   margin-left: 8%;
 }
 
+#orgcalendar {
+  margin-top: 1em;
+  border-radius: .4em;
+  .fc-toolbar {
+    background-color: $neutral;
+    padding-bottom: .5em;
+  }
+  h2 {
+  font-family: $header;
+  text-transform: uppercase;
+  font-size: 2em;
+  text-align: center;
+  color: $darkcarbon;
+  }
+}
 .fc-content {
   background-color: #a1bcc1;
 }
