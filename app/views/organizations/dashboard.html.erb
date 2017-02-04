@@ -82,8 +82,8 @@
                     </tr>
                     <% event.user_events.order(waitlist: :desc).pluck(:user_id).map{ |x| User.find(x) }.each do |user| %>
                       <tr class="vol-row">
-                        <td><div class="image-placeholder"></div></td>
-                        <td><%= user.name %></td>
+                        <td><%= link_to image_tag(user.image.url(:small)), user_path(user.id) %></div></td>
+                        <td><%= link_to user.name, user_path(user.id) %></td>
                         <td><%= user.email %></td>
                         <td>
                           <% if user.user_events.find_by(event_id: event.id).waitlist.nil? %>
