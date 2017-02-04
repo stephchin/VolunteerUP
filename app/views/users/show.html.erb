@@ -52,12 +52,11 @@
     </div> <!--ends col-md-8-->
   </div> <!--ends row-->
 
-
   <h3>Recommended for You</h3>
 
   <div class="recommended">
     <% @cause_list.each do |cause| %>
-        <p style="font-size: 1.2em;"><%= link_to Event.find(cause.id).name, Event.find(cause.id) %> -hosted by- 
+        <p style="font-size: 1.2em;"><%= link_to Event.find(cause.id).name, Event.find(cause.id) %> -hosted by-
         <%= link_to Event.find(cause.id).organization.name, Event.find(cause.id).organization %>
         <%= " to benefit #{Event.find(cause.id).cause}" %></p>
     <% end %>

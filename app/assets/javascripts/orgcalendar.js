@@ -4,11 +4,11 @@ $(document).ready(function() {
      timeFormat: "LT",
      defaultView: 'month',
      header: {
-        left: 'prev,next',
-        center: 'title',
-        right: 'month,agendaWeek',
+        left: 'title',
+        center: '',
+        right: 'prev,next month,agendaWeek',
       },
-      height: 395,
+      height: 350,
      eventClick: function(event) {
       if (event.url) {
           window.open(event.url, "_blank");
