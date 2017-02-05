@@ -10,8 +10,28 @@
   <%= devise_error_messages! %>
 
   <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name, autocomplete: "off" %>
+    <div class="display-error"><%= display_error_user(:name) %></div>
+  </div>
+
+  <div class="display-inline-flex signup-location">
+    <div class="field">
+      <%= f.label :city %>
+      <%= f.text_field :city, autocomplete: "off" %>
+    </div>
+
+    <div class="field state_selector">
+      <%= f.label :state %>
+      <%= f.select(:state, options_for_select([["Select", ""], ["AL", "AL"], ["AK", "AK"], ["AZ", "AZ"], ["AR", "AR"], ["CA", "CA"], ["CO", "CO"], ["CT", "CT"], ["DE", "DE"], ["FL", "FL"],  ["GA", "GA"], ["HI", "HI"], ["ID", "ID"], ["IL", "IL"], ["IN", "IN"], ["IA", "IA"], ["KS", "KS"], ["KY", "KY"], ["LA", "LA"], ["ME", "ME"], ["MD", "MD"], ["MA", "MA"], ["MI", "MI"], ["MN", "MN"], ["MS", "MS"], ["MO", "MO"], ["MT", "MT"], ["NE", "NE"], ["NV", "NV"], ["NH", "NH"], ["NJ", "NJ"], ["NM", "NM"], ["NY", "NY"], ["NC", "NC"], ["ND", "ND"], ["OH", "OH"], ["OK", "OK"], ["OR", "OR"], ["PA", "PA"], ["RI", "RI"], ["SC", "SC"], ["SD", "SD"], ["TN", "TN"], ["TX", "TX"], ["UT", "UT"], ["VT", "VT"], ["VA", "VA"], ["WA", "WA"], ["WV", "WV"], ["WI", "WI"], ["WY", "WY"]
+      ], selected: f.object.state)) %> <br>
+    </div>
+  </div>
+
+  <div class="field">
     <%= f.label :email %>
     <%= f.email_field :email, autofocus: true %>
+    <div class="display-error"><%= display_error_user(:email) %></div>
   </div><br>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -21,6 +41,7 @@
   <div class="field">
     <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
     <%= f.password_field :password, autocomplete: "off" %>
+    <div class="display-error"><%= display_error_user(:password) %></div>
     <% if @minimum_password_length %>
       <br />
       <em><%= @minimum_password_length %> characters minimum</em>
@@ -31,6 +52,7 @@
     <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div><br>
+
 
   <div class="field">
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />

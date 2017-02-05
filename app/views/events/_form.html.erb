@@ -34,7 +34,7 @@
 
             <div class="field cause-selector">
               <%= f.label :cause %>
-              <%= f.select(:cause, options_for_select([["In support of...", "Other"], ["Children/Youth", "Children/Youth"], ["Animals", "Animals"], ["Arts & Culture", "Arts & Culture"], ["Community Development", "Community Development"], ["Health/Hospitals", "Health/Hospitals"], ["Mental Health", "Mental Health"], ["Education/Literacy", "Education/Literacy"], ["Homelessness", "Homelessness"], ["Other", "Other"]])) %> <br>
+              <%= f.select(:cause, options_for_select([["In support of...", "Other"], ["Children/Youth", "Children/Youth"], ["Animals", "Animals"], ["Arts & Culture", "Arts & Culture"], ["Community Development", "Community Development"], ["Health/Hospitals", "Health/Hospitals"], ["Mental Health", "Mental Health"], ["Education/Literacy", "Education/Literacy"], ["Homelessness", "Homelessness"], ["Other", "Other"]], selected: f.object.cause)) %> <br>
             </div>
           </div>
 
