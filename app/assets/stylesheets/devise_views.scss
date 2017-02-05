@@ -66,7 +66,6 @@ $neutral: #EFEFEF;
     margin-bottom: 30px;
   }
 }
-
 .login-with {
   width: 50%;
   display: block;
@@ -82,7 +81,6 @@ $neutral: #EFEFEF;
 .display-inline-flex{
   display: flex;
 }
-
 .devise-box input[type=checkbox]{
   width: 17px;
   padding-top: 0px;
@@ -97,6 +95,17 @@ $neutral: #EFEFEF;
 
 .signup-location {
   overflow: hidden;
+}
+
+// Edit Account Page
+
+form#edit_user {
+  div {
+    margin-top: .5em;
+  }
+  .actions {
+    margin-top: 2em;
+  }
 }
 
 #city-field > input {

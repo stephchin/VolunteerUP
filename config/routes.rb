@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   get 'about' => 'landing_page#about'
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "users/registrations" }
   resources :users do
     get :get_events
     get 'user_map_locations'
