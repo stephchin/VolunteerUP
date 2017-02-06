@@ -1,7 +1,10 @@
-# README
+# VolunteerUP
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+VolunteerUP is an app that connects nonprofit organizations with eager volunteers. Users are able to register as volunteers, search for events in their area, and sign up for events as volunteers. Users are also able to register as organizers that administer their nonprofit organization pages, create a calendar of events, and request volunteers.
+
+## Ruby Version
+
+5.0
 
 ## Database creation and configuration
 In order to set up the database run the following commands:
@@ -14,20 +17,3 @@ In order to run test using the seeded database, use the following commands after
 
 * rake db:setup
 * rake db:seed RAILS_ENV=test --trace
-
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
