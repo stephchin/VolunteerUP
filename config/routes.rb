@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get "admin" => "admin#index"
+  put "admin/:id" => "admin#update"
+  patch "admin/:id" => "admin#update"
+
   get 'notifications/index'
   delete 'application/:notif_id/delete_notification' => "application#delete_notification"
 
