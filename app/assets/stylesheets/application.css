@@ -344,6 +344,19 @@ h5, th {
   margin: 10px 0px 10px 0px;
 }
 
+.account-settings-field input {
+  width: 16em;
+}
+
+.account-settings-city input {
+  width: 11.25em;
+  margin-right: 6px;
+}
+
+.account-settings-size {
+  width: 20em;
+}
+
 .form-box input {
   height: 28px;
   margin-bottom: 2px;
