@@ -39,6 +39,7 @@ ul.notificator {
 
 .notification-img {
   margin-top: 5px;
+  margin-right: 5px;
 }
 
 ul #notificationList
@@ -70,7 +71,7 @@ ul #notificationList
   overflow: visible;
   position: absolute;
   top: 70px;
-  margin-left: -280px;
+  margin-left: -290px;
   width: 300px;
   z-index: 30;
   display: none;
