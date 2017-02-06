@@ -2,6 +2,10 @@
 
 VolunteerUP is an app that connects nonprofit organizations with eager volunteers. Users are able to register as volunteers, search for events in their area, and sign up for events as volunteers. Users are also able to register as organizers that administer their nonprofit organization pages, create a calendar of events, and request volunteers.
 
+## Heroku Demo
+
+https://volunteerup.herokuapp.com/
+
 ## Ruby Version
 
 5.0
