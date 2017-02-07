@@ -1,42 +1,66 @@
 <nav class="breadcrumb">
   <a class="breadcrumb-item" href="/">Home</a>
   <a class="breadcrumb-item" href="/users/<%=current_user.id%>"> / My Profile</a>
-  <span class="breadcrumb-item active"> / Account Settings</span>
+  <span class="breadcrumb-item active"> / My Settings</span>
 </nav>
 
-<h2>Account Settings</h2>
+<h2>My Settings</h2>
 
-<div class="form-box account-settings-size">
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f| %>
+<div class="account-settings">
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f| %>
 
-    <%= image_tag(resource.image.url(:large)) %>
-    <br><br>
-    <div class="field account-settings-field">
-      <label>Profile picture</label>
-      <%= f.file_field :image %>
-    </div>
+  <ul class="nav nav-tabs nav-stacked col-sm-3">
+    <li class="active"><a href="#profile" data-toggle="tab">Profile</a></li>
+    <li><a href="#account" data-toggle="tab">Account</a></li>
+  </ul>
 
-    <div class="field account-settings-field">
-      <%= f.label :name %>
-      <%= f.text_field :name, autocomplete: "off" %>
-      <div class="display-error"><%= display_error_user(:name) %></div>
-    </div>
 
-    <div class="display-inline-flex account-settings-city">
-      <div class="field">
-        <%= f.label :city %>
-        <%= f.text_field :city, autocomplete: "off" %>
+  <!-- <div class="row form-box "> -->
+
+  <div class="tab-content col-sm-9 form-box account-settings-size">
+      <div class="tab-pane active" id="profile">
+
+      <h3>Public Profile</h3>
+
+      <div class="field account-settings-field">
+        <%= f.label :name %>
+        <%= f.text_field :name, autocomplete: "off" %>
+        <div class="display-error"><%= display_error_user(:name) %></div>
       </div>
 
-      <div class="field state_selector">
-        <%= f.label :state %>
-        <%= f.select(:state, options_for_select([["Select", ""], ["AL", "AL"], ["AK", "AK"], ["AZ", "AZ"], ["AR", "AR"], ["CA", "CA"], ["CO", "CO"], ["CT", "CT"], ["DE", "DE"], ["FL", "FL"],  ["GA", "GA"], ["HI", "HI"], ["ID", "ID"], ["IL", "IL"], ["IN", "IN"], ["IA", "IA"], ["KS", "KS"], ["KY", "KY"], ["LA", "LA"], ["ME", "ME"], ["MD", "MD"], ["MA", "MA"], ["MI", "MI"], ["MN", "MN"], ["MS", "MS"], ["MO", "MO"], ["MT", "MT"], ["NE", "NE"], ["NV", "NV"], ["NH", "NH"], ["NJ", "NJ"], ["NM", "NM"], ["NY", "NY"], ["NC", "NC"], ["ND", "ND"], ["OH", "OH"], ["OK", "OK"], ["OR", "OR"], ["PA", "PA"], ["RI", "RI"], ["SC", "SC"], ["SD", "SD"], ["TN", "TN"], ["TX", "TX"], ["UT", "UT"], ["VT", "VT"], ["VA", "VA"], ["WA", "WA"], ["WV", "WV"], ["WI", "WI"], ["WY", "WY"]
-        ], selected: f.object.state)) %>
+
+      <div class="display-inline-flex account-settings-city">
+        <div class="field">
+          <%= f.label :city %>
+          <%= f.text_field :city, autocomplete: "off" %>
+        </div>
+
+        <div class="field state_selector">
+          <%= f.label :state %>
+          <%= f.select(:state, options_for_select([["Select", ""], ["AL", "AL"], ["AK", "AK"], ["AZ", "AZ"], ["AR", "AR"], ["CA", "CA"], ["CO", "CO"], ["CT", "CT"], ["DE", "DE"], ["FL", "FL"],  ["GA", "GA"], ["HI", "HI"], ["ID", "ID"], ["IL", "IL"], ["IN", "IN"], ["IA", "IA"], ["KS", "KS"], ["KY", "KY"], ["LA", "LA"], ["ME", "ME"], ["MD", "MD"], ["MA", "MA"], ["MI", "MI"], ["MN", "MN"], ["MS", "MS"], ["MO", "MO"], ["MT", "MT"], ["NE", "NE"], ["NV", "NV"], ["NH", "NH"], ["NJ", "NJ"], ["NM", "NM"], ["NY", "NY"], ["NC", "NC"], ["ND", "ND"], ["OH", "OH"], ["OK", "OK"], ["OR", "OR"], ["PA", "PA"], ["RI", "RI"], ["SC", "SC"], ["SD", "SD"], ["TN", "TN"], ["TX", "TX"], ["UT", "UT"], ["VT", "VT"], ["VA", "VA"], ["WA", "WA"], ["WV", "WV"], ["WI", "WI"], ["WY", "WY"]
+          ], selected: f.object.state)) %>
+        </div>
+      </div> <!-- end city/state row -->
+      <div class="field account-settings-field">
+        <label>Profile picture</label>
+        <%= image_tag(resource.image.url(:med)) %><br><br>
+        <%= f.file_field :image %>
       </div>
+
+
+    <!-- </div> end first col -->
+
+    <div class="actions">
+      <%= f.submit "Update", class: "btn btn-sm btn-primary" %>
     </div>
 
-    <% if !(["facebook", "twitter"].include?(resource.provider)) %>
+    </div> <!-- end tab pane -->
 
+    <div class="tab-pane" id="account">
+    <!-- <div class="col-md-6"> -->
+      <% if !(["facebook", "twitter"].include?(resource.provider)) %>
+
+      <h3>Change Email</h3>
       <div class="field account-settings-field">
         <%= f.label :email %>
         <%= f.email_field :email, autofocus: true %>
@@ -47,11 +71,11 @@
         <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
       <% end %>
 
+      <h3>Change Password</h3>
       <div class="field account-settings-field">
         <%= f.label :new_password %>
         <%= f.password_field :password, autocomplete: "off", placeholder: @minimum_password_length.to_s + " characters minimum"%>
         <div class="display-error"><%= display_error_user(:password) %></div>
-
       </div>
 
       <div class="field account-settings-field">
@@ -61,16 +85,19 @@
 
       <div class="field account-settings-field">
         <%= f.label :current_password %>
-        <%= f.password_field :current_password, autocomplete: "off", placeholder: "Required for email/password change" %>
+        <%= f.password_field :current_password, autocomplete: "off", placeholder: "Required for email or password changes" %>
         <div class="display-error"><%= display_error_user(:current_password) %></div>
       </div>
 
-    <% end %>
+      <% end %>
 
-    <div class="actions">
-      <%= f.submit "Update", class: "btn btn-sm btn-primary" %>
-    </div>
-  <% end %>
-
-  <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-sm btn-danger" %>
+      <div class="actions">
+        <%= f.submit "Update", class: "btn btn-sm btn-primary" %>
+      </div>
+      <% end %>
+      <h3>Cancel Your Account</h3>
+      <p>Once you cancel your account, there is no going back. Please be certain.</p><br>
+      <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-sm btn-danger" %>
+    </div> <!-- end tab pane -->
+  </div> <!-- end tab content -->
 </div>
