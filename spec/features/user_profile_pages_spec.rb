@@ -31,7 +31,7 @@ RSpec.feature "UserProfilePages", type: :feature do
         expect(page).to have_content @user.state
       end
       And 'I can see a link to edit my profile info' do
-        expect(page).to have_link "Account Settings"
+        expect(page).to have_link "My Settings"
       end
       And 'I can see a list of my Organizations' do
         expect(page).to have_content @o1.name

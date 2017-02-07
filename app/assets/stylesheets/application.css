@@ -345,16 +345,16 @@ h5, th {
 }
 
 .account-settings-field input {
-  width: 16em;
+  width: 20em;
 }
 
 .account-settings-city input {
-  width: 11.25em;
-  margin-right: 6px;
+  width: 15em;
+  margin-right: 8px;
 }
 
 .account-settings-size {
-  width: 20em;
+  width: 52em;
 }
 
 .form-box input {

@@ -34,7 +34,7 @@
       </div>
       <% if current_user.id.to_s == params[:id] %>
         <p>
-        <%= link_to 'Account Settings', edit_user_registration_path, class: "btn btn-xs btn-info" %>
+        <%= link_to 'My Settings', edit_user_registration_path, class: "btn btn-xs btn-info" %>
         </p>
     </div><!--ends col-md-4-->
 
@@ -127,6 +127,7 @@
       <% end %>
       </tbody>
     </table>
+    <%= paginate @events %>
   </div>
 
 

@@ -114,3 +114,22 @@ form#edit_user {
   font-size: 12px;
   float: right;
 }
+
+.account-settings {
+
+  .nav-tabs>li.active>a {
+    border: 1px solid #ddd;
+    border-right-color: transparent;
+    border-radius: 4px;
+  }
+  .nav-tabs {
+    border-bottom: none;
+  }
+  .col-sm-2 {
+    // padding-right: 0px;
+  }
+  .nav-tabs>li>a:hover {
+    border-color: none;
+    border-radius: 4px;
+  }
+}
