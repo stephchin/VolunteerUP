@@ -37,7 +37,7 @@ RSpec.feature "EditProfiles", type: :feature do
         click_button "Update"
       end
       And 'Profile update will return an error' do
-        expect(page).to have_content("error")
+        expect(page).to have_content("password can't be blank")
       end
       Then 'I can successfully update my email and password when I enter my current password' do
         fill_in "user[current_password]", with: "123456"
