@@ -18,6 +18,9 @@ class UsersController < ApplicationController
     else
       @causes = []
     end
+
+
+    @events = @events.page(params[:page]).per(5);
   end
 
   def user_map_locations
