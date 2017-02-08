@@ -8,6 +8,10 @@ https://volunteerup.herokuapp.com/
 
 ## Ruby Version
 
+ruby 2.2.6
+
+## Rails Version
+
 5.0
 
 ## Database creation and configuration
