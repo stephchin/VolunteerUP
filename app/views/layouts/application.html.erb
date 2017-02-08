@@ -52,18 +52,26 @@
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <button type="button" id="avatar-button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
             <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
+            <% if user_signed_in? %>
+              <span class="nav-avatar"><%= image_tag(current_user.image.url(:large)) %></span>
+            <% else %>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            <% end %>
           </button>
           <a class="navbar-brand" href="/">VolunteerUP</a>
+          <%= render "layouts/notification_center", notifications: @notifications %>
         </div>
 
+        <!-- <div class="nav-header"> -->
+          <%#= render "layouts/notification_center", notifications: @notifications %>
+        <!-- </div> -->
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
+          <ul class="nav navbar-nav" >
             <li><a href="/about">About <span class="sr-only">(current)</span></a></li>
             <li><%= link_to "Events", events_path %></li>
             <li><%= link_to "Organizations", organizations_path %></li>
@@ -89,9 +97,8 @@
                 <% end %>
               </ul>
             </li>
-
               <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
-              <li><%= render "layouts/notification_center", notifications: @notifications %></li>
+              <!-- Was here -->
             <% else %>
               <li><%= link_to "Log in", new_user_session_path %></li>
               <li><%= link_to "Sign up", new_user_registration_path %></li>
