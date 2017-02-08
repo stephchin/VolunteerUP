@@ -6,17 +6,21 @@ $darkcarbon: #656565;
 $watermelon: #FF3B3F;
 $neutral: #EFEFEF;
 
-
 ul.notificator {
   display: inline-block;
-  float:right;
+  position: relative;
+  padding: 0px;
+  // left: 415px;
+  // left: 930px;
+  // left: calc(100% + 30vw);
+  left: 56vw;
+  // left: calc(100%);
+  // float: right;
   margin-top: .5em;
-  z-index: -1000;
+  z-index: 1000;
   li
   {
-    // position: relative;
     list-style: none;
-
     i
     {
       color: #fff;
@@ -25,10 +29,10 @@ ul.notificator {
 }
 
 #notification-counter {
-  position: absolute;
   top: -2px;
-  left: 25px;
+  // left: 25px;
   margin-top: .5em;
+  margin-right: .5em;
 
   background-color: $watermelon;
   color: #fff;
@@ -39,7 +43,7 @@ ul.notificator {
 
 .notification-img {
   margin-top: 5px;
-  margin-right: 5px;
+  // margin-right: 5px;
 }
 
 ul #notificationList
@@ -127,4 +131,23 @@ ul #notificationList
 ul#notificationList > li
 {
   padding: 3px;
+}
+
+.nav-avatar > img {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+}
+
+#avatar-button {
+  padding: 0;
+  border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+
+  ul.notificator {
+    position: static;
+    float: right;
+  }
 }
