@@ -107,7 +107,7 @@
           </div> <!-- inner row end -->
         </div> <!-- end event box -->
         <% end %> <!-- event loop end -->
-        <%= paginate org.events %>
+        <%= paginate org.events.page(params[:page]).per(3) %>
     </div> <!-- volunteers class end -->
   </div> <!-- outter col-md-6 end -->
 </div> <!-- outter row end -->
