@@ -17,11 +17,11 @@ In order to set up the database run the following commands:
 rake db:drop
 rake db:create
 rake db:migrate
+rake db:setup
 ```
 
 In order to run test using the seeded database, use the following commands after migrations:
 
 ```BASH
-rake db:setup
 rake db:seed RAILS_ENV=test --trace
 ```
