@@ -7,7 +7,7 @@ class Organization < ApplicationRecord
   validates :name, uniqueness: true, presence: true
   validates :description, presence: true
 
-  has_attached_file :image, styles: { small: "64x64", med: "250x250", large: "400x400" }, default_url: "default_org.png"
+  has_attached_file :image, styles: { small: "64x64", med: "250x250", large: "400x400" }, s3_protocol: :https, default_url: "default_org.png"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
 
   resourcify
