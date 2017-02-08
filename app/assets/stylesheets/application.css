@@ -344,6 +344,10 @@ h5, th {
   margin: 10px 0px 10px 0px;
 }
 
+.account-settings-size {
+  max-width: 55em;
+}
+
 .account-settings-field input {
   width: 20em;
 }
@@ -353,8 +357,20 @@ h5, th {
   margin-right: 8px;
 }
 
-.account-settings-size {
-  width: 52em;
+@media (max-width: 420px) {
+  .account-settings-field input {
+    width: 16em;
+  }
+
+  .account-settings-city input {
+    width: 12em;
+    margin-right: 5px;
+  }
+
+  .account-settings select {
+    width: 3.5em;
+  }
+
 }
 
 .form-box input {
