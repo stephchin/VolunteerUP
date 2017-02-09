@@ -148,6 +148,7 @@ user_names.each do |user|
   p "Created User #{user}!"
 end
 
+admin = User.find_by_email("a@yahoo.com")
 u12 = User.find_by_email("h@yahoo.com")
 u11 = User.find_by_email("i@yahoo.com")
 u1 = User.find_by_email("j@yahoo.com")
@@ -163,6 +164,10 @@ u10 = User.find_by_email("s@yahoo.com")
 u13 = User.find_by_email("t@yahoo.com")
 u14 = User.find_by_email("u@yahoo.com")
 u15 = User.find_by_email("v@yahoo.com")
+
+admin.add_role :admin
+p "Created Admin #{admin.name}!"
+
 
 [u1, u2, u3, u4, u5, u6, u7, u8, u9, u10, u11, u12, u13, u14, u15].each_with_index do |u, index|
   u.add_role :organizer
