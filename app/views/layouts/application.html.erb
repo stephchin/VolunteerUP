@@ -59,12 +59,19 @@
         <!-- 'Sticky' (non-collapsing) right-side menu item(s) -->
        <div class="navbar-header pull-right">
          <ul class="nav pull-left">
+           <!-- organizer dashboard in dropdown -->
+           <% if current_user.organizations.all.length > 0 %>
+            <li class="pull-left"><%= link_to "Organizer Dashboard", dashboard_organizations_path %></li>
+           <% end %>
+           <!-- admin dashboard in dropdown -->
+           <% if current_user.has_role? :admin %>
+            <li class="pull-left"><%= link_to "Admin Dashboard", admin_path %></li>
+           <% end %>
            <!-- notifcation center-->
            <% if user_signed_in? %>
            <li class="pull-left">
               <%= render "layouts/notification_center", notifications: @notifications %>
           </li>
-
            <!-- avatar dropdown -->
            <li class="dropdown pull-right">
              <a href="#" data-toggle="dropdown" class="dropdown-toggle">
@@ -74,14 +81,6 @@
                <li id="logged-in-as">Logged in as: <%= current_user.name %></li>
                <li><%= link_to "My Profile", user_path(current_user.id)%></li>
                <li><%= link_to "My Settings", edit_user_registration_path%></li>
-               <!-- organizer dashboard in dropdown -->
-               <% if current_user.organizations.all.length > 0 %>
-                <li><%= link_to "Organizer Dashboard", dashboard_organizations_path %></li>
-               <% end %>
-               <!-- admin dashboard in dropdown -->
-               <% if current_user.has_role? :admin %>
-                <li><%= link_to "Admin Dashboard", admin_path %></li>
-               <% end %>
                <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
              </ul>
            </li> <!-- end avatar dropdown -->
@@ -112,9 +111,11 @@
 
 
 
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
+
+
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
 
 
 

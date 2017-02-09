@@ -34,7 +34,8 @@
  }
 
  .nav>li>a.dropdown-toggle {
-    padding: 0px 0px;
+    padding: 2px 21px;
+    margin: auto;
   }
 
 .dropdown-menu {
@@ -64,7 +65,7 @@ ul.nav.pull-left {
 }
 
 .pull-right{
-  padding: 3px 5px 0px 10px;
+  /*padding: 3px 5px 0px 10px;*/
 }
 
 .nav>li>a, .nav .open>a, .nav .open>a, .nav .open>a:focus, .nav .open>a:hover, .nav>li>a:hover, .nav>li>a:focus {
