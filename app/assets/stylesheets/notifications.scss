@@ -7,16 +7,8 @@ $watermelon: #FF3B3F;
 $neutral: #EFEFEF;
 
 ul.notificator {
-  display: inline-block;
-  position: relative;
-  padding: 0px;
-  // left: 415px;
-  // left: 930px;
-  // left: calc(100% + 30vw);
-  left: 56vw;
-  // left: calc(100%);
-  // float: right;
-  margin-top: .5em;
+  margin-top: 9px;
+  margin-right: 10px;
   z-index: 1000;
   li
   {
@@ -29,21 +21,20 @@ ul.notificator {
 }
 
 #notification-counter {
-  top: -2px;
-  // left: 25px;
-  margin-top: .5em;
-  margin-right: .5em;
-
+  position: absolute;
+  top: 4px;
+  margin-bottom: .5em;
+  margin-left: 13px;
   background-color: $watermelon;
   color: #fff;
-  border-radius: 3px;
+  border-radius: 50%;
   padding: 2px 5px;
   font: 8px Verdana;
 }
 
 .notification-img {
-  margin-top: 5px;
-  // margin-right: 5px;
+  width: 24px;
+  height: 24px;
 }
 
 ul #notificationList
@@ -67,16 +58,19 @@ ul #notificationList
   padding-left: 0;
 }
 
-#notificationContainer
+#notificationContainer,
 {
   background-color: #fff;
-  border: 1px solid rgba(100, 100, 100, .4);
-  -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+  border-left: 1px solid rgba(100, 100, 100, .4);
+  border-right: 1px solid rgba(100, 100, 100, .4);
+  border-bottom: 1px solid rgba(100, 100, 100, .4);
+  border-top: none;
+  -webkit-box-shadow: 0px 3px 8px rgba(0, 0, 0, .25);
   overflow: visible;
   position: absolute;
-  top: 70px;
-  margin-left: -290px;
-  width: 300px;
+  top: 43px;
+  margin-left: -285px;
+  width: 320px;
   z-index: 30;
   display: none;
 }
@@ -99,55 +93,25 @@ ul #notificationList
 {
   font-weight: bold;
   padding: 8px;
-  font-size: 13px;
-  background-color: #fbfdfd;
+  font-size: 14px;
+  // background-color: #fbfdfd;
   // position: absolute;
   z-index: 1;
-  border-bottom: 1px solid $watermelon;
-  color: $watermelon;
+  border-bottom: 1px solid $carbon;
+  // color: $darkcarbon;
 }
 
 #notificationsBody
 {
   padding: 3px 0px 0px 0px !important;
-  min-height:300px;
-  max-height:300px;
+  min-height: 200px;
+  max-height: 300px;
   overflow: auto;
   position: relative;
   width: 100%;
 }
 
-
-#notificationFooter
-{
-  background-color: #fbfdfd;
-  text-align: center;
-  font-weight: bold;
-  padding: 8px;
-  font-size: 12px;
-  border-top: 1px solid #eeeeee;
-}
-
 ul#notificationList > li
 {
   padding: 3px;
-}
-
-.nav-avatar > img {
-  height: 30px;
-  width: 30px;
-  border-radius: 50%;
-}
-
-#avatar-button {
-  padding: 0;
-  border-radius: 50%;
-}
-
-@media (max-width: 768px) {
-
-  ul.notificator {
-    position: static;
-    float: right;
-  }
 }
