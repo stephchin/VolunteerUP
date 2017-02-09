@@ -62,8 +62,10 @@
               <span class="icon-bar"></span>
             <% end %>
           </button>
-          <a class="navbar-brand" href="/">VolunteerUP</a>
-          <%= render "layouts/notification_center", notifications: @notifications %>
+          <% if user_signed_in? %>
+            <a class="navbar-brand" href="/">VolunteerUP</a>
+            <%= render "layouts/notification_center", notifications: @notifications %>
+          <% end %>
         </div>
 
         <!-- <div class="nav-header"> -->
