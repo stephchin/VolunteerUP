@@ -48,6 +48,11 @@
   <div class="col-md-6">
     <div class="volunteer">
       <h5>Upcoming Events</h5>
+
+
+
+
+        <!-- What I need to fix -->
         <% org.events.order(:start_time).all.each_with_index do |event, index| %>
         <div class="event-box">
           <div class="row">
@@ -103,14 +108,17 @@
                   </table> <!-- end of modal table -->
                 </div> <!-- end modal content -->
               </div> <!-- end modal fade -->
-            </div> <!-- inner 2nd col end -->
-          </div> <!-- inner row end -->
-        </div> <!-- end event box -->
+            </div><!-- inner 2nd col end -->
+           </div><!-- inner row end -->
+         </div><!-- end event box -->
         <% end %> <!-- event loop end -->
-        <%= paginate org.events.page(params[:page]).per(3) %>
     </div> <!-- volunteers class end -->
+
+    <!-- The end of the fix -->
+
   </div> <!-- outter col-md-6 end -->
 </div> <!-- outter row end -->
+        <%#= paginate org.events.order(:start_time).all.page(1).per(3) %>
 <br>
 <%= link_to "Edit Organization", edit_organization_path(org.id), class: "btn btn-info btn-xs" %>
 <br><br>
