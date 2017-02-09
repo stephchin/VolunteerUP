@@ -19,6 +19,7 @@ class OrganizationsController < ApplicationController
   # GET /organizations/1.json
   def show
     # @ability = Ability.new(current_user)
+    @events = @organization.events.order(:start_time).page(params[:page]).per(3)
   end
 
   def add_user
