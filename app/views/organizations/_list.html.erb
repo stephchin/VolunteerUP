@@ -1,0 +1,29 @@
+<div id="events-list">
+<table class="table">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @events.each do |event| %>
+    <tr>
+      <td class="event-col">
+        <p class="eventname"><%= link_to event.name, event_path(event) %></p>
+        <p class="eventdescription"><%= event.description %></p>
+      </td>
+      <td class="event-col">
+        <p><span class="glyphicon glyphicon-time"></span><%= event.start_time.strftime("%b %e, %Y ") %>
+        <br><%= event.start_time.strftime("%l:%M %p") %> - <%= event.end_time.strftime("%l:%M %p") %></p>
+        <p><span class="glyphicon glyphicon-map-marker"></span><%= event.street %>
+        <br><%= "#{event.city}, #{event.state} #{event.postal_code} #{event.country}" %></p>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<div id="paginator">
+  <%= paginate @events, remote: true %>
+</div>
+</div>
