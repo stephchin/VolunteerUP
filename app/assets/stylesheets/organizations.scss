@@ -114,6 +114,10 @@ body .fc {
   padding: 1%;
 }
 
+.event-col {
+  width: 50%;
+}
+
 .eventname {
   font-size: 12px;
   font-weight: bold;
@@ -127,4 +131,9 @@ body .fc {
 .dashboardh2 {
   font-family: $main;
   font-size: 1.8em;
+}
+
+.volunteer {
+  overflow-y: auto;
+  height: 600px;
 }

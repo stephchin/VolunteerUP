@@ -6,17 +6,13 @@ $darkcarbon: #656565;
 $watermelon: #FF3B3F;
 $neutral: #EFEFEF;
 
-
 ul.notificator {
-  display: inline-block;
-  float:right;
-  margin-top: .5em;
-  z-index: -1000;
+  margin: auto;
+  padding: 7px 12px 7px 22px;
+  z-index: 1000;
   li
   {
-    // position: relative;
     list-style: none;
-
     i
     {
       color: #fff;
@@ -26,20 +22,19 @@ ul.notificator {
 
 #notification-counter {
   position: absolute;
-  top: -2px;
-  left: 25px;
-  margin-top: .5em;
-
+  top: 4px;
+  margin-bottom: .5em;
+  margin-left: 13px;
   background-color: $watermelon;
   color: #fff;
-  border-radius: 3px;
+  border-radius: 50%;
   padding: 2px 5px;
   font: 8px Verdana;
 }
 
 .notification-img {
-  margin-top: 5px;
-  margin-right: 5px;
+  width: 24px;
+  height: 24px;
 }
 
 ul #notificationList
@@ -63,20 +58,36 @@ ul #notificationList
   padding-left: 0;
 }
 
-#notificationContainer
+#notificationContainer,
 {
   background-color: #fff;
-  border: 1px solid rgba(100, 100, 100, .4);
-  -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+  border-left: 1px solid rgba(100, 100, 100, .4);
+  border-right: 1px solid rgba(100, 100, 100, .4);
+  border-bottom: 1px solid rgba(100, 100, 100, .4);
+  border-top: none;
+  -webkit-box-shadow: 0px 3px 8px rgba(0, 0, 0, .25);
   overflow: visible;
   position: absolute;
-  top: 70px;
-  margin-left: -290px;
-  width: 300px;
+  top: 43px;
+  margin-left: -285px;
+  width: 320px;
   z-index: 30;
   display: none;
 }
 
+
+@media (max-width: 435px) {
+  ul.notificator {
+    padding: 7px 10px 7px 10px
+  }
+  #notificationContainer,
+  {
+    margin-left: -235px;
+    width: 290px;
+    z-index: 30;
+    display: none;
+  }
+}
 
 // #notificationContainer:before {
 //   content: '';
@@ -95,36 +106,31 @@ ul #notificationList
 {
   font-weight: bold;
   padding: 8px;
-  font-size: 13px;
-  background-color: #fbfdfd;
+  font-size: 14px;
+  // background-color: #fbfdfd;
   // position: absolute;
   z-index: 1;
-  border-bottom: 1px solid $watermelon;
-  color: $watermelon;
+  border-bottom: 1px solid $carbon;
+  // color: $darkcarbon;
 }
 
 #notificationsBody
 {
   padding: 3px 0px 0px 0px !important;
-  min-height:300px;
-  max-height:300px;
+  min-height: 200px;
+  max-height: 300px;
   overflow: auto;
   position: relative;
   width: 100%;
 }
 
-
-#notificationFooter
-{
-  background-color: #fbfdfd;
-  text-align: center;
-  font-weight: bold;
-  padding: 8px;
-  font-size: 12px;
-  border-top: 1px solid #eeeeee;
-}
-
 ul#notificationList > li
 {
   padding: 3px;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    clear: both;
+  }
 }

@@ -1,0 +1,5 @@
+<% js = escape_javascript(
+  render(partial: 'organizations/list', locals: { events: @events })
+) %>
+$("#events-list").html('<%= js %>');
+$("#paginator").html('<%= escape_javascript(paginate(@events, remote: true).to_s) %>');

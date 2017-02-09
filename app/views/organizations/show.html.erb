@@ -69,8 +69,9 @@
             <div class="user-thumb">
               <%= image_tag(organizer.image.url(:small)) %>
             </div>
-          <%= link_to organizer.name, user_path(organizer) %><br>
-          <%= organizer.email %><br></div>
+            <%= link_to organizer.name, user_path(organizer) %><br>
+            <%= organizer.email %><br>
+          </div>
         <% end %>
       </p>
       <% if user_signed_in? && !current_user.organizations.include?(@organization) %>
@@ -81,36 +82,18 @@
         <p><%= link_to "Sign In to Join!", new_user_session_path, class: "btn btn-info" %></p>
       <% end %>
       <br>
-    <div class="calendartitle"><h2>Upcoming Events:</h2></div>
+      <div class="calendartitle"><h2>Upcoming Events:</h2></div>
       <div id="orgcalendar"></div>
       <input id="organization_id" type="hidden" value="<%= @organization.id %>"/>
     </div>
-    
+
     <!-- events column -->
     <div class="col-md-6">
       <h5><%= link_to "Events", events_path %></h5>
-      <p id="events-list">
-        <% @organization.events.order(:start_time).each do |event| %>
-          <div class="event-box">
-            <div class="row">
-              <div class="col-sm-5">
-              <!-- <div class="image-placeholder"></div> -->
-                <p><div class="eventname"><%= link_to event.name, event_path(event) %></div><br><br>
-                <div class="eventdescription">
-                <%= event.description %></div></p>
-              </div>
-
-              <div class="col-sm-7">
-                <p><span class="glyphicon glyphicon-time"></span> <%= event.start_time.strftime("%b %e, %Y ") %><br>
-                <%= event.start_time.strftime("%l:%M %p") %> - <%= event.end_time.strftime("%l:%M %p") %><br><br>
-                <span class="glyphicon glyphicon-map-marker"></span> <%= event.street %> <br>
-                <%= "#{event.city}, #{event.state} #{event.postal_code} #{event.country}" %><br><br>
-                </p>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      </p>
+      <%= render(
+        partial: 'organizations/list',
+        locals: { events: @events }
+      ) %>
     </div>
   </div>
 </div> <!-- end organizer and event container -->

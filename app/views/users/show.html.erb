@@ -63,71 +63,11 @@
   </div>
 
   <!-- Begin Events Table -->
-  <div class="table-responsive">
-    <table class="table" id="user-events-table">
-      <caption>Your Upcoming Events</caption>
-        <% if @events.length == 0 %>
-          <tr>
-            <td>
-              <p id="noevents">You aren't currently signed up for any events...</p><br>
-              <%= link_to "Volunteer Now!", events_path, class: "btn btn-lg btn-primary" %><br><br>
-            </td>
-          </tr>
-        <% else %>
-        <thead>
-          <tr>
-            <th>Event</th>
-            <th>Organization</th>
-            <th>Date and Time</th>
-            <th>Date Location</th>
-            <th>Can't Make It?</th>
-          </tr>
-        </thead>
-      <tbody>
-        <% @events.order(start_time: :asc).each do |event| %>
-          <tr>
-            <td>
-              <strong><%= link_to event.name, event %></strong><br>
-            </td>
-            <td>
-              <%= link_to event.organization.name, organization_path(event.organization) %>
-            </td>
-            <td>
-                <span class="glyphicon glyphicon-time"></span>
-                <%= event.start_time.strftime("%b %e, %Y")%><br>
-                <%= event.start_time.strftime("%l:%M %p") %> -
-                <%= event.end_time.strftime("%l:%M %p") %><br>
-                (<%= ((event.end_time-event.start_time)/3600).round(1)  %> hours)
-            </td>
-            <td>
-                <span class="glyphicon glyphicon-map-marker"></span>
-                <%= event.street %><br>
-                <%= event.city %>,
-                <%= event.state %>
-                <%= event.postal_code %>
-                <%= event.country %>
-            </td>
-            <% if user_signed_in? %>
-              <% if current_user.events.all.include?(Event.find(event.id)) %>
-                <% if (current_user.user_events.where(event_id: event.id, waitlist: nil).length > 0) %>
-                  <td><%= link_to "Cancel Your RSVP",
-                    event_remove_event_path(current_user.id) + "?event=" +
-                    event.id.to_s, method: :delete, class: "btn btn-xs btn-danger" %>
-                  </td>
-                <% else %>
-                  <td><%= link_to "Remove From Waitlist",
-                    event_remove_event_path(current_user.id) + "?event=" +
-                    event.id.to_s, method: :delete, class: "btn btn-xs btn-warning" %>
-                  </td>
-                <% end %>
-              <% end %>
-            <% end %>
-          </tr>
-        <% end %>
-      <% end %>
-      </tbody>
-    </table>
-    <%= paginate @events %>
+  <div class="table-responsive" id="events-list">
+    <%= render(
+      partial: 'users/list',
+      locals: { events: @events }
+    ) %>
   </div>
 
 

@@ -8,16 +8,24 @@ https://volunteerup.herokuapp.com/
 
 ## Ruby Version
 
+ruby 2.2.6
+
+## Rails Version
+
 5.0
 
 ## Database creation and configuration
 In order to set up the database run the following commands:
 
-* rake db:drop
-* rake db:create
-* rake db:migrate
+```BASH
+rake db:drop
+rake db:create
+rake db:migrate
+rake db:setup
+```
 
 In order to run test using the seeded database, use the following commands after migrations:
 
-* rake db:setup
-* rake db:seed RAILS_ENV=test --trace
+```BASH
+rake db:seed RAILS_ENV=test --trace
+```
