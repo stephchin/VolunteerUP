@@ -8,7 +8,7 @@ $neutral: #EFEFEF;
 
 ul.notificator {
   margin: auto;
-  padding: 7px 22px;
+  padding: 7px 12px 7px 22px;
   z-index: 1000;
   li
   {
@@ -76,6 +76,19 @@ ul #notificationList
 }
 
 
+@media (max-width: 435px) {
+  ul.notificator {
+    padding: 7px 10px 7px 10px
+  }
+  #notificationContainer,
+  {
+    margin-left: -235px;
+    width: 290px;
+    z-index: 30;
+    display: none;
+  }
+}
+
 // #notificationContainer:before {
 //   content: '';
 //   display: block;
@@ -117,7 +130,7 @@ ul#notificationList > li
 }
 
 @media (max-width: 768px) {
-  #hambuger {
+  .hamburger {
     clear: both;
   }
 }

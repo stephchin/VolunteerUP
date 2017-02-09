@@ -64,6 +64,22 @@ ul.nav.pull-left {
     margin-right: 20px;
 }
 
+@media (max-width: 768px) {
+  ul.nav.pull-left {
+    margin-right: 0px;
+  }
+}
+@media (max-width: 435px) {
+  .nav>li>a {
+    padding: 10px 7px;
+  }
+  .nav>li>a.dropdown-toggle {
+    padding: 2px 10px
+  }
+}
+
+
+
 .pull-right{
   /*padding: 3px 5px 0px 10px;*/
 }
