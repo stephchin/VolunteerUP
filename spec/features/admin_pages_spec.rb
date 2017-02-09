@@ -19,7 +19,7 @@ RSpec.feature "AdminPages", type: :feature do
       Then "I can see the Admin Console link in my navbar" do
         expect(page).to have_content("Admin Console")
       end
-      And "I can go to the admin Console and see all users" do
+      And "I can go to the Admin Console and see all users" do
         visit admin_path
         expect(page).to have_content("All Users")
       end
