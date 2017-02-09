@@ -116,6 +116,8 @@ ul#notificationList > li
   padding: 3px;
 }
 
-#hambuger {
-  clear: both;
+@media (max-width: 768px) {
+  #hambuger {
+    clear: both;
+  }
 }
