@@ -8,18 +8,18 @@ RSpec.feature "AdminPages", type: :feature do
     @u1.save
     @pw = "123456"
   end
-  context "Going to the Admin Dashboard" do
-    Steps "Going to the Admin Dashboard" do
+  context "Going to the Admin Console" do
+    Steps "Going to the Admin Console" do
       Given "I am logged in as an admin" do
         visit new_user_session_path
         fill_in "user[email]", with: @u1.email
         fill_in "user[password]", with: @pw
         click_button "Log in"
       end
-      Then "I can see the Admin Dashboard link in my navbar" do
-        expect(find(:css, '.dropdown-menu')).to have_content("Admin Dashboard")
+      Then "I can see the Admin Console link in my navbar" do
+        expect(page).to have_content("Admin Console")
       end
-      And "I can go to the admin dashboard and see all users" do
+      And "I can go to the admin Console and see all users" do
         visit admin_path
         expect(page).to have_content("All Users")
       end
