@@ -57,6 +57,10 @@ td {
   padding-right: 5px;
 }
 
+caption {
+  font-size: 20pt;
+}
+
 div {
   &.field, &.actions {
     margin-bottom: 10px;
@@ -86,18 +90,29 @@ label {
   width: 90px;
   display: inline-table;
   text-align: center;
-
   img  {
-    border: 1px solid transparent;
     border-radius: 50%;
+    height: 50px;
+    width: 50px;
+  }
+  .user-name {
+    margin-top: 4px;
+    text-align: center;
+    font-size: 13px;
   }
 }
 
-.vol-row img, #admin-user-table img  {
-  border: 1px solid transparent;
-  border-radius: 50%;
-}
-
-.user-name {
+.user-table-thumb {
+  margin-left: 15px;
+  display: inline-table;
   text-align: center;
+  img  {
+    border-radius: 50%;
+    height: 32px;
+    width: 32px;
+  }
 }
+//
+// .vol-row img, #admin-user-table img  {
+//   border-radius: 50%;
+// }

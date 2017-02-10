@@ -66,11 +66,10 @@
       <p id="organizer-list">
         <% @organization.users.sort.each do |organizer| %>
           <div class="user-box">
-            <div class="user-thumb">
+            <div>
               <%= image_tag(organizer.image.url(:small)) %>
             </div>
-            <%= link_to organizer.name, user_path(organizer) %><br>
-            <%= organizer.email %><br>
+            <div class="user-name"><%= organizer.name.split(" ")[0] %></div>
           </div>
         <% end %>
       </p>

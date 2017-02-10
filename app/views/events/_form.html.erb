@@ -13,16 +13,11 @@
     <% end %> -->
     <div class="row form-box">
         <div class="col-md-6">
-
+          <h3>Event Overview</h3>
           <div class="field field-input">
             <%= f.label :name %>
             <%= f.text_field :name, placeholder: "Event name" %>
             <div class="display-error"><%= display_error_events(:name) %></div>
-          </div>
-
-          <div class="field">
-            <%= f.label :event_image %>
-            <%= f.file_field :image %>
           </div>
 
           <div class="display-inline-flex">
@@ -43,9 +38,16 @@
             <%= f.text_area :description, placeholder: "Tell us about your event!" %>
           </div>
 
+          <div class="field">
+            <%= f.label :event_image %>
+            <%#= image_tag(event.image.url(:med)) %>
+            <%= f.file_field :image %>
+          </div>
+
         </div> <!-- end col -->
 
         <div class="col-md-6">
+          <h3>Volunteers</h3>
 
           <div class="field">
             <%= f.label :volunteers_needed %>
@@ -53,6 +55,7 @@
             <div class="display-error"><%= display_error_events(:volunteers_needed) %></div>
           </div>
 
+          <h3>Date and Time</h3>
           <div class="field">
             <%= f.label :start_time %>
             <%= f.datetime_select :start_time %>
@@ -63,6 +66,7 @@
             <%= f.datetime_select :end_time %>
           </div>
 
+          <h3>Location</h3>
           <div class="field field-input">
             <%= f.label :street %>
             <%= f.text_field :street, placeholder: "Street address"%>

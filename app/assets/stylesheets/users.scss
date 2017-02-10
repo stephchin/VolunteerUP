@@ -16,38 +16,29 @@ $carbon: #A9A9A9;
 }
 
 .user-img {
-  border-radius: 50%;
-  margin: 5px;
-  min-width: 180px;
-  min-height: 180px;
-  max-width: 180px;
-  min-width: 180px;
   img {
-    // Use max-width: 100% if you do not want to stretch
-    // the user's profile image
-    width: 100%;
-    height: auto;
-    border-radius: inherit;
-    min-width: 180px;
-    min-height: 180px;
-    max-width: 180px;
-    min-width: 180px;
+    border-radius: 2px;
   }
 }
 
-.user-thumb {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  margin: 5px;
-  img {
-    max-width: 100%;
-    min-width: 100%;
-    max-height: 100%;
-    min-height: 100%;
-    border-radius: inherit;
-  }
-}
+// .user-thumb {
+//   width: 50px;
+//   height: 50px;
+//   border-radius: 50%;
+//   margin: 5px;
+//   img {
+//     max-width: 100%;
+//     min-width: 100%;
+//     max-height: 100%;
+//     min-height: 100%;
+//     border-radius: inherit;
+//   }
+//   p {
+//     margin-top: 4px;
+//     text-align: center;
+//     font-size: 13px;
+//   }
+// }
 
 // Tabbed Column Calendar
 
@@ -78,7 +69,7 @@ $carbon: #A9A9A9;
 
 // Events Table
 
-#user-events-table, #admin-user-table{
+#user-events-table{
   margin-top: 3em;
   background-color: #EFEFEF;
   border: 1px solid #EFEFEF;
