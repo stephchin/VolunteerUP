@@ -42,7 +42,8 @@ RSpec.feature "UserProfilePages", type: :feature do
       end
       And 'I can click on my organization name to go to its page' do
           within('#user-events-table') do
-          click_link @o1.name
+          expect(page).to have_link @o1.name
+          visit organization_path(@o1)
           end
         expect(page).to have_current_path(organization_path(@o1.id))
       end

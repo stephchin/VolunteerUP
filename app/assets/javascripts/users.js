@@ -18,24 +18,30 @@ function placeMakersUser(dataFromServer, markers) {
 
 function showLocations(dataFromServer) {
   console.log("user showLocations running");
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-        dataFromServer[dataFromServer.length] = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
-        "picture": {
-          "url": "http://pngimages.net/sites/default/files/user-png-image-30725.png",
-          "width":  32,
-          "height": 32
-        },
-        infowindow: "You!"
-      };
-      placeMakersUser(dataFromServer, markers);
-    });
-  } else {
-    alert("Geolocation is not available");
-    placeMakersUser(dataFromServer, markers)
-  }
+  placeMakersUser(dataFromServer);
+
+  // Code to show User location commented out while team decides whether this
+  // is the optimal solution- after decision is made code can
+  // be uncommented or deleted
+
+  // if (navigator.geolocation) {
+  //   navigator.geolocation.getCurrentPosition(function(position) {
+  //       dataFromServer[dataFromServer.length] = {
+  //       lat: position.coords.latitude,
+  //       lng: position.coords.longitude,
+  //       "picture": {
+  //         "url": "http://pngimages.net/sites/default/files/user-png-image-30725.png",
+  //         "width":  32,
+  //         "height": 32
+  //       },
+  //       infowindow: "You!"
+  //     };
+  //     placeMakersUser(dataFromServer, markers);
+  //   });
+  // } else {
+  //   alert("Geolocation is not available");
+  //   placeMakersUser(dataFromServer, markers)
+  // }
 }
 
 function createGmapUser(dataFromServer) {
