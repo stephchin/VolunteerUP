@@ -18,7 +18,11 @@ function placeMakersUser(dataFromServer, markers) {
 
 function showLocations(dataFromServer) {
   console.log("user showLocations running");
-  placeMakersUser(dataFromServer, markers)
+  placeMakersUser(dataFromServer);
+
+  // Code to show User location commented out while team decides whether this
+  // is the optimal solution- after decision is made code can be uncommented or deleted
+
   // if (navigator.geolocation) {
   //   navigator.geolocation.getCurrentPosition(function(position) {
   //       dataFromServer[dataFromServer.length] = {
