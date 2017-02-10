@@ -416,6 +416,12 @@ h5, th {
   max-width: 55em;
 }
 
+.form-box img {
+  border-radius: 2px;
+  max-width: 200px;
+  max-height: 200px;
+}
+
 .account-settings-field input {
   width: 20em;
 }
@@ -467,7 +473,7 @@ h5, th {
 
 .form-box textarea {
   width: 28em;
-  height: 12em;
+  /*height: 4em;*/
 }
 
 .postal-field input{

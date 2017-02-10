@@ -1,25 +1,27 @@
 <h1>Admin Console</h1>
 <div class="table-responsive">
   <table class="table" id="admin-user-table">
-    <caption>All Users</caption>
+    <h3>All Users</h3>
+    <thead>
         <tr>
-          <th>Avatar</th>
+          <th></th>
           <th>Name</th>
           <th>Email</th>
           <th>Role</th>
           <th>Action</th>
         </tr>
+    </thead>
     <tbody>
     <% @users.order(:email).each do |user| %>
       <tr>
-        <td><%= link_to image_tag(user.image.url(:small)), user_path(user) %></td>
+        <td><div class="user-table-thumb"><%= link_to image_tag(user.image.url(:small)), user_path(user) %></div></td>
         <td><%= link_to user.name, user_path(user) %></td>
         <td><%= user.email %></td>
         <td><%= user.roles.order(:name).pluck(:name).map(&:capitalize).join(", ") %>
         </td>
         <td>
           <%= form_tag("/admin/" + user.id.to_s + "?role=admin", method: :PUT) do %>
-            <input type="submit" value="Make Admin" class="btn btn-info btn-sm"/>
+            <input type="submit" value="Make Admin" class="btn btn-info btn-xs"/>
           <% end %>
         </td>
       </tr>
