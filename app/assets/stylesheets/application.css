@@ -485,3 +485,11 @@ h5, th {
 }
 .state-field select {
 }
+
+.notice, .success {
+  color: green;
+}
+
+.alert {
+  color: red;
+}
