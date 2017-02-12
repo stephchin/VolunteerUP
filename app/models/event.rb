@@ -50,12 +50,12 @@ class Event < ApplicationRecord
     terms = terms.map { |e|
       ('%' + e.gsub('*', '%') + '%').gsub(/%+/, '%')
     }
-    num_or_conds = 3
+    num_of_conds = 3
     where(
       terms.map { |term|
         "(LOWER(events.name) LIKE ? OR LOWER(events.cause) LIKE ? OR LOWER(organizations.name) LIKE ?)"
       }.join(' AND '),
-      *terms.map { |e| [e] * num_or_conds }.flatten
+      *terms.map { |e| [e] * num_of_conds }.flatten
     ).joins(:organization)
   }
 

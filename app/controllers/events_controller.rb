@@ -28,7 +28,7 @@ class EventsController < ApplicationController
     end
 
     # kaminari pagination
-    @events = @events.page(params[:page]).per(5)
+    # @events = @events.page(params[:page]).per(5)
 
     if !params[:filterrific].nil?
       @zip = params[:filterrific][:with_distance][:zip]

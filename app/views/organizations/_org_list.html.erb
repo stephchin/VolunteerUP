@@ -1,0 +1,34 @@
+<div id="filterrific_results">
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Organization Info</th>
+      <th>Organizers</th>
+      <th>Contact</th>
+      <!-- <th colspan="3"></th> -->
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @organizations.each do |organization| %>
+      <tr>
+        <td>
+          <strong><%= link_to organization.name, organization%></strong><br><br>
+          <%= organization.description %><br><br>
+        </td>
+        <td>
+          <% organization.users.each do |user| %>
+          <%= user.name %><br>
+          <% end %>
+        </td>
+        <td>
+          Phone: <%= organization.phone %><br>
+          Email: <%= organization.email %><br>
+          Web: <%= organization.website %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @organizations, remote: true %>
+</div>
