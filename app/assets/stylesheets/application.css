@@ -486,10 +486,11 @@ h5, th {
 .state-field select {
 }
 
-.notice, .success {
+/*.notice, .success {
   color: green;
 }
 
 .alert {
   color: red;
-}
+  padding: 0px;
+}*/

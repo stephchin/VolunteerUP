@@ -112,7 +112,7 @@ class OrganizationsController < ApplicationController
   def dashboard
     all_orgs = []
     org_ids = current_user.organizations.all.map(&:id)
-    @all_orgs = org_ids.map{ |id| Organization.find(id) }
+    @all_orgs = org_ids.map{ |id| Organization.find(id) }.sort { |x,y| x.name <=> y.name }
 
 
 
