@@ -5,6 +5,7 @@ $main: 'Signika', sans-serif;
 // Color Scheme
 $sky: #CAEBF2;
 $carbon: #A9A9A9;
+$middlecarbon: #878787;
 $darkcarbon: #656565;
 $watermelon: #FF3B3F;
 $neutral: #EFEFEF;
@@ -116,3 +117,7 @@ label {
 // .vol-row img, #admin-user-table img  {
 //   border-radius: 50%;
 // }
+
+i {
+  color: $middlecarbon;
+}
