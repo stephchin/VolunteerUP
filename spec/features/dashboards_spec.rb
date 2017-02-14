@@ -42,7 +42,9 @@ RSpec.feature "Dashboards", type: :feature do
         # expect(page).to have_link("Delete", "organizations/" + @org.id.to_s)
       end
       Then "I can click the link to go to that organization's page" do
-        click_link @org.name
+        within (".tab-content") do
+          click_link @org.name
+        end
         expect(page).to have_current_path(organization_path(@org.id))
       end
       Then "I can click the user's name to go to their page" do

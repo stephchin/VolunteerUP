@@ -26,29 +26,30 @@
     </div>
     <!-- info column -->
     <div class="col-md-6">
-      <h5>Description</h5>
+      <h5><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Description</h5>
       <div class="text-area">
         <p class="description"><%= @organization.description %></p>
       </div>
-      <h5>Phone</h5>
+      <h5><i class="fa fa-phone" aria-hidden="true"></i> Phone</h5>
       <div class="text-area">
         <p><%= @organization.phone %></p>
       </div>
 
-      <h5>Email</h5>
+      <h5><i class="fa fa-envelope" aria-hidden="true"></i> Email</h5>
       <div class="text-area">
         <p><%= mail_to @organization.email, @organization.email %></p>
       </div>
 
-      <h5>Website</h5>
+      <h5><i class="fa fa-globe" aria-hidden="true"></i> Website</h5>
       <div class="text-area">
         <p><%= link_to @organization.website, "http://#{@organization.website}" %></p>
 
-        <% if !@organization.twitter.nil? && !@organization.facebook.nil? %>
-        <p class="org-social-media">
-          <a href="http://<%= @organization.twitter %>"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a>
-          <a href="http://<%= @organization.facebook %>"><i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i></a>
-        </p>
+        <% if !@organization.twitter.nil?%>
+          <a href="http://<%= @organization.twitter %>"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
+        <% end %>
+
+        <% if !@organization.facebook.nil? %>
+          <a href="http://<%= @organization.facebook %>"><i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i></a>
         <% end %>
       </div><br>
     </div>
