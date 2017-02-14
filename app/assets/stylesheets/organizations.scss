@@ -53,6 +53,8 @@ $neutral: #EFEFEF;
 
 .volunteer {
   background-color: #EFEFEF;
+  overflow-y: auto;
+  height: 750px;
 }
 
 .org-social-media a i {
@@ -133,7 +135,8 @@ body .fc {
   font-size: 1.8em;
 }
 
-.volunteer {
-  overflow-y: auto;
-  height: 600px;
+.org-med img {
+  width: 200px;
+  height: 200px;
+  border-radius: 2px;
 }
