@@ -5,7 +5,7 @@ module Users
       account_update_params = devise_parameter_sanitizer.sanitize(:account_update)
       @user = User.find(current_user.id)
 
-      if needs_password?
+      if needs_password? && !(["facebook", "twitter"].include?(resource.provider))
         successfully_updated = @user.update_with_password(account_update_params)
       else
         account_update_params.delete('password')
