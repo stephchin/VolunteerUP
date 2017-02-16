@@ -23,7 +23,7 @@ RSpec.feature "EditProfiles", type: :feature, js: true do
       end
       And 'I can update my name and profile picture without a password' do
         fill_in "user_name", with: "Kate"
-        # page.attach_file("user_image", "spec/fixtures/sample_profilepic.png")
+        page.attach_file("user_image", File.absolute_path("spec/fixtures/sample_profilepic.png"))
       end
       Then 'I can submit my updated information' do
         # page.find('#update-profile-submit').trigger("click")
@@ -32,7 +32,8 @@ RSpec.feature "EditProfiles", type: :feature, js: true do
       And 'My profile information will successfully update' do
         expect(page).to have_current_path(user_path(@user))
         # expect(page).to have_content("Kate")
-        # expect(page).to have_css("img[src*='sample_profilepic.png']")
+        save_and_open_page
+        expect(page).to have_css("img[src*='sample_profilepic.png']")
       end
       Then 'I try to change my email and password without entering my current password' do
         within(".container") do
