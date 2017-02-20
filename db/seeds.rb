@@ -4,35 +4,33 @@ city = ["Carlsbad", "Chula Vista", "Coronado", "Del Mar", "El Cajon", "Encinitas
         "Vista"]
 state = "CA"
 
-# To create all Organizations
-org_names = ["We Help", "Food Bankers", "Red Cross", "Real Helpers",
-  "Salvation Army", "Are We Done Yet", "Not Today", "Big Time Rush", "Sudwerk",
-  "Greendale", "We Have Time For That", "Sacred Honors International Team",
-  "Until Dark", "Scott's Tots", "Attractive Women"]
-descriptions = ["We help people.", "Animals are our priority.", "Don't run away",
-  "We are serious organization!", "Just like your next door neighbor.",
-  "Getting closer and closer to finshing!",
-  "Fighting something? Come join us. Our motto is... Not Today to any and all problems.",
-  "We want to be your bo-bo-bo-bo-bo-body guys. Have a problem? We're worldwide!",
-  "Drinks for binks? Shots for tots? Baby wipes for Bailey flights? We've got all kinds of drinks for the children!",
-  "Who is better at being human beings than these human beings! Dean-a-ling-a-ling! Something Something Eartha Kitt.",
-  "Tired of hearing 'I ain't got time for that?' Then are you in for a treat! Our organization has just that, time!",
-  "Here at Sacred Honors International Team, we are the... well, you can read. We lead the way by flushing everyone's problems away on top of wiping away any stain left behind!",
-  "Listen, I'm tired. It's almost midnight and I have left in the tank. If you want to volunteer, you're more than welcome to. I'm just going to sleep now.",
-  "Hey, Mr. Scott. Watcha gonna do, watcha gonna do? Make our dreams come true!
+orgs = [
+    {name: "We Help", description: "We help people.", image: File.open("db/images/wehelp.jpg")},
+    {name: "Food Bankers", description: "Down on your luck? We're here to serve!", image: File.open("db/images/foodbankers.jpg")},
+    {name: "Red Cross", description: "Don't run away.", image: File.open("db/images/redcross.jpg")},
+    {name: "Real Helpers", description: "We are a serious organization!", image: File.open("db/images/realhelpers.jpg")},
+    {name: "Salvation Army", description: "Just like your next door neighbor.", image: File.open("db/images/salvationarmy.jpg")},
+    {name: "Are We Done Yet", description: "Getting closer and closer to finishing!", image: File.open("db/images/arewedoneyet.jpg")},
+    {name: "Not Today", description: "Fighting something? Come join is. Our motto is... Not Today to any and all problems.", image: File.open("db/images/nottoday.jpg")},
+    {name: "Big Time Rush", description: "We want to be your bo-bo-bo-bo-bo-body guys. Have a problem? We're worldwide!", image: File.open("db/images/bigtimerush.jpg")},
+    {name: "Sudwerk", description: "Drinks for binks? Shots for tots? Baby wipes for Bailey flights? We've got all kinds of drinks for the children!", image: File.open("db/images/sudwerk.jpg")},
+    {name: "Greendale", description: "Who is better at being human beings than these human beings! Dean-a-ling-a-ling! Something something Eartha Kitt.", image: File.open("db/images/greendale.jpg")},
+    {name: "We Have Time For That", description: "Tired of hearing 'I ain't got time for that?' Then are you in for a treat! Our organization has just that, time!", image: File.open("db/images/wehavetimeforthat.jpg")},
+    {name: "Sacred Honors International Team", description: "Here are Sacred Honors International Team, we are the... well, you can read. We lead the way by flushing everyone's problems away on top of wiping away and stain left behind!", image: File.open("db/images/shit.jpg")},
+    {name: "Until Dark", description: "Listen, I'm tired. It's almost midnight and I have nothing left in the tank. If you want to volunteer, you're more than welcome to. I'm just going to sleep now.", image: File.open("db/images/untilmidnight.jpg")},
+    {name: "Scott's Tots", description: "Hey, Mr. Scott. Watcha gonna do, watcha gonna do? Make our dreams come true!
     Here at Scott's Tots we provide students with college tuition! Or actually
     laptops. Sorry we mean lithium batteries. Man, has it been 10 years already?
-    Anyways... We promise to do a lot for the children.",
-  "Psych! Now that we've lured you to our webpage, what we really do is run community events for different causes. Please come join us to make a difference!"
-
+    Anyways... We promise to do a lot for the children.", image: File.open("db/images/scottstots.jpg")},
+    {name: "Attractive Women", description: "Psych! Now that we've lured you to our webpage, what we really do is run community events for different causes. Please come join us to make a difference!", image: File.open("db/images/attractivewomen.jpg")}
 ]
 
-org_names.each_with_index do |org, index|
+orgs.each do |org|
   phone = "(#{rand(10).to_s * 3})#{rand(10).to_s * 3}-#{rand(10).to_s * 4}"
-  Organization.create!(name: org, description: descriptions[index],
-    phone: phone, email: "#{org.split(" ").join("")}@yahoo.com",
-    website: "www.#{org.split(" ").join("")}.org")
-  p "Created Organization #{index}!"
+  Organization.create!(name: org[:name], description: org[:description],
+    phone: phone, email: "#{org[:name].split(" ").join("").downcase}@yahoo.com",
+    website: "www.#{org[:name].split(" ").join("").downcase}.org", image: org[:image])
+  p "Created Organization #{org[:name]}!"
 end
 
 # To create all Events
@@ -246,7 +244,7 @@ p "Created Admin #{admin.name}!"
 [u1, u2, u3, u4, u5, u6, u7, u8, u9, u10, u11, u12, u13, u14, u15].each_with_index do |u, index|
   u.add_role :organizer
   u.user_organizations.create!(
-    organization: Organization.find_by_name(org_names[index]),
+    organization: Organization.find(index + 1),
     is_creator: true)
   p "Created Organizer #{u.name}!"
 end
