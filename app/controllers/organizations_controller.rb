@@ -36,7 +36,7 @@ class OrganizationsController < ApplicationController
   # GET /organizations/1.json
   def show
     # @ability = Ability.new(current_user)
-    @events = @organization.events.order(:start_time).page(params[:page]).per(3)
+    @events = @organization.events.where("end_time >= ?", Time.now).order(:start_time).page(params[:page]).per(3)
   end
 
   def add_user
@@ -113,9 +113,6 @@ class OrganizationsController < ApplicationController
     all_orgs = []
     org_ids = current_user.organizations.all.map(&:id)
     @all_orgs = org_ids.map{ |id| Organization.find(id) }.sort { |x,y| x.name <=> y.name }
-
-
-
   end
 
   def remove_organizer
@@ -145,7 +142,7 @@ class OrganizationsController < ApplicationController
   end
 
   def get_orgevents
-    org_events = Organization.find(params[:organization_id]).events
+    org_events = Organization.find(params[:organization_id]).events.where("end_time >= ?", Time.now)
     calendar_orgevents = []
     org_events.each do |event|
       calendar_orgevents << {

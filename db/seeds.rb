@@ -115,13 +115,13 @@ event_names = [
     of the other, you'll get there eventually."}}
 ]
 
-23.times do |iter|
+30.times do |iter|
   names_index = rand(event_names.length)
   name_key = event_names[names_index].keys[0]
   causes_index = rand(causes.length)
   loc_index = rand(event_locations.length)
   loc_key = event_locations[loc_index].keys[0]
-  s = DateTime.now + rand(14) + 7
+  s = DateTime.now + rand(21) + (rand(24) / 24.0)
   e = s + ((rand(24) + 1) / 24.0)
 
   Event.create!(name: name_key,
@@ -134,13 +134,13 @@ event_names = [
   p "Created Event #{iter}!"
 end
 
-30.times do |iter|
+23.times do |iter|
   names_index = rand(event_names.length)
   name_key = event_names[names_index].keys[0]
   causes_index = rand(causes.length)
   loc_index = rand(event_locations.length)
   loc_key = event_locations[loc_index].keys[0]
-  s = DateTime.now - rand(14)
+  s = DateTime.now - rand(31)
   e = s + ((rand(24) + 1) / 24.0)
 
   Event.create!(name: name_key,
@@ -255,7 +255,7 @@ user_length = User.all.length
 event_length = Event.all.length
 
 User.all.each do |user|
-  (rand(3) + 2).times do |iter|
+  (rand(3) + 9).times do |iter|
     e = Event.find(rand(event_length) + 1)
     if !e.users.all.include?(user) && e.remaining_vol > 0
       e.user_events.new(user: user)
