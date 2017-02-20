@@ -101,7 +101,7 @@
 
 
             <!-- What I need to fix -->
-            <% org.events.order(:start_time).all.each_with_index do |event, index| %>
+            <% org.events.where("end_time >= ?", Time.now).order(:start_time).all.each_with_index do |event, index| %>
             <div class="event-box">
               <div class="row">
                 <div class="col-sm-5">

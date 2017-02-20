@@ -5,7 +5,7 @@ RSpec.feature "Maps", type: :feature do
   before(:each) do
     @organization = Organization.new(name: "Test Org", description: "Test Org is a helpful org")
     @organization.save
-    @event = Event.create(name: "ABC", start_time:"2017-02-02 01:01:01", end_time:"2017-02-02 02:01:01", volunteers_needed: 1, latitude: 30, longitude: 30)
+    @event = Event.create(name: "ABC", start_time: DateTime.now + (2.0 / 24.0), end_time: DateTime.now + (5.0 / 24.0), volunteers_needed: 1, latitude: 30, longitude: 30)
     @event.organization = @organization
     @event.save
     @user = User.find_by_email("a@yahoo.com")

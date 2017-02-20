@@ -4,35 +4,33 @@ city = ["Carlsbad", "Chula Vista", "Coronado", "Del Mar", "El Cajon", "Encinitas
         "Vista"]
 state = "CA"
 
-# To create all Organizations
-org_names = ["We Help", "Food Bankers", "Red Cross", "Real Helpers",
-  "Salvation Army", "Are We Done Yet", "Not Today", "Big Time Rush", "Sudwerk",
-  "Greendale", "We Have Time For That", "Sacred Honors International Team",
-  "Until Dark", "Scott's Tots", "Attractive Women"]
-descriptions = ["We help people.", "Animals are our priority.", "Don't run away",
-  "We are serious organization!", "Just like your next door neighbor.",
-  "Getting closer and closer to finshing!",
-  "Fighting something? Come join us. Our motto is... Not Today to any and all problems.",
-  "We want to be your bo-bo-bo-bo-bo-body guys. Have a problem? We're worldwide!",
-  "Drinks for binks? Shots for tots? Baby wipes for Bailey flights? We've got all kinds of drinks for the children!",
-  "Who is better at being human beings than these human beings! Dean-a-ling-a-ling! Something Something Eartha Kitt.",
-  "Tired of hearing 'I ain't got time for that?' Then are you in for a treat! Our organization has just that, time!",
-  "Here at Sacred Honors International Team, we are the... well, you can read. We lead the way by flushing everyone's problems away on top of wiping away any stain left behind!",
-  "Listen, I'm tired. It's almost midnight and I have left in the tank. If you want to volunteer, you're more than welcome to. I'm just going to sleep now.",
-  "Hey, Mr. Scott. Watcha gonna do, watcha gonna do? Make our dreams come true!
+orgs = [
+    {name: "We Help", description: "We help people.", image: File.open("db/images/wehelp.jpg")},
+    {name: "Food Bankers", description: "Down on your luck? We're here to serve!", image: File.open("db/images/foodbankers.jpg")},
+    {name: "Red Cross", description: "Don't run away.", image: File.open("db/images/redcross.jpg")},
+    {name: "Real Helpers", description: "We are a serious organization!", image: File.open("db/images/realhelpers.jpg")},
+    {name: "Salvation Army", description: "Just like your next door neighbor.", image: File.open("db/images/salvationarmy.jpg")},
+    {name: "Are We Done Yet", description: "Getting closer and closer to finishing!", image: File.open("db/images/arewedoneyet.jpg")},
+    {name: "Not Today", description: "Fighting something? Come join is. Our motto is... Not Today to any and all problems.", image: File.open("db/images/nottoday.jpg")},
+    {name: "Big Time Rush", description: "We want to be your bo-bo-bo-bo-bo-body guys. Have a problem? We're worldwide!", image: File.open("db/images/bigtimerush.jpg")},
+    {name: "Sudwerk", description: "Drinks for binks? Shots for tots? Baby wipes for Bailey flights? We've got all kinds of drinks for the children!", image: File.open("db/images/sudwerk.jpg")},
+    {name: "Greendale", description: "Who is better at being human beings than these human beings! Dean-a-ling-a-ling! Something something Eartha Kitt.", image: File.open("db/images/greendale.jpg")},
+    {name: "We Have Time For That", description: "Tired of hearing 'I ain't got time for that?' Then are you in for a treat! Our organization has just that, time!", image: File.open("db/images/wehavetimeforthat.jpg")},
+    {name: "Sacred Honors International Team", description: "Here are Sacred Honors International Team, we are the... well, you can read. We lead the way by flushing everyone's problems away on top of wiping away and stain left behind!", image: File.open("db/images/shit.jpg")},
+    {name: "Until Dark", description: "Listen, I'm tired. It's almost midnight and I have nothing left in the tank. If you want to volunteer, you're more than welcome to. I'm just going to sleep now.", image: File.open("db/images/untilmidnight.jpg")},
+    {name: "Scott's Tots", description: "Hey, Mr. Scott. Watcha gonna do, watcha gonna do? Make our dreams come true!
     Here at Scott's Tots we provide students with college tuition! Or actually
     laptops. Sorry we mean lithium batteries. Man, has it been 10 years already?
-    Anyways... We promise to do a lot for the children.",
-  "Psych! Now that we've lured you to our webpage, what we really do is run community events for different causes. Please come join us to make a difference!"
-
+    Anyways... We promise to do a lot for the children.", image: File.open("db/images/scottstots.jpg")},
+    {name: "Attractive Women", description: "Psych! Now that we've lured you to our webpage, what we really do is run community events for different causes. Please come join us to make a difference!", image: File.open("db/images/attractivewomen.jpg")}
 ]
 
-org_names.each_with_index do |org, index|
+orgs.each do |org|
   phone = "(#{rand(10).to_s * 3})#{rand(10).to_s * 3}-#{rand(10).to_s * 4}"
-  Organization.create!(name: org, description: descriptions[index],
-    phone: phone, email: "#{org.split(" ").join("")}@yahoo.com",
-    website: "www.#{org.split(" ").join("")}.org")
-  p "Created Organization #{index}!"
+  Organization.create!(name: org[:name], description: org[:description],
+    phone: phone, email: "#{org[:name].split(" ").join("").downcase}@yahoo.com",
+    website: "www.#{org[:name].split(" ").join("").downcase}.org", image: org[:image])
+  p "Created Organization #{org[:name]}!"
 end
 
 # To create all Events
@@ -121,7 +119,7 @@ event_names = [
   causes_index = rand(causes.length)
   loc_index = rand(event_locations.length)
   loc_key = event_locations[loc_index].keys[0]
-  s = DateTime.now + rand(14)
+  s = DateTime.now + rand(21) + (rand(24) / 24.0)
   e = s + ((rand(24) + 1) / 24.0)
 
   Event.create!(name: name_key,
@@ -130,22 +128,96 @@ event_names = [
     street: event_locations[loc_index][loc_key][:street],
     city: loc_key, state: "CA",
     postal_code: event_locations[loc_index][loc_key][:postal_code], country: "USA",
-    volunteers_needed: rand(20) + 1, organization: Organization.order("RANDOM()").first)
+    volunteers_needed: rand(20) + 10, organization: Organization.order("RANDOM()").first)
+  p "Created Event #{iter}!"
+end
+
+23.times do |iter|
+  names_index = rand(event_names.length)
+  name_key = event_names[names_index].keys[0]
+  causes_index = rand(causes.length)
+  loc_index = rand(event_locations.length)
+  loc_key = event_locations[loc_index].keys[0]
+  s = DateTime.now - rand(31)
+  e = s + ((rand(24) + 1) / 24.0)
+
+  Event.create!(name: name_key,
+    description: event_names[names_index][name_key][:description],
+    cause: causes[causes_index], start_time: s, end_time: e,
+    street: event_locations[loc_index][loc_key][:street],
+    city: loc_key, state: "CA",
+    postal_code: event_locations[loc_index][loc_key][:postal_code], country: "USA",
+    volunteers_needed: rand(20) + 10, organization: Organization.order("RANDOM()").first)
   p "Created Event #{iter}!"
 end
 
 
 # To create all Users
-user_names = ["Ally", "Barney", "Carson", "Dierdre", "Esther", "Fox", "Gary",
-              "Hannibal", "Ingrid", "Julius", "Kendra", "Lily", "Marshall",
-              "Newton", "Odell", "Pierce", "Queen", "Robin", "Sia", "Ted",
-              "Utah", "Vinnie", "Washington", "Xanthipe", "Yosh", "Zeke"]
+user_names = ["Aya", "Ben", "Colin", "Data", "Elijah", "Freddie", "Ginger",
+              "Hannibal", "Isabella", "Jane", "Karen", "Lamorne", "Mackenzie",
+              "Neil", "Olivia", "Paget", "Quinn", "Rahul", "Shia", "Tony",
+              "Uzo", "Vanessa", "Will", "Xanthipe", "Yvonne", "Zach"]
 password = "123456"
 
 user_names.each do |user|
   User.create!(email: user[0] + "@yahoo.com", name: user, password: password,
-    city: city[rand(17)], state: state)
+    city: city[rand(17)], state: state, image: File.open("db/images/#{user[0].downcase}.jpg"))
   p "Created User #{user}!"
+end
+
+users = [
+    { email: "d_schrute@yahoo.com", name: "Dwight Schrute", password: password,
+      city: "Scranton", state: "PA", image: File.open("db/images/dwight-schrute.jpg") },
+    { email: "d_com@yahoo.com", name: "Dot Com", password: password,
+      city: "New York", state: "NY", image: File.open("db/images/dot-com.jpg") },
+    { email: "t_barnes@yahoo.com", name: "Troy Barnes", password: password,
+      city: "Greendale", state: "CO", image: File.open("db/images/troy-barnes.jpg") },
+    { email: "a_ludgate@yahoo.com", name: "April Ludgate", password: password,
+      city: "Pawnee", state: "IN", image: File.open("db/images/april-ludgate.jpg") },
+    { email: "t_funke@yahoo.com", name: "Tobias Funke", password: password,
+      city: "Newport Beach", state: "CA", image: File.open("db/images/tobias-funke.jpg") },
+    { email: "c_baskets@yahoo.com", name: "Christine Baskets", password: password,
+      city: "Bakersfield", state: "CA", image: File.open("db/images/christine-baskets.jpg") },
+    { email: "l_hewitt@yahoo.com", name: "Lem Hewitt", password: password,
+      city: "New York", state: "NY", image: File.open("db/images/lem-hewitt.jpg") },
+    { email: "a_santiago@yahoo.com", name: "Amy Santiago", password: password,
+      city: "New York", state: "NY", image: File.open("db/images/amy-santiago.jpg") },
+    { email: "b_summers@yahoo.com", name: "Buffy Summers", password: password,
+      city: "Sunnydale", state: "CA", image: File.open("db/images/buffy-summers.jpg") },
+    { email: "r_bunch@yahoo.com", name: "Rebecca Bunch", password: password,
+      city: "West Covina", state: "CA", image: File.open("db/images/rebecca-bunch.jpg") },
+    { email: "f_crane@yahoo.com", name: "Frasier Crane", password: password,
+      city: "Seattle", state: "WA", image: File.open("db/images/frasier-crane.jpg") },
+    { email: "c_bing@yahoo.com", name: "Chandler Bing", password: password,
+      city: "New York", state: "NY", image: File.open("db/images/chandler-bing.jpg") },
+    { email: "l_weir@yahoo.com", name: "Lindsay Weir", password: password,
+      city: "Chippewa", state: "MI", image: File.open("db/images/lindsay-weir.jpg") },
+    { email: "s_shapiro@yahoo.com", name: "Shoshanna Shapiro", password: password,
+      city: "New York", state: "NY", image: File.open("db/images/shoshanna-shapiro.jpg") },
+    { email: "d_clark@yahoo.com", name: "Donna Clark", password: password,
+      city: "San Francisco", state: "CA", image: File.open("db/images/donna-clark.jpg") },
+    { email: "t_mcconnell@yahoo.com", name: "Tracy McConnell", password: password,
+      city: "New York", state: "NY", image: File.open("db/images/tracy-mcconnell.jpg") },
+    { email: "c_kelly@yahoo.com", name: "Charlie Kelly", password: password,
+      city: "Philadelphia", state: "PA", image: File.open("db/images/charlie-kelly.jpg") },
+    { email: "m_dobbs@yahoo.com", name: "Mickey Dobbs", password: password,
+      city: "Culver City", state: "CA", image: File.open("db/images/mickey-dobbs.jpg") },
+    { email: "r_sterling@yahoo.com", name: "Roger Sterling", password: password,
+      city: "New York", state: "NY", image: File.open("db/images/roger-sterling.jpg") },
+    { email: "j_greenberg@yahoo.com", name: "Josh Greenberg", password: password,
+      city: "New York", state: "NY", image: File.open("db/images/josh-greenberg.jpg") },
+    { email: "p_dunphy@yahoo.com", name: "Phil Dunphy", password: password,
+      city: "Los Angeles", state: "CA", image: File.open("db/images/phil-dunphy.jpg") },
+    { email: "o_pope@yahoo.com", name: "Olivia Pope", password: password,
+      city: "Washington D.C.", state: "VA", image: File.open("db/images/olivia-pope.jpg") },
+    { email: "r_zane@yahoo.com", name: "Rachel Zane", password: password,
+      city: "New York", state: "NY", image: File.open("db/images/rachel-zane.jpg") }
+]
+
+users.each do |user|
+    User.create!(email: user[:email], name: user[:name], password: password,
+        city: user[:city], state: user[:state], image: user[:image])
+    puts "Created #{user[:name]}!"
 end
 
 admin = User.find_by_email("a@yahoo.com")
@@ -172,33 +244,16 @@ p "Created Admin #{admin.name}!"
 [u1, u2, u3, u4, u5, u6, u7, u8, u9, u10, u11, u12, u13, u14, u15].each_with_index do |u, index|
   u.add_role :organizer
   u.user_organizations.create!(
-    organization: Organization.find_by_name(org_names[index]),
+    organization: Organization.find(index + 1),
     is_creator: true)
   p "Created Organizer #{u.name}!"
-end
-
-# Changes
-first_names = ["Alex", "Boris", "Cathy", "Dude", "Elbert", "Fran", "Guy", "Hero",
-  "Izzy", "Janice", "Karl", "Lorne", "Max", "Neil", "Oscar", "Paulo", "Qent", "Ryan",
-  "Sophie", "Turner", "Ulysses", "Vernon", "Wallace", "Xavier", "Yedd", "Zenon"]
-last_names = ["Adams", "Brown", "Cooper"]#, "Dalby", "Eads", "Fielder", "Gabel",
-  #{}"Haden", "Ibanes", "Jones", "King", "Lancaster", "Martin"]#, "Nicholson", "Owen",
-  #{}"Pryor", "Qi", "Richards", "Smith", "Terry", "Udrih", "Valentine", "Williams",
-  #{}"Xanthos", "Yates", "Zed"]
-
-first_names.each do |first|
-  last_names.each do |last|
-    User.create!(email: "#{first[0]}#{last[0]}@yahoo.com", name: "#{first} #{last}",
-      password: password, city: city[rand(17)], state: state)
-    p "Created User #{first} #{last}!"
-  end
 end
 
 user_length = User.all.length
 event_length = Event.all.length
 
 User.all.each do |user|
-  (rand(3) + 2).times do |iter|
+  (rand(3) + 9).times do |iter|
     e = Event.find(rand(event_length) + 1)
     if !e.users.all.include?(user) && e.remaining_vol > 0
       e.user_events.new(user: user)

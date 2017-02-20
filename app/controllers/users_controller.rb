@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
 
   def show
-    @events = @user.events.all
+    @events = @user.events.all.where("end_time >= ?", Time.now)
     if user_signed_in?
       @causes = current_user.likes.sort_by{ |key, value| -value }.select{ |cause| (Event.where(cause: cause[0]).map(&:id) - current_user.events.all.map(&:id)).length > 0 }.first(3)
       @cause_list = []
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
 
   def user_map_locations
     # @user_events = User.find(1).events
-    @user_events = current_user.events
+    @user_events = current_user.events.where("end_time >= ?", Time.now)
 
     @hash = Gmaps4rails.build_markers(@user_events) do |event,marker|
       marker.lat(event.latitude)
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
 
   # GET all events for calendar on user profile
  def get_events
-   user_events = User.find(params[:user_id]).events
+   user_events = User.find(params[:user_id]).events.where("end_time >= ?", Time.now)
    calendar_events = []
    user_events.each do |event|
      calendar_events << {

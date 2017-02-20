@@ -10,7 +10,7 @@ class EventsController < ApplicationController
 
   def index
 
-    @events = Event.all
+    @events = Event.all.where("end_time >= ?", Time.now)
     # Initialize filterrific with the following params:
     @filterrific = initialize_filterrific(
       Event,
@@ -73,7 +73,7 @@ class EventsController < ApplicationController
   end
 
   def map_locations
-    @events = Event.all
+    @events = Event.all.where("end_time >= ?", Time.now)
 
     @filterrific = initialize_filterrific(
       Event,

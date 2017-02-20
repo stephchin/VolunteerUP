@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature "UserProfilePages", type: :feature do
   before(:each) do
     @user = User.find_by_email("a@yahoo.com")
-    @event = Event.create(name: "Event1", start_time:"2017-02-02 01:01:01", end_time:"2017-02-02 02:01:01", volunteers_needed: 100 )
+    @event = Event.create(name: "Event1", start_time: DateTime.now + (2.0 / 24.0), end_time: DateTime.now + (5.0 / 24.0), volunteers_needed: 100 )
     @o1 = Organization.find_by_name("We Help")
     @o2 = Organization.find_by_name("Food Bankers")
     @user.organizations << @o1
