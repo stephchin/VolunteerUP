@@ -115,13 +115,13 @@ event_names = [
     of the other, you'll get there eventually."}}
 ]
 
-30.times do |iter|
+23.times do |iter|
   names_index = rand(event_names.length)
   name_key = event_names[names_index].keys[0]
   causes_index = rand(causes.length)
   loc_index = rand(event_locations.length)
   loc_key = event_locations[loc_index].keys[0]
-  s = DateTime.now + rand(14)
+  s = DateTime.now + rand(14) + 7
   e = s + ((rand(24) + 1) / 24.0)
 
   Event.create!(name: name_key,
@@ -130,7 +130,26 @@ event_names = [
     street: event_locations[loc_index][loc_key][:street],
     city: loc_key, state: "CA",
     postal_code: event_locations[loc_index][loc_key][:postal_code], country: "USA",
-    volunteers_needed: rand(20) + 1, organization: Organization.order("RANDOM()").first)
+    volunteers_needed: rand(20) + 10, organization: Organization.order("RANDOM()").first)
+  p "Created Event #{iter}!"
+end
+
+30.times do |iter|
+  names_index = rand(event_names.length)
+  name_key = event_names[names_index].keys[0]
+  causes_index = rand(causes.length)
+  loc_index = rand(event_locations.length)
+  loc_key = event_locations[loc_index].keys[0]
+  s = DateTime.now - rand(14)
+  e = s + ((rand(24) + 1) / 24.0)
+
+  Event.create!(name: name_key,
+    description: event_names[names_index][name_key][:description],
+    cause: causes[causes_index], start_time: s, end_time: e,
+    street: event_locations[loc_index][loc_key][:street],
+    city: loc_key, state: "CA",
+    postal_code: event_locations[loc_index][loc_key][:postal_code], country: "USA",
+    volunteers_needed: rand(20) + 10, organization: Organization.order("RANDOM()").first)
   p "Created Event #{iter}!"
 end
 
@@ -191,7 +210,10 @@ users = [
       city: "New York", state: "NY", image: File.open("db/images/josh-greenberg.jpg") },
     { email: "p_dunphy@yahoo.com", name: "Phil Dunphy", password: password,
       city: "Los Angeles", state: "CA", image: File.open("db/images/phil-dunphy.jpg") },
-
+    { email: "o_pope@yahoo.com", name: "Olivia Pope", password: password,
+      city: "Washington D.C.", state: "VA", image: File.open("db/images/olivia-pope.jpg") },
+    { email: "r_zane@yahoo.com", name: "Rachel Zane", password: password,
+      city: "New York", state: "NY", image: File.open("db/images/rachel-zane.jpg") }
 ]
 
 users.each do |user|
