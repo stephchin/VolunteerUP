@@ -6,8 +6,8 @@ RSpec.feature "Dashboards", type: :feature do
     @u2 = User.find_by_email("z@yahoo.com")
     @org = Organization.create(name: "Yes", description: "We do everything",
       phone: "555-555-5555", email: "yes@yahoo.com", website: "www.yes.com")
-    @event = Event.create(name: "ABC", start_time:"2017-02-02 01:01:01",
-      end_time:"2017-02-02 02:01:01", volunteers_needed: 1 )
+    @event = Event.create(name: "ABC", start_time: DateTime.now + (2.0 / 24.0),
+      end_time: DateTime.now + (5.0 / 24.0), volunteers_needed: 1 )
     @event.organization = @org
     @event.save
     @event.user_events.create(user: @u2)
