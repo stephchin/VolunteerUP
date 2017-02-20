@@ -136,16 +136,68 @@ end
 
 
 # To create all Users
-user_names = ["Ally", "Barney", "Carson", "Dierdre", "Esther", "Fox", "Gary",
-              "Hannibal", "Ingrid", "Julius", "Kendra", "Lily", "Marshall",
-              "Newton", "Odell", "Pierce", "Queen", "Robin", "Sia", "Ted",
-              "Utah", "Vinnie", "Washington", "Xanthipe", "Yosh", "Zeke"]
+user_names = ["Aya", "Ben", "Colin", "Data", "Elijah", "Freddie", "Ginger",
+              "Hannibal", "Isabella", "Jane", "Karen", "Lamorne", "Mackenzie",
+              "Neil", "Olivia", "Paget", "Quinn", "Rahul", "Shia", "Tony",
+              "Uzo", "Vanessa", "Will", "Xanthipe", "Yvonne", "Zach"]
 password = "123456"
 
 user_names.each do |user|
   User.create!(email: user[0] + "@yahoo.com", name: user, password: password,
-    city: city[rand(17)], state: state)
+    city: city[rand(17)], state: state, image: File.open("db/images/#{user[0].downcase}.jpg"))
   p "Created User #{user}!"
+end
+
+users = [
+    { email: "d_schrute@yahoo.com", name: "Dwight Schrute", password: password,
+      city: "Scranton", state: "PA", image: File.open("db/images/dwight-schrute.jpg") },
+    { email: "d_com@yahoo.com", name: "Dot Com", password: password,
+      city: "New York", state: "NY", image: File.open("db/images/dot-com.jpg") },
+    { email: "t_barnes@yahoo.com", name: "Troy Barnes", password: password,
+      city: "Greendale", state: "CO", image: File.open("db/images/troy-barnes.jpg") },
+    { email: "a_ludgate@yahoo.com", name: "April Ludgate", password: password,
+      city: "Pawnee", state: "IN", image: File.open("db/images/april-ludgate.jpg") },
+    { email: "t_funke@yahoo.com", name: "Tobias Funke", password: password,
+      city: "Newport Beach", state: "CA", image: File.open("db/images/tobias-funke.jpg") },
+    { email: "c_baskets@yahoo.com", name: "Christine Baskets", password: password,
+      city: "Bakersfield", state: "CA", image: File.open("db/images/christine-baskets.jpg") },
+    { email: "l_hewitt@yahoo.com", name: "Lem Hewitt", password: password,
+      city: "New York", state: "NY", image: File.open("db/images/lem-hewitt.jpg") },
+    { email: "a_santiago@yahoo.com", name: "Amy Santiago", password: password,
+      city: "New York", state: "NY", image: File.open("db/images/amy-santiago.jpg") },
+    { email: "b_summers@yahoo.com", name: "Buffy Summers", password: password,
+      city: "Sunnydale", state: "CA", image: File.open("db/images/buffy-summers.jpg") },
+    { email: "r_bunch@yahoo.com", name: "Rebecca Bunch", password: password,
+      city: "West Covina", state: "CA", image: File.open("db/images/rebecca-bunch.jpg") },
+    { email: "f_crane@yahoo.com", name: "Frasier Crane", password: password,
+      city: "Seattle", state: "WA", image: File.open("db/images/frasier-crane.jpg") },
+    { email: "c_bing@yahoo.com", name: "Chandler Bing", password: password,
+      city: "New York", state: "NY", image: File.open("db/images/chandler-bing.jpg") },
+    { email: "l_weir@yahoo.com", name: "Lindsay Weir", password: password,
+      city: "Chippewa", state: "MI", image: File.open("db/images/lindsay-weir.jpg") },
+    { email: "s_shapiro@yahoo.com", name: "Shoshanna Shapiro", password: password,
+      city: "New York", state: "NY", image: File.open("db/images/shoshanna-shapiro.jpg") },
+    { email: "d_clark@yahoo.com", name: "Donna Clark", password: password,
+      city: "San Francisco", state: "CA", image: File.open("db/images/donna-clark.jpg") },
+    { email: "t_mcconnell@yahoo.com", name: "Tracy McConnell", password: password,
+      city: "New York", state: "NY", image: File.open("db/images/tracy-mcconnell.jpg") },
+    { email: "c_kelly@yahoo.com", name: "Charlie Kelly", password: password,
+      city: "Philadelphia", state: "PA", image: File.open("db/images/charlie-kelly.jpg") },
+    { email: "m_dobbs@yahoo.com", name: "Mickey Dobbs", password: password,
+      city: "Culver City", state: "CA", image: File.open("db/images/mickey-dobbs.jpg") },
+    { email: "r_sterling@yahoo.com", name: "Roger Sterling", password: password,
+      city: "New York", state: "NY", image: File.open("db/images/roger-sterling.jpg") },
+    { email: "j_greenberg@yahoo.com", name: "Josh Greenberg", password: password,
+      city: "New York", state: "NY", image: File.open("db/images/josh-greenberg.jpg") },
+    { email: "p_dunphy@yahoo.com", name: "Phil Dunphy", password: password,
+      city: "Los Angeles", state: "CA", image: File.open("db/images/phil-dunphy.jpg") },
+
+]
+
+users.each do |user|
+    User.create!(email: user[:email], name: user[:name], password: password,
+        city: user[:city], state: user[:state], image: user[:image])
+    puts "Created #{user[:name]}!"
 end
 
 admin = User.find_by_email("a@yahoo.com")
@@ -175,23 +227,6 @@ p "Created Admin #{admin.name}!"
     organization: Organization.find_by_name(org_names[index]),
     is_creator: true)
   p "Created Organizer #{u.name}!"
-end
-
-# Changes
-first_names = ["Alex", "Boris", "Cathy", "Dude", "Elbert", "Fran", "Guy", "Hero",
-  "Izzy", "Janice", "Karl", "Lorne", "Max", "Neil", "Oscar", "Paulo", "Qent", "Ryan",
-  "Sophie", "Turner", "Ulysses", "Vernon", "Wallace", "Xavier", "Yedd", "Zenon"]
-last_names = ["Adams", "Brown", "Cooper"]#, "Dalby", "Eads", "Fielder", "Gabel",
-  #{}"Haden", "Ibanes", "Jones", "King", "Lancaster", "Martin"]#, "Nicholson", "Owen",
-  #{}"Pryor", "Qi", "Richards", "Smith", "Terry", "Udrih", "Valentine", "Williams",
-  #{}"Xanthos", "Yates", "Zed"]
-
-first_names.each do |first|
-  last_names.each do |last|
-    User.create!(email: "#{first[0]}#{last[0]}@yahoo.com", name: "#{first} #{last}",
-      password: password, city: city[rand(17)], state: state)
-    p "Created User #{first} #{last}!"
-  end
 end
 
 user_length = User.all.length

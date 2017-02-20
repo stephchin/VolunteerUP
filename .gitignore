@@ -69,3 +69,6 @@ db/schema.rb
 
 # Ignore SimpleCov tests
 coverage
+
+# Ignore VIM .swp files
+*.swp
