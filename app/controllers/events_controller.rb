@@ -43,6 +43,7 @@ class EventsController < ApplicationController
     end
     # kaminari pagination
     @events = @events.page(params[:page]).per(5)
+    @current_page = @events.page(params[:page]).per(5).current_page
 
   # Recover from invalid param sets, e.g., when a filter refers to the
   # database id of a record that doesn’t exist any more.
@@ -95,10 +96,12 @@ class EventsController < ApplicationController
       @max_distance = params[:filterrific][:with_distance][:max_distance]
 
       if @zip.empty? || @max_distance.empty?
-        @events = @filterrific.find.page(params[:page])
+        @events = @filterrific.find.page(params[:page]).per(5)
       else
-        @events = @filterrific.find.near(@zip, @max_distance).page(params[:page])
+        @events = @filterrific.find.near(@zip, @max_distance).page(params[:page]).per(5)
       end
+    else
+      @events = @events.page(params[:page]).per(5)
     end
 
     @hash = Gmaps4rails.build_markers(@events) do |event,marker|

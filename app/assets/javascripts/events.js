@@ -107,6 +107,7 @@ function loadAndCreateGmapAll() {
         "&filterrific[search_query]=" + search;
     }
 
+
     $.ajax({
       dataType: 'json',
       url: myurl,

@@ -9,6 +9,7 @@
   </div>
 </div>
 
+
 <div class="well">
   <div class="row">
     <%= form_for_filterrific @filterrific do |f| %>
@@ -55,10 +56,18 @@
 <% end %>
 
 
-<div id="events_map" class="center-block" data-events-id="<%=@events%>"
+<h1>
+    <%= @current_page %>
+</h1>
+<%= render(
+    partial: 'events/map',
+    locals: { events: @events, zip: @zip, max_distance: @max_distance, search: @search }
+) %>
+
+<!-- <div id="events_map" class="center-block" data-events-id="<%=@events%>"
   data-zip="<%= @zip %>"
   data-distance="<%= @max_distance %>"
-  data-search="<%= @search %>"></div>
+  data-search="<%= @search %>"></div> -->
 
 <!-- <script>
     markers = handler.addMarkers(<%=raw @hash.to_json %>);

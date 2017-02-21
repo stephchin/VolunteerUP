@@ -2,3 +2,41 @@
   render(partial: 'events/list', locals: { events: @events })
 ) %>
 $("#filterrific_results").html("<%= js %>");
+          handler.buildMap( {provider: {}, internal: {id: 'events_map'}}, function(){
+              markers = handler.removeMarkers(<%= raw @hash.to_json %>);
+          });
+
+if ($("#events_map").length > 0) {
+    var myurl = "/events/map_locations?";
+    var zip = $("#filterrific_with_distance_zip").val();
+    // var zip = $("#events_map").attr("data-zip");
+    var max_dist = $("#filterrific_with_distance_max_distance option:selected").val();
+    // var max_dist = $("#events_map").attr("data-distance");
+    // var search = $("#events_map").attr("data-search");
+    var search = $("#filterrific_search_query").val();
+    var page = $("li.page-item.active a").text();
+    myurl += "page=" + page;
+    console.log("This is the page number: " + page);
+
+    console.log(zip);
+    console.log(max_dist);
+
+    if (search || (zip && max_dist)) {
+      myurl += "&filterrific[with_distance][zip]=" + zip +
+        "&filterrific[with_distance][max_distance]=" + max_dist +
+        "&filterrific[search_query]=" + search;
+    }
+    console.log(myurl);
+
+    $.ajax({
+      dataType: 'json',
+      url: myurl,
+      method: 'GET',
+      success: function(dataFromServer) {
+        createGmapAll(dataFromServer);
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        alert("Getting map data failed: " + errorThrown);
+      }
+    });
+}
