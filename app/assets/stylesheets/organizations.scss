@@ -18,18 +18,6 @@ $neutral: #EFEFEF;
  flex-wrap: wrap;
 }
 
-.org-tbody {
-  tr td {
-    &:first-child {
-      width: 40%;
-      padding-right: 30px;
-      a {
-        font-size: 1.2em;
-      }
-    }
-  }
-}
-
  // Aligns items in column vertically
 .vertical-align {
  display: flex;
