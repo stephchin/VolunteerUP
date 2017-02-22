@@ -1,19 +1,19 @@
 <div id="events-list">
 <table class="table">
-  <thead>
+  <!-- <thead>
     <tr>
-      <th></th>
-      <th></th>
+      <td></td>
+      <td></td>
     </tr>
-  </thead>
+  </thead> -->
   <tbody>
-  <% @events.each do |event| %>
+  <% events.each do |event| %>
     <tr>
-      <td class="event-col">
+      <td class="event-col-left">
         <p class="eventname"><%= link_to event.name, event_path(event) %></p>
         <p class="eventdescription"><%= event.description %></p>
       </td>
-      <td class="event-col">
+      <td class="event-col-right">
         <p><i class="fa fa-clock-o" aria-hidden="true"></i> <%= event.start_time.strftime("%b %e, %Y ") %>
         <br><%= event.start_time.strftime("%l:%M %p") %> - <%= event.end_time.strftime("%l:%M %p") %></p>
         <p><i class="fa fa-map-marker" aria-hidden="true"></i> <%= event.street %>
@@ -24,6 +24,6 @@
   </tbody>
 </table>
 <div id="paginator">
-  <%= paginate @events, remote: true %>
+  <%= paginate events, remote: true %>
 </div>
 </div>

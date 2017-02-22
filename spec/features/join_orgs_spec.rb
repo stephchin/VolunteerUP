@@ -28,13 +28,13 @@ RSpec.feature "JoinOrgs", type: :feature do
          page.has_selector?('orgcalendar', :text => 'Month', :visible => true)
        end
        Then 'I can view and join the organization' do
-         click_button "Join!"
+         click_button "Become an organizer!"
        end
        And 'I can see a message saying you have joined' do
          expect(page).to have_content("Congrats, you are now an organizer for #{@org.name}")
        end
        Then 'I can see a message saying I have already joined' do
-         expect(page).to have_content("You've already joined")
+         expect(page).to have_content("You're an organizer!")
        end
      end
 
