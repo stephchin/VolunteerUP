@@ -56,9 +56,6 @@
 <% end %>
 
 
-<h1>
-    <%= @current_page %>
-</h1>
 <%= render(
     partial: 'events/map',
     locals: { events: @events, zip: @zip, max_distance: @max_distance, search: @search }
