@@ -129,17 +129,21 @@ body .fc {
   padding: 1%;
 }
 
-.event-col {
-  width: 50%;
+.event-col-left {
+  width: 60%;
+}
+.event-col-right {
+  width: 40%;
 }
 
 .eventname {
-  font-size: 12px;
+  // font-size: 12px;
   font-weight: bold;
 }
 
 .eventdescription {
-  font-weight: lighter;;
+  font-weight: lighter;
+  font-size: 13px;
   font-style: italic;
 }
 
@@ -152,4 +156,47 @@ body .fc {
   width: 200px;
   height: 200px;
   border-radius: 2px;
+}
+
+.org-show-events-tab {
+  height: 600px;
+  .nav-tabs>li.active>a {
+    background-color: #EFEFEF;
+    // border: none;
+  }
+  .nav-tabs {
+    // border: none;
+  }
+}
+
+#events-list tr:first-child td {
+    border-top: none;
+}
+
+.org-image {
+  img {
+    max-width: 450px;
+    max-height: 450px;
+    width: 100%;
+    height: 100%;
+  }
+}
+body .fc {
+  font-size: .9em;
+}
+
+.org-index-table{
+  th:nth-child(1){ width:20%; }
+  th:nth-child(2){ width:30%; }
+  th:nth-child(3){ width:25%; }
+  th:nth-child(4){ width:25%; }
+
+  #org-desc {
+    font-size: 13px;
+  }
+  .org-index-img img {
+    border-radius: 2px;
+    height: 120px;
+    width: 120px;
+  }
 }

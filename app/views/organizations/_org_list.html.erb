@@ -1,10 +1,11 @@
 <div id="filterrific_results">
-<table class="table table-hover">
+<table class="table table-hover org-index-table">
   <thead>
     <tr>
-      <th>Organization Info</th>
+      <th>Organization</th>
+      <th>About</th>
+      <th>Contact Info</th>
       <th>Organizers</th>
-      <th>Contact</th>
       <!-- <th colspan="3"></th> -->
     </tr>
   </thead>
@@ -12,19 +13,33 @@
   <tbody class="org-tbody">
     <% @organizations.each do |organization| %>
       <tr>
+
         <td>
-          <strong><%= link_to organization.name, organization%></strong><br><br>
-          <%= organization.description %><br><br>
+          <strong><%= link_to organization.name, organization%></strong><br>
+          <p class="org-index-img"><%= link_to image_tag(organization.image.url(:med)), organization_path(organization.id) %></p>
         </td>
         <td>
-          <% organization.users.each do |user| %>
-          <%= user.name %><br>
+          <p id="org-desc"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> <%= organization.description %></p>
+
+        </td>
+        <td>
+          <p><i class="fa fa-phone" aria-hidden="true"></i> <%= organization.phone%></p>
+          <p><i class="fa fa-envelope" aria-hidden="true"></i> <%= organization.email%></p>
+          <p><i class="fa fa-globe" aria-hidden="true"></i> <%= organization.website%></p>
+          <% if !organization.twitter.nil? %>
+            <p><i class="fa fa-twitter" aria-hidden="true"></i> <%= organization.twitter%></p>
+          <% end %>
+          <% if !organization.facebook.nil? %>
+            <p><i class="fa fa-facebook-official" aria-hidden="true"></i> <%= organization.facebook%></p>
           <% end %>
         </td>
         <td>
-          Phone: <%= organization.phone %><br>
-          Email: <%= organization.email %><br>
-          Web: <%= organization.website %>
+          <% organization.users.each do |user| %>
+          <div class="user-box">
+            <div><%= link_to image_tag(user.image.url(:small)), user_path(user) %></div>
+          <div class="user-name"><%= user.name.split(" ")[0] %></div>
+          </div>
+          <% end %>
         </td>
       </tr>
     <% end %>
