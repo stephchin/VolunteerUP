@@ -9,6 +9,7 @@ class EventsController < ApplicationController
   # GET /events.json
 
   def index
+
     # @events = Event.all.where("end_time >= ?", Time.now)
     # Initialize filterrific with the following params:
     @filterrific = initialize_filterrific(
@@ -42,6 +43,10 @@ class EventsController < ApplicationController
     end
     @events = @events.where("end_time >= ?", Time.now)
     # kaminari pagination
+
+    @events = @events.where("end_time >= ?", Time.now)
+
+
     @events = @events.page(params[:page]).per(5)
 
   # Recover from invalid param sets, e.g., when a filter refers to the
