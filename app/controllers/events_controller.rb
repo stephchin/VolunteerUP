@@ -10,7 +10,7 @@ class EventsController < ApplicationController
 
   def index
 
-    @events = Event.all.where("end_time >= ?", Time.now)
+    # @events = Event.all.where("end_time >= ?", Time.now)
     # Initialize filterrific with the following params:
     @filterrific = initialize_filterrific(
       Event,
@@ -42,6 +42,10 @@ class EventsController < ApplicationController
       end
     end
     # kaminari pagination
+
+    @events = @events.where("end_time >= ?", Time.now)
+
+
     @events = @events.page(params[:page]).per(5)
     @current_page = @events.page(params[:page]).per(5).current_page
 
