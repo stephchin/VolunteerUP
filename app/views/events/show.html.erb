@@ -51,6 +51,7 @@
         <!-- Volunteer! button -->
 
         <!-- changes the buttons/message above volunteer count -->
+
         <% if user_signed_in? %>
           <% if !current_user.events.all.include?(Event.find(@event.id)) %>
             <% if (@event.remaining_vol > 0) %>
@@ -67,7 +68,7 @@
           <% end %>
         <% else %>
           <p><%= link_to "Sign in to volunteer", event_add_user_path(@event.id), method: :post, class: "btn btn-info btn-sm" %></p>
-        <% end %><br />
+        <% end %><br/>
       </div>
 
       <% if @event.remaining_vol > 0 %>
