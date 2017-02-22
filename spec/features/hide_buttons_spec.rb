@@ -4,8 +4,8 @@ RSpec.feature "HideButtons", type: :feature do
   before(:each) do
     @org = Organization.create(name: "Pawnee Parks & Recs",
       description: "We have a park")
-    @event = Event.new(name: "Save Gary", start_time:"2017-02-02 01:01:01",
-      end_time:"2017-02-02 02:01:01", volunteers_needed: 200, organization: @org)
+    @event = Event.new(name: "Save Gary", start_time: DateTime.now + (2.0 / 24.0), end_time: DateTime.now + (5.0 / 24.0),
+      volunteers_needed: 200, organization: @org)
     @event.save
   end
   context "Logged out user cannot see 'Edit' and 'Create buttons'" do

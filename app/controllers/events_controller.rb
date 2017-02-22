@@ -41,13 +41,13 @@ class EventsController < ApplicationController
         @events = @filterrific.find.near(@zip, @max_distance).page(params[:page])
       end
     end
+    @events = @events.where("end_time >= ?", Time.now)
     # kaminari pagination
 
     @events = @events.where("end_time >= ?", Time.now)
 
 
     @events = @events.page(params[:page]).per(5)
-    @current_page = @events.page(params[:page]).per(5).current_page
 
   # Recover from invalid param sets, e.g., when a filter refers to the
   # database id of a record that doesn’t exist any more.
@@ -78,7 +78,7 @@ class EventsController < ApplicationController
   end
 
   def map_locations
-    @events = Event.all.where("end_time >= ?", Time.now)
+    # @events = Event.all.where("end_time >= ?", Time.now)
 
     @filterrific = initialize_filterrific(
       Event,
@@ -105,8 +105,10 @@ class EventsController < ApplicationController
         @events = @filterrific.find.near(@zip, @max_distance).page(params[:page]).per(5)
       end
     else
-      @events = @events.page(params[:page]).per(5)
+      @events = Event.all.where("end_time >= ?", Time.now).page(params[:page]).per(5)
     end
+
+    @events = @events.where("end_time >= ?", Time.now)
 
     @hash = Gmaps4rails.build_markers(@events) do |event,marker|
       marker.lat(event.latitude)

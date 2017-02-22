@@ -4,7 +4,7 @@ RSpec.feature "VolunteerLogInRedirects", type: :feature do
   before(:each) do
     @organization = Organization.new(name: "Some Org", description: "ABC is a helpful org")
     @organization.save
-    @event = Event.create(name: "Some Event", start_time:"2017-02-02 01:01:01", end_time:"2017-02-02 02:01:01", volunteers_needed: 100 )
+    @event = Event.create(name: "Some Event", start_time: DateTime.now + (2.0 / 24.0), end_time: DateTime.now + (5.0 / 24.0), volunteers_needed: 100 )
     @event.organization = @organization
     @event.save
     @user = User.create(name: "Michael", city: "San Diego", state: "CA", email: "1@yahoo.com", password: "123456")
