@@ -3,13 +3,14 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 $carbon: #A9A9A9;
+$watermelon: #FF3B3F;
 
 .hi-user {
   font-size: 2.8em;
 }
 
 .user-info {
-  padding-top: 1em;
+  padding-top: .6em;
   p {
     font-size: 1.1em;
   }
@@ -61,10 +62,15 @@ $carbon: #A9A9A9;
 
 .recommended {
   color: $carbon;
-  background-color: #EFEFEF;
-  border-radius: .2em;
+  // background-color: #EFEFEF;
+  border-top: solid 2px $watermelon;
+  border-bottom: solid 2px $watermelon;
+  // border-radius: .2em;
   display: inline-block;
-  padding: 1%;
+  // padding: 1%;
+  .glyphicon {
+    color: $watermelon;
+  }
 }
 
 // Events Table
@@ -87,14 +93,13 @@ $carbon: #A9A9A9;
   }
   .btn-lg { width: 150px; }
   .btn-xs { width: 120px;}
-  th:nth-child(1){ width:15%; }
-  th:nth-child(2){ width:15%; }
-  th:nth-child(3){ width:25%; }
-  th:nth-child(4){ width:25%; }
+  th:nth-child(1){ width:20%; }
+  th:nth-child(2){ width:20%; }
+  th:nth-child(3){ width:20%; }
+  th:nth-child(4){ width:20%; }
   th:nth-child(5){ width:20%; }
 }
 
 #noevents {
   font-size: 1.2em;
-
 }

@@ -7,40 +7,56 @@
   <span class="breadcrumb-item active"> / My Profile</span>
 </nav>
 
-<p class="success"><%= success %></p>
-  <div class="row">
-    <div class="col-md-5">
-      <h1 class="hi-user">Hi <%= @user.name %>!</h1>
-      <div class="user-img">
-        <%= image_tag(@user.image.url(:med)) %>
+<!-- <p class="success"><%= success %></p> -->
+<div class="row">
+  <div class="col-md-3">
+    <h1 class="hi-user"><%= @user.name %></h1>
 
-      </div>
+    <h3><div class="user-img">
+      <%= image_tag(@user.image.url(:med)) %>
+    </div></h3>
 
-      <div class="user-info">
-        <p>
-        <span class="glyphicon glyphicon-envelope"></span> <%= @user.email %>
-        </p>
-        <% if !@user.city.nil? && !@user.state.nil? %>
-          <p>
-          <span class="glyphicon glyphicon-map-marker"></span> <%= @user.city + ' ' + @user.state %>
-          </p>
-        <% end %>
-        <p>
-        My Roles:
-        <%= @user.roles.pluck(:name).map(&:capitalize).join(", ") %>
-        </p>
-        <p>
-        My Organizations:
-        <%= safe_join(@user.organizations.map {|organization| link_to organization.name, organization_path(organization)}, (", ").html_safe) %>
-        </p>
-      </div>
+    <div class="user-info">
+      <p><span class="glyphicon glyphicon-envelope"></span> <%= @user.email %></p>
+      <% if !@user.city.nil? && !@user.state.nil? %>
+        <p><span class="glyphicon glyphicon-map-marker"></span> <%= @user.city + ' ' + @user.state %></p>
+      <% end %>
       <% if current_user.id.to_s == params[:id] %>
-        <p>
-        <%= link_to 'My Settings', edit_user_registration_path, class: "btn btn-xs btn-info" %>
-        </p>
-    </div><!--ends col-md-4-->
+        <p><%= link_to 'My Settings', edit_user_registration_path, class: "btn btn-xs btn-info" %></p>
+      <% end %>
+    </div>
 
-    <div class="col-md-7">
+  </div><!--ends col-md-4-->
+    <div class="col-md-5">
+      <% if current_user.id.to_s == params[:id] %>
+      <h5>Recommended Events!</h5>
+
+      <div class="recommended">
+        <% @cause_list.each do |cause| %>
+          <p style="font-size: 1em;"><span class="glyphicon glyphicon-chevron-right"></span> <%= link_to Event.find(cause.id).name, Event.find(cause.id) %> by
+          <%= link_to Event.find(cause.id).organization.name, Event.find(cause.id).organization %>
+          <%= " to benefit #{Event.find(cause.id).cause}" %></p>
+        <% end %>
+      </div>
+
+      <h5>My Organizations:</h5>
+      <% if @user.organizations.any? %>
+        <% @user.organizations.order(:name).each do |org| %>
+          <div class="org-box">
+            <div><%= link_to image_tag(org.image.url(:med)), organization_path(org)%></div>
+            <div class="org-name"><%= link_to org.name, organization_path(org)%></div>
+          </div>
+        <% end %>
+      <% else %>
+        <%= link_to "Join an organization!", organizations_path, class: "btn btn-primary" %>
+      <% end %>
+
+      <h5>My Roles:</h5>
+      <p><%= @user.roles.order(:name).pluck(:name).map(&:capitalize).join(", ") %></p>
+
+    </div>
+
+    <div class="col-md-4">
       <ul class="nav nav-tabs" id="user-tabs">
         <li class="active"><a data-toggle="tab" href="#calendar">Calendar</a></li>
         <li id="map-tab"><a data-toggle="tab" href="#user_map"> Map</a></li>
@@ -52,17 +68,9 @@
 
       <input id="user_id" type="hidden" value="<%= @user.id %>"/>
     </div> <!--ends col-md-8-->
-  </div> <!--ends row-->
+</div> <!--ends row-->
 
-  <h3>Recommended for You</h3>
 
-  <div class="recommended">
-    <% @cause_list.each do |cause| %>
-        <p style="font-size: 1.2em;"><%= link_to Event.find(cause.id).name, Event.find(cause.id) %> -hosted by-
-        <%= link_to Event.find(cause.id).organization.name, Event.find(cause.id).organization %>
-        <%= " to benefit #{Event.find(cause.id).cause}" %></p>
-    <% end %>
-  </div>
 
   <!-- Begin Events Table -->
   <div class="table-responsive" id="events-list">
@@ -71,6 +79,7 @@
       locals: { events: @events }
     ) %>
   </div>
+
 
 
 <% end %>
