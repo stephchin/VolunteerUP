@@ -15,7 +15,10 @@ RSpec.feature "UserCancelAccounts", type: :feature do
       end
       Then 'I can go to my profile page' do
         visit user_path(@u1)
-        expect(page).to have_content("Hi Ally")
+        expect(page).to have_content("Ally")
+        expect(page).to have_content("My Roles")
+        expect(page).to have_content("My Organizations")
+        expect(page).to have_content("Your Upcoming Events")
       end
       Then 'I can go to my settings' do
         within (".container") do
