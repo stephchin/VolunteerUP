@@ -13,7 +13,7 @@
         <th>Event</th>
         <th>Organization</th>
         <th>Date and Time</th>
-        <th>Date Location</th>
+        <th>Location</th>
         <th>Can't Make It?</th>
       </tr>
     </thead>
@@ -24,7 +24,10 @@
           <strong><%= link_to event.name, event %></strong><br>
         </td>
         <td>
-          <%= link_to event.organization.name, organization_path(event.organization) %>
+          <%= link_to event.organization.name, organization_path(event.organization) %><br>
+          <div class="org-box">
+            <%= link_to image_tag(event.organization.image.url(:med)), organization_path(event.organization)%>
+          </div>
         </td>
         <td>
             <span class="glyphicon glyphicon-time"></span>
@@ -40,22 +43,25 @@
             <%= event.state %>
             <%= event.postal_code %>
             <%= event.country %>
+            <br><br>
+
         </td>
-        <% if user_signed_in? %>
-          <% if current_user.events.all.include?(Event.find(event.id)) %>
-            <% if (current_user.user_events.where(event_id: event.id, waitlist: nil).length > 0) %>
-              <td><%= link_to "Cancel Your RSVP",
-                event_remove_event_path(current_user.id) + "?event=" +
-                event.id.to_s, method: :delete, class: "btn btn-xs btn-danger" %>
-              </td>
-            <% else %>
-              <td><%= link_to "Remove From Waitlist",
-                event_remove_event_path(current_user.id) + "?event=" +
-                event.id.to_s, method: :delete, class: "btn btn-xs btn-warning" %>
-              </td>
+        <td>
+          <% if user_signed_in? %>
+            <% if current_user.events.all.include?(Event.find(event.id)) %>
+              <% if (current_user.user_events.where(event_id: event.id, waitlist: nil).length > 0) %>
+                <%= link_to "Cancel Your RSVP",
+                  event_remove_event_path(current_user.id) + "?event=" +
+                  event.id.to_s, method: :delete, class: "btn btn-xs btn-danger" %>
+              <% else %>
+                <%= link_to "Remove From Waitlist",
+                  event_remove_event_path(current_user.id) + "?event=" +
+                  event.id.to_s, method: :delete, class: "btn btn-xs btn-warning" %>
+              <% end %>
             <% end %>
           <% end %>
-        <% end %>
+        </td>
+
       </tr>
     <% end %>
   <% end %>
