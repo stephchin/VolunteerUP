@@ -58,10 +58,12 @@ RSpec.feature "SignUps", type: :feature do
       And "I can see my user profile page" do
         @user = User.find_by_email("123@yahoo.com")
         visit user_path(@user.id)
-        expect(page).to have_content "Hi Suzan!"
+        expect(page).to have_content "Suzan"
         expect(page).to have_content "123@yahoo.com"
         expect(page).to have_content "Cincinnati OH"
         expect(page).to have_css("img[src*='default_user.png']")
+        expect(page).to have_content "My Roles"
+        expect(page).to have_content "My Organizations"
       end
       And "I can see that I am assigned a default role of volunteer" do
         expect(page).to have_content "Volunteer"

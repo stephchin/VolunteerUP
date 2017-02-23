@@ -65,7 +65,10 @@ RSpec.feature "LandingPages", type: :feature do
         click_button "Log in"
       end
       And 'I can see my user dashboard page' do
-        expect(page).to have_content "Hi #{@user.name}!"
+        expect(page).to have_content "#{@user.email}"
+        expect(page).to have_content "Your Upcoming Events"
+        expect(page).to have_content "My Roles"
+        expect(page).to have_content "My Organization"
       end
     end
   end

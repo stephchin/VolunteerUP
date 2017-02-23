@@ -51,7 +51,7 @@ RSpec.feature "Maps", type: :feature do
         fill_in 'Email', with: "a@yahoo.com"
         fill_in 'Password', with: "123456"
         click_button 'Log in'
-        expect(page).to have_content("Hi #{@user.name}")
+        expect(page).to have_content("#{@user.name}")
       end
       Then 'I can sign up for an event' do
         visit '/events'
