@@ -41,7 +41,7 @@ RSpec.feature "UserProfilePages", type: :feature do
         expect(page).to have_content @event.name
       end
       And 'I can click on my organization name to go to its page' do
-          within('#user-events-table') do
+          within('#upcoming-events') do
           expect(page).to have_link @o1.name
           visit organization_path(@o1)
           end

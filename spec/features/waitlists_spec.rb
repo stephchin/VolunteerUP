@@ -43,7 +43,7 @@ RSpec.feature "Waitlists", type: :feature do
       end
       And 'I can see the event in my upcoming event' do
         visit user_path(@user)
-        expect(page).to have_content "Your Upcoming Events"
+        expect(page).to have_content "Upcoming Events"
         expect(page).to have_content "#{@event.name}"
         expect(page).to have_content "Remove From Waitlist"
       end
@@ -99,7 +99,7 @@ RSpec.feature "Waitlists", type: :feature do
       end
       Then 'I can go to the event in my upcoming event' do
         visit user_path(@user)
-        expect(page).to have_content "Your Upcoming Events"
+        expect(page).to have_content "Upcoming Events"
         expect(page).to have_content "#{@event.name}"
         expect(page).to have_content "Remove From Waitlist"
       end
@@ -107,7 +107,7 @@ RSpec.feature "Waitlists", type: :feature do
         click_link("Remove From Waitlist")
       end
       Then 'That event is no longer in my upcoming events' do
-        within('#user-events-table') do
+        within('#upcoming-events') do
           expect(page).not_to have_content "#{@event.name}"
           expect(page).not_to have_content "Remove From Waitlist"
         end

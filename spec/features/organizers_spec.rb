@@ -41,13 +41,12 @@ RSpec.feature "Organizers", type: :feature do
         expect(page).to have_content(@org_name)
         expect(page).to have_css("img[src*='default_org.png']")
       end
-      Then "On my profile page, I can see 'Organizer' and 'Dashboard' on my nav bar" do
+      Then "I can see 'Org Dashboard' on my nav bar" do
         visit user_path(@user.id)
         @user.user_organizations.create(organization: @org, is_creator: true)
         @user2.user_organizations.create(organization: @org, is_creator: false)
         @user3.user_organizations.create(organization: @org, is_creator: false)
-        expect(page).to have_content("Organizer")
-        expect(page).to have_content("Dashboard")
+        expect(page).to have_content("Org Dashboard")
       end
       Then "In the dashboard, I can see all the listed organizers" do
         @user.user_organizations.create(organization: @org, is_creator: true)
