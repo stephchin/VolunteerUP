@@ -1,6 +1,5 @@
 <table class="table" id="user-events-table">
-  <caption>Your Upcoming Events</caption>
-    <% if @events.length == 0 %>
+    <% if events.length == 0 %>
       <tr>
         <td>
           <p id="noevents">You aren't currently signed up for any events...</p><br>
@@ -18,16 +17,13 @@
       </tr>
     </thead>
   <tbody>
-    <% @events.order(start_time: :asc).each do |event| %>
+    <% events.order(start_time: :asc).each do |event| %>
       <tr>
         <td>
           <strong><%= link_to event.name, event %></strong><br>
         </td>
         <td>
           <%= link_to event.organization.name, organization_path(event.organization) %><br>
-          <div class="org-box">
-            <%= link_to image_tag(event.organization.image.url(:med)), organization_path(event.organization)%>
-          </div>
         </td>
         <td>
             <span class="glyphicon glyphicon-time"></span>

@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
   def show
     @events = @user.events.all.where("end_time >= ?", Time.now)
+    @past_events = @user.events.all.where("end_time < ?", Time.now)
     if user_signed_in?
       @causes = current_user.likes.sort_by{ |key, value| -value }.select{ |cause| (Event.where(cause: cause[0]).map(&:id) - current_user.events.all.map(&:id)).length > 0 }.first(3)
       @cause_list = []
