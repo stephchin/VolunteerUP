@@ -22,7 +22,7 @@ RSpec.feature "CreateEvents", type: :feature do
         expect(page).to have_current_path(user_path(@user))
       end
       And "I am an organizer" do
-        expect(page).to have_content("Organizer")
+        expect(page).to have_content("Org Dashboard")
       end
       Then "I can go to the Events Page" do
         visit '/events'

@@ -31,7 +31,7 @@ RSpec.feature "Volunteers", type: :feature do
       And "I can click the 'Cancel Your RSVP'" do
         visit user_path(@user.id)
         find("a[href*='/events/#{@user.id}/remove_event?event=#{@event.id}']").click
-        within('#user-events-table') do
+        within('#upcoming-events') do
           expect(page).to_not have_content(@event.name)
         end
       end
