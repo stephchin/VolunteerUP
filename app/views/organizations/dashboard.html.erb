@@ -98,24 +98,24 @@
           <h5>Upcoming Events</h5>
 
 
-
-
             <!-- What I need to fix -->
             <% org.events.where("end_time >= ?", Time.now).order(:start_time).all.each_with_index do |event, index| %>
             <div class="event-box">
               <div class="row">
-                <div class="col-sm-5">
-                  <p><%= link_to event.name, event_path(event) %><br><br></p>
+                <div class="col-sm-4">
+                  <p><%= link_to event.name, event_path(event) %></p>
                   <br>
                 </div>
-                <div class="col-sm-7">
+                <div class="col-sm-4">
                   <p><i class="fa fa-clock-o" aria-hidden="true"></i> <%= event.start_time.strftime("%b %e, %Y ") %><br>
                   <%= event.start_time.strftime("%l:%M %p") %> - <%= event.end_time.strftime("%l:%M %p") %><br><br>
                   <i class="fa fa-map-marker" aria-hidden="true"></i> <%= event.street %> <br>
                   <%= "#{event.city}, #{event.state} #{event.postal_code} #{event.country}" %>
                   <br><br>
+                </div>
+                <div class="col-sm-4">
 
-                  <%= "#{(event.remaining_vol > 0) ? event.remaining_vol : 0} needed / #{event.volunteers_needed} total" %></p><br>
+                  <p><%= "#{(event.remaining_vol > 0) ? event.remaining_vol : 0} needed / #{event.volunteers_needed} total" %></p><br>
 
                   <%= link_to "Volunteer List", "##{org.name.split(" ").join("")}-modal#{index.to_s}",
                     "data-toggle" => "modal", class: "btn btn-info btn-xs" %>
