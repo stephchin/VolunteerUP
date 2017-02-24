@@ -13,7 +13,11 @@
         <th>Organization</th>
         <th>Date and Time</th>
         <th>Location</th>
-        <th>Can't Make It?</th>
+        <% if !events.first.end_time.past? %>
+          <th>Can't make it?</th>
+        <% else %>
+          <th>How was it?</th>
+        <% end %>
       </tr>
     </thead>
   <tbody>
