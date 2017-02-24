@@ -50,7 +50,7 @@
           <% if user_signed_in? %>
             <% if current_user.events.all.include?(Event.find(event.id)) %>
               <% if event.end_time.past? %>
-                <%= link_to "Rate the Event",
+                <%= link_to "Rate this event",
                   event, class: "btn btn-xs btn-primary" %>
               <% elsif (current_user.user_events.where(event_id: event.id, waitlist: nil).length > 0) %>
                 <%= link_to "Cancel Your RSVP",
