@@ -15,20 +15,20 @@
     <h3><div class="user-img">
       <%= image_tag(@user.image.url(:med)) %>
     </div></h3>
-
     <div class="user-info">
       <p><span class="glyphicon glyphicon-envelope"></span> <%= @user.email %></p>
       <% if !@user.city.nil? && !@user.state.nil? %>
         <p><span class="glyphicon glyphicon-map-marker"></span> <%= @user.city + ' ' + @user.state %></p>
       <% end %>
       <% if current_user.id.to_s == params[:id] %>
-        <p><%= link_to 'My Settings', edit_user_registration_path, class: "btn btn-xs btn-info" %></p>
+        <p><%= link_to 'My Settings', edit_user_registration_path, class: "btn btn-sm btn-info" %></p><br>
       <% end %>
     </div>
 
   </div><!--ends col-md-4-->
     <div class="col-md-5">
       <% if current_user.id.to_s == params[:id] %>
+      <div class="space-block-85"></div>
       <h5>Recommended Events!</h5>
 
       <div class="recommended">
@@ -51,12 +51,10 @@
         <%= link_to "Join an organization!", organizations_path, class: "btn btn-primary" %>
       <% end %>
 
-      <h5>My Roles:</h5>
-      <p><%= @user.roles.order(:name).pluck(:name).map(&:capitalize).join(", ") %></p>
-
     </div>
 
     <div class="col-md-4">
+      <div class="space-block-85"></div>
       <ul class="nav nav-tabs" id="user-tabs">
         <li class="active"><a data-toggle="tab" href="#calendar">Calendar</a></li>
         <li id="map-tab"><a data-toggle="tab" href="#user_map"> Map</a></li>
@@ -69,17 +67,36 @@
       <input id="user_id" type="hidden" value="<%= @user.id %>"/>
     </div> <!--ends col-md-8-->
 </div> <!--ends row-->
+  <div class="space-block-30"></div>
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#events">Upcoming Events</a>
+
+    </li>
+    <li><a data-toggle="tab" href="#past_events">Past Events</a>
+
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div id="events" class="tab-pane fade in active">
+      <div class="table-responsive" id="events-list">
+        <%= render(
+          partial: 'users/list',
+          locals: { events: @events }
+        ) %>
+      </div>
+    </div>
+    <div id="past_events"  class="tab-pane fade">
+      <div id="events" class="tab-pane fade in active">
+        <div class="table-responsive" id="events-list">
+          <%= render(
+            partial: 'users/list',
+            locals: { events: @past_events }
+          ) %>
+        </div>
+      </div>
 
 
-
-  <!-- Begin Events Table -->
-  <div class="table-responsive" id="events-list">
-    <%= render(
-      partial: 'users/list',
-      locals: { events: @events }
-    ) %>
+    </div>
   </div>
-
-
 
 <% end %>

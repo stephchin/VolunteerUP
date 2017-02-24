@@ -2,17 +2,20 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$sky: #CAEBF2;
 $carbon: #A9A9A9;
+$darkcarbon: #656565;
 $watermelon: #FF3B3F;
-
+$neutral: #EFEFEF;
 .hi-user {
-  font-size: 2.8em;
+  margin-bottom: 0px;
 }
 
 .user-info {
-  padding-top: .6em;
+  padding-top: .1em;
   p {
-    font-size: 1.1em;
+    font-size: 1em;
+    color: $darkcarbon;
   }
 }
 
@@ -76,7 +79,7 @@ $watermelon: #FF3B3F;
 // Events Table
 
 #user-events-table{
-  margin-top: 3em;
+  margin-top: 1em;
   background-color: #EFEFEF;
   border: 1px solid #EFEFEF;
   border-collapse: separate;
@@ -96,10 +99,16 @@ $watermelon: #FF3B3F;
   th:nth-child(1){ width:20%; }
   th:nth-child(2){ width:20%; }
   th:nth-child(3){ width:20%; }
-  th:nth-child(4){ width:20%; }
+  th:nth-child(4){ width:23%; }
   th:nth-child(5){ width:20%; }
 }
 
 #noevents {
   font-size: 1.2em;
+}
+.space-block-85 {
+  margin-top: 105px;
+}
+.space-block-30 {
+  margin-top: 30px;
 }

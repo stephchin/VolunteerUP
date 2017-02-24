@@ -256,6 +256,7 @@ h5, th {
 .breadcrumb {
   background-color: transparent;
   margin-bottom: 5px;
+  padding: 8px 15px 0px 0px;
 }
 
 /* Pagination */
@@ -386,12 +387,7 @@ h5, th {
   margin: 15px;
 }
 
-/* Breadcrumb */
 
-.breadcrumb {
-  background-color: transparent;
-  margin-bottom: 5px;
-}
 
 /* org new and edit forms*/
 

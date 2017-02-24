@@ -8,7 +8,7 @@ $(document).ready(function() {
         center: '',
         right: 'prev,next month,agendaWeek,agendaDay',
       },
-      height: 350,
+      height: 295,
      eventClick: function(event) {
       if (event.url) {
           window.open(event.url, "_blank");
