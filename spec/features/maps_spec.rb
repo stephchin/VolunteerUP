@@ -28,7 +28,7 @@ RSpec.feature "Maps", type: :feature do
         visit '/events/map_locations'
       end
       And 'I will see the JSON object includes a lat and long' do
-        expect(page).to have_content @e1.latitude
+        expect(page).to have_content @event.latitude
       end
     end
   end
