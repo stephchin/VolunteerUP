@@ -38,6 +38,7 @@ class OrganizationsController < ApplicationController
     # @ability = Ability.new(current_user)
     @events = @organization.events.where("end_time >= ?", Time.now).order(:start_time).page(params[:page]).per(3)
     @past_events = @organization.events.where("end_time < ?", Time.now).order(:start_time).page(params[:page]).per(3)
+
   end
 
   def add_user
