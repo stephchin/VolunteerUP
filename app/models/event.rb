@@ -31,12 +31,12 @@ class Event < ApplicationRecord
 
 
   filterrific(
-    default_filter_params: { sorted_by: 'event_created_at_desc' },
+    default_filter_params: { sorted_by: 'event_name_asc' },
     available_filters: [
       :sorted_by,
       :search_query,
-      :with_start_time,
-      :with_end_time
+    #   :with_start_time,
+    #   :with_end_time
     #  :with_distance
     ]
   )
