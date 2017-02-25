@@ -272,7 +272,7 @@ h5, th {
   background-color: #EFEFEF;
 }
 
-.about-links button {
+.about-links a {
   width: 200px;
   text-align: left;
 }
