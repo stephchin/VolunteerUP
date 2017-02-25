@@ -24,8 +24,8 @@
         </td>
         <td>
           <p><i class="fa fa-phone" aria-hidden="true"></i> <%= organization.phone%></p>
-          <p><i class="fa fa-envelope" aria-hidden="true"></i> <%= organization.email%></p>
-          <p><i class="fa fa-globe" aria-hidden="true"></i> <%= organization.website%></p>
+          <p><i class="fa fa-envelope" aria-hidden="true"></i><%= mail_to organization.email, organization.email %></p>
+          <p><i class="fa fa-globe" aria-hidden="true"></i><%= link_to organization.website, "http://#{organization.website}" %></p>
           <% if !organization.twitter.nil? %>
             <p><i class="fa fa-twitter" aria-hidden="true"></i> <%= organization.twitter%></p>
           <% end %>
