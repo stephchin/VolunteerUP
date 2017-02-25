@@ -27,27 +27,23 @@ class EventsController < ApplicationController
       format.js
     end
 
-    # kaminari pagination
-    # @events = @events.page(params[:page]).per(5)
-
     if !params[:filterrific].nil?
       @zip = params[:filterrific][:with_distance][:zip]
       @max_distance = params[:filterrific][:with_distance][:max_distance]
-      @search = params[:filterrific][:search_query]
 
       if @zip.empty? || @max_distance.empty?
-        @events = @filterrific.find.page(params[:page])
+        @events = @filterrific.find
       else
-        @events = @filterrific.find.near(@zip, @max_distance).page(params[:page])
+        @events = @filterrific.find.near(@zip, @max_distance)
       end
+    else
+      @events = @filterrific.find    
     end
-    @events = @events.where("end_time >= ?", Time.now)
+
+    @events = @events.where("end_time >= ?", Time.now).page(params[:page]).per(5)
     # kaminari pagination
 
-    @events = @events.where("end_time >= ?", Time.now)
-
-
-    @events = @events.page(params[:page]).per(5)
+    # @events = @events.page(params[:page]).per(5)
 
   # Recover from invalid param sets, e.g., when a filter refers to the
   # database id of a record that doesn’t exist any more.
@@ -100,15 +96,15 @@ class EventsController < ApplicationController
       @max_distance = params[:filterrific][:with_distance][:max_distance]
 
       if @zip.empty? || @max_distance.empty?
-        @events = @filterrific.find.page(params[:page]).per(5)
+        @events = @filterrific.find
       else
-        @events = @filterrific.find.near(@zip, @max_distance).page(params[:page]).per(5)
+        @events = @filterrific.find.near(@zip, @max_distance)
       end
     else
-      @events = Event.all.where("end_time >= ?", Time.now).page(params[:page]).per(5)
+      @events = @filterrific.find
     end
 
-    @events = @events.where("end_time >= ?", Time.now)
+    @events = @events.where("end_time >= ?", Time.now).page(params[:page]).per(5)
 
     @hash = Gmaps4rails.build_markers(@events) do |event,marker|
       marker.lat(event.latitude)
