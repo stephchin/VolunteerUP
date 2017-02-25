@@ -9,17 +9,23 @@ class UsersController < ApplicationController
   def show
     @events = @user.events.all.where("end_time >= ?", Time.now)
     @past_events = @user.events.all.where("end_time < ?", Time.now)
+
     if user_signed_in?
-      @causes = current_user.likes.sort_by{ |key, value| -value }.select{ |cause| (Event.where(cause: cause[0]).map(&:id) - current_user.events.all.map(&:id)).length > 0 }.first(3)
       @cause_list = []
-      @causes.each do |cause|
-        a = Event.where(cause: cause[0]).map(&:id) - current_user.events.all.map(&:id)
+
+      causes = current_user.likes.sort_by { |key, value| -value }
+        .select { |cause| (Event.where("end_time >= ? and cause = ?", Time.now, cause[0])
+        .map(&:id) - current_user.events.all.map(&:id)).length > 0 }.first(3)
+
+      causes.each do |cause|
+        a = Event.where("end_time >= ? and cause = ?", Time.now, cause[0])
+            .map(&:id) - current_user.events.all.map(&:id)
         @cause_list << Event.find(a[0])
       end
+
     else
       @causes = []
     end
-
 
     @events = @events.page(params[:page]).per(5);
   end
