@@ -10,7 +10,7 @@ RSpec.feature "Maps", type: :feature do
     @event.save
     @user = User.find_by_email("a@yahoo.com")
     @user.add_role :volunteer
-    @event2 = Event.create(name: "CBA", start_time:"2017-03-03 01:01:01", end_time:"2017-03-03 02:01:01", volunteers_needed: 1, latitude: 40, longitude: 40)
+    @event2 = Event.create(name: "CBA", start_time: DateTime.now + (2.0 / 24.0), end_time: DateTime.now + (5.0 / 24.0), volunteers_needed: 1, latitude: 40, longitude: 40)
     @event2.organization = @organization
     @event2.save
     @e1 = Event.first
