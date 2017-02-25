@@ -61,16 +61,25 @@ $neutral: #EFEFEF;
   }
 }
 
-.about-container {
-  max-width: 70%;
-}
+// .about-container {
+//   max-width: 70%;
+// }
+// .about-links {
+//   padding-top: 1em;
+//   button {
+//     border-radius: .2em;
+//     a {
+//     font-size: 1em;
+//     }
+//   }
+// }
 .about-links {
   padding-top: 1em;
-  button {
-    border-radius: .2em;
-    a {
-    font-size: 1em;
-    }
+  p {
+      a {
+          border-radius: .2em;
+          font-size: 1em;
+      }
   }
 }
 
