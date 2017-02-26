@@ -53,12 +53,12 @@
         <% if user_signed_in? %>
           <% if !current_user.events.all.include?(Event.find(@event.id)) %>
             <% if @event.end_time.past? %>
-              <%= link_to "Find more events!",
-                events_path, class: "btn btn-primary" %><br>
+              <%= link_to "More Events!",
+                events_path, class: "btn btn-primary btn-lg" %><br>
             <% elsif (@event.remaining_vol > 0) %>
               <%= button_to "Volunteer!", event_add_user_path(@event.id), class: "btn btn-primary btn-lg"%>
             <% else%>
-              <%= button_to "Add to waitlist!", event_add_user_path(@event.id), class: "btn btn-warning"%>
+              <%= button_to "Add to waitlist!", event_add_user_path(@event.id), class: "btn btn-primary btn-lg"%>
             <% end %>
           <% else %>
             <% if @event.end_time.past? %>
@@ -71,7 +71,7 @@
             <% end %>
           <% end %>
         <% else %>
-          <p><%= link_to "Sign in to volunteer", event_add_user_path(@event.id), method: :post, class: "btn btn-info btn-sm" %></p>
+          <p><%= link_to "Sign in to volunteer", event_add_user_path(@event.id), method: :post, class: "btn btn-info btn-md" %></p>
         <% end %><br/>
       </div>
 
@@ -86,24 +86,20 @@
             </p>
           </div>
         <% else %>
-          <div id="greyed-out-vols-needed" class="volunteers needed">
+          <div id="greyed-out-vols-needed" class="volunteers-needed">
             <h4><%="0"%></h4>
             <br>
-            <p id="spots-open">Volunteers <br>
-              Needed</p><br>
-            <p id="total-vol"></p>
+            <p id="spots-open">This event is full. <br></p><br>
+            <p id="total-vol">Add yourself to the waitlist and we'll let you know if spots open!</p>
           </div><br>
         <% end %>
       <% else %>
-        <div id="greyed-out-vols-needed" class="volunteers needed">
+        <div id="greyed-out-vols-needed" class="volunteers-needed">
           <!-- <h4><%="Done"%></h4> -->
           <br>
           <p id="spots-open">This event has ended. For more events by this organization visit: <br><br><%= link_to @event.organization.name, organization_path(@event.organization) %><br></p><br>
         </div>
       <% end %>
-
-
-
 
       <div class="flex align-bottom">
         <!-- tweet button -->
