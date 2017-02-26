@@ -48,14 +48,27 @@ $neutral: #EFEFEF;
   }
   .btn-login {
     font-family: $main;
-    background: $watermelon;
     border-radius: 2%;
-    color: #fff;
     height: auto;
     font-size: 1.5em;
     width: 196px;
+    background-color: $watermelon;
+    border: 2px solid $watermelon;
+    color: white;
+    -webkit-transition-duration: 0.4s; /* Safari */
+      transition-duration: 0.4s;
+    &:hover, &:active, &:focus, &:active:focus, &:active:hover {
+     background-color: inherit;
+     border: 2px solid $watermelon;
+     color: $watermelon;
+    }
   }
 }
+
+
+
+
+
 .loginlinks {
   margin-top: 5%;
   a {
