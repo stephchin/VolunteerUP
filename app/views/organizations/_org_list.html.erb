@@ -1,4 +1,6 @@
 <div id="filterrific_results">
+<div class="align-right page-entries"><%= page_entries_info @organizations %></div><br>
+
 <table class="table table-hover org-index-table">
   <thead>
     <tr>
@@ -45,5 +47,20 @@
     <% end %>
   </tbody>
 </table>
-<%= paginate @organizations, remote: true %>
+<div class="row buttons-below-table">
+  <div class="pull-left">
+    <% if user_signed_in? %>
+      <%= link_to new_organization_path, class: "btn btn-sm btn-primary" do %>
+        <i class="fa fa-plus" aria-hidden="true"></i> New Organization
+        <% end %>
+    <% end %>
+  </div>
+  <div class="pull-right">
+    <%= paginate @organizations, remote: true %>
+  </div>
+</div>
+
+
+
+
 </div>

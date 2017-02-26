@@ -50,8 +50,7 @@
     </table>
   </div>
   <div class="row buttons-below-table">
-    <class="col-md-12">
-      <div class="pull-left">
+    <div class="pull-left">
       <% if @ability.can? :new, Event %>
         <%= link_to new_event_path, class: "btn btn-sm btn-primary" do %>
           <i class="fa fa-plus" aria-hidden="true"></i> New Event
