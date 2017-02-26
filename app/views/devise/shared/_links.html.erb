@@ -21,13 +21,15 @@
 
 <%- if devise_mapping.omniauthable? %>
   <%- resource_class.omniauth_providers.each do |provider| %>
-    <button class="login-with btn btn-primary">
     <% if provider == :twitter %>
-    <i class="fa fa-twitter-square fa-lg" aria-hidden="true"></i>
+      <%= link_to omniauth_authorize_path(resource_name, provider), class: 'btn btn-primary ' do %>
+          <i class="fa fa-twitter fa-lg" aria-hidden="true"></i> Log in with Twitter
+      <% end %>
     <% elsif provider == :facebook %>
-    <i class="fa fa-facebook-official fa-lg" aria-hidden="true"></i>
+      <%= link_to omniauth_authorize_path(resource_name, provider), class: 'btn btn-primary ' do %>
+          <i class="fa fa-facebook fa-lg" aria-hidden="true"></i> Log in with Facebook
+      <% end %>
     <% end %>
-    <%= link_to "Log in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider) %>
-  </button>
+    <br><br>
   <% end -%>
 <% end -%>

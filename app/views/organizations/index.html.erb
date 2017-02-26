@@ -31,7 +31,3 @@
   locals: { organizations: @organizations }
 ) %>
 <br>
-
-<% if user_signed_in? %>
-  <%= link_to 'New Organization', new_organization_path, class: "btn btn-sm btn-primary" %>
-<% end %>

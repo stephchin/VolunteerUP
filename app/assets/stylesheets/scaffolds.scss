@@ -4,10 +4,12 @@ $main: 'Signika', sans-serif;
 
 // Color Scheme
 $sky: #CAEBF2;
+$darksky: #4aabbf;
 $carbon: #A9A9A9;
 $middlecarbon: #878787;
 $darkcarbon: #656565;
 $watermelon: #FF3B3F;
+$darkwatermelon: #e53538;
 $neutral: #EFEFEF;
 
 body {
@@ -37,16 +39,88 @@ pre {
 
 a {
   color: #000;
-
-  // &:visited {
-  //   color: #666;
-  // }
-
   &:hover {
     color: #fff;
     background-color: #000;
   }
 }
+
+.btn-primary {
+  background-color: $darkcarbon;
+  border: 2px solid $darkcarbon;
+  color: white;
+  -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+  i {
+    color: white;
+  }
+  &:hover, &:active, &:focus, &:active:focus, &:active:hover {
+   background-color: inherit;
+   border: 2px solid $darkcarbon;
+   color: $darkcarbon;
+   i {
+     color: $darkcarbon;
+   }
+ }
+}
+
+.btn-info {
+  background-color:  $darksky;
+  border: 2px solid $darksky;
+  color: white;
+  -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+  i {
+    color: white;
+  }
+  &:hover, &:active, &:focus, &:active.focus, &:active:hover {
+    background-color: inherit;
+    border: 2px solid $darksky;
+    color: $darksky;
+    i {
+      color: $darksky;
+    }
+  }
+}
+
+.btn-warning {
+  background-color:  $darksky;
+  border: 2px solid $darksky;
+  color: white;
+  -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+  i {
+    color: white;
+  }
+  &:hover, &:active, &:focus, &:active.focus, &:active:hover {
+    background-color: inherit;
+    border: 2px solid $darksky;
+    color: $darksky;
+    i {
+      color: $darksky;
+    }
+  }
+}
+
+.btn-danger {
+  background-color:  $darkwatermelon;
+  border: 2px solid $darkwatermelon;
+  color: white;
+  -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+  i {
+    color: white;
+  }
+  &:hover, &:active, &:focus, &:active.focus, &:active:hover {
+    background-color: inherit;
+    border: 2px solid $darkwatermelon;
+    color: $darkwatermelon;
+    i {
+      color: $darkwatermelon;
+    }
+  }
+}
+
 
 th {
   padding-bottom: 5px;
@@ -143,4 +217,7 @@ i {
 
 .devise-box i {
   color: white;
+}
+.table {
+  margin-bottom: 5px;
 }
