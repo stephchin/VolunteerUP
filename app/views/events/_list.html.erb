@@ -1,6 +1,7 @@
-    
+
 <div id="filterrific_results">
   <!-- Pagination -->
+  <div class="align-right page-entries"><%= page_entries_info @events %></div><br>
   <div class="table-responsive">
     <table class="table table-hover">
       <thead>
@@ -48,7 +49,21 @@
       </tbody>
     </table>
   </div>
-  <!-- Pagination -->
-  <div class="align-right"><%= page_entries_info @events %></div>
-  <%= paginate @events, remote: true %>
+  <div class="row buttons-below-table">
+    <class="col-md-12">
+      <div class="pull-left">
+      <% if @ability.can? :new, Event %>
+        <%= link_to new_event_path, class: "btn btn-sm btn-primary" do %>
+          <i class="fa fa-plus" aria-hidden="true"></i> New Event
+        <% end %>
+      <% end %>
+    </div>
+    <div class="pull-right">
+      <%= paginate @events, remote: true %>
+    </div>
+  </div>
+</div>
+
+
+
 </div>

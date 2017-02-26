@@ -4,11 +4,10 @@
 </nav>
 
 <div class="row">
-  <div class="col-md-8">
-    <h1 class= "vertical-align">Events</h1>
+  <div class="col-md-12">
+    <h1 class="vertical-align">Events</h1>
   </div>
 </div>
-
 
 <div class="well">
   <div class="row">
@@ -42,18 +41,12 @@
   </div>
 </div>
 
-<br>
-
 <%= render(
   partial: 'events/list',
   locals: { events: @events }
 ) %>
 
-<br>
-
-<% if @ability.can? :new, Event %>
-  <%= link_to 'New Event', new_event_path, class: "btn btn-sm btn-primary" %>
-<% end %>
+<br><br>
 
 
 <%= render(

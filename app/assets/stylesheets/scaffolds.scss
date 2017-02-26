@@ -51,6 +51,9 @@ a {
   color: white;
   -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
+  i {
+    color: white;
+  }
   &:hover, &:active, &:focus, &:active:focus, &:active:hover {
    background-color: inherit;
    border: 2px solid $darkcarbon;
@@ -67,6 +70,9 @@ a {
   color: white;
   -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
+  i {
+    color: white;
+  }
   &:hover, &:active, &:focus, &:active.focus, &:active:hover {
     background-color: inherit;
     border: 2px solid $darksky;
@@ -83,6 +89,9 @@ a {
   color: white;
   -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
+  i {
+    color: white;
+  }
   &:hover, &:active, &:focus, &:active.focus, &:active:hover {
     background-color: inherit;
     border: 2px solid $darksky;
@@ -99,6 +108,9 @@ a {
   color: white;
   -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
+  i {
+    color: white;
+  }
   &:hover, &:active, &:focus, &:active.focus, &:active:hover {
     background-color: inherit;
     border: 2px solid $darkwatermelon;
@@ -205,4 +217,7 @@ i {
 
 .devise-box i {
   color: white;
+}
+.table {
+  margin-bottom: 5px;
 }
