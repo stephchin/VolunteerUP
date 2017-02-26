@@ -54,16 +54,16 @@
           <% if !current_user.events.all.include?(Event.find(@event.id)) %>
             <% if @event.end_time.past? %>
               <%= link_to "More Events!",
-                events_path, class: "btn btn-primary btn-lg" %><br>
+                events_path, class: "btn btn-danger btn-lg" %><br>
             <% elsif (@event.remaining_vol > 0) %>
-              <%= button_to "Volunteer!", event_add_user_path(@event.id), class: "btn btn-primary btn-lg"%>
+              <%= button_to "Volunteer!", event_add_user_path(@event.id), class: "btn btn-danger btn-lg"%>
             <% else%>
-              <%= button_to "Add to waitlist!", event_add_user_path(@event.id), class: "btn btn-primary btn-lg"%>
+              <%= button_to "Add to waitlist!", event_add_user_path(@event.id), class: "btn btn-danger btn-lg"%>
             <% end %>
           <% else %>
             <% if @event.end_time.past? %>
               <%= link_to "Rate this event",
-                @event , class: "btn btn-primary" %><br>
+                @event , class: "btn btn-danger" %><br>
             <% elsif (current_user.user_events.where(event_id: @event.id, waitlist: nil).length > 0) %>
               <p id="signed-up">You're signed up! <span class="glyphicon glyphicon-thumbs-up"></span></p>
             <% else %>

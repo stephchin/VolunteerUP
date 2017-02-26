@@ -8,6 +8,7 @@ $main: 'Signika', sans-serif;
 
 // Color Scheme
 $sky: #CAEBF2;
+$darksky: #4aabbf;
 $carbon: #A9A9A9;
 $darkcarbon: #656565;
 $watermelon: #FF3B3F;
@@ -23,7 +24,7 @@ $neutral: #EFEFEF;
 }
 
 #signed-up {
-  color: #2ecc71;
+  color: $darkcarbon;
 }
 
 #on-waitlist {
