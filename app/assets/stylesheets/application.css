@@ -486,9 +486,11 @@ h5, th {
 
 /*.notice, .success {
   color: green;
-}
+}*/
 
 .alert {
-  color: red;
-  padding: 0px;
-}*/
+  padding: inherit;
+  margin-bottom: inherit;;
+  border: inherit;
+  border-radius: inherit;
+}
