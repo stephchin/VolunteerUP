@@ -33,7 +33,7 @@ RSpec.feature "Waitlists", type: :feature do
         click_link (@event.name)
       end
       Then 'I can see that the event is full' do
-        expect(page).to have_content "0 Volunteers Needed"
+        expect(page).to have_content "This event is full."
       end
       And 'I can click the waitlist button' do
         click_button('Add to waitlist!')
@@ -89,7 +89,7 @@ RSpec.feature "Waitlists", type: :feature do
         fill_in "filterrific_search_query", with: @event.name
         click_button "Search"
         click_link (@event.name)
-        expect(page).to have_content "0 Volunteers Needed"
+        expect(page).to have_content "This event is full. "
       end
       And 'I can click the waitlist button' do
         click_button('Add to waitlist!')
