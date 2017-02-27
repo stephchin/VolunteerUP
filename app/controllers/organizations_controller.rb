@@ -92,6 +92,7 @@ class OrganizationsController < ApplicationController
   def update
     respond_to do |format|
       if @organization.update(organization_params)
+        add_notification("has been updated!")
         format.html { redirect_to @organization, notice: "#{@organization.name} was successfully updated!" }
         format.json { render :show, status: :ok, location: @organization }
       else
@@ -123,6 +124,7 @@ class OrganizationsController < ApplicationController
     user.user_organizations.delete(organization: org)
     user.organizations.delete(org)
     flash[:alert] = "You have successfully removed #{user.name} from #{org.name}"
+    Notification.create(event: "You've been removed from the organization - #{org.name}", user_id: user.id)
     redirect_to dashboard_organizations_path
   end
 
@@ -140,6 +142,7 @@ class OrganizationsController < ApplicationController
       event_waitlist[0].save
     end
     flash[:alert] = "You have removed a volunteer from the #{event.name} event."
+    Notification.create(event: "You've been removed from the event - #{event.name}", user_id: user.id)
     redirect_to dashboard_organizations_path
   end
 
@@ -172,6 +175,12 @@ class OrganizationsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def organization_params
       params.require(:organization).permit(:name, :description, :phone, :email, :website, :image, :facebook, :twitter)
+    end
+
+    def add_notification(str)
+      @organization.user_organizations.all.each do |user|
+        Notification.create(event: "#{@organization.name} #{str}", user_id: user.user_id)
+      end
     end
 
 end
