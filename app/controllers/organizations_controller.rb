@@ -130,12 +130,14 @@ class OrganizationsController < ApplicationController
         Notification.create(event: "#{user.name} has been removed from - #{org.name}", user_id: organizer.user_id)
       end
       redirect_to dashboard_organizations_path
+      return
     else
       flash[:alert] = "You've left #{org.name}."
       Notification.create(event: "You've left #{org.name}", user_id: current_user.id)
       org.user_organizations.all.each do |organizer|
         Notification.create(event: "#{user.name} has left #{org.name}", user_id: organizer.user_id)
       redirect_to user_path(current_user)
+      return
       end
     end
   end
