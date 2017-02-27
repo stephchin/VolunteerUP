@@ -123,8 +123,19 @@ class OrganizationsController < ApplicationController
     user = User.find(params[:user])
     user.user_organizations.delete(organization: org)
     user.organizations.delete(org)
-    flash[:alert] = "You have successfully removed #{user.name} from #{org.name}"
-    Notification.create(event: "You've been removed from the organization - #{org.name}", user_id: user.id)
+    if current_user != user
+      flash[:alert] = "You've successfully removed #{user.name} from #{org.name}."
+      Notification.create(event: "You've been removed from - #{org.name}", user_id: user.id)
+      org.user_organizations.all.each do |organizer|
+        Notification.create(event: "#{user.name} has been removed from - #{org.name}", user_id: organizer.user_id)
+      end
+    else
+      flash[:alert] = "You've left #{org.name}."
+      Notification.create(event: "You've left #{org.name}", user_id: user_id)
+      org.user_organizations.all.each do |organizer|
+        Notification.create(event: "#{user.name} has left #{org.name}", user_id: organizer.user_id)
+      end
+    end
     redirect_to dashboard_organizations_path
   end
 
@@ -141,7 +152,7 @@ class OrganizationsController < ApplicationController
       Notification.create(event: "You've been added to the event!", user_id: event_waitlist[0].user_id)
       event_waitlist[0].save
     end
-    flash[:alert] = "You have removed a volunteer from the #{event.name} event."
+    flash[:alert] = "You've removed a volunteer from the #{event.name} event."
     Notification.create(event: "You've been removed from the event - #{event.name}", user_id: user.id)
     redirect_to dashboard_organizations_path
   end
