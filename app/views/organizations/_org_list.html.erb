@@ -28,12 +28,14 @@
           <p><i class="fa fa-phone" aria-hidden="true"></i> <%= organization.phone%></p>
           <p><i class="fa fa-envelope" aria-hidden="true"></i><%= mail_to organization.email, organization.email %></p>
           <p><i class="fa fa-globe" aria-hidden="true"></i><%= link_to organization.website, "http://#{organization.website}" %></p>
+          <p style="padding-left: 25%">
           <% if !organization.twitter.nil? %>
-            <p><i class="fa fa-twitter" aria-hidden="true"></i> <%= organization.twitter%></p>
+            <a href="http://<%= organization.twitter %>"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a>
           <% end %>
           <% if !organization.facebook.nil? %>
-            <p><i class="fa fa-facebook-official" aria-hidden="true"></i> <%= organization.facebook%></p>
+            <a href="http://<%= organization.facebook %>"><i class="fa fa-facebook-official fa-lg" aria-hidden="true"></i></a>
           <% end %>
+          </p>
         </td>
         <td>
           <% organization.users.each do |user| %>
