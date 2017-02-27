@@ -78,12 +78,15 @@
                       <%= "Organizer" %>
                     <% end %>
                   </td>
-                  <% if current_user.user_organizations.all.find_by(organization: org.id).is_creator %>
+                  <% if current_user.user_organizations.all.find_by(organization: org.id).is_creator || current_user == user %>
                     <td>
-                      <% if !user.user_organizations.all.find_by(organization_id: org.id).is_creator %>
+                      <%# if !user.user_organizations.all.find_by(organization_id: org.id).is_creator %>
                         <%= button_to "X", organization_remove_organizer_path(org.id) + "?user=" + user.id.to_s,
                         class: "btn btn-danger btn-xs"%>
-                      <% end %>
+                      <%# elsif current_user == user %>
+                        <!-- <h1>STUFF</h1> -->
+                        <%#= button_to "Leave Organization", organization_remove_organizer_path(org.id) + "?user=" + current_user.id.to_s %>
+                      <%# end %>
                     </td>
                   <% end %>
                 </tr>
