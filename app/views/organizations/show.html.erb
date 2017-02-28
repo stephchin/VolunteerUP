@@ -3,7 +3,6 @@
   <a class="breadcrumb-item" href="/organizations"> / Organizations</a>
   <span class="breadcrumb-item active"> / <%= @organization.name %></span>
 </nav>
-
 <!-- Title Container -->
 <div class="container-fluid">
   <div class="row">
@@ -74,7 +73,6 @@
       </div><br>
     </div>
     <!-- organizers column -->
-    <%= render partial: 'organizations/carousel' %>
 
   </div> <!-- end section -->
 
@@ -83,6 +81,13 @@
 <div>
 </div>
 <br>
+
+<div class="container-fluid">
+<%= render(
+  partial: 'carousel',
+  locals: { event_imgs: @event_imgs }
+) %>
+</div>
 
 <div class="container-fluid org-event-tbl"> <!-- organizer and event container -->
   <div class="row section-box">

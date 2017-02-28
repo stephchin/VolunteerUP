@@ -1,49 +1,35 @@
-<div class="container-fluid">
-  
+
     <div class="col-md-12">
         <div class="carousel slide" id="myCarousel">
+
           <div class="carousel-inner">
-                <div class="item active">
-                <div class="col-lg-4 col-xs-4 col-md- col-sm-4">
-                  <a href="#"><img src="http://lorempixel.com/400/300/" class="img-responsive">Helping Wounded Warriors!</a></div>
-                </div>
+
+            <div class="item active">
+              <div class="col-lg-4 col-xs-4 col-md-4 col-sm-4">
+                <%= image_tag("org_events/homeless.jpg",  :class => "img-responsive") %> <p>Feeding the Homeless! </p> </div>
+            </div>
+
+            <% event_imgs.each do |img, index| %>
                 <div class="item">
-                  <div class="col-lg-4 col-xs-4 col-md- col-sm-4">
-                  <a href="#"><img src="http://lorempixel.com/400/300/" class="img-responsive">Feeding the Homies!</a></div>
+                  <div class="col-lg-4 col-xs-4 col-md-4 col-sm-4">
+                    <%= image_tag("org_events/#{img.split('/').last}",  :class => "img-responsive") %> <p>Feeding the Homies! </p> </div>
                 </div>
-                <div class="item">
-                  <div class="col-lg-4 col-xs-4 col-md- col-sm-4">
-                  <a href="#"><img src="http://lorempixel.com/400/300/" class="img-responsive">Canned Goods Drive</a></div>
-                </div>
-                <div class="item">
-                  <div class="col-lg-4 col-xs-4 col-md- col-sm-4">
-                  <a href="#"><img src="http://lorempixel.com/400/300/" class="img-responsive">Volunteer Appreciation Party</a></div>
-                </div>
-                <div class="item">
-                  <div class="col-lg-4 col-xs-4 col-md- col-sm-4">
-                  <a href="#"><img src="http://lorempixel.com/400/300/" class="img-responsive">Block Party Cleanup Event</a></div>
-                </div>
-                <div class="item">
-                  <div class="col-lg-4 col-xs-4 col-md- col-sm-4">
-                  <a href="#"><img src="http://lorempixel.com/400/300/" class="img-responsive">Healing Helpers Event</a></div>
-                </div>
-                <div class="item">
-                  <div class="col-lg-4 col-xs-4 col-md- col-sm-4">
-                  <a href="#"><img src="http://lorempixel.com/400/300/" class="img-responsive">Wash Cars 4 Cash</a></div>
-                </div>
-                <div class="item">
-                  <div class="col-lg-4 col-xs-4 col-md- col-sm-4">
-                  <a href="#"><img src="http://lorempixel.com/400/300/" class="img-responsive">Elderly People Things</a></div>
-                </div>
-              </div>
+            <% end %>
+
+            </div>
+
             <!-- carousel controls -->
             <a class="left carousel-control" href="#myCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
             <a class="right carousel-control" href="#myCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
             <!-- end carousel controls -->
-        </div>
+          </div>
     </div>
-</div>
+
+
+
+
 <script>
+$(document).ready(function(){
   $('#myCarousel').carousel({
     interval: 40000
   });
@@ -66,4 +52,5 @@
 
     }
   });
+});
 </script>
