@@ -39,6 +39,10 @@ class OrganizationsController < ApplicationController
     @events = @organization.events.where("end_time >= ?", Time.now).order(:start_time).page(params[:page]).per(3)
     @past_events = @organization.events.where("end_time < ?", Time.now).order(:start_time).page(params[:page]).per(3)
 
+    # Temp org-image array to randomize for each org#show page
+    all_imgs = Dir.glob("app/assets/images/org_events/*.jpg")
+    @event_imgs = all_imgs.sample(5)
+    puts @events_imgs
   end
 
   def add_user
