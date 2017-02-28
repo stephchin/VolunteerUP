@@ -23,7 +23,7 @@ $(document).ready(function()
 
     $("#notificationList").on("click", ".delete-notification", function(){
 
-      $(this).parent('li').remove();
+      $(this).parent().parent('li').remove();
 
       var num = $("#notification-counter").text();
       $("#notification-counter").text(num - 1);

@@ -134,14 +134,15 @@
 
 <br>
 
-<div>
 <% if @ability.can? :manage, @organization %>
   <%= link_to 'Edit Organization', edit_organization_path(@organization), class: "btn btn-sm btn-info"%>
+
   <% if !current_user.user_organizations.find_by(organization_id: @organization.id).is_creator %>
       <%= button_to "Leave Organization", organization_remove_organizer_path(@organization.id) +
-        "?user=" + current_user.id.to_s, class: "btn btn-danger btn-sm" %>
+        "?user=" + current_user.id.to_s, class: "btn btn-danger btn-sm leave-org" %>
   <% end %>
+
 <% end %>
-</div>
+
 
 <!-- <%#= link_to 'Back', organizations_path, class: "btn btn-xs btn-info" %> -->
