@@ -1,5 +1,4 @@
 
-    <div class="col-md-12">
         <div class="carousel slide" id="myCarousel">
 
           <div class="carousel-inner">
@@ -23,34 +22,30 @@
             <a class="right carousel-control" href="#myCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
             <!-- end carousel controls -->
           </div>
-    </div>
 
 
 
 
 <script>
-$(document).ready(function(){
-  $('#myCarousel').carousel({
-    interval: 40000
-  });
+$('#myCarousel').carousel({
+  interval: 40000
+});
 
-  $('.carousel .item').each(function(){
-    var next = $(this).next();
-    if (!next.length) {
-      next = $(this).siblings(':first');
-    }
-    next.children(':first-child').clone().appendTo($(this));
+$('.carousel .item').each(function(){
+  var next = $(this).next();
+  if (!next.length) {
+    next = $(this).siblings(':first');
+  }
+  next.children(':first-child').clone().appendTo($(this));
 
-    if (next.next().length>0) {
-        console.log("if stmt");
-        next.next().children(':first-child').clone().appendTo($(this)).addClass('rightest');
+  if (next.next().length>0) {
 
-    }
-    else {
-        console.log("else stmt");
-        $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+      next.next().children(':first-child').clone().appendTo($(this)).addClass('rightest');
 
-    }
-  });
+  }
+  else {
+      $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+
+  }
 });
 </script>
