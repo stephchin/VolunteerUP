@@ -10,7 +10,6 @@ class EventsController < ApplicationController
 
   def index
 
-    # @events = Event.all.where("end_time >= ?", Time.now)
     # Initialize filterrific with the following params:
     @filterrific = initialize_filterrific(
       Event,
@@ -37,13 +36,10 @@ class EventsController < ApplicationController
         @events = @filterrific.find.near(@zip, @max_distance)
       end
     else
-      @events = @filterrific.find    
+      @events = @filterrific.find
     end
 
     @events = @events.where("end_time >= ?", Time.now).page(params[:page]).per(5)
-    # kaminari pagination
-
-    # @events = @events.page(params[:page]).per(5)
 
   # Recover from invalid param sets, e.g., when a filter refers to the
   # database id of a record that doesn’t exist any more.
@@ -74,8 +70,6 @@ class EventsController < ApplicationController
   end
 
   def map_locations
-    # @events = Event.all.where("end_time >= ?", Time.now)
-
     @filterrific = initialize_filterrific(
       Event,
       params[:filterrific],
@@ -190,6 +184,7 @@ class EventsController < ApplicationController
       event.user_events.new(user: current_user)
       event.save
       flash[:success] = "You're signed up! Happy volunteering."
+      Notification.create(event: "Reminder: The event starts #{event.start_time.strftime("%B %d, %Y %I:%M %Z")}", user_id: current_user.id)
       redirect_to event_path(event.id)
     elsif event.remaining_vol <= 0
       waitlist_number = event.user_events.maximum("waitlist");
@@ -197,6 +192,7 @@ class EventsController < ApplicationController
         waitlist_number = 1
       end
       flash[:notice] = "You've been added to the waitlist!"
+      Notification.create(event: "Reminder: Check back before #{event.start_time.strftime("%B %d, %Y %I:%M %Z")} to see if you've been added to the event", user_id: current_user.id)
       event.user_events.new(user: current_user, waitlist: waitlist_number + 1)
       event.save
       redirect_to event_path(event.id)
