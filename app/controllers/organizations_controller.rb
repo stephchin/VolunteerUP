@@ -55,6 +55,7 @@ class OrganizationsController < ApplicationController
       @user.add_role :organizer
       @user.save
       flash[:notice] = "Congrats, you are now an organizer for #{@organization.name}!"
+      Notification.create(event: "You are now an organizer for #{@organization.name}", user_id: @user.id)
       redirect_to organization_path(@organization.id)
     end
   end
