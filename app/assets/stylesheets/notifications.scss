@@ -45,12 +45,16 @@ ul.notificator {
 
 ul #notificationList
 {
+
   li
   {
     position:relative;
     border-bottom: #dddddd 1px solid;
     font-size: 13px;
-    margin: 6px;
+    padding: 6px;
+    &:hover {
+    background-color: #c2ebef !important;
+    }
   }
   span
   {
@@ -58,6 +62,10 @@ ul #notificationList
     font-size: 8px;
   }
 
+}
+
+.extra-padding {
+  margin: 6px;
 }
 
 #notificationsBody  ul
@@ -125,7 +133,7 @@ ul #notificationList
 
 #notificationsBody
 {
-  padding: 3px 0px 0px 0px !important;
+  padding: 0px 0px 0px 0px !important;
   min-height: 200px;
   max-height: 300px;
   overflow: auto;
