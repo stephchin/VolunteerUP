@@ -32,7 +32,8 @@ orgs.each do |org|
     website: "www.#{org[:name].split(" ").join("").downcase}.org",
     facebook: "facebook.com/#{org[:name].split(" ").join("").downcase}.org",
     twitter: "@#{org[:name].split(" ").join("").downcase}.org",
-    image: org[:image]) p "Created Organization #{org[:name]}!"
+    image: org[:image])
+    p "Created Organization #{org[:name]}!"
 end
 
 # To create all Events
