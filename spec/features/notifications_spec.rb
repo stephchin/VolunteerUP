@@ -20,7 +20,9 @@ RSpec.feature "Notifications", type: :feature do
         expect(page).to have_content "#{@e.name} has been updated!"
       end
       Then "I can click a button to delete the notification" do
-        click_link("X")
+        within (".delete-notification") do
+          find(".glyphicon").click
+        end
       end
     end
   end
