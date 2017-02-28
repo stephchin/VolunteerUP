@@ -82,7 +82,9 @@
                     <td>
 
                       <% if current_user == user && !current_user.user_organizations.find_by(organization_id: org.id).is_creator %>
-                        <%= button_to "Leave Organization", organization_remove_organizer_path(org.id) + "?user=" + current_user.id.to_s %>
+                        <%= button_to "Leave Organization",
+                        organization_remove_organizer_path(org.id) +
+                        "?user=" + current_user.id.to_s, class: "btn btn-danger btn-xs" %>
                       <% elsif !user.user_organizations.all.find_by(organization_id: org.id).is_creator %>
                         <%= button_to "X", organization_remove_organizer_path(org.id) + "?user=" + user.id.to_s,
                         class: "btn btn-danger btn-xs"%>
