@@ -10,7 +10,7 @@
 <!-- <p class="success"><%= success %></p> -->
 <div class="row">
   <div class="col-md-3">
-    <h1 class="hi-user"><%= @user.name %></h1>
+    <h1 class="hi-user"><%= @user.name.split(" ")[0] %></h1>
 
     <h3><div class="user-img">
       <%= image_tag(@user.image.url(:med)) %>

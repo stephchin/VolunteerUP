@@ -37,12 +37,12 @@
         <p><i class="fa fa-envelope" aria-hidden="true"></i> <%= mail_to @organization.email, @organization.email %></p>
 
         <p><i class="fa fa-globe" aria-hidden="true"></i> <%= link_to @organization.website, "http://#{@organization.website}" %></p>
-        <% if !@organization.twitter.nil?%>
-          <a href="http://<%= @organization.twitter %>"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
+        <% if @organization.twitter.present?%>
+          <p><a href="http://www.twitter.com/<%= @organization.twitter %>" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i> <%= @organization.twitter %></a><br></p>
         <% end %>
 
-        <% if !@organization.facebook.nil? %>
-          <a href="http://<%= @organization.facebook %>"><i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i></a>
+        <% if @organization.facebook.present? %>
+          <p><a href="http://www.<%= @organization.facebook %>" target="_blank"><i class="fa fa-facebook-official" aria-hidden="true"></i> <%= @organization.facebook %></a></p>
         <% end %>
 
       </div>
