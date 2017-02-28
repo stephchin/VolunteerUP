@@ -54,7 +54,7 @@ a {
   i {
     color: white;
   }
-  &:hover, &:active, &:focus, &:active:focus, &:active:hover {
+  &:hover, &:active, &:focus, &:active:focus, &:active:hover,  {
    background-color: inherit;
    border: 2px solid $darkcarbon;
    color: $darkcarbon;
@@ -73,7 +73,7 @@ a {
   i {
     color: white;
   }
-  &:hover, &:active, &:focus, &:active.focus, &:active:hover {
+  &:hover, &:active, &:focus, &:active.focus, &:active:focus, &:active:hover {
     background-color: inherit;
     border: 2px solid $darksky;
     color: $darksky;

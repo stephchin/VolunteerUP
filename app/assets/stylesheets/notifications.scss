@@ -15,9 +15,15 @@ ul.notificator {
     list-style: none;
     i
     {
-      color: #fff;
+      color: $darkcarbon;
+      &:hover {
+        color: $watermelon;
+      }
     }
   }
+}
+.notification-time {
+  color: $carbon;
 }
 
 #notification-counter {
@@ -39,10 +45,16 @@ ul.notificator {
 
 ul #notificationList
 {
+
   li
   {
     position:relative;
     border-bottom: #dddddd 1px solid;
+    font-size: 13px;
+    padding: 6px;
+    &:hover {
+    background-color: #c2ebef !important;
+    }
   }
   span
   {
@@ -52,10 +64,15 @@ ul #notificationList
 
 }
 
+.extra-padding {
+  margin: 6px;
+}
+
 #notificationsBody  ul
 {
   z-index: -1000;
   padding-left: 0;
+  margin-top: 0px;
 }
 
 #notificationContainer,
@@ -116,7 +133,7 @@ ul #notificationList
 
 #notificationsBody
 {
-  padding: 3px 0px 0px 0px !important;
+  padding: 0px 0px 0px 0px !important;
   min-height: 200px;
   max-height: 300px;
   overflow: auto;
@@ -133,4 +150,10 @@ ul#notificationList > li
   .hamburger {
     clear: both;
   }
+}
+
+.delete-notification {
+  float: right;
+  padding: 5px;
+  margin-bottom: 10px;
 }

@@ -16,48 +16,50 @@ orgs = [
     {name: "Sudwerk", description: "Drinks for binks? Shots for tots? Baby wipes for Bailey flights? We've got all kinds of drinks for the children!", image: File.open("db/images/sudwerk.jpg")},
     {name: "Greendale", description: "Who is better at being human beings than these human beings! Dean-a-ling-a-ling! Something something Eartha Kitt.", image: File.open("db/images/greendale.jpg")},
     {name: "We Have Time For That", description: "Tired of hearing 'I ain't got time for that?' Then are you in for a treat! Our organization has just that, time!", image: File.open("db/images/wehavetimeforthat.jpg")},
-    {name: "Sacred Honors International Team", description: "Here are Sacred Honors International Team, we are the... well, you can read. We lead the way by flushing everyone's problems away on top of wiping away and stain left behind!", image: File.open("db/images/shit.jpg")},
+    {name: "Sacred Honors International Team", description: "Here are Sacred Honors International Team, we are the... well, you can read. We lead the way by flushing everyone's problems away on top of wiping away and stain left behind!", image: File.open("db/images/goodstuff.jpg")},
     {name: "Until Dark", description: "Listen, I'm tired. It's almost midnight and I have nothing left in the tank. If you want to volunteer, you're more than welcome to. I'm just going to sleep now.", image: File.open("db/images/untilmidnight.jpg")},
     {name: "Scott's Tots", description: "Hey, Mr. Scott. Watcha gonna do, watcha gonna do? Make our dreams come true!
     Here at Scott's Tots we provide students with college tuition! Or actually
     laptops. Sorry we mean lithium batteries. Man, has it been 10 years already?
     Anyways... We promise to do a lot for the children.", image: File.open("db/images/scottstots.jpg")},
-    {name: "Attractive Women", description: "Psych! Now that we've lured you to our webpage, what we really do is run community events for different causes. Please come join us to make a difference!", image: File.open("db/images/attractivewomen.jpg")}
+    {name: "Smart Women", description: "Now that we've lured you to our webpage, what we really do is run community events for different causes. Please come join us to make a difference!", image: File.open("db/images/attractivewomen.jpg")}
 ]
 
 orgs.each do |org|
   phone = "(#{rand(10).to_s * 3})#{rand(10).to_s * 3}-#{rand(10).to_s * 4}"
   Organization.create!(name: org[:name], description: org[:description],
     phone: phone, email: "#{org[:name].split(" ").join("").downcase}@yahoo.com",
-    website: "www.#{org[:name].split(" ").join("").downcase}.org", image: org[:image])
-  p "Created Organization #{org[:name]}!"
+    website: "www.#{org[:name].split(" ").join("").downcase}.org",
+    facebook: "facebook.com/#{org[:name].split(" ").join("").downcase}.org",
+    twitter: "@#{org[:name].split(" ").join("").downcase}.org",
+    image: org[:image]) p "Created Organization #{org[:name]}!"
 end
 
 # To create all Events
 event_locations = [
   {"Carlsbad" => { street: "2924 Carlsbad Blvd", postal_code: "92008" }},
-  {"Carlsbad" => { street: "3557 Monroe St", postal_code: "92008" }},
-  {"Chula Vista" => { street: "2127 Olympic Parkway", postal_code: "91915" }},
+  {"Beverly Hills" => { street: "905 Loma Vista Dr", postal_code: "90210" }},
+  {"Indio" => { street: "81800 Avenue 51", postal_code: "92201" }},
   {"Chula Vista" => { street: "285 E Orange Ave", postal_code: "91911" }},
   {"Coronado" => { street: "960 Orange Ave", postal_code: "92118" }},
-  {"Coronado" => { street: "699 Rodgers Rd", postal_code: "92118" }},
+  {"Santa Barbara" => { street: "1122 N Milpas St", postal_code: "93103" }},
   {"Del Mar" => { street: "1435 Camino Del Mar", postal_code: "92014" }},
   {"Del Mar" => { street: "2200 Jimmy Durante Blvd", postal_code: "92014" }},
   {"El Cajon" => { street: "1591 Magnolia Ave", postal_code: "92020" }},
   {"El Cajon" => { street: "1695 E Main St", postal_code: "92021" }},
   {"Encinitas" => { street: "453 Sante Fe Dr", postal_code: "92024" }},
-  {"Encinitas" => { street: "160 S Rancho Santa Fe Rd", postal_code: "92024" }},
+  {"Goleta" => { street: "879 Embarcadero del Norte", postal_code: "93117" }},
   {"Escondido" => { street: "320 W Valley Pkwy", postal_code: "92025" }},
   {"Escondido" => { street: "3024 La Honda Dr", postal_code: "92027" }},
   {"Imperial Beach" => { street: "700 13th St", postal_code: "91932" }},
-  {"Imperial Beach" => { street: "1079 Seacoast Dr", postal_code: "91932" }},
+  {"San Francisco" => { street: "500 Brannan St", postal_code: "94107" }},
   {"La Mesa" => { street: "8138 La Mesa Blvd", postal_code: "91942" }},
-  {"La Mesa" => { street: "5746 Amaya Dr", postal_code: "91941" }},
-  {"Lemon Grove" => { street: "3521 Lemon Grove Ave", postal_code: "91945" }},
+  {"San Francisco" => { street: "1090 Point Lobos Ave", postal_code: "94121" }},
+  {"San Francisco" => { street: "300 Finley Rd", postal_code: "94129" }},
   {"Lemon Grove" => { street: "1501 Skyline Dr", postal_code: "91945" }},
   {"National City" => { street: "1401 E Plaza Blvd", postal_code: "91950" }},
-  {"National City" => { street: "500 Mile of Cars Way", postal_code: "91950" }},
-  {"Oceanside" => { street: "1779 Oceanside Blbd", postal_code: "92054" }},
+  {"Belvedere Tiburon" => { street: "43 Main St", postal_code: "94920" }},
+  {"Petaluma" => { street: "621 E Washington St", postal_code: "94952" }},
   {"Oceanside" => { street: "Melrose Dr", postal_code: "92057" }},
   {"Poway" => { street: "12202 Poway Rd", postal_code: "92064" }},
   {"Poway" => { street: "13404 Cricket Hill", postal_code: "92064" }},
@@ -66,8 +68,8 @@ event_locations = [
   {"San Marcos" => { street: "126 Knoll Rd", postal_code: "92069" }},
   {"San Marcos" => { street: "1523 San Elijo Rd", postal_code: "92078" }},
   {"Santee" => { street: "9161 Mission Gorge Rd", postal_code: "92071" }},
-  {"Santee" => { street: "9200 Inwood Dr", postal_code: "92071" }},
-  {"Solana Beach" => { street: "125 Lomas  Santa Fe Dr", postal_code: "92075" }},
+  {"Novato" => { street: "790 De Long Ave", postal_code: "94945" }},
+  {"Napa" => { street: "1275 McKinstry St", postal_code: "94559" }},
   {"Solana Beach" => { street: "512 Via Del La Valle", postal_code: "92075" }},
   {"Vista" => { street: "170 Emerald Dr", postal_code: "92083" }},
   {"Vista" => { street: "790 Sycamore Ave", postal_code: "92083" }}
