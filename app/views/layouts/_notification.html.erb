@@ -3,9 +3,13 @@
 
 <% @notifications.each do |notification| %>
 <li>
-  <%= notification.event %>
-  <span> <%= notification.created_at.strftime("%d %b. %Y") %></span>
-  <span class="delete-notification">
-  <%= link_to "X", "/application/" + notification.id.to_s + "/delete_notification", method: :delete %></span>
+  <div class="delete-notification">
+  <%= link_to "/application/" + notification.id.to_s + "/delete_notification", method: :delete do %>
+    <i class="glyphicon glyphicon-remove"></i>
+  <% end %>
+  </div>
+  <div><%= notification.event %></div>
+  <div class="notification-time"><%= notification.created_at.localtime.strftime("%d %b %Y at %I:%M%P") %><div>
+
 </li>
 <% end %>

@@ -15,9 +15,15 @@ ul.notificator {
     list-style: none;
     i
     {
-      color: #fff;
+      color: $darkcarbon;
+      &:hover {
+        color: $watermelon;
+      }
     }
   }
+}
+.notification-time {
+  color: $carbon;
 }
 
 #notification-counter {
@@ -43,6 +49,8 @@ ul #notificationList
   {
     position:relative;
     border-bottom: #dddddd 1px solid;
+    font-size: 13px;
+    margin: 6px;
   }
   span
   {
@@ -56,6 +64,7 @@ ul #notificationList
 {
   z-index: -1000;
   padding-left: 0;
+  margin-top: 0px;
 }
 
 #notificationContainer,
@@ -133,4 +142,10 @@ ul#notificationList > li
   .hamburger {
     clear: both;
   }
+}
+
+.delete-notification {
+  float: right;
+  padding: 5px;
+  margin-bottom: 10px;
 }
