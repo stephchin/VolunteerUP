@@ -30,8 +30,8 @@ orgs.each do |org|
   Organization.create!(name: org[:name], description: org[:description],
     phone: phone, email: "#{org[:name].split(" ").join("").downcase}@yahoo.com",
     website: "www.#{org[:name].split(" ").join("").downcase}.org",
-    facebook: "facebook.com/#{org[:name].split(" ").join("").downcase}.org",
-    twitter: "@#{org[:name].split(" ").join("").downcase}.org",
+    facebook: "facebook.com/#{org[:name].split(" ").join("").downcase}",
+    twitter: "@#{org[:name].split(" ").join("").downcase}",
     image: org[:image])
     p "Created Organization #{org[:name]}!"
 end
