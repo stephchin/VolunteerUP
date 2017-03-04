@@ -94,19 +94,29 @@ function loadAndCreateGmap() {
 
 function loadAndCreateGmapAll() {
   if ($("#events_map").length > 0) {
-    var myurl = "/events/map_locations";
-    // var zip = $("#filterrific_with_distance_zip").val()
+    var myurl = "/events/map_locations?";
+    // var zip = $("#filterrific_with_distance_zip").val();
     var zip = $("#events_map").attr("data-zip");
-    // var max_dist = $("#filterrific_with_distance_max_distnace").val()
+    // var max_dist = $("#filterrific_with_distance_max_distance option:selected").val();
     var max_dist = $("#events_map").attr("data-distance");
-    var search = $("#events_map").attr("data-search");
+    // var search = $("#events_map").attr("data-search");
+    var search = $("#filterrific_search_query").val();
+    var sortedBy = $("#filterrific_sorted_by").val();
+    var page = $("li.page-item.active a").text();
+    myurl += "page=" + page;
+    console.log("this", sortedBy);
+    console.log("zip",zip);
+    console.log("max_dist:",max_dist);
+    console.log("search:",search);
+    console.log("page:",page);
 
-    if (search || (zip && max_dist)) {
-      myurl += "?filterrific[with_distance][zip]=" + zip +
+    if (search || (zip && max_dist) || sortedBy) {
+      myurl += "&filterrific[with_distance][zip]=" + zip +
         "&filterrific[with_distance][max_distance]=" + max_dist +
-        "&filterrific[search_query]=" + search;
+        "&filterrific[search_query]=" + search +
+        "&filterrific[sorted_by]=" + sortedBy;
     }
-
+    console.log(myurl);
 
     $.ajax({
       dataType: 'json',
