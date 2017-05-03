@@ -20,14 +20,14 @@
       <% if !@user.city.nil? && !@user.state.nil? %>
         <p><span class="glyphicon glyphicon-map-marker"></span> <%= @user.city + ' ' + @user.state %></p>
       <% end %>
-      <% if current_user.id.to_s == params[:id] %>
+      <% if user_signed_in? && current_user.id.to_s == params[:id] %>
         <p><%= link_to 'My Settings', edit_user_registration_path, class: "btn btn-sm btn-info" %></p><br>
       <% end %>
     </div>
 
   </div><!--ends col-md-4-->
     <div class="col-md-5">
-      <% if current_user.id.to_s == params[:id] %>
+      <% if user_signed_in? && current_user.id.to_s == params[:id] %>
       <div class="space-block-85"></div>
       <h5>Recommended Events!</h5>
 
