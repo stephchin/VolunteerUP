@@ -7,8 +7,8 @@ class UsersController < ApplicationController
 
 
   def show
-    @events = @user.events.all.where("end_time >= ?", Time.now)
-    @past_events = @user.events.all.where("end_time < ?", Time.now)
+    @events = active_events(@user)
+    @past_events = past_events(@user)
 
     if user_signed_in?
       @cause_list = []
@@ -32,9 +32,9 @@ class UsersController < ApplicationController
 
   def user_map_locations
     # @user_events = User.find(1).events
-    @user_events = current_user.events.where("end_time >= ?", Time.now)
+    @user_events = active_events(current_user)
 
-    @hash = Gmaps4rails.build_markers(@user_events) do |event,marker|
+    @hash = Gmaps4rails.build_markers(@user_events) do |event, marker|
       marker.lat(event.latitude)
       marker.lng(event.longitude)
       marker.infowindow("<p style='text-align: center;'>#{event.name}</p>Hosted By:  #{event.organization.name}")
@@ -44,30 +44,30 @@ class UsersController < ApplicationController
 
   # GET all events for calendar on user profile
  def get_events
-   user_events = User.find(params[:user_id]).events.where("end_time >= ?", Time.now)
+   user_events = active_events(User.find(params[:user_id]))
    calendar_events = []
    user_events.each do |event|
      calendar_events << {
-      id: event.id,
-      title: event.name,
-      start: event.start_time,
-      end: event.end_time,
-      url: '/events/' + event.id.to_s
+       id: event.id,
+       title: event.name,
+       start: event.start_time,
+       end: event.end_time,
+       url: '/events/' + event.id.to_s
       # create url so you can click on a specific event and be taken to that page
      }
    end
    render :json => calendar_events.to_json
  end
 
-  private
+ private
 
-    #Use callbacks to share common setup or constraints between actions
-    def set_user
-      @user = User.find(params[:id])
-    end
+  #Use callbacks to share common setup or constraints between actions
+  def set_user
+    @user = User.find(params[:id])
+  end
 
-    def set_ability
-      @ability = Ability.new(current_user)
-    end
+  def set_ability
+    @ability = Ability.new(current_user)
+  end
 
 end
