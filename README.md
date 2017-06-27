@@ -29,3 +29,6 @@ In order to run test using the seeded database, use the following commands after
 ```BASH
 rake db:seed RAILS_ENV=test --trace
 ```
+
+## To Seed Heroku Database
+Instead of dropping the whole database, run this command to add more events: `heroku run rake db:seed extra=yes`
