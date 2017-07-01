@@ -6,17 +6,8 @@ class OrganizationsController < ApplicationController
   skip_authorize_resource only: [:get_orgevents]
 
   def index
-    @organizations = Organization.all
     @filterrific = load_filterrific
-    @organizations = @organizations.page(params[:page]).per(4)
-  end
-
-  def load_filterrific
-    initialize_filterrific(
-      Organization,
-      params[:filterrific],
-      persistence_id: false
-    ) || return
+    @organizations = @filterrific.find.page(params[:page]).per(4)
   end
 
   def show
@@ -193,5 +184,13 @@ class OrganizationsController < ApplicationController
         user_id: user.user_id
       )
     end
+  end
+
+  def load_filterrific
+    initialize_filterrific(
+      Organization,
+      params[:filterrific],
+      persistence_id: false
+    ) or return
   end
 end
