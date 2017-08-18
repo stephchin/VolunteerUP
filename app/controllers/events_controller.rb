@@ -9,24 +9,8 @@ class EventsController < ApplicationController
   # GET /events.json
 
   def index
-
-    # Initialize filterrific with the following params:
-    @filterrific = initialize_filterrific(
-      Event,
-      params[:filterrific],
-      select_options: {
-        sorted_by: Event.options_for_sorted_by
-      },
-      persistence_id: false,
-    ) or return
-
-    # Respond to html for initial page load and to js for AJAX filter updates.
-    respond_to do |format|
-      format.html
-      format.js
-    end
-
-    if !params[:filterrific].nil?
+    @filterrific = load_filterrific
+    if !params[:filterrific].nil? && !params[:filterrific][:reset_filterrific]
       @zip = params[:filterrific][:with_distance][:zip]
       @max_distance = params[:filterrific][:with_distance][:max_distance]
 
@@ -36,18 +20,10 @@ class EventsController < ApplicationController
         @events = @filterrific.find.near(@zip, @max_distance)
       end
     else
-      @events = @filterrific.find
+      @events = Event.all
     end
 
     @events = @events.where("end_time >= ?", Time.now).page(params[:page]).per(5)
-
-  # Recover from invalid param sets, e.g., when a filter refers to the
-  # database id of a record that doesn’t exist any more.
-  # In this case we reset filterrific and discard all filter params.
-  rescue ActiveRecord::RecordNotFound => e
-    # There is an issue with the persisted param_set. Reset it.
-    puts "Had to reset filterrific params: #{ e.message }"
-    redirect_to(reset_filterrific_url(format: :html)) and return
   end
 
 
@@ -234,6 +210,17 @@ class EventsController < ApplicationController
     @event.users.all.each do |user|
       Notification.create(event: "#{@event.name} #{str}", user_id: user.id)
     end
+  end
+
+  def load_filterrific
+    initialize_filterrific(
+      Event,
+      params[:filterrific],
+      select_options: {
+        sorted_by: Event.options_for_sorted_by
+      },
+      persistence_id: false,
+    ) or return
   end
 
 end

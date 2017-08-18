@@ -31,7 +31,7 @@ RSpec.feature "JoinOrgs", type: :feature do
          click_button "Become an organizer!"
        end
        And 'I can see a message saying you have joined' do
-         expect(page).to have_content("Congrats, you are now an organizer for #{@org.name}")
+         expect(page).to have_content("You are now an organizer for #{@org.name}!")
        end
        Then 'I can see a message saying I have already joined' do
          expect(page).to have_content("You're an organizer!")

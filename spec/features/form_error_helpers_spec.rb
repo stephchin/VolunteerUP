@@ -54,7 +54,7 @@ RSpec.feature "FormErrorHelpers", type: :feature do
       end
       And "I can see errors for the required fields" do
         expect(page).to have_content("Name can't be blank")
-        expect(page).to have_content("Organization can't be blank")
+        expect(page).to have_content("Organization must exist")
         expect(page).to have_content("Volunteers needed can't be blank")
       end
     end

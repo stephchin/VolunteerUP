@@ -5,122 +5,80 @@ class OrganizationsController < ApplicationController
   load_and_authorize_resource
   skip_authorize_resource only: [:get_orgevents]
 
-  # GET /organizations
-  # GET /organizations.json
   def index
-    @organizations = Organization.all
-    # @ability = Ability.new(current_user)
-    @filterrific = initialize_filterrific(
-      Organization,
-      params[:filterrific],
-      persistence_id: false,
-    ) or return
-
-    respond_to do |format|
-      format.html
-      format.js
-    end
-
-    # kaminari pagination
-    @organizations = @filterrific.find.page(params[:page])
-
-    @organizations = @organizations.page(params[:page]).per(4)
-
-    rescue ActiveRecord::RecordNotFound => e
-    # There is an issue with the persisted param_set. Reset it.
-    puts "Had to reset filterrific params: #{ e.message }"
-    redirect_to(reset_filterrific_url(format: :html)) and return
+    @filterrific = load_filterrific
+    @organizations = @filterrific.find.page(params[:page]).per(4)
   end
 
-  # GET /organizations/1
-  # GET /organizations/1.json
   def show
-    # @ability = Ability.new(current_user)
-    @events = @organization.events.where("end_time >= ?", Time.now).order(:start_time).page(params[:page]).per(3)
-    @past_events = @organization.events.where("end_time < ?", Time.now).order(:start_time).page(params[:page]).per(3)
-
-    # Temp org-image array to randomize for each org#show page
-    all_imgs = Dir.glob("app/assets/images/org_events/*.jpg")
-    @event_imgs = all_imgs.sample(5)
-    puts @events_imgs
+    @events = active_events(@organization)
+    @past_events = past_events(@organization)
+    @event_imgs = organization_images.sample(5)
   end
 
   def add_user
-    @user = current_user
-    @organization = Organization.find(params[:organization_id])
-    if !@user.organizations.all.include?(@organization)
-      #this creates a new association between user and organization, with is_creator field set to false
-      @user.user_organizations.create(organization: @organization, is_creator: false)
-      #this adds the organizer role to the user
-      @user.add_role :organizer
-      @user.save
-      flash[:notice] = "Congrats, you are now an organizer for #{@organization.name}!"
-      Notification.create(event: "You are now an organizer for #{@organization.name}", user_id: @user.id)
-      redirect_to organization_path(@organization.id)
+    org = find_org
+    unless user_is_organizer?(org)
+      add_user_to_org(assign_organizer_role(current_user), org).save
+      add_user_success_msg(org, current_user)
+      redirect_to organization_path(org.id)
     end
   end
 
-  # GET /organizations/new
   def new
     @organization = Organization.new
   end
 
-  # GET /organizations/1/edit
   def edit
   end
 
-  # POST /organizations
-  # POST /organizations.json
   def create
     @organization = Organization.new(organization_params)
-    @user = current_user
-    #this creates a new association between user and organization, with is_creator field set to true
-    @user.user_organizations.new(organization: @organization, is_creator: true)
-    #this adds the organizer role to the user
-    @user.add_role :organizer
-    @user.save
+    user = current_user
+    #creates a association between user and org, is_creator set to true
+    user.user_organizations.new(organization: @organization, is_creator: true)
+    # adds the organizer role to the user
+    assign_organizer_role(user)
 
     respond_to do |format|
       if @organization.save
-        format.html { redirect_to @organization,
-          notice: "Thanks #{@current_user.name}! You've successfully created #{@organization.name}" }
-        format.json { render :show, status: :created, location: @organization }
+        format.html do
+          redirect_to @organization,
+          notice: "You successfully created #{@organization.name}"
+        end
       else
         format.html { render :new }
-        format.json { render json: @organization.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /organizations/1
-  # PATCH/PUT /organizations/1.json
   def update
     respond_to do |format|
       if @organization.update(organization_params)
         add_notification("has been updated!")
-        format.html { redirect_to @organization, notice: "#{@organization.name} was successfully updated!" }
-        format.json { render :show, status: :ok, location: @organization }
+        format.html {
+          redirect_to @organization,
+          notice: "#{@organization.name} was successfully updated!"
+        }
       else
         format.html { render :edit }
-        format.json { render json: @organization.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /organizations/1
-  # DELETE /organizations/1.json
   def destroy
     @organization.destroy
     respond_to do |format|
-      format.html { redirect_to organizations_url, notice: 'Your organization was successfully destroyed.' }
+      format.html {
+        redirect_to organizations_url,
+        notice: 'Your organization was successfully destroyed.'
+      }
       format.json { head :no_content }
     end
   end
 
   def dashboard
-    all_orgs = []
-    org_ids = current_user.organizations.all.map(&:id)
-    @all_orgs = org_ids.map{ |id| Organization.find(id) }.sort { |x,y| x.name <=> y.name }
+    @all_orgs = current_user.organizations.all.sort_by { |org| org.name }
   end
 
   def remove_organizer
@@ -129,23 +87,23 @@ class OrganizationsController < ApplicationController
     user.user_organizations.delete(organization: org)
     user.organizations.delete(org)
     if current_user != user
-      flash[:alert] = "You've successfully removed #{user.name} from #{org.name}."
-      Notification.create(event: "You've been removed from - #{org.name}", user_id: user.id)
+      removed_organizer_success_msg(user, org)
       org.user_organizations.all.each do |organizer|
-        Notification.create(event: "#{user.name} has been removed from - #{org.name}", user_id: organizer.user_id)
+        organizer_removed_notification(user, org, organizer)
       end
       redirect_to dashboard_organizations_path
       return
     else
-      flash[:alert] = "You've left #{org.name}."
-      Notification.create(event: "You've left #{org.name}", user_id: current_user.id)
+      removed_self_success_msg(user, org)
       org.user_organizations.all.each do |organizer|
-        Notification.create(event: "#{user.name} has left #{org.name}", user_id: organizer.user_id)
+        organizer_left_notification(user, org)
       redirect_to user_path(current_user)
       return
       end
     end
   end
+
+
 
   def remove_volunteer
     user = User.find(params[:user])
@@ -166,7 +124,7 @@ class OrganizationsController < ApplicationController
   end
 
   def get_orgevents
-    org_events = Organization.find(params[:organization_id]).events.where("end_time >= ?", Time.now)
+    org_events = active_events(find_org)
     calendar_orgevents = []
     org_events.each do |event|
       calendar_orgevents << {
@@ -182,24 +140,57 @@ class OrganizationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_organization
-      @organization = Organization.find(params[:id])
-    end
 
-    def set_ability
-      @ability = Ability.new(current_user)
-    end
+  def find_org
+    Organization.find(params[:organization_id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def organization_params
-      params.require(:organization).permit(:name, :description, :phone, :email, :website, :image, :facebook, :twitter)
-    end
+  def assign_organizer_role(user)
+    #this adds the organizer role to the user
+    user.add_role(:organizer).save
+    user
+  end
 
-    def add_notification(str)
-      @organization.user_organizations.all.each do |user|
-        Notification.create(event: "#{@organization.name} #{str}", user_id: user.user_id)
-      end
-    end
+  def add_user_to_org(user, org)
+    #creates a new association between user and organization, is_creator = false
+    user.user_organizations.create(organization: org, is_creator: false)
+  end
 
+  def organization_images
+    # Temp org-image array to randomize for each org#show page
+    Dir.glob("app/assets/images/org_events/*.jpg")
+  end
+
+  def set_organization
+    @organization = Organization.find(params[:id])
+  end
+
+  def set_ability
+    @ability = Ability.new(current_user)
+  end
+
+  # Never trust parameters from the scary internet, only allow white list
+  def organization_params
+    params.require(:organization).permit(
+      :name, :description, :phone, :email, :website, :image, :facebook,
+      :twitter
+    )
+  end
+
+  def add_notification(str)
+    @organization.user_organizations.all.each do |user|
+      Notification.create(
+        event: "#{@organization.name} #{str}",
+        user_id: user.user_id
+      )
+    end
+  end
+
+  def load_filterrific
+    initialize_filterrific(
+      Organization,
+      params[:filterrific],
+      persistence_id: false
+    ) or return
+  end
 end
