@@ -28,7 +28,7 @@ gem 'kaminari'
 gem 'bootstrap-datepicker-rails'
 
 # Paperclip for file uploads
-gem 'paperclip', "~> 5.0.0"
+gem 'paperclip', "~> 5.2.0"
 
 # Use Geocoder & Gmaps4Rails
 gem 'geocoder'
